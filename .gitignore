@@ -9,12 +9,12 @@ artifacts/
 *.db
 *.db-shm
 *.db-wal
-src/AzurePrep.Web/App_Data/*.db*
+src/PrepHub.Web/App_Data/*.db*
 *.design.db*
 
 # Chaves de Data Protection (criptografam o cookie de autenticação) — material
 # sensível gerado por instância, nunca versionado
-src/AzurePrep.Web/App_Data/dp-keys/
+src/PrepHub.Web/App_Data/dp-keys/
 
 # Documentação interna de sessões (não versionada)
 /docs/

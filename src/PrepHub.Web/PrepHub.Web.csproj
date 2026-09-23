@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\PrepHub.Application\PrepHub.Application.csproj" />
+    <ProjectReference Include="..\PrepHub.Infrastructure\PrepHub.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="10.0.0" />
+    <PackageReference Include="AspNet.Security.OAuth.LinkedIn" Version="10.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="10.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.10">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+
+    <!-- Observabilidade. O OpenTelemetry entra só AQUI: é a camada que tem pipeline HTTP para
+         servir /metrics, e manter o vendor nesta fronteira é o que permite trocar o destino da
+         telemetria sem tocar em regra de negócio.
+
+         ⚠️ O exportador Prometheus é publicado como pré-release pelo projeto OpenTelemetry
+         (sufixo -beta) e provavelmente vai continuar assim: o protocolo que o time trata como
+         estável é o OTLP. A versão fica presa de propósito — "beta" aqui quer dizer que a API
+         pode mudar entre versões, não que o código não sirva para produção. -->
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.17.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.17.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.17.0" />
+    <PackageReference Include="OpenTelemetry.Exporter.Prometheus.AspNetCore" Version="1.17.0-beta.1" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>72de6680-b9da-470b-87aa-5cfb7754405f</UserSecretsId>
+  </PropertyGroup>
+
+</Project>

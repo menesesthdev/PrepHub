@@ -1,0 +1,17 @@
+# Os dashboards são arquivos versionados no repositório, não desenhos guardados dentro do
+# Grafana. Editar pela interface e não exportar significa perder o painel no próximo `docker
+# compose down -v` — por isso allowUiUpdates fica desligado: o Grafana devolve o JSON do disco e
+# deixa claro que o lugar de editar é o repositório.
+apiVersion: 1
+
+providers:
+  - name: PrepHub
+    orgId: 1
+    folder: PrepHub
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 30
+    allowUiUpdates: false
+    options:
+      path: /var/lib/grafana/dashboards
+      foldersFromFilesStructure: false

@@ -1,7 +1,7 @@
 # Marca — arquivos-fonte
 
 Arte original do PrepHub. **Nada aqui é servido pela aplicação**: estes arquivos existem
-para gerar os derivados que ficam em `src/AzurePrep.Web/wwwroot/`.
+para gerar os derivados que ficam em `src/PrepHub.Web/wwwroot/`.
 
 | Arquivo | Formato | Papel |
 |---|---|---|

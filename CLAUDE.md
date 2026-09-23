@@ -1,8 +1,8 @@
-# PrepHub (repositório AzurePrep) — Contexto do Projeto
+# PrepHub (repositório PrepHub) — Contexto do Projeto
 
 ## O que é
 
-> **Marca: PrepHub** (desde 15/09/2026, com a entrada da AWS). Mudou só o nome **exibido** — telas, e-mails, recebedor do Pix. Solução, namespaces, métricas `azureprep_*`, volume `azureprep_dados` e nomes de cookie continuam `AzurePrep`: trocá-los derrubaria sessões, dashboards e o volume de dados sem ganho para quem usa.
+> **Marca: PrepHub** (desde 15/09/2026, com a entrada da AWS). Mudou só o nome **exibido** — telas, e-mails, recebedor do Pix. Solução, namespaces, métricas `prephub_*`, volume `prephub_dados` e nomes de cookie continuam `PrepHub`: trocá-los derrubaria sessões, dashboards e o volume de dados sem ganho para quem usa.
 
 Simulado do exame **AZ-900 (Microsoft Azure Fundamentals)** que replica fielmente a experiência real da prova: interface, timer, navegação entre questões, marcação para revisão. O diferencial não é ter "mais um banco de questões" — é a fidelidade à experiência real de prova (estilo Pearson VUE), algo que o simulado oficial da Microsoft não oferece.
 
@@ -28,15 +28,15 @@ Se em algum momento o Claude Code (ou eu) sugerir "buscar questões que caíram 
 Clean Architecture, seguindo o padrão já usado em outros projetos (ex: WebAppClinicaMedica):
 
 ```
-AzurePrep.sln
+PrepHub.sln
 ├── src/
-│   ├── AzurePrep.Domain          # Entidades, Value Objects, regras de negócio puras
-│   ├── AzurePrep.Application     # Casos de uso, interfaces, DTOs
-│   ├── AzurePrep.Infrastructure  # EF Core, DbContext, Repositories, SQLite
-│   └── AzurePrep.Web             # ASP.NET Core MVC (Controllers, Views, ViewModels)
+│   ├── PrepHub.Domain          # Entidades, Value Objects, regras de negócio puras
+│   ├── PrepHub.Application     # Casos de uso, interfaces, DTOs
+│   ├── PrepHub.Infrastructure  # EF Core, DbContext, Repositories, SQLite
+│   └── PrepHub.Web             # ASP.NET Core MVC (Controllers, Views, ViewModels)
 └── tests/
-    ├── AzurePrep.Domain.Tests
-    └── AzurePrep.Application.Tests
+    ├── PrepHub.Domain.Tests
+    └── PrepHub.Application.Tests
 ```
 
 Dependências: `Web` → `Application` + `Infrastructure`; `Infrastructure` → `Application`; `Application` → `Domain`.
@@ -81,12 +81,12 @@ O objetivo é uma questão que **quem só decorou termo erra, e quem entende o c
 
 **Duas barreiras que faltavam e agora existem** — as duas cobrem falhas que só apareceriam depois do deploy:
 
-- **`Validar_CatalogoRealEmbutido_EstaIntegro`** roda a validação sobre os arquivos de verdade, contra as áreas de verdade (`AzurePrepDbSeeder.AreasPorExame`, público só para isso). Antes, os testes de regra usavam lotes sintéticos e nunca tocavam nos JSONs; a única checagem do catálogo real era o seed derrubando a aplicação no startup — ou seja, o erro aparecia no deploy, não no commit. ⚠️ É **dicionário por código de exame**, não lista plana: área é escopada ao exame, e com todos os slugs num balde só um lote do AZ-104 apontando para `conceitos-de-nuvem` (área do AZ-900) passaria na validação e cairia no domínio errado, com peso de blueprint errado no sorteio. Dois testes irmãos cobrem o resto: `CatalogoRealEmbutido_SoReferenciaExamesDefinidos` (lote com `exameCode` inexistente sumiria do seed **em silêncio**, porque o seed aplica filtrando por código) e `ExamesDefinidos_TemQuestoesSuficientesParaMontarUmaProva` (o sorteio faz `Math.Min(total, pool)`, então exame publicado com banco magro entrega prova curta e sempre parecida, sem nada ligar sintoma a causa).
+- **`Validar_CatalogoRealEmbutido_EstaIntegro`** roda a validação sobre os arquivos de verdade, contra as áreas de verdade (`PrepHubDbSeeder.AreasPorExame`, público só para isso). Antes, os testes de regra usavam lotes sintéticos e nunca tocavam nos JSONs; a única checagem do catálogo real era o seed derrubando a aplicação no startup — ou seja, o erro aparecia no deploy, não no commit. ⚠️ É **dicionário por código de exame**, não lista plana: área é escopada ao exame, e com todos os slugs num balde só um lote do AZ-104 apontando para `conceitos-de-nuvem` (área do AZ-900) passaria na validação e cairia no domínio errado, com peso de blueprint errado no sorteio. Dois testes irmãos cobrem o resto: `CatalogoRealEmbutido_SoReferenciaExamesDefinidos` (lote com `exameCode` inexistente sumiria do seed **em silêncio**, porque o seed aplica filtrando por código) e `ExamesDefinidos_TemQuestoesSuficientesParaMontarUmaProva` (o sorteio faz `Math.Min(total, pool)`, então exame publicado com banco magro entrega prova curta e sempre parecida, sem nada ligar sintoma a causa).
 - **`MigracoesTests`** aplica as migrations num SQLite real e compara o resultado com o modelo atual (o mesmo diff do "pending model changes" do `dotnet ef`). Os testes de persistência usam `EnsureCreated`, que constrói o banco direto do modelo e **pula as migrations** — migration faltando ou fora de sincronia passava por toda a suíte. ⚠️ Vale ainda mais aqui porque `dotnet ef` não roda em máquina sem o runtime do ASP.NET Core instalado, e nesse caso a migration é escrita à mão.
 
 ## Especificação da interface de prova (fidelidade é o produto)
 
-Isso não é "nice to have", é o diferencial do AzurePrep. A referência de calibração é o **exam sandbox oficial da Microsoft** (`aka.ms/examdemo`) — demo pública da interface de entrega, não é dump de conteúdo. Elementos obrigatórios:
+Isso não é "nice to have", é o diferencial do PrepHub. A referência de calibração é o **exam sandbox oficial da Microsoft** (`aka.ms/examdemo`) — demo pública da interface de entrega, não é dump de conteúdo. Elementos obrigatórios:
 
 - **Barra superior fixa**: código/nome do exame à esquerda, "Tempo restante" + relógio HH:MM:SS à direita. Fundo claro (cinza), texto escuro — o chrome da prova real é discreto, não uma faixa colorida
 - **Indicador de posição**: "Item 12 de 40", no topo da área da questão
@@ -170,7 +170,7 @@ O projeto é **gratuito e sem anúncios**, e a sustentação atual é **doação
 
 ## Banco de dados
 
-SQLite via EF Core Migrations. Arquivo em `src/AzurePrep.Web/App_Data/azureprep.db` (ajustável). Evitar recursos específicos de um único provider na modelagem — se o projeto crescer, a migração pra PostgreSQL deve ser barata.
+SQLite via EF Core Migrations. Arquivo em `src/PrepHub.Web/App_Data/prephub.db` (ajustável). Evitar recursos específicos de um único provider na modelagem — se o projeto crescer, a migração pra PostgreSQL deve ser barata.
 
 **Decisão (mantida com login social):** seguir no SQLite, com **WAL habilitado** no startup (leitores param de bloquear o escritor). O que quebraria o SQLite não é volume nem autenticação, é **deploy multi-instância ou disco efêmero** — esse é o gatilho para migrar pro PostgreSQL, não uma data. É a disciplina provider-agnostic acima que mantém essa migração barata.
 
@@ -190,7 +190,7 @@ docker compose up --build
 # http://localhost:9090       Prometheus
 ```
 
-- **Backup:** `tools/backup-dados.sh` empacota o volume `azureprep_dados` (banco + chaves de Data Protection). Ele **para o container** por alguns segundos de propósito: o SQLite roda em WAL, então parte das escritas confirmadas vive no arquivo `-wal` até o checkpoint, e copiar com a aplicação escrevendo produz uma cópia que às vezes abre sem as últimas transações — defeito que só aparece no dia da restauração. Restaurar é `docker compose down`, recriar o volume a partir do `.tar.gz` e subir; ver `docs/deploy.md`.
+- **Backup:** `tools/backup-dados.sh` empacota o volume `prephub_dados` (banco + chaves de Data Protection). Ele **para o container** por alguns segundos de propósito: o SQLite roda em WAL, então parte das escritas confirmadas vive no arquivo `-wal` até o checkpoint, e copiar com a aplicação escrevendo produz uma cópia que às vezes abre sem as últimas transações — defeito que só aparece no dia da restauração. Restaurar é `docker compose down`, recriar o volume a partir do `.tar.gz` e subir; ver `docs/deploy.md`.
 - **`App_Data` é o único estado que precisa sobreviver** e é onde o volume nomeado `dados` monta: banco SQLite **e** chaves de Data Protection. Container tem disco efêmero — que é exatamente o gatilho de migração para PostgreSQL citado acima; o volume neutraliza o gatilho enquanto for **uma instância só**. Escalar réplicas continua sendo o momento de trocar de banco (e o limitador de tentativas, que é em memória, tem o mesmo limite).
 - **As chaves de Data Protection são persistidas de propósito** (`PersistKeysToFileSystem` em `Program.cs`). Sem isso, cada restart geraria chaves novas: todos os cookies de sessão invalidados e os formulários quebrando com "the antiforgery token could not be decrypted". É o erro mais comum ao containerizar ASP.NET Core e não aparece em teste rápido, só depois do primeiro deploy.
 - O aviso `No XML encryptor configured` no boot é esperado: em Linux não há DPAPI, então as chaves ficam em claro **dentro do volume**. Quem protege é o acesso ao volume; cifrá-las exigiria certificado, o que só faz sentido com um deploy real definido.
@@ -224,19 +224,19 @@ Responde "o que está acontecendo no projeto": quantas contas existem, quanta ge
 **A cadeia inteira, do evento ao painel:**
 
 1. O caso de uso chama `IMetricasDeNegocio` (Application) — nunca o controller. Mesma disciplina da posse da tentativa: o controller não tem como esquecer de contar o que não é ele quem conta.
-2. `MetricasDoAzurePrep` (Infrastructure) implementa a porta com um `Meter` da **BCL** (`System.Diagnostics.Metrics`). Nenhum pacote de vendor nessa camada.
+2. `MetricasDoPrepHub` (Infrastructure) implementa a porta com um `Meter` da **BCL** (`System.Diagnostics.Metrics`). Nenhum pacote de vendor nessa camada.
 3. `ObservabilidadeSetup` (Web) liga o OpenTelemetry ao meter e publica `/metrics` no formato do Prometheus.
 4. O Prometheus busca (`scrape`) esse endpoint a cada 15s; o Grafana só desenha o que pergunta a ele. **Painel vazio quase sempre é problema do Prometheus, não do Grafana.**
 
 **Estoque x movimento — a distinção que organiza tudo.** Evento (login, prova encerrada) vira **contador**, e se pergunta por taxa: `rate()`, `increase()`. Contador zera quando o processo reinicia, então nunca serve de total histórico. Estoque (contas cadastradas, provas realizadas) vira **medidor**, recontado no banco pelo `ColetorDeMetricasDoBanco` a cada 30s — é isso que sobrevive a todo deploy.
 
 - **O medidor não lê o banco na hora do scrape.** A leitura de um instrumento observável é síncrona e roda dentro da coleta: consultar o SQLite ali deixaria o Prometheus preso em I/O e, com o banco travado, faria a coleta inteira expirar. O preço de recontar em segundo plano é o painel enxergar o banco com até um intervalo de atraso — irrelevante para "quantas contas existem".
-- **`azureprep_coleta_idade_seconds` existe para denunciar coletor morto.** Se ele parasse em silêncio, todos os medidores congelariam mostrando o último valor conhecido com cara de valor atual. Uma exceção no coletor é registrada e engolida de propósito: a partir do .NET 6 ela derrubaria o processo, e derrubar o site porque a *contagem* de usuários falhou seria trocar um painel defasado por uma aplicação fora do ar.
+- **`prephub_coleta_idade_seconds` existe para denunciar coletor morto.** Se ele parasse em silêncio, todos os medidores congelariam mostrando o último valor conhecido com cara de valor atual. Uma exceção no coletor é registrada e engolida de propósito: a partir do .NET 6 ela derrubaria o processo, e derrubar o site porque a *contagem* de usuários falhou seria trocar um painel defasado por uma aplicação fora do ar.
 - **Antes da primeira coleta os medidores não publicam nada**, em vez de publicar zero. Lacuna no gráfico é "ainda não sei"; zero seria "não há nenhuma conta cadastrada" dito com toda a confiança.
 
-**`azureprep_confirmacoes_email_total{etapa}` é o termômetro da entrega.** A distância entre `link_emitido` e `concluida` é a única medida que existe de quantas contas nascem inalcançáveis — endereço digitado errado ou mensagem barrada pelo filtro de spam do destino. Sem esses dois pontos, uma quebra no envio apareceria só como "menos gente usando", que não aponta para lugar nenhum. `reenvio_solicitado` cumpre para a confirmação o mesmo papel que `solicitada` cumpre na redefinição. E `ResultadoDeLogin.EmailNaoConfirmado` tem rótulo próprio de propósito: junto com `senha_incorreta`, uma quebra no envio de e-mail — dezenas de pessoas presas na porta — apareceria no painel com a cara de força bruta.
+**`prephub_confirmacoes_email_total{etapa}` é o termômetro da entrega.** A distância entre `link_emitido` e `concluida` é a única medida que existe de quantas contas nascem inalcançáveis — endereço digitado errado ou mensagem barrada pelo filtro de spam do destino. Sem esses dois pontos, uma quebra no envio apareceria só como "menos gente usando", que não aponta para lugar nenhum. `reenvio_solicitado` cumpre para a confirmação o mesmo papel que `solicitada` cumpre na redefinição. E `ResultadoDeLogin.EmailNaoConfirmado` tem rótulo próprio de propósito: junto com `senha_incorreta`, uma quebra no envio de e-mail — dezenas de pessoas presas na porta — apareceria no painel com a cara de força bruta.
 
-**As métricas de login distinguem o que a tela não distingue** — e é esse o ponto. `azureprep_logins_total{resultado}` separa `conta_inexistente`, `senha_incorreta`, `conta_bloqueada` e `pedido_invalido`, enquanto a tela devolve a mesma mensagem para todos, porque diferenciar ali viraria oráculo para descobrir quem tem conta. O painel é interno, o rótulo é um enum fechado sem e-mail nem id, e contar custa microssegundos contra os ~200ms do PBKDF2 — não abre canal de tempo. Sem essa separação, força bruta apareceria como uma linha genérica de "falhas". Mesma lógica em `azureprep_redefinicoes_senha_total`: a distância entre `solicitada` e `link_emitido` é alguém varrendo e-mails à procura de quem tem cadastro.
+**As métricas de login distinguem o que a tela não distingue** — e é esse o ponto. `prephub_logins_total{resultado}` separa `conta_inexistente`, `senha_incorreta`, `conta_bloqueada` e `pedido_invalido`, enquanto a tela devolve a mesma mensagem para todos, porque diferenciar ali viraria oráculo para descobrir quem tem conta. O painel é interno, o rótulo é um enum fechado sem e-mail nem id, e contar custa microssegundos contra os ~200ms do PBKDF2 — não abre canal de tempo. Sem essa separação, força bruta apareceria como uma linha genérica de "falhas". Mesma lógica em `prephub_redefinicoes_senha_total`: a distância entre `solicitada` e `link_emitido` é alguém varrendo e-mails à procura de quem tem cadastro.
 
 - ⚠️ **Nada que identifique uma pessoa pode virar rótulo.** E-mail, nome ou id de usuário criariam uma série temporal por pessoa: estoura a memória do Prometheus (alta cardinalidade) e transforma o painel num cadastro exposto. Por isso a porta só aceita enums e código de exame. Vale igual para as métricas de HTTP, que rotulam pelo **template** da rota (`exam/{attemptId}/answer`) e não pela URL concreta.
 
@@ -248,7 +248,7 @@ Responde "o que está acontecendo no projeto": quantas contas existem, quanta ge
 - ⚠️ **Quem colocar um proxy reverso na frente tem de manter a 9464 fora dele** — é o mesmo cuidado registrado na seção `ProxyReverso` do Docker.
 - Grafana e Prometheus são publicados **só em `127.0.0.1`**. Sem esse prefixo o Docker escreveria regras de iptables abrindo as portas em todas as interfaces, furando o firewall do host — e nenhum dos dois tem autenticação que sirva para internet aberta.
 
-**⚠️ `metric_name_validation_scheme: legacy` no `prometheus.yml` não é detalhe.** O OpenTelemetry nomeia instrumentos com ponto (`azureprep.usuarios.cadastrados`) e o Prometheus 3 passou a aceitar UTF-8: sem essa configuração ele guarda o nome **com ponto**, e `sum(azureprep_usuarios_cadastrados)` não encontra nada — a série existe com outro nome, e a consulta exigiria a sintaxe entre aspas (`sum({"azureprep.usuarios.cadastrados"})`), que praticamente nenhum exemplo ou dashboard da internet usa. Voltando ao esquema clássico, o exportador entrega tudo já traduzido para underscore.
+**⚠️ `metric_name_validation_scheme: legacy` no `prometheus.yml` não é detalhe.** O OpenTelemetry nomeia instrumentos com ponto (`prephub.usuarios.cadastrados`) e o Prometheus 3 passou a aceitar UTF-8: sem essa configuração ele guarda o nome **com ponto**, e `sum(prephub_usuarios_cadastrados)` não encontra nada — a série existe com outro nome, e a consulta exigiria a sintaxe entre aspas (`sum({"prephub.usuarios.cadastrados"})`), que praticamente nenhum exemplo ou dashboard da internet usa. Voltando ao esquema clássico, o exportador entrega tudo já traduzido para underscore.
 
 **Métrica é testada porque falha calada.** Um contador que deixa de ser chamado não quebra nada, não lança nada e não aparece em log nenhum — só produz um painel plano, idêntico a um dia sem movimento. Nome de instrumento e valor de rótulo são contrato com os dashboards que o compilador não vê, então os testes os afirmam como **literais** (`"conta_inexistente"`, e não derivado do enum). O caso que mais justifica a suíte é o encerramento por tempo esgotado: acontece num caminho separado do "Encerrar prova", e instrumentar só o clique perderia justamente as provas de quem não terminou a tempo — sobrando um número que *parece* certo, com a taxa de aprovação inflada e nenhum sinal de que faltava metade dos dados.
 
@@ -264,26 +264,26 @@ Responde "o que está acontecendo no projeto": quantas contas existem, quanta ge
 
 ```bash
 dotnet build
-dotnet run --project src/AzurePrep.Web
-dotnet ef migrations add NomeDaMigration --project src/AzurePrep.Infrastructure --startup-project src/AzurePrep.Web
-dotnet ef database update --project src/AzurePrep.Infrastructure --startup-project src/AzurePrep.Web
+dotnet run --project src/PrepHub.Web
+dotnet ef migrations add NomeDaMigration --project src/PrepHub.Infrastructure --startup-project src/PrepHub.Web
+dotnet ef database update --project src/PrepHub.Infrastructure --startup-project src/PrepHub.Web
 dotnet test
 
 # Observabilidade — ver o que a aplicação está publicando, sem passar por Prometheus nem Grafana.
 # Em desenvolvimento (PortaDeMetricas = 0) o endpoint responde na porta da própria aplicação:
-curl -s http://localhost:5090/metrics | grep '^azureprep'
+curl -s http://localhost:5090/metrics | grep '^prephub'
 
 # No container a porta é outra e não é publicada no host — só a rede do compose a alcança:
-docker compose exec prometheus wget -qO- http://web:9464/metrics | grep '^azureprep'
+docker compose exec prometheus wget -qO- http://web:9464/metrics | grep '^prephub'
 
 # Os alvos que o Prometheus está coletando (health "up"/"down" e o último erro de cada um):
 curl -s 'http://localhost:9090/api/v1/targets?state=active' | python3 -m json.tool
 
 # Rodar uma consulta PromQL direto, para saber se o painel está vazio por falta de dado:
-curl -s --get http://localhost:9090/api/v1/query --data-urlencode 'query=sum(azureprep_usuarios_cadastrados)'
+curl -s --get http://localhost:9090/api/v1/query --data-urlencode 'query=sum(prephub_usuarios_cadastrados)'
 
 # Credenciais OAuth (nunca commitar — ficam fora do repositório)
-cd src/AzurePrep.Web
+cd src/PrepHub.Web
 dotnet user-secrets init
 dotnet user-secrets set "Authentication:Google:ClientId"     "..."
 dotnet user-secrets set "Authentication:Google:ClientSecret" "..."
@@ -320,7 +320,7 @@ python3 tools/smtp-de-teste.py           # terminal 1
 
 # terminal 2 — vale só nesta execução, não grava nada:
 Email__SmtpHost=127.0.0.1 Email__SmtpPort=1025 Email__UsarSsl=false \
-    dotnet run --project src/AzurePrep.Web
+    dotnet run --project src/PrepHub.Web
 ```
 
 Serve para exercitar `EnviadorDeEmailSmtp` de verdade (conexão, `MAIL FROM`, `DATA`) antes de
@@ -385,5 +385,5 @@ Callback a cadastrar em cada provedor (ajuste host/porta): `/signin-google`, `/s
 
 ⚠️ **As questões dos exames novos — inclusive as 450 do AIF-C01, geradas com assistência — não passaram por revisão técnica humana.** No AIF-C01 o risco maior está nos serviços recentes da v1.1 (Bedrock AgentCore, Strands Agents, Kiro, Amazon Quick, AWS Transform): o exame foi publicado a pedido do usuário antes dessa conferência, que continua pendente. O validador garante forma (contagem de alternativas, gabarito presente, explicação por distrator, distrator obrigatório no arrastar), não veracidade — gabarito errado passa em todos os testes.
   - **`Exame.IsPublished` ("em construção") continua valendo para o próximo exame.** O exame é semeado e recebe questões desde a primeira — os arquivos de seed exigem um `exameCode` declarado, então sem esse estado intermediário o exame só poderia entrar já pronto, e as centenas de questões seriam escritas sem nunca passar pelo seed nem pelos testes. Enquanto está em construção ele **some do catálogo e recusa tentativa**, e a recusa é na Application (`SessaoDeProvaService`), não só na tela: o id do exame trafega no formulário de "Iniciar simulado", então esconder o botão não impede quem já o tem. Publicar antes da hora **não quebra nada** — e é esse o problema: o sorteio faz `Math.Min(total, pool)` e entrega uma prova curta e sempre parecida, com cara de prova normal. Dois testes guardam o par, e o seed registra o progresso no log a cada startup. ⚠️ **Estudos de caso: risco reconhecido, NÃO confirmado.** Se AZ-305/AZ-400 tiverem case study (cenário longo compartilhado por várias questões), isso não cabe no modelo atual — `Questao` é unidade independente, e o formato exigiria entidade nova + migration, mudança no sorteio (o bloco é atômico e pode atravessar domínios, quebrando a repartição por cota) e uma UI de abas que colide com a navegação linear. **Mas os study guides oficiais dos dois exames não mencionam case studies**, e a afirmação anterior de que os têm era conhecimento não verificado apresentado como fato. Antes de tratar isso como épico, confirmar na página de detalhes do exame ou no `aka.ms/examdemo`. De todo modo não bloqueia escrever as questões independentes, que são a maior parte de qualquer um dos dois.
-- **Alertas** (`alerting_rules` no Prometheus, Alertmanager, notificação do Grafana). A infraestrutura já suporta — `azureprep_coleta_idade_seconds` e a taxa de 5xx são os dois candidatos naturais —, mas alerta sem destino combinado e sem alguém de plantão é só mais um painel vermelho que ninguém vê.
+- **Alertas** (`alerting_rules` no Prometheus, Alertmanager, notificação do Grafana). A infraestrutura já suporta — `prephub_coleta_idade_seconds` e a taxa de 5xx são os dois candidatos naturais —, mas alerta sem destino combinado e sem alguém de plantão é só mais um painel vermelho que ninguém vê.
 - **Logs e traces centralizados** (Loki, Tempo, OTLP). O `AddOpenTelemetry` já está montado e trocar o exportador é mudança de uma linha, mas isso dobraria a stack do compose para responder perguntas que hoje `docker compose logs` responde.

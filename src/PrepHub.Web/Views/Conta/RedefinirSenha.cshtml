@@ -1,0 +1,85 @@
+@using PrepHub.Domain.Autenticacao
+@model RedefinirSenhaViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nova senha · PrepHub</title>
+    <partial name="_Favicon" />
+    @* O link chega por e-mail e traz o token na URL: pedimos que ele não vaze no Referer
+       para outros sites, caso a página passe a carregar algo de fora. *@
+    <meta name="referrer" content="no-referrer" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="login-body">
+    <main class="login">
+        <div class="login__card">
+            <div class="login__brand">
+                <span class="login__logo">
+                    <img src="~/img/logo-prephub.png" asp-append-version="true"
+                         width="240" height="200" decoding="async"
+                         alt="PrepHub — simulados de certificação" />
+                </span>
+            </div>
+
+            @if (Model.TokenInvalido)
+            {
+                @* Uma única mensagem para link inexistente, vencido e já usado: distinguir os
+                   três ajudaria quem estivesse sondando tokens. *@
+                <h1 class="login__title">Link inválido</h1>
+                <p class="login__error" role="alert">
+                    Este link de redefinição não é mais válido. Ele pode ter vencido, já ter sido
+                    usado ou ter sido substituído por um pedido mais recente.
+                </p>
+                <p class="login__lead">Peça um link novo para continuar.</p>
+
+                <p class="login__alt">
+                    <a asp-action="EsqueciSenha">Pedir novo link</a>
+                </p>
+            }
+            else
+            {
+                <h1 class="login__title">Criar nova senha</h1>
+                <p class="login__lead">
+                    Escolha a senha que você vai usar para entrar a partir de agora.
+                </p>
+
+                <form class="auth-form" asp-action="RedefinirSenha" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="Token" />
+
+                    <div class="field">
+                        <label class="field__label" asp-for="Senha"></label>
+                        <input class="field__input" asp-for="Senha" type="password"
+                               autocomplete="new-password" />
+                        <span class="field__hint">Mínimo de @PoliticaDeSenha.TamanhoMinimo caracteres.</span>
+                        <span class="field__error" asp-validation-for="Senha"></span>
+                    </div>
+
+                    <div class="field">
+                        <label class="field__label" asp-for="ConfirmacaoDeSenha"></label>
+                        <input class="field__input" asp-for="ConfirmacaoDeSenha" type="password"
+                               autocomplete="new-password" />
+                        <span class="field__error" asp-validation-for="ConfirmacaoDeSenha"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn--primary auth-form__submit">Salvar nova senha</button>
+                </form>
+
+                <p class="login__alt">
+                    <a asp-action="Login">Voltar para o login</a>
+                </p>
+            }
+        </div>
+
+        <p class="login__footnote">
+            Questões 100% originais, escritas a partir do Skills Measured outline oficial.
+            Este simulado não reproduz conteúdo real de provas.
+        </p>
+    </main>
+</body>
+</html>

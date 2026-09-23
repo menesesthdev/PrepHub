@@ -9,7 +9,7 @@
 set -euo pipefail
 
 AQUI="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-WWWROOT="$(cd "$AQUI/../.." && pwd)/src/AzurePrep.Web/wwwroot"
+WWWROOT="$(cd "$AQUI/../.." && pwd)/src/PrepHub.Web/wwwroot"
 
 # Duas fontes, cada uma para um uso: a marca sozinha (nuvem + "P" + checklist) vira os ícones,
 # e a logo completa, com "PREPHUB APP" e o descritivo, vai para as telas de conta. Os textos
@@ -77,6 +77,6 @@ with open(f"{wwwroot}/favicon.ico", "wb") as arquivo:
 print(f"favicon.ico: {len(cabecalho + entradas + blobs)} bytes, {len(pngs)} resolucoes")
 PYTHON
 
-rm -f "$WWWROOT/img/icone-48.png" "$WWWROOT/img/logo-azureprep.png"
+rm -f "$WWWROOT/img/icone-48.png" "$WWWROOT/img/logo-prephub.png"
 
 echo "Derivados regenerados em $WWWROOT"

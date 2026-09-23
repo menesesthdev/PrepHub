@@ -18,7 +18,7 @@
 #   ./tools/backup-dados.sh /mnt/backups 30    # destino e dias de retenção
 #
 # Em cron (diário às 4h):
-#   0 4 * * * cd /caminho/do/AzurePrep && ./tools/backup-dados.sh /mnt/backups 30 >> /var/log/azureprep-backup.log 2>&1
+#   0 4 * * * cd /caminho/do/PrepHub && ./tools/backup-dados.sh /mnt/backups 30 >> /var/log/prephub-backup.log 2>&1
 #
 # ⚠️ Backup que nunca foi restaurado não é backup. Ver a seção "Restaurar" em docs/deploy.md.
 
@@ -26,11 +26,11 @@ set -euo pipefail
 
 DESTINO="${1:-./backups}"
 RETENCAO_DIAS="${2:-14}"
-VOLUME="azureprep_dados"
+VOLUME="prephub_dados"
 SERVICO="web"
 
 carimbo="$(date +%Y-%m-%d_%H%M%S)"
-arquivo="${DESTINO}/azureprep-dados-${carimbo}.tar.gz"
+arquivo="${DESTINO}/prephub-dados-${carimbo}.tar.gz"
 
 mkdir -p "$DESTINO"
 
@@ -69,8 +69,8 @@ docker run --rm \
 
 # Verificação mínima: um tar que lista e contém o banco. Não prova que o SQLite abre — só que o
 # pacote não saiu vazio, que é a falha mais comum e a mais fácil de passar despercebida.
-if ! tar tzf "$arquivo" | grep -q 'azureprep\.db$'; then
-    echo "ERRO: o pacote não contém azureprep.db — backup descartado." >&2
+if ! tar tzf "$arquivo" | grep -q 'prephub\.db$'; then
+    echo "ERRO: o pacote não contém prephub.db — backup descartado." >&2
     rm -f "$arquivo"
     exit 1
 fi
@@ -79,7 +79,7 @@ tamanho="$(du -h "$arquivo" | cut -f1)"
 echo "✓ backup concluído: ${arquivo} (${tamanho})"
 
 if [ "$RETENCAO_DIAS" -gt 0 ]; then
-    removidos="$(find "$DESTINO" -name 'azureprep-dados-*.tar.gz' -type f -mtime "+${RETENCAO_DIAS}" -print -delete | wc -l)"
+    removidos="$(find "$DESTINO" -name 'prephub-dados-*.tar.gz' -type f -mtime "+${RETENCAO_DIAS}" -print -delete | wc -l)"
     [ "$removidos" -gt 0 ] && echo "→ ${removidos} backup(s) com mais de ${RETENCAO_DIAS} dias removido(s)."
 fi
 

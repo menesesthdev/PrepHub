@@ -9,7 +9,7 @@ datasources:
 
     # O uid é fixo porque é ele que os JSONs dos dashboards referenciam. Deixar o Grafana sortear
     # um faria cada painel apontar para uma fonte inexistente depois de recriar o container.
-    uid: azureprep-prometheus
+    uid: prephub-prometheus
 
     # proxy: o navegador fala com o Grafana, que fala com o Prometheus pela rede interna. Com
     # `direct` o navegador precisaria alcançar http://prometheus:9090, nome que só existe dentro

@@ -14,15 +14,15 @@ global:
   evaluation_interval: 15s
 
   external_labels:
-    projeto: azureprep
+    projeto: prephub
 
   # ⚠️ Nomes de métrica no formato clássico, com underscore.
   #
-  # O OpenTelemetry nomeia os instrumentos com ponto (azureprep.usuarios.cadastrados) e o
+  # O OpenTelemetry nomeia os instrumentos com ponto (prephub.usuarios.cadastrados) e o
   # Prometheus 3 passou a aceitar isso: ele negocia UTF-8 no scrape e guarda o nome com ponto,
-  # como veio. O efeito prático é que `sum(azureprep_usuarios_cadastrados)` não encontra nada —
+  # como veio. O efeito prático é que `sum(prephub_usuarios_cadastrados)` não encontra nada —
   # a série existe com OUTRO nome, e a consulta precisaria da sintaxe entre aspas
-  # (`sum({"azureprep.usuarios.cadastrados"})`), que quase nenhum exemplo, tutorial ou dashboard
+  # (`sum({"prephub.usuarios.cadastrados"})`), que quase nenhum exemplo, tutorial ou dashboard
   # da internet usa.
   #
   # Voltando ao esquema clássico, o exportador entrega os nomes já traduzidos para underscore e
@@ -35,7 +35,7 @@ scrape_configs:
   # `web` é o nome do serviço no compose e resolve pelo DNS interno do Docker. A porta 9464 NÃO é
   # publicada no host de propósito: é a porta separada em que /metrics responde, alcançável só de
   # dentro desta rede. Ver Observabilidade:PortaDeMetricas no appsettings.
-  - job_name: azureprep
+  - job_name: prephub
     metrics_path: /metrics
     static_configs:
       - targets:
