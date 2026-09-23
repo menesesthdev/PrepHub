@@ -1,5 +1,5 @@
 # =============================================================================
-# AzurePrep — imagem da aplicação web.
+# PrepHub — imagem da aplicação web.
 #
 # Build em dois estágios: o SDK (grande, com compilador e NuGet) fica no estágio
 # descartado, e a imagem final leva só o runtime ASP.NET e os arquivos publicados.
@@ -33,14 +33,14 @@ ARG MSBUILD_ARGS=""
 
 # Os .csproj entram ANTES do resto do código de propósito: o restore só reexecuta quando uma
 # dependência muda, e não a cada linha editada. Sem isso, todo build baixaria os pacotes de novo.
-COPY src/AzurePrep.Domain/AzurePrep.Domain.csproj                 src/AzurePrep.Domain/
-COPY src/AzurePrep.Application/AzurePrep.Application.csproj       src/AzurePrep.Application/
-COPY src/AzurePrep.Infrastructure/AzurePrep.Infrastructure.csproj src/AzurePrep.Infrastructure/
-COPY src/AzurePrep.Web/AzurePrep.Web.csproj                       src/AzurePrep.Web/
-RUN dotnet restore src/AzurePrep.Web/AzurePrep.Web.csproj $MSBUILD_ARGS
+COPY src/PrepHub.Domain/PrepHub.Domain.csproj                 src/PrepHub.Domain/
+COPY src/PrepHub.Application/PrepHub.Application.csproj       src/PrepHub.Application/
+COPY src/PrepHub.Infrastructure/PrepHub.Infrastructure.csproj src/PrepHub.Infrastructure/
+COPY src/PrepHub.Web/PrepHub.Web.csproj                       src/PrepHub.Web/
+RUN dotnet restore src/PrepHub.Web/PrepHub.Web.csproj $MSBUILD_ARGS
 
 COPY src/ src/
-RUN dotnet publish src/AzurePrep.Web/AzurePrep.Web.csproj \
+RUN dotnet publish src/PrepHub.Web/PrepHub.Web.csproj \
         --configuration Release \
         --no-restore \
         --output /app/publish \
@@ -85,4 +85,4 @@ EXPOSE 9464
 # Sem HEALTHCHECK aqui de propósito: a imagem de runtime não traz curl nem wget, e instalar um
 # só para isso engordaria a imagem. O endpoint /health existe — quem orquestrar (compose com
 # curl, proxy, Kubernetes) aponta para ele.
-ENTRYPOINT ["dotnet", "AzurePrep.Web.dll"]
+ENTRYPOINT ["dotnet", "PrepHub.Web.dll"]

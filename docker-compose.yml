@@ -1,10 +1,10 @@
-name: azureprep
+name: prephub
 
 services:
   web:
     build: .
-    image: azureprep:local
-    container_name: azureprep-web
+    image: prephub:local
+    container_name: prephub-web
     restart: unless-stopped
 
     ports:
@@ -33,7 +33,7 @@ services:
 
   prometheus:
     image: prom/prometheus:v3.13.2
-    container_name: azureprep-prometheus
+    container_name: prephub-prometheus
     restart: unless-stopped
 
     ports:
@@ -60,7 +60,7 @@ services:
 
   grafana:
     image: grafana/grafana:13.1.2
-    container_name: azureprep-grafana
+    container_name: prephub-grafana
     restart: unless-stopped
 
     ports:
@@ -87,7 +87,7 @@ services:
 
     volumes:
       # Fonte de dados e dashboards vêm de arquivo versionado — ver o comentário em
-      # provisioning/dashboards/azureprep.yml sobre por que editar pela interface está desligado.
+      # provisioning/dashboards/prephub.yml sobre por que editar pela interface está desligado.
       - ./observabilidade/grafana/provisioning:/etc/grafana/provisioning:ro
       - ./observabilidade/grafana/dashboards:/var/lib/grafana/dashboards:ro
       # Guarda usuários, sessões e preferências. Sem ele, cada restart pede a troca de senha inicial.

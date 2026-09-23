@@ -12,7 +12,7 @@ Uso:
 
     # noutro terminal, apontando a app para cá (só nesta execução):
     Email__SmtpHost=127.0.0.1 Email__SmtpPort=1025 Email__UsarSsl=false \
-        ~/.dotnet/dotnet run --project src/AzurePrep.Web
+        ~/.dotnet/dotnet run --project src/PrepHub.Web
 
 ⚠️ Só para desenvolvimento: aceita qualquer remetente, não valida nada, não tem TLS e escuta
 apenas em 127.0.0.1. Não é para rodar em máquina exposta.
@@ -36,7 +36,7 @@ class ManipuladorSmtp(socketserver.StreamRequestHandler):
     """Uma conexão SMTP. O SmtpClient abre uma por envio."""
 
     def handle(self):
-        self._responder(220, "AzurePrep SMTP de teste pronto")
+        self._responder(220, "PrepHub SMTP de teste pronto")
 
         remetente = None
         destinatarios = []
@@ -52,7 +52,7 @@ class ManipuladorSmtp(socketserver.StreamRequestHandler):
             if verbo in ("EHLO", "HELO"):
                 # Sem STARTTLS na lista de propósito: anunciar o que não temos faria o
                 # cliente tentar negociar TLS e a conexão morrer no meio.
-                self.wfile.write(b"250-AzurePrep SMTP de teste\r\n")
+                self.wfile.write(b"250-PrepHub SMTP de teste\r\n")
                 self.wfile.write(b"250-AUTH PLAIN LOGIN\r\n")
                 self.wfile.write(b"250 8BITMIME\r\n")
 

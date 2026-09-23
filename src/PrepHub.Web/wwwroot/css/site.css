@@ -1,0 +1,1374 @@
+/* ==========================================================================
+   PrepHub — tema neutro (azul/cinza/branco), sério, estilo ambiente de prova.
+   Sem gamificação, sem cores vibrantes. Fidelidade visual é o produto.
+   ========================================================================== */
+
+:root {
+    --c-bg: #f3f4f6;
+    --c-surface: #ffffff;
+    --c-border: #d1d5db;
+    --c-border-strong: #9ca3af;
+    --c-text: #1f2933;
+    --c-text-muted: #52606d;
+    --c-primary: #1f4e79;      /* azul Azure sóbrio */
+    --c-primary-dark: #163a5c;
+    --c-primary-tint: #e8eef5;
+    --c-answered: #2f6f4f;     /* verde discreto */
+    --c-flagged: #b45309;      /* âmbar discreto */
+    --c-danger: #9b2c2c;
+    --c-danger-tint: #f7ecec;
+    --radius: 6px;
+    --shadow: 0 1px 2px rgba(15, 23, 42, .08), 0 1px 3px rgba(15, 23, 42, .06);
+    --font: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+
+    /* Métricas do chrome da prova (barra superior / barra de ações) */
+    --exam-bar-h: 56px;
+    --exam-actions-h: 60px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--c-bg);
+    color: var(--c-text);
+    font-family: var(--font);
+    font-size: 16px;
+    line-height: 1.5;
+    /* iOS infla o texto sozinho ao girar o aparelho; a escala fica com o viewport. */
+    -webkit-text-size-adjust: 100%;
+    /* Palavra longa (URL, nome de serviço) quebra em vez de esticar a página. */
+    overflow-wrap: break-word;
+}
+
+h1, h2, h3 { line-height: 1.25; }
+a { color: var(--c-primary); }
+
+/* ---- Layout base -------------------------------------------------------- */
+.site-header {
+    background: var(--c-surface);
+    border-bottom: 1px solid var(--c-border);
+}
+.site-header__inner,
+.site-footer__inner,
+.site-main {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+.site-header__inner { display: flex; align-items: center; height: 64px; }
+.site-brand { text-decoration: none; color: var(--c-text); display: flex; align-items: center; gap: 10px; }
+.site-brand__logo { display: block; width: 36px; height: 36px; border-radius: 6px; }
+.site-brand__text { display: flex; flex-direction: column; }
+.site-brand__mark { font-weight: 700; font-size: 1.25rem; color: var(--c-primary); }
+.site-brand__sub { font-size: .8rem; color: var(--c-text-muted); }
+.site-main { padding-top: 32px; padding-bottom: 48px; }
+.site-footer { border-top: 1px solid var(--c-border); background: var(--c-surface); margin-top: 48px; }
+.site-footer__inner { padding-top: 16px; padding-bottom: 16px; font-size: .8rem; color: var(--c-text-muted); }
+
+/* ---- Botões ------------------------------------------------------------- */
+.btn {
+    display: inline-block;
+    font: inherit;
+    font-size: .95rem;
+    padding: 9px 16px;
+    border: 1px solid var(--c-border-strong);
+    border-radius: var(--radius);
+    background: var(--c-surface);
+    color: var(--c-text);
+    cursor: pointer;
+    text-decoration: none;
+    transition: background .12s ease, border-color .12s ease;
+}
+.btn:hover { background: var(--c-primary-tint); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn:disabled:hover { background: var(--c-surface); }
+.btn[hidden] { display: none; }
+.btn--primary { background: var(--c-primary); border-color: var(--c-primary); color: #fff; }
+.btn--primary:hover { background: var(--c-primary-dark); }
+.btn--danger { background: var(--c-danger); border-color: var(--c-danger); color: #fff; }
+.btn--danger:hover { background: #7f2323; }
+.btn--block { display: block; width: 100%; margin-top: 16px; }
+.btn--link {
+    border-color: transparent;
+    background: transparent;
+    color: var(--c-primary);
+    text-decoration: underline;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.btn--link:hover { background: var(--c-primary-tint); }
+.btn--link.has-comment::after { content: " •"; color: var(--c-flagged); font-weight: 700; }
+
+/* ---- Home --------------------------------------------------------------- */
+.hero { margin-bottom: 32px; }
+.hero__title { font-size: 1.8rem; margin: 0 0 8px; }
+.hero__lead { color: var(--c-text-muted); max-width: 640px; margin: 0; }
+.section-title { font-size: 1.15rem; margin: 0 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--c-border); }
+.empty-state { color: var(--c-text-muted); }
+
+/* min() no mínimo da coluna: abaixo de 280px de espaço o cartão acompanha o
+   container em vez de estourar a largura da tela. */
+.exam-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 20px; }
+.exam-card {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.exam-card__code {
+    display: inline-block;
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    color: var(--c-primary);
+    background: var(--c-primary-tint);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+.exam-card__name { font-size: 1.05rem; margin: 10px 0 0; }
+.exam-card__meta { display: flex; gap: 20px; margin: 16px 0; padding: 0; }
+.exam-card__meta dt { font-size: .72rem; text-transform: uppercase; color: var(--c-text-muted); letter-spacing: .03em; }
+.exam-card__meta dd { margin: 2px 0 0; font-weight: 600; }
+.exam-card__action { margin-top: auto; }
+
+/* ==========================================================================
+   Login e cadastro — mesma paleta da prova (azul/cinza/branco, sem cor
+   vibrante). Duas entradas na tela: e-mail e senha acima, provedores sociais
+   abaixo. O card é o mesmo nas duas telas, então o cadastro reaproveita
+   .login__* e só troca o conteúdo do formulário.
+   ========================================================================== */
+.login-body {
+    background: var(--c-bg);
+    min-height: 100vh;
+    /* dvh desconta a barra do navegador móvel, que 100vh ignora e faz sobrar
+       uma faixa rolável no fim da tela. No desktop dvh e vh são iguais. */
+    min-height: 100dvh;
+}
+.login {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    gap: 20px;
+}
+.login__card {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+    /* Faixa azul no topo: ecoa o azul da logo e fecha o card por cima. */
+    border-top: 4px solid var(--c-primary);
+}
+.login__brand { display: flex; flex-direction: column; margin-bottom: 24px; }
+.login__mark { font-weight: 700; font-size: 1.3rem; color: var(--c-primary); }
+.login__sub { font-size: .8rem; color: var(--c-text-muted); }
+
+/* ---- Logo animada da tela de login --------------------------------------
+   A animação vive só aqui, fora da simulação: o chrome da prova continua
+   estático e sóbrio como o sandbox real. São três camadas independentes —
+   entrada no container, flutuação na imagem e brilho no ::after — para que
+   nenhuma delas dispute a mesma propriedade `transform` com outra.
+   -------------------------------------------------------------------------- */
+.login__logo {
+    position: relative;
+    display: block;
+    /* 6:5, a proporção da logo completa — o derivado é gerado nela, então não há distorção. */
+    width: 240px;
+    height: 200px;
+    margin: 0 auto;
+    /* overflow segura a faixa de brilho dentro do quadro; a logo é PNG com alpha,
+       então o fundo do card aparece por trás e não há moldura a esconder. */
+    overflow: hidden;
+    animation: logo-entrada .7s cubic-bezier(.2, .7, .3, 1) both;
+}
+.login__logo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    animation: logo-flutua 6s ease-in-out 1s infinite;
+}
+/* Faixa de luz diagonal: some no branco do fundo e só aparece ao cruzar os
+   azuis da nuvem e do "A" — é o que dá o brilho sem sujar o card. */
+.login__logo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(105deg,
+        transparent 38%,
+        rgba(255, 255, 255, .72) 50%,
+        transparent 62%);
+    transform: translateX(-130%);
+    animation: logo-brilho 6s ease-in-out 1.6s infinite;
+}
+
+@keyframes logo-entrada {
+    from { opacity: 0; transform: translateY(12px) scale(.94); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes logo-flutua {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-5px); }
+}
+/* Varre rápido e descansa o resto do ciclo — brilho contínuo viraria distração. */
+@keyframes logo-brilho {
+    0%        { transform: translateX(-130%); }
+    28%, 100% { transform: translateX(130%); }
+}
+
+/* Quem pediu menos movimento no sistema recebe a logo parada, sem exceção. */
+@media (prefers-reduced-motion: reduce) {
+    .login__logo,
+    .login__logo img,
+    .login__logo::after {
+        animation: none;
+    }
+    .login__logo::after { display: none; }
+}
+
+.login__title { font-size: 1.5rem; margin: 0 0 6px; }
+.login__lead { margin: 0 0 26px; color: var(--c-text-muted); font-size: .95rem; }
+
+.login__error {
+    margin: 0 0 20px;
+    padding: 12px 14px;
+    font-size: .9rem;
+    color: var(--c-danger);
+    background: var(--c-danger-tint);
+    border: 1px solid #e3c3c3;
+    border-radius: var(--radius);
+}
+.login__error code { font-size: .85em; }
+
+/* Confirmação (senha alterada). Verde discreto, o mesmo já usado para item respondido na
+   prova — sem parabéns nem emoji, no tom do resto do produto. */
+.login__sucesso {
+    margin: 0 0 20px;
+    padding: 12px 14px;
+    font-size: .9rem;
+    color: var(--c-answered);
+    background: #eef5f1;
+    border: 1px solid #cfe0d6;
+    border-radius: var(--radius);
+}
+
+.login__hint {
+    margin: 18px 0 0;
+    font-size: .85rem;
+    color: var(--c-text-muted);
+}
+
+/* ---- Formulário de e-mail e senha ---------------------------------------
+   Campos empilhados, rótulo acima do controle e erro logo abaixo dele: é a
+   ordem em que o leitor de tela anuncia e a que não desloca o resto do card
+   quando uma mensagem aparece.
+   -------------------------------------------------------------------------- */
+.auth-form { display: flex; flex-direction: column; gap: 16px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field__label { font-size: .85rem; font-weight: 600; color: var(--c-text); }
+.field__input {
+    font: inherit;
+    font-size: .95rem;
+    padding: 10px 12px;
+    border: 1px solid var(--c-border-strong);
+    border-radius: var(--radius);
+    background: var(--c-surface);
+    color: var(--c-text);
+    transition: border-color .12s ease, box-shadow .12s ease;
+}
+.field__input::placeholder { color: #9aa5b1; }
+.field__input:hover { border-color: var(--c-text-muted); }
+.field__input:focus {
+    outline: none;
+    border-color: var(--c-primary);
+    /* Anel discreto no azul do tema, no lugar do outline padrão do browser. */
+    box-shadow: 0 0 0 3px var(--c-primary-tint);
+}
+/* Rótulo e ação na mesma linha ("Senha" à esquerda, "Esqueci minha senha" à direita). */
+.field__linha { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.field__acao { font-size: .8rem; }
+
+.field__hint { font-size: .78rem; color: var(--c-text-muted); }
+.field__error { font-size: .8rem; color: var(--c-danger); }
+/* O tag helper de validação emite o span mesmo sem erro — vazio, não deve ocupar linha. */
+.field__error:empty { display: none; }
+.field__input.input-validation-error { border-color: var(--c-danger); }
+.field__input.input-validation-error:focus { box-shadow: 0 0 0 3px var(--c-danger-tint); }
+
+.auth-form__submit { margin-top: 4px; padding: 12px 16px; font-weight: 600; }
+
+/* Separador "ou continue com": a linha atravessa e o rótulo abre espaço nela. */
+.login__divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0 18px;
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--c-text-muted);
+}
+.login__divider::before,
+.login__divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--c-border);
+}
+
+.login__providers { display: flex; flex-direction: column; gap: 12px; }
+
+/* Caminho alternativo (cadastrar / entrar): presente, sem competir com o botão primário. */
+.login__alt {
+    margin: 22px 0 0;
+    text-align: center;
+    font-size: .9rem;
+    color: var(--c-text-muted);
+}
+.login__alt a { font-weight: 600; }
+
+/* Botão neutro com o glifo colorido da marca: o reconhecimento vem do ícone,
+   então a paleta sóbria do projeto se mantém e o alvo continua óbvio. */
+.provider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    font: inherit;
+    font-size: .98rem;
+    font-weight: 600;
+    padding: 13px 16px;
+    border: 1px solid var(--c-border-strong);
+    border-radius: var(--radius);
+    background: var(--c-surface);
+    color: var(--c-text);
+    cursor: pointer;
+    transition: background .12s ease, border-color .12s ease, box-shadow .12s ease;
+}
+.provider:hover { background: #f5f7f9; border-color: var(--c-text-muted); }
+.provider:focus-visible { outline: 2px solid var(--c-primary); outline-offset: 2px; }
+.provider__icon { display: flex; flex-shrink: 0; }
+
+.login__legal {
+    margin: 26px 0 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--c-border);
+    font-size: .8rem;
+    color: var(--c-text-muted);
+    line-height: 1.5;
+}
+.login__footnote {
+    max-width: 420px;
+    margin: 0;
+    text-align: center;
+    font-size: .78rem;
+    color: var(--c-text-muted);
+}
+
+/* Identificação do usuário logado no cabeçalho interno. */
+.site-user { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.site-user__avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 1px solid var(--c-border); }
+.site-user__name { font-size: .9rem; font-weight: 600; }
+.site-user__signout { font: inherit; font-size: .85rem; padding: 6px 12px; }
+
+/* (os ajustes por largura de login e cabeçalho estão na seção "Responsivo", no fim) */
+
+/* ==========================================================================
+   Tela de prova — replica o chrome da entrega real (Pearson VUE / Microsoft):
+   barra superior clara, área única de conteúdo, barra de ações fixa embaixo.
+   ========================================================================== */
+.exam-body {
+    background: #fbfbfc;
+    /* Espaço para a barra de ações fixa não cobrir o conteúdo. */
+    padding-bottom: var(--exam-actions-h);
+}
+
+/* ---- Barra superior ----------------------------------------------------- */
+.exam-bar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    height: var(--exam-bar-h);
+    padding: 0 24px;
+    background: #eef0f3;
+    border-bottom: 1px solid var(--c-border);
+}
+.exam-bar__title { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+.exam-bar__code { font-weight: 700; font-size: 1rem; }
+.exam-bar__name {
+    font-size: .9rem;
+    color: var(--c-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.exam-bar__clock { margin-left: auto; display: flex; align-items: baseline; gap: 10px; }
+.exam-bar__clock-label { font-size: .85rem; color: var(--c-text-muted); }
+.exam-bar__clock-value {
+    font-variant-numeric: tabular-nums;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: .02em;
+}
+.exam-bar__clock-value.is-low { color: var(--c-danger); }
+
+/* ---- Área de conteúdo --------------------------------------------------- */
+.exam-stage { max-width: 900px; margin: 0 auto; padding: 32px 24px 40px; }
+.exam-sheet[hidden] { display: none; }
+
+/* ---- Questão ------------------------------------------------------------ */
+.question__counter {
+    margin: 0 0 20px;
+    font-size: .85rem;
+    color: var(--c-text-muted);
+}
+.question__text { font-size: 1.05rem; margin: 0 0 16px; }
+.question__instruction { margin: 0 0 6px; font-size: 1.05rem; }
+.question__note { margin: 0 0 20px; font-size: .95rem; font-weight: 600; }
+
+/* Alternativas sem "cartão": radio + texto, como na prova real. */
+.options { list-style: none; margin: 24px 0 0; padding: 0; }
+.option { border-top: 1px solid #edeff2; }
+.option:last-child { border-bottom: 1px solid #edeff2; }
+.option__label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 8px;
+    cursor: pointer;
+}
+.option__label:hover { background: #f5f7f9; }
+.option__input { margin-top: 4px; width: 16px; height: 16px; accent-color: var(--c-primary); flex-shrink: 0; }
+.option__label:has(.option__input:checked) { background: var(--c-primary-tint); }
+
+/* ---- Arrastar e soltar (questões de associação) -------------------------- */
+/* Duas colunas: painel de itens à esquerda, alvos à direita — a mesma disposição
+   do sandbox oficial. Sem cor de destaque nem animação: continua sendo tela de
+   prova, e o arrastar não pode virar a parte divertida do simulado. */
+.question__hint {
+    margin: 0 0 20px;
+    font-size: .88rem;
+    color: var(--c-text-muted);
+}
+
+.dnd {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+    gap: 24px;
+    margin-top: 24px;
+    align-items: start;
+}
+.dnd__column-title {
+    margin: 0 0 10px;
+    font-size: .8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--c-text-muted);
+}
+.dnd__pool,
+.dnd__targets { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+
+.dnd__item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    padding: 10px 12px;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border-strong);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    cursor: grab;
+}
+.dnd__item:hover { background: #f5f7f9; }
+.dnd__item:active { cursor: grabbing; }
+.dnd__item.is-picked {
+    background: var(--c-primary-tint);
+    border-color: var(--c-primary);
+    box-shadow: inset 0 0 0 1px var(--c-primary);
+}
+
+.dnd__target { display: flex; flex-direction: column; gap: 4px; }
+.dnd__target-label { font-size: .95rem; }
+
+.dnd__slot {
+    display: block;
+    width: 100%;
+    min-height: 44px;
+    text-align: left;
+    font: inherit;
+    padding: 10px 12px;
+    background: #fbfcfd;
+    /* Tracejado enquanto vazio é o convite ao drop; preenchido vira caixa sólida. */
+    border: 1px dashed var(--c-border-strong);
+    border-radius: var(--radius);
+    color: var(--c-text-muted);
+    cursor: pointer;
+}
+.dnd__slot.is-filled {
+    border-style: solid;
+    border-color: var(--c-primary);
+    background: var(--c-primary-tint);
+    color: var(--c-text);
+}
+.dnd__slot.is-over { border-color: var(--c-primary); background: var(--c-primary-tint); }
+.dnd__slot-text { pointer-events: none; }
+
+/* ---- Barra de ações fixa ------------------------------------------------ */
+.exam-actions {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: var(--exam-actions-h);
+    padding: 0 24px;
+    background: #eef0f3;
+    border-top: 1px solid var(--c-border);
+}
+.exam-actions__left { display: flex; align-items: center; gap: 8px; }
+.exam-actions__right { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.mark-toggle { display: flex; align-items: center; gap: 8px; font-size: .92rem; cursor: pointer; }
+.mark-toggle[hidden] { display: none; }
+.mark-toggle input { width: 16px; height: 16px; accent-color: var(--c-flagged); }
+
+/* ---- Tela de revisão ---------------------------------------------------- */
+.review-screen__title { font-size: 1.3rem; margin: 0 0 10px; }
+.review-screen__help { margin: 0 0 20px; color: var(--c-text-muted); font-size: .92rem; max-width: 62ch; }
+.review-screen__filters { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.btn--filter.is-active {
+    background: var(--c-primary);
+    border-color: var(--c-primary);
+    color: #fff;
+}
+
+.review-table { width: 100%; border-collapse: collapse; font-size: .93rem; }
+.review-table th {
+    text-align: left;
+    padding: 10px 12px;
+    background: #eef0f3;
+    border-bottom: 1px solid var(--c-border);
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    color: var(--c-text-muted);
+}
+.review-table th:first-child { width: 88px; }
+.review-table th:last-child { width: 110px; }
+.review-row { border-bottom: 1px solid #edeff2; cursor: pointer; }
+.review-row:hover, .review-row:focus { background: var(--c-primary-tint); outline: none; }
+.review-row:focus-visible { outline: 2px solid var(--c-primary); outline-offset: -2px; }
+.review-row td { padding: 10px 12px; }
+.review-row__item { font-weight: 600; font-variant-numeric: tabular-nums; }
+.review-row__mark { color: var(--c-flagged); font-weight: 700; }
+.review-row--incomplete td:nth-child(2) { color: var(--c-danger); font-weight: 600; }
+.review-row--unseen td:nth-child(2) { color: var(--c-text-muted); }
+.review-screen__empty { margin-top: 20px; color: var(--c-text-muted); }
+.review-screen__empty[hidden] { display: none; }
+
+/* ---- Modal -------------------------------------------------------------- */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, .5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+.modal[hidden] { display: none; }
+.modal__dialog {
+    background: var(--c-surface);
+    border-radius: var(--radius);
+    padding: 28px;
+    max-width: 460px;
+    width: calc(100% - 40px);
+    box-shadow: 0 10px 40px rgba(15, 23, 42, .25);
+    /* Com o teclado virtual aberto sobra pouca altura: o diálogo rola por dentro
+       em vez de ter os botões empurrados para fora da tela. */
+    max-height: calc(100dvh - 40px);
+    overflow-y: auto;
+}
+.modal__title { margin: 0 0 12px; font-size: 1.2rem; }
+.modal__body { margin: 0 0 12px; color: var(--c-text-muted); }
+.modal__warning { margin: 0 0 24px; font-size: .9rem; font-weight: 600; color: var(--c-danger); }
+.modal__textarea {
+    width: 100%;
+    font: inherit;
+    font-size: .95rem;
+    padding: 10px 12px;
+    border: 1px solid var(--c-border-strong);
+    border-radius: var(--radius);
+    resize: vertical;
+    margin-bottom: 20px;
+}
+.modal__actions { display: flex; justify-content: flex-end; gap: 12px; }
+
+/* ==========================================================================
+   Score report — escala 1–1000 com corte em 700, como o relatório real.
+   ========================================================================== */
+.score-report {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 32px;
+    margin-bottom: 32px;
+    text-align: center;
+}
+.score-report__value { font-size: 3.4rem; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+.score-report__max { font-size: 1.4rem; font-weight: 600; color: var(--c-text-muted); }
+.score-report__verdict {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    padding: 4px 16px;
+    border-radius: 4px;
+}
+.score-report--pass .score-report__verdict { color: var(--c-answered); background: #e6f0ea; }
+.score-report--fail .score-report__verdict { color: var(--c-danger); background: var(--c-danger-tint); }
+.score-report__cut { margin: 14px 0 0; font-size: .9rem; color: var(--c-text-muted); }
+
+/* Régua da escala, com o marcador da nota e o traço do corte. */
+.score-scale { margin: 28px auto 0; max-width: 520px; }
+.score-scale__track {
+    position: relative;
+    height: 10px;
+    background: var(--c-border);
+    border-radius: 5px;
+}
+.score-scale__fill { position: absolute; inset: 0 auto 0 0; background: var(--c-primary); border-radius: 5px; }
+.score-report--fail .score-scale__fill { background: var(--c-danger); }
+.score-report--pass .score-scale__fill { background: var(--c-answered); }
+.score-scale__cut { position: absolute; top: -5px; bottom: -5px; width: 2px; background: var(--c-text); }
+.score-scale__ends { display: flex; justify-content: space-between; margin-top: 8px; font-size: .78rem; color: var(--c-text-muted); }
+
+.result__meta { display: flex; justify-content: center; gap: 40px; margin: 28px 0 0; flex-wrap: wrap; }
+.result__meta dt { font-size: .72rem; text-transform: uppercase; color: var(--c-text-muted); letter-spacing: .03em; }
+.result__meta dd { margin: 2px 0 0; font-size: 1.05rem; font-weight: 600; }
+.result__section { margin-bottom: 32px; }
+.result__actions { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+.result__note { color: var(--c-text-muted); font-size: .9rem; max-width: 62ch; }
+
+.skill-breakdown { display: flex; flex-direction: column; gap: 16px; }
+.skill-row__head { display: flex; justify-content: space-between; font-size: .9rem; margin-bottom: 6px; gap: 16px; }
+.skill-row__name { font-weight: 600; }
+.skill-row__score { color: var(--c-text-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.skill-row__bar { height: 10px; background: var(--c-border); border-radius: 5px; overflow: hidden; }
+.skill-row__fill { height: 100%; background: var(--c-primary); }
+
+/* ==========================================================================
+   Revisão de estudo (fora da prova real — existe só para aprender com os erros)
+   ========================================================================== */
+.review-list { display: flex; flex-direction: column; gap: 10px; }
+.review-item {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-left: 4px solid var(--c-border-strong);
+    border-radius: var(--radius);
+}
+.review-item--correct { border-left-color: var(--c-answered); }
+.review-item--incorrect { border-left-color: var(--c-danger); }
+.review-item__summary { display: flex; align-items: center; gap: 12px; padding: 14px 18px; cursor: pointer; font-size: .95rem; }
+.review-item__badge { font-size: .72rem; font-weight: 700; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; }
+.review-item--correct .review-item__badge { background: #e6f0ea; color: var(--c-answered); }
+.review-item--incorrect .review-item__badge { background: var(--c-danger-tint); color: var(--c-danger); }
+.review-item__number { font-weight: 600; }
+.review-item__type { color: var(--c-text-muted); font-size: .82rem; margin-left: auto; }
+.review-item__body { padding: 0 18px 18px; }
+.review-item__text { font-weight: 600; }
+.review-options { list-style: none; margin: 0 0 16px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.review-option { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 4px; border: 1px solid transparent; }
+.review-option--correct { background: #e6f0ea; border-color: #bcd8c7; }
+.review-option--wrong { background: var(--c-danger-tint); border-color: #e3c3c3; }
+.review-option__mark { width: 16px; font-weight: 700; }
+.review-option--correct .review-option__mark { color: var(--c-answered); }
+.review-option--wrong .review-option__mark { color: var(--c-danger); }
+.review-option__tag { margin-left: auto; font-size: .72rem; color: var(--c-text-muted); font-style: italic; }
+/* Par de arrastar-e-soltar: o alvo em destaque, o item depois da seta. */
+.review-option__target { font-weight: 600; }
+.review-option__arrow { margin: 0 6px; color: var(--c-text-muted); }
+.review-item__explanation { font-size: .9rem; color: var(--c-text); background: #f9fafb; border: 1px solid var(--c-border); border-radius: var(--radius); padding: 12px 14px; }
+
+/* ==========================================================================
+   Histórico do usuário — mesma sobriedade do score report: número e veredito,
+   sem gráfico decorativo nem cor vibrante.
+   ========================================================================== */
+
+/* Rótulo só para leitor de tela (cabeçalho de coluna de ações, por exemplo). */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
+.historico__bloco { margin-bottom: 36px; }
+.historico__nota { margin: -8px 0 16px; font-size: .85rem; color: var(--c-text-muted); }
+
+.historico-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.historico-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+}
+/* Faixa âmbar à esquerda: mesma cor de "marcado para revisão" na prova — sinaliza
+   pendência sem alarmar. */
+.historico-item--aberta { border-left: 3px solid var(--c-flagged); }
+.historico-item__info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.historico-item__data { font-size: .9rem; font-weight: 600; }
+.historico-item__progresso { font-size: .82rem; color: var(--c-text-muted); }
+.historico-item .btn { margin-left: auto; flex-shrink: 0; }
+
+/* Painel de números: dado grande, rótulo pequeno. Sem ícone e sem cor de fundo. */
+.painel-numeros {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px;
+    margin: 0;
+    background: var(--c-border);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+.painel-numeros__item { background: var(--c-surface); padding: 16px 18px; }
+.painel-numeros dt { font-size: .75rem; text-transform: uppercase; letter-spacing: .03em; color: var(--c-text-muted); }
+.painel-numeros dd { margin: 6px 0 0; font-size: 1.5rem; font-weight: 700; }
+.painel-numeros__variacao { font-size: .85rem; font-weight: 600; margin-left: 6px; }
+.painel-numeros__variacao--sobe { color: var(--c-answered); }
+.painel-numeros__variacao--cai { color: var(--c-danger); }
+
+/* Tabela larga rola dentro do próprio container — a página nunca rola na horizontal. */
+.tabela-rolavel { overflow-x: auto; border: 1px solid var(--c-border); border-radius: var(--radius); }
+.historico-tabela { width: 100%; border-collapse: collapse; background: var(--c-surface); font-size: .92rem; }
+.historico-tabela th,
+.historico-tabela td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--c-border); white-space: nowrap; }
+.historico-tabela thead th {
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    color: var(--c-text-muted);
+    background: #f9fafb;
+}
+.historico-tabela tbody tr:last-child td { border-bottom: 0; }
+.historico-tabela tbody tr:hover { background: var(--c-primary-tint); }
+.historico-tabela__nota { font-weight: 700; font-variant-numeric: tabular-nums; }
+.historico-tabela__acoes { display: flex; gap: 14px; }
+.historico-tabela__acoes a { font-size: .85rem; }
+
+.selo { font-size: .75rem; font-weight: 700; text-transform: uppercase; padding: 3px 9px; border-radius: 4px; }
+.selo--aprovado { background: #e6f0ea; color: var(--c-answered); }
+.selo--reprovado { background: var(--c-danger-tint); color: var(--c-danger); }
+
+/* Navegação principal do cabeçalho. */
+.site-nav { display: flex; gap: 20px; margin-left: 32px; }
+.site-nav__link { font-size: .92rem; font-weight: 600; color: var(--c-text-muted); text-decoration: none; }
+.site-nav__link:hover { color: var(--c-primary); }
+.site-nav__link--ativo { color: var(--c-primary); }
+
+/* ==========================================================================
+   Página de apoio — mesma sobriedade do resto: sem barra de meta, sem contador
+   de apoiadores, sem cor de destaque. O argumento é o custo declarado, não a
+   pressão visual.
+   ========================================================================== */
+.apoio {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px;
+    margin-bottom: 32px;
+}
+.apoio__qr { flex-shrink: 0; width: 220px; text-align: center; }
+/* O SVG vem com largura própria do gerador; aqui ele passa a acompanhar o container. */
+.apoio__qr svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+}
+.apoio__qr-legenda { margin: 10px 0 0; font-size: .78rem; color: var(--c-text-muted); }
+
+.apoio__acoes { flex: 1; min-width: 0; }
+.apoio__valores { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+.apoio__rotulo { margin: 0 0 6px; font-size: .85rem; font-weight: 600; }
+
+/* Payload longo (~134 caracteres) quebrado em qualquer ponto: é uma sequência sem
+   espaços, então sem break-all ele esticaria o cartão inteiro. */
+.apoio__payload {
+    display: block;
+    font-family: ui-monospace, SFMono-Regular, "Cascadia Mono", Menlo, Consolas, monospace;
+    font-size: .76rem;
+    line-height: 1.6;
+    word-break: break-all;
+    color: var(--c-text-muted);
+    background: #f9fafb;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    padding: 10px 12px;
+}
+.apoio__copiar { margin-top: 14px; }
+.apoio__aviso-copia { margin-left: 12px; font-size: .85rem; color: var(--c-answered); }
+.apoio__nota { margin: 18px 0 0; font-size: .85rem; color: var(--c-text-muted); }
+.apoio__externo { margin: 14px 0 0; font-size: .9rem; }
+
+/* Chamada no fim do score report: uma linha discreta, depois dos botões — nunca
+   durante a prova, que é onde a imersão é o produto. */
+.result__apoio {
+    margin: 28px 0 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--c-border);
+    font-size: .85rem;
+    color: var(--c-text-muted);
+}
+
+/* Link permanente no rodapé: presença constante, custo zero de atenção. */
+.site-footer__apoio { margin: 8px 0 0; }
+
+/* ==========================================================================
+   Responsivo
+
+   O layout é o mesmo em qualquer largura — o que muda é como ele se
+   reorganiza quando deixa de caber. Nada aqui altera a aparência no desktop:
+   são pontos de quebra, alvos de toque e correções de viewport móvel.
+
+   Princípios aplicados:
+   - Nenhuma tela rola na horizontal. O que é largo demais (tabela de
+     histórico) rola dentro do próprio container.
+   - Texto que some por falta de espaço vira `.sr-only`, não `display: none` —
+     o leitor de tela continua anunciando "Tempo restante".
+   - A barra de ações da prova nunca é cortada: em telas estreitas ela vira
+     duas linhas (secundário em cima, navegação embaixo), e a altura reservada
+     por `--exam-actions-h` acompanha, senão a barra fixa cobriria a questão.
+   ========================================================================== */
+
+/* ---- ≤ 860px: cabeçalho começa a apertar -------------------------------- */
+@media (max-width: 860px) {
+    /* O descritivo é o texto mais dispensável da barra — sai antes que a
+       navegação comece a quebrar em duas linhas. */
+    .site-brand__sub { display: none; }
+    .site-nav__link { white-space: nowrap; }
+    /* Nome longo trunca em vez de empurrar o botão "Sair" para fora. */
+    .site-user__name {
+        max-width: 160px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+/* ---- ≤ 720px: tablet em pé e celular deitado ---------------------------- */
+@media (max-width: 720px) {
+    .site-nav { margin-left: 16px; gap: 14px; }
+
+    /* Cartão de tentativa em andamento: botão desce para baixo do texto. */
+    .historico-item { flex-wrap: wrap; }
+    .historico-item .btn { margin-left: 0; }
+
+    /* Na barra da prova o código do exame e o relógio são o que importa;
+       o nome por extenso é o primeiro a sair. */
+    .exam-bar { gap: 12px; padding: 0 16px; }
+    .exam-bar__name { display: none; }
+
+    .exam-stage { padding: 24px 16px 32px; }
+    .exam-actions { gap: 12px; padding: 0 16px; }
+    .exam-actions__right { gap: 8px; }
+    .exam-actions .btn { padding: 8px 12px; font-size: .9rem; }
+
+    .result__meta { gap: 24px; }
+}
+
+/* ---- ≤ 640px: celular em pé --------------------------------------------- */
+@media (max-width: 640px) {
+    /* Cabeçalho em duas linhas: marca e usuário em cima, navegação embaixo.
+       Com dois links não compensa esconder o menu atrás de um botão — o que
+       exigiria script numa página que hoje não carrega nenhum. */
+    .site-header__inner {
+        flex-wrap: wrap;
+        height: auto;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        row-gap: 10px;
+    }
+    .site-brand { flex: 1 1 auto; min-width: 0; }
+    .site-nav {
+        /* base 100% força a navegação a ocupar a linha inteira, sozinha */
+        order: 3;
+        flex: 1 0 100%;
+        margin-left: 0;
+    }
+
+    .site-header__inner,
+    .site-footer__inner,
+    .site-main { padding-left: 16px; padding-right: 16px; }
+    .site-main { padding-top: 24px; padding-bottom: 32px; }
+
+    .score-report { padding: 26px 18px; }
+    .exam-card__meta { flex-wrap: wrap; gap: 16px 20px; }
+
+    /* QR acima e ações abaixo: em coluna o QR fica centralizado e continua grande
+       o bastante para ser lido por outro aparelho. */
+    .apoio { flex-direction: column; align-items: center; padding: 22px 18px; gap: 24px; }
+    .apoio__acoes { width: 100%; }
+    .apoio__copiar { display: block; width: 100%; }
+    .apoio__aviso-copia { display: block; margin: 10px 0 0; }
+
+    /* ---- Barra de ações da prova em duas linhas --------------------------
+       Linha 1: marcar para revisão + comentários (secundários).
+       Linha 2: tela de revisão + anterior/próxima, dividindo a largura —
+       são os alvos usados a cada item, então ficam grandes e ao alcance do
+       polegar. A ordem do HTML já é essa; só o empilhamento muda. */
+    :root { --exam-actions-h: 104px; }
+    .exam-body { padding-bottom: calc(var(--exam-actions-h) + 8px); }
+    .exam-actions {
+        flex-wrap: wrap;
+        align-content: center;
+        height: auto;
+        min-height: var(--exam-actions-h);
+        padding: 10px 12px;
+        gap: 10px;
+    }
+    .exam-actions__left { flex: 1 0 100%; justify-content: space-between; }
+    .exam-actions__right { flex: 1 0 100%; margin-left: 0; gap: 8px; }
+    .exam-actions__right .btn {
+        flex: 1 1 0;
+        min-height: 42px;
+        padding: 8px 6px;
+        white-space: nowrap;
+    }
+    /* "Tela de revisão" é o rótulo mais longo; ganha um pouco mais de espaço
+       para não quebrar em duas linhas. */
+    .exam-actions__right .btn:first-child { flex-grow: 1.4; }
+
+    /* Alternativas com área de toque maior — errar o alvo numa prova
+       cronometrada custa tempo. */
+    .option__label { padding: 14px 8px; gap: 14px; }
+    .option__input { width: 18px; height: 18px; }
+    .mark-toggle input { width: 18px; height: 18px; }
+
+    /* Duas colunas lado a lado não cabem: o painel de itens sobe e os alvos
+       ficam abaixo. A ordem importa — é a mesma leitura de cima para baixo que
+       a instrução descreve ("do painel para o alvo"). */
+    .dnd { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+    .dnd__item, .dnd__slot { min-height: 48px; }
+}
+
+/* ---- ≤ 480px: celulares estreitos --------------------------------------- */
+@media (max-width: 480px) {
+    .login__card { padding: 28px 22px; }
+    .login { padding: 24px 14px; }
+
+    /* O avatar já identifica a conta; o nome sai para caber o botão "Sair". */
+    .site-user__name { display: none; }
+
+    .hero__title { font-size: 1.55rem; }
+    .score-report__value { font-size: 2.8rem; }
+    .modal__dialog { padding: 22px 18px; width: calc(100% - 24px); }
+
+    /* Revisão de estudo: cabeçalho do item e alternativa longa passam a
+       quebrar em vez de espremer o tipo da questão contra a borda. */
+    .review-item__summary { flex-wrap: wrap; gap: 8px 10px; padding: 12px 14px; }
+    .review-item__type { margin-left: 0; }
+    .review-item__body { padding: 0 14px 14px; }
+    /* Só o rótulo "sua resposta" desce de linha: o ✓/✕ precisa continuar
+       colado ao texto da alternativa a que se refere. */
+    .review-option { flex-wrap: wrap; align-items: flex-start; }
+    .review-option__mark { flex: 0 0 16px; }
+    .review-option__text { flex: 1 1 0; min-width: 0; }
+    .review-option__tag { flex: 1 0 100%; margin-left: 26px; }
+
+    .review-table th:first-child { width: 64px; }
+    .review-table th:last-child { width: 84px; }
+    .review-row td { padding: 12px 8px; }
+    .review-screen__filters { gap: 8px; }
+    .review-screen__filters .btn { flex: 1 1 auto; padding: 9px 8px; font-size: .85rem; }
+}
+
+/* ---- ≤ 400px: o piso do que se atende (iPhone SE e similares) ------------ */
+@media (max-width: 400px) {
+    /* Aqui o rótulo do relógio não cabe ao lado do valor. Vira só-leitor-de-tela
+       em vez de sumir: o número sozinho não diria do que é o tempo. */
+    .exam-bar__clock-label {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+        border: 0;
+    }
+    .exam-bar { padding: 0 12px; }
+    .exam-actions__right .btn { font-size: .84rem; }
+    .mark-toggle { font-size: .88rem; }
+
+    /* A logo grande empurraria o formulário para fora da primeira dobra. */
+    .login__logo { width: 168px; height: 140px; }
+}
+
+/* ---- Toque: sem estado de hover preso ----------------------------------- */
+/* Em tela sensível ao toque o :hover fica grudado no último item tocado — numa
+   lista de alternativas isso se confunde com "selecionada". A seleção real
+   (:checked) continua destacada. */
+@media (hover: none) {
+    .option__label:hover { background: transparent; }
+    .option__label:has(.option__input:checked):hover { background: var(--c-primary-tint); }
+    .dnd__item:hover { background: var(--c-surface); }
+    .dnd__item.is-picked:hover { background: var(--c-primary-tint); }
+    .review-row:hover { background: transparent; }
+    .historico-tabela tbody tr:hover { background: transparent; }
+    .provider:hover { background: var(--c-surface); border-color: var(--c-border-strong); }
+}
+
+/* ---- Ponteiro grosso: campos sem zoom automático ------------------------- */
+/* O Safari no iOS dá zoom em qualquer campo com fonte abaixo de 16px e não
+   volta ao normal depois — o resto da página fica deslocado. 16px exatos
+   evitam isso; a diferença visual para os .95rem atuais é imperceptível. */
+@media (pointer: coarse) {
+    .field__input,
+    .modal__textarea { font-size: 16px; }
+}
+
+/* ==========================================================================
+   Tela de prova AWS — calibrada pelo demo oficial da Pearson VUE para a AWS.
+   Cores amostradas do demo: barra #006caa, faixa de ferramentas #4678bd.
+   Fonte serifada genérica, como o demo (que usa a serif padrão do sistema).
+   Aqui a fidelidade manda mais que a identidade visual do PrepHub: nenhum
+   token do tema neutro vale dentro de .exam-aws.
+   ========================================================================== */
+.exam-aws {
+    --aws-bar: #006caa;
+    --aws-tools: #4678bd;
+    --aws-teal: #007394;
+    --aws-fg: #222;
+    --aws-bg: #fff;
+    min-height: 100vh;
+    background: var(--aws-bg);
+    color: var(--aws-fg);
+    font-family: serif;
+    font-size: 17px;
+    line-height: 1.25;
+    padding-bottom: 36px;
+}
+.exam-aws u { text-decoration: underline; }
+/* O tema pinta o html de cinza; na tela AWS o branco vai até o rodapé, como no demo. */
+html:has(.exam-aws) { background: #fff; }
+.aws-arrow { width: 15px; height: 15px; vertical-align: -2px; }
+.aws-icon { width: 16px; height: 16px; flex-shrink: 0; }
+
+.aws-top {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 48px;
+    padding: 0 4px 0 10px;
+    background: var(--aws-bar);
+    color: #fff;
+}
+.aws-top__title {
+    font-size: 1.3rem;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.aws-top__status { margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; font-size: 1rem; }
+.aws-top__line { display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+#timer { font-variant-numeric: tabular-nums; }
+
+.aws-tools {
+    position: sticky;
+    top: 48px;
+    z-index: 19;
+    display: flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 0 8px;
+    background: var(--aws-tools);
+    color: #fff;
+}
+.aws-tools__right { margin-left: auto; display: flex; align-items: center; }
+.aws-tool {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 6px;
+    font: inherit;
+    font-size: 1rem;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+.aws-tool[hidden] { display: none; }
+.aws-tool:hover { background: rgba(255, 255, 255, .15); }
+.aws-tool__check { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.aws-tool:focus-within { outline: 1px dotted #fff; }
+/* Marcada: a bandeira preenchida é o único sinal — o demo não usa checkbox visível. */
+.aws-tool:has(.aws-tool__check:checked) .aws-icon--flag path { fill: #f5c542; stroke: #fff; }
+
+.aws-stage { padding: 20px 18px 40px; max-width: 1200px; }
+
+.aws-q__text p { margin: 0 0 14px; }
+.aws-q__list { margin: 0 0 16px; padding-left: 40px; }
+.aws-q__list li { margin: 0; }
+
+.aws-q__options { list-style: none; margin: 8px 0 0; padding: 0; }
+/* Espaçamento do demo: linhas altas, letra numa coluna própria e o texto alinhado depois dela. */
+.aws-q__options li + li { margin-top: 12px; }
+.aws-q__option { display: flex; align-items: baseline; gap: 12px; padding: 3px 2px; cursor: pointer; }
+.aws-q__option .option__input { accent-color: #555; width: 14px; height: 14px; margin: 0; align-self: center; }
+.aws-q__letter { min-width: 2.2em; }
+
+.aws-q__selects { display: flex; flex-direction: column; gap: 18px; margin-top: 8px; }
+.aws-q__select-row { display: flex; align-items: center; gap: 14px; }
+.aws-q__select-label { flex-shrink: 0; min-width: 4.2em; }
+.aws-q__select {
+    width: min(518px, 100%);
+    height: 25px;
+    padding: 0 22px 0 5px;
+    font: inherit;
+    color: var(--aws-fg);
+    /* Seta desenhada com currentColor, para continuar visível nos esquemas de fundo escuro. */
+    background:
+        linear-gradient(45deg, transparent 50%, currentColor 50%) no-repeat right 11px center / 5px 5px,
+        linear-gradient(-45deg, transparent 50%, currentColor 50%) no-repeat right 6px center / 5px 5px,
+        var(--aws-bg);
+    border: 1px solid currentColor;
+    border-radius: 0;
+    appearance: none;
+    -webkit-appearance: none;
+}
+/* Associação: o enunciado de cada linha é texto livre e de tamanho variável — em grade, as listas
+   suspensas ficam alinhadas numa coluna só em vez de começar onde cada texto termina. */
+.question--aws[data-type="Associacao"] .aws-q__select-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 518px);
+    column-gap: 14px;
+    max-width: 1100px;
+}
+.question--aws[data-type="Associacao"] .aws-q__select-label { min-width: 0; }
+
+.aws-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    display: flex;
+    min-height: 33px;
+    background: var(--aws-bar);
+}
+.aws-nav__right { margin: 0 0 0 auto; display: flex; flex-wrap: wrap; justify-content: flex-end; }
+.aws-nav__btn {
+    padding: 2px 8px;
+    font: inherit;
+    font-size: 1.15rem;
+    color: #fff;
+    background: var(--aws-bar);
+    border: 0;
+    border-left: 2px solid #fff;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.aws-nav__btn--left { border-left: 0; border-right: 2px solid #fff; }
+.aws-nav__btn[hidden] { display: none; }
+.aws-nav__btn:hover { background: #005a8e; }
+.aws-nav__btn:disabled { opacity: .55; cursor: default; }
+.aws-nav__btn:disabled:hover { background: var(--aws-bar); }
+
+/* ---- Revisão AWS: outra moldura, como no demo --------------------------- */
+.exam-aws.is-review:not([data-scheme]) { background: #f2f3f5; }
+.aws-review { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: .85rem; padding: 8px 8px 0; }
+.aws-review__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 44px; }
+.aws-review__title { font-size: 1.6rem; font-weight: 700; margin: 0; }
+.aws-review__all {
+    font-family: serif;
+    font-size: 1.05rem;
+    padding: 7px 14px;
+    color: #fff;
+    background: var(--aws-teal);
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.aws-review__tabs { display: flex; margin-bottom: 32px; border-bottom: 1px solid var(--aws-teal); }
+.aws-review__tab {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 6px 8px;
+    font-family: serif;
+    font-size: .95rem;
+    font-weight: 700;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -1px;
+    cursor: pointer;
+}
+.aws-review__tab[hidden] { display: none; }
+/* background: transparent vence o .btn--filter.is-active da tela Microsoft, que pinta a aba de azul. */
+.aws-review__tab.is-active { color: var(--aws-teal); background: transparent; border-bottom-color: var(--aws-teal); }
+.aws-review__card { background: var(--aws-bg); border-radius: 6px; padding: 8px 12px; overflow-x: auto; }
+.aws-review__table { width: 100%; border-collapse: collapse; }
+.aws-review__table th {
+    text-align: left;
+    padding: 12px 12px 10px 0;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #545b64;
+    border-bottom: 1px solid #e5e5e5;
+}
+.aws-review__table .review-row { cursor: pointer; }
+.aws-review__table .review-row td { padding: 14px 12px 8px 0; border-bottom: 1px solid #c0c0c0; }
+.aws-review__table .review-row:hover,
+.aws-review__table .review-row:focus { background: rgba(0, 115, 148, .06); outline: none; }
+.aws-review__table .review-row:focus-visible { outline: 2px solid var(--aws-teal); outline-offset: -2px; }
+.aws-review__action { text-align: right; font-family: serif; font-weight: 700; color: var(--aws-teal); }
+.aws-badge { display: inline-block; padding: 1px 10px; border-radius: 10px; font-weight: 700; }
+.aws-badge--incomplete { background: #fce8e6; color: #c5221f; }
+.aws-badge--complete { background: #e6f4ea; color: #1e6b34; }
+.aws-review__empty { padding: 12px 0; }
+.aws-review__empty[hidden] { display: none; }
+.aws-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* ---- Instruções --------------------------------------------------------- */
+.aws-intro p { margin: 0 0 14px; }
+.aws-intro__title { margin-top: 24px !important; }
+.aws-intro__note { font-size: .9rem; }
+.modal__dialog--wide { max-width: 760px; max-height: 85vh; overflow-y: auto; }
+
+/* ---- Esquema de cores ---------------------------------------------------- */
+.aws-scheme {
+    margin-left: 6px;
+    width: 196px;
+    height: 26px;
+    padding: 0 6px;
+    font: inherit;
+    font-size: .95rem;
+    color: #fff;
+    background: var(--aws-tools);
+    border: 1px solid #000;
+    border-radius: 0;
+}
+.aws-scheme option { color: #000; background: #fff; }
+.exam-aws[data-scheme="preto-amarelo-claro"] { --aws-fg: #000; --aws-bg: #ffffcc; }
+.exam-aws[data-scheme="preto-salmao"]        { --aws-fg: #000; --aws-bg: #fa8072; }
+.exam-aws[data-scheme="preto-branco"]        { --aws-fg: #000; --aws-bg: #fff; }
+.exam-aws[data-scheme="preto-amarelo"]       { --aws-fg: #000; --aws-bg: #ffff00; }
+.exam-aws[data-scheme="azul-branco"]         { --aws-fg: #0000cc; --aws-bg: #fff; }
+.exam-aws[data-scheme="azul-amarelo"]        { --aws-fg: #0000cc; --aws-bg: #ffff00; }
+.exam-aws[data-scheme="amarelo-claro-preto"] { --aws-fg: #ffffcc; --aws-bg: #000; --aws-teal: #7fd4ec; }
+.exam-aws[data-scheme="branco-preto"]        { --aws-fg: #fff; --aws-bg: #000; --aws-teal: #7fd4ec; }
+.exam-aws[data-scheme="branco-azul"]         { --aws-fg: #fff; --aws-bg: #00008b; --aws-teal: #7fd4ec; }
+
+.exam-aws .modal__dialog { font-family: serif; border-radius: 0; }
+
+@media (max-width: 640px) {
+    .aws-top { flex-wrap: wrap; padding: 4px 8px; }
+    .aws-top__title { font-size: 1.05rem; white-space: normal; }
+    .aws-top__status { margin-left: 0; align-items: flex-start; }
+    .aws-tools { top: 0; position: static; }
+    .aws-q__select-row { flex-wrap: wrap; row-gap: 4px; }
+    .question--aws[data-type="Associacao"] .aws-q__select-row { grid-template-columns: minmax(0, 1fr); row-gap: 4px; }
+    .aws-nav__btn { font-size: 1rem; }
+}
+
+/* Abas de fornecedor do catálogo: botões que mostram e escondem os blocos, sem recarregar.
+   Visual discreto, no mesmo azul do resto do site — é navegação, não chamada para ação. */
+.vendor-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--c-border);
+}
+.vendor-tabs[hidden] { display: none; }
+.vendor-tabs__tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    margin-bottom: -1px;
+    font: inherit;
+    font-weight: 600;
+    color: var(--c-text-muted);
+    background: transparent;
+    border: 0;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+}
+.vendor-tabs__tab:focus-visible { outline: 2px solid var(--c-primary); outline-offset: -2px; }
+.vendor-tabs__tab:hover { color: var(--c-primary); background: var(--c-primary-tint); }
+.vendor-tabs__tab.is-active { color: var(--c-primary); border-bottom-color: var(--c-primary); }
+/* No celular as três abas com contagem não cabem numa linha: quebrar em duas separa "AWS" das
+   demais, e rolar na horizontal esconde a última aba de quem não sabe que dá para rolar. Sem a
+   contagem — que o título de cada bloco já repete — as três cabem inteiras. */
+@media (max-width: 480px) {
+    .vendor-tabs { flex-wrap: nowrap; gap: 0; }
+    .vendor-tabs__tab { padding: 10px 12px; white-space: nowrap; }
+    .vendor-tabs__count { display: none; }
+}
+.vendor-tabs__count {
+    font-size: .75rem;
+    font-weight: 700;
+    padding: 1px 8px;
+    border-radius: 10px;
+    background: var(--c-primary-tint);
+    color: var(--c-primary);
+}
+
+/* Um bloco de exames por fornecedor na tela inicial. */
+.exam-group[hidden] { display: none; }
+.exam-group:not([hidden]) ~ .exam-group:not([hidden]) { margin-top: 40px; }
+.exam-group__title { display: flex; align-items: baseline; gap: 10px; }
+.exam-group__count { font-size: .8rem; font-weight: 400; color: var(--c-text-muted); }
