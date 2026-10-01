@@ -1,0 +1,322 @@
+{
+  "exameCode": "CLF-C02",
+  "area": "conceitos-de-nuvem",
+  "questoes": [
+    {
+      "id": "clfc02-conceitos-dr-pilotlight-54",
+      "topico": "Estratégias de recuperação de desastres",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de infraestrutura da Contoso precisa manter uma cópia mínima do ambiente de produção sempre ativa na AWS, capaz de escalar rapidamente em caso de falha do datacenter principal. O objetivo é equilibrar custo com tempo de recuperação moderado. Qual estratégia de disaster recovery melhor atende a esse requisito?",
+      "opcoes": [
+        { "texto": "Pilot Light", "correta": true },
+        { "texto": "Backup and Restore", "correta": false },
+        { "texto": "Multi-Site Active/Active", "correta": false },
+        { "texto": "Warm Standby", "correta": false }
+      ],
+      "explicacao": "Pilot Light mantém os componentes essenciais (banco de dados replicado, AMIs atualizadas) sempre ligados com custo mínimo e escala sob demanda em caso de desastre. Backup and Restore é mais barato mas tem tempo de recuperação muito maior, pois tudo precisa ser restaurado do zero. Multi-Site Active/Active elimina o tempo de recuperação mas custa quase o dobro da produção, acima do necessário aqui. Warm Standby mantém uma versão reduzida mas funcional do ambiente inteiro, custando mais que Pilot Light sem a exigência de recuperação imediata."
+    },
+    {
+      "id": "clfc02-conceitos-dr-multisite-55",
+      "topico": "Estratégias de recuperação de desastres",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Um banco digital processa transações 24/7 e não pode tolerar nenhuma interrupção, mesmo durante falhas regionais completas. A equipe aceita pagar o custo de manter dois ambientes ativos simultaneamente. Qual estratégia de disaster recovery é adequada?",
+      "opcoes": [
+        { "texto": "Multi-Site Active/Active", "correta": true },
+        { "texto": "Warm Standby", "correta": false },
+        { "texto": "Pilot Light", "correta": false },
+        { "texto": "Backup and Restore", "correta": false }
+      ],
+      "explicacao": "Multi-Site Active/Active roda o ambiente completo em duas ou mais regiões simultaneamente, com tráfego distribuído e failover instantâneo — é a única que atende tolerância zero a interrupção. Warm Standby mantém um ambiente reduzido que ainda precisa de tempo para escalar. Pilot Light mantém apenas componentes críticos desligados, com escala manual. Backup and Restore exige restaurar todo o ambiente a partir de backups, com horas de downtime."
+    },
+    {
+      "id": "clfc02-conceitos-localzones-56",
+      "topico": "Infraestrutura global da AWS",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de jogos online precisa reduzir a latência para jogadores em São Paulo, mas a Região mais próxima da AWS fica a centenas de quilômetros. A equipe quer rodar instâncias EC2 mais perto dos usuários finais, mantendo a conexão com a Região principal. Qual recurso de infraestrutura resolve esse problema?",
+      "opcoes": [
+        { "texto": "AWS Local Zones", "correta": true },
+        { "texto": "AWS Wavelength", "correta": false },
+        { "texto": "Amazon CloudFront", "correta": false },
+        { "texto": "AWS Outposts", "correta": false }
+      ],
+      "explicacao": "AWS Local Zones estendem uma Região AWS para áreas metropolitanas, permitindo rodar EC2, EBS e outros serviços com latência de milissegundos para os usuários próximos. AWS Wavelength é para latência ultrabaixa em redes 5G de operadoras, não para proximidade geográfica geral. CloudFront é CDN para conteúdo estático e dinâmico, não para rodar instâncias de computação. Outposts leva infraestrutura AWS para o datacenter do cliente, não para proximidade com usuários finais."
+    },
+    {
+      "id": "clfc02-conceitos-wavelength-57",
+      "topico": "Infraestrutura global da AWS",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de telemedicina desenvolve um aplicativo de realidade aumentada que guia cirurgias remotamente via rede 5G. A latência precisa ser inferior a 10 milissegundos entre o dispositivo do cirurgião e o backend de processamento. Qual serviço AWS posiciona a computação dentro da infraestrutura da operadora de telecomunicações?",
+      "opcoes": [
+        { "texto": "AWS Wavelength", "correta": true },
+        { "texto": "AWS Local Zones", "correta": false },
+        { "texto": "Amazon CloudFront", "correta": false },
+        { "texto": "AWS Direct Connect", "correta": false }
+      ],
+      "explicacao": "AWS Wavelength implanta recursos de computação e armazenamento diretamente na borda da rede 5G da operadora, minimizando os saltos de rede para latência abaixo de 10ms. Local Zones aproximam a computação de metrópoles mas ficam fora da rede da operadora, com latência maior. CloudFront acelera entrega de conteúdo HTTP mas não posiciona computação na rede 5G. Direct Connect é conexão dedicada entre datacenter e AWS, irrelevante para dispositivos móveis em rede celular."
+    },
+    {
+      "id": "clfc02-conceitos-microservicos-58",
+      "topico": "Arquitetura cloud-native",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de desenvolvimento da Litware migrou um monólito para a AWS e agora enfrenta deploys longos que afetam todo o sistema quando uma única funcionalidade precisa de atualização. A equipe quer que cada componente possa ser implantado, escalado e atualizado independentemente. Qual abordagem arquitetural resolve esse problema?",
+      "opcoes": [
+        { "texto": "Decompor a aplicação em microsserviços", "correta": true },
+        { "texto": "Usar Auto Scaling no monólito", "correta": false },
+        { "texto": "Migrar para instâncias maiores com mais CPU", "correta": false },
+        { "texto": "Adicionar um load balancer na frente do monólito", "correta": false }
+      ],
+      "explicacao": "Microsserviços permitem que cada componente tenha ciclo de vida independente — deploy, escala e atualização sem afetar os demais. Auto Scaling no monólito escala tudo junto e não resolve o problema de deploy acoplado. Instâncias maiores (escala vertical) não desacoplam componentes e têm teto de hardware. Load balancer distribui carga mas não separa funcionalidades — o deploy continua afetando tudo."
+    },
+    {
+      "id": "clfc02-conceitos-stranglerpattern-59",
+      "topico": "Estratégias de migração",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam possui um sistema ERP monolítico com 15 anos de código legado. A equipe quer migrar para a nuvem de forma incremental, substituindo módulos um a um sem interromper a operação. Qual padrão de migração permite essa transição gradual?",
+      "opcoes": [
+        { "texto": "Strangler Fig pattern", "correta": true },
+        { "texto": "Lift-and-shift completo", "correta": false },
+        { "texto": "Big bang migration", "correta": false },
+        { "texto": "Blue-green deployment", "correta": false }
+      ],
+      "explicacao": "O Strangler Fig pattern substitui componentes do sistema legado gradualmente — cada módulo novo intercepta as chamadas do antigo até que o monólito seja completamente substituído, sem interrupção. Lift-and-shift move o monólito inteiro sem modernizar, mantendo o acoplamento. Big bang migration substitui tudo de uma vez, com alto risco de interrupção. Blue-green deployment é uma técnica de deploy (dois ambientes), não uma estratégia de decomposição de monólito."
+    },
+    {
+      "id": "clfc02-conceitos-payasyougo-cenario-60",
+      "topico": "Economia da nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma startup lançou um aplicativo de delivery que tem picos de uso às sextas e sábados à noite (10x o tráfego normal) e uso mínimo nas manhãs de segunda a quarta. No datacenter próprio, a equipe dimensionava os servidores para o pico, deixando 90% da capacidade ociosa na maior parte da semana. Qual benefício econômico da nuvem elimina esse desperdício?",
+      "opcoes": [
+        { "texto": "Trocar despesa fixa por variável, pagando apenas pelo consumo real", "correta": true },
+        { "texto": "Negociar descontos por volume com o provedor de nuvem", "correta": false },
+        { "texto": "Consolidar servidores em instâncias maiores para reduzir o número de máquinas", "correta": false },
+        { "texto": "Contratar instâncias reservadas para o pico de capacidade", "correta": false }
+      ],
+      "explicacao": "O modelo pay-as-you-go permite escalar durante os picos e reduzir nos períodos de baixa demanda, eliminando a capacidade ociosa que gerava custo fixo. Descontos por volume ajudam no preço unitário mas não resolvem o desperdício de capacidade ociosa. Consolidar em instâncias maiores reproduz o mesmo problema de superdimensionamento. Reservar instâncias para o pico volta a gerar custo fixo pela capacidade que só é usada duas noites por semana."
+    },
+    {
+      "id": "clfc02-conceitos-governance-controlttower-61",
+      "topico": "Governança na nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa com 30 equipes de desenvolvimento quer criar novas contas AWS automaticamente com guardrails de segurança pré-configurados — políticas de senha, restrição de regiões e logging obrigatório. Qual serviço automatiza a criação de um ambiente multi-conta governado?",
+      "opcoes": [
+        { "texto": "AWS Control Tower", "correta": true },
+        { "texto": "AWS Organizations", "correta": false },
+        { "texto": "AWS Config", "correta": false },
+        { "texto": "AWS Service Catalog", "correta": false }
+      ],
+      "explicacao": "AWS Control Tower automatiza a configuração de um landing zone multi-conta com guardrails (preventivos e detectivos) pré-definidos, criando contas já governadas. AWS Organizations agrupa contas e aplica SCPs, mas não automatiza a criação com guardrails prontos — é o bloco que o Control Tower orquestra. AWS Config monitora conformidade de recursos mas não cria contas nem aplica guardrails no provisionamento. Service Catalog controla quais recursos podem ser provisionados dentro de uma conta, não a criação da conta em si."
+    },
+    {
+      "id": "clfc02-conceitos-servicecatalog-62",
+      "topico": "Governança na nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de governança da Contoso quer que os desenvolvedores só possam criar recursos AWS a partir de templates aprovados — por exemplo, apenas determinadas configurações de EC2, RDS e S3 que atendem aos padrões de segurança e custo da empresa. Qual serviço permite publicar esses portfólios de recursos pré-aprovados?",
+      "opcoes": [
+        { "texto": "AWS Service Catalog", "correta": true },
+        { "texto": "AWS Control Tower", "correta": false },
+        { "texto": "AWS CloudFormation diretamente", "correta": false },
+        { "texto": "AWS Systems Manager", "correta": false }
+      ],
+      "explicacao": "AWS Service Catalog permite criar portfólios de produtos (templates CloudFormation aprovados) que os usuários podem provisionar sem acesso direto ao console — governança com autoatendimento. Control Tower governa a criação de contas e guardrails organizacionais, não o provisionamento de recursos individuais. CloudFormation diretamente não restringe quais templates podem ser usados — qualquer um com permissão IAM pode lançar qualquer stack. Systems Manager gerencia operações em instâncias existentes, não governa o provisionamento."
+    },
+    {
+      "id": "clfc02-conceitos-faulttolerance-63",
+      "topico": "Confiabilidade",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma plataforma de e-commerce precisa continuar processando pedidos mesmo se uma Availability Zone inteira ficar indisponível. A equipe distribui instâncias EC2 em três AZs atrás de um Application Load Balancer. Se uma AZ falhar, o que acontece com o tráfego dos usuários?",
+      "opcoes": [
+        { "texto": "O ALB redireciona automaticamente o tráfego para as instâncias saudáveis nas outras AZs", "correta": true },
+        { "texto": "O tráfego destinado à AZ falha retorna erro 503 até a recuperação", "correta": false },
+        { "texto": "O Route 53 precisa ser reconfigurado manualmente para remover a AZ", "correta": false },
+        { "texto": "O Auto Scaling Group precisa ser recriado em outra região", "correta": false }
+      ],
+      "explicacao": "O ALB faz health checks continuamente e redireciona automaticamente o tráfego para instâncias saudáveis nas AZs restantes — é o comportamento padrão, sem intervenção manual. Erro 503 ocorreria se todas as instâncias em todas as AZs estivessem indisponíveis. Route 53 opera no nível de DNS e região, não de AZ — o ALB já resolve isso internamente. O Auto Scaling Group opera dentro de uma região e não precisa ser recriado; ele pode lançar instâncias de reposição nas AZs restantes automaticamente."
+    },
+    {
+      "id": "clfc02-conceitos-ha-vs-ft-64",
+      "topico": "Confiabilidade",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de arquitetura discute dois requisitos: o sistema de pagamentos não pode perder nenhuma transação em andamento, mesmo durante falhas de componentes; o portal de consulta de saldo pode tolerar alguns segundos de indisponibilidade desde que volte rapidamente. Qual afirmação descreve corretamente a diferença entre os dois requisitos?",
+      "opcoes": [
+        { "texto": "Pagamentos exige tolerância a falhas (zero perda); consulta de saldo exige alta disponibilidade (recuperação rápida)", "correta": true },
+        { "texto": "Ambos exigem o mesmo nível de redundância, pois são do mesmo sistema", "correta": false },
+        { "texto": "Consulta de saldo exige tolerância a falhas porque lida com dados financeiros", "correta": false },
+        { "texto": "Pagamentos exige apenas alta disponibilidade porque transações podem ser reprocessadas", "correta": false }
+      ],
+      "explicacao": "Tolerância a falhas garante operação contínua sem perda — componentes redundantes assumem instantaneamente. Alta disponibilidade aceita interrupção breve mas se recupera rápido. Tratar ambos igualmente superprovisiona a consulta de saldo sem necessidade. Consulta de saldo lida com dados financeiros mas tolera segundos de indisponibilidade, logo alta disponibilidade basta. Transações de pagamento em andamento não podem simplesmente ser reprocessadas sem risco de duplicação — o requisito é zero perda."
+    },
+    {
+      "id": "clfc02-conceitos-sustainability-65",
+      "topico": "Well-Architected Framework",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A diretoria da Litware estabeleceu metas de redução de emissão de carbono e pediu à equipe de TI que otimize os workloads na AWS para minimizar o impacto ambiental. Qual pilar do AWS Well-Architected Framework orienta especificamente essas práticas?",
+      "opcoes": [
+        { "texto": "Sustentabilidade", "correta": true },
+        { "texto": "Otimização de custos", "correta": false },
+        { "texto": "Eficiência de desempenho", "correta": false },
+        { "texto": "Excelência operacional", "correta": false }
+      ],
+      "explicacao": "O pilar de Sustentabilidade orienta práticas para minimizar o impacto ambiental dos workloads — escolher regiões com energia renovável, dimensionar corretamente e desligar recursos ociosos por razões ambientais. Otimização de custos reduz gastos mas a motivação é financeira, não ambiental, embora práticas se sobreponham. Eficiência de desempenho foca em usar recursos computacionais eficientemente para atender requisitos de desempenho. Excelência operacional trata de operar e monitorar sistemas, não de impacto ambiental."
+    },
+    {
+      "id": "clfc02-conceitos-perfefficiency-66",
+      "topico": "Well-Architected Framework",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de engenharia precisa escolher o tipo de instância EC2 ideal para um workload de machine learning que exige GPUs, e quer validar a escolha com benchmarks antes de ir para produção. Qual pilar do Well-Architected Framework fornece orientação para essa decisão?",
+      "opcoes": [
+        { "texto": "Eficiência de desempenho", "correta": true },
+        { "texto": "Otimização de custos", "correta": false },
+        { "texto": "Confiabilidade", "correta": false },
+        { "texto": "Segurança", "correta": false }
+      ],
+      "explicacao": "Eficiência de desempenho orienta a seleção do tipo de recurso correto para o workload (instância com GPU para ML), uso de benchmarks e experimentação para validar a escolha. Otimização de custos ajuda a encontrar o melhor preço mas a decisão aqui é por capacidade computacional adequada, não por preço. Confiabilidade trata de recuperação de falhas e escalabilidade, não de seleção de tipo de recurso. Segurança trata de proteção de dados e controle de acesso."
+    },
+    {
+      "id": "clfc02-conceitos-opex-cenario-67",
+      "topico": "Economia da nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O CFO de uma empresa pergunta por que a migração para a nuvem transformou o orçamento de TI. Antes, a empresa gastava R$ 2 milhões a cada 3 anos em servidores novos, mais R$ 500 mil/ano em manutenção. Na AWS, o gasto mensal varia entre R$ 30 mil e R$ 80 mil conforme a demanda. Qual mudança financeira melhor descreve essa transformação?",
+      "opcoes": [
+        { "texto": "Despesa de capital (CapEx) foi substituída por despesa operacional (OpEx)", "correta": true },
+        { "texto": "A empresa eliminou todos os custos de TI migrando para a nuvem", "correta": false },
+        { "texto": "A despesa operacional foi substituída por despesa de capital na nuvem", "correta": false },
+        { "texto": "O custo total aumentou porque a nuvem cobra mensalmente", "correta": false }
+      ],
+      "explicacao": "A nuvem transforma CapEx (investimento antecipado em hardware) em OpEx (gasto operacional mensal proporcional ao uso), eliminando ciclos de compra de equipamento. A nuvem não elimina custos de TI — transforma como são pagos. A direção é CapEx→OpEx, não o contrário. O custo total pode até diminuir pela eliminação de ociosidade; cobrança mensal não implica custo maior."
+    },
+    {
+      "id": "clfc02-conceitos-cloudnative-loosecoupling-68",
+      "topico": "Arquitetura cloud-native",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de arquitetura quer garantir que a falha de um componente do sistema de pedidos não se propague para o sistema de notificações. Atualmente, o serviço de pedidos chama diretamente o serviço de notificações via HTTP síncrono, e quando notificações fica fora do ar, pedidos também falha. Qual padrão arquitetural resolve essa dependência?",
+      "opcoes": [
+        { "texto": "Introduzir uma fila (como Amazon SQS) entre os dois serviços para desacoplamento", "correta": true },
+        { "texto": "Aumentar o timeout da chamada HTTP para dar mais tempo ao serviço de notificações", "correta": false },
+        { "texto": "Replicar o serviço de notificações em mais Availability Zones", "correta": false },
+        { "texto": "Mover ambos os serviços para a mesma instância EC2 para reduzir latência", "correta": false }
+      ],
+      "explicacao": "Uma fila SQS desacopla os serviços: pedidos publica a mensagem e continua operando mesmo que notificações esteja fora do ar — a fila retém a mensagem até o consumidor voltar. Aumentar timeout mantém o acoplamento síncrono e só adia a falha. Mais AZs para notificações melhora a disponibilidade dele mas não elimina o acoplamento direto. Colocar ambos na mesma instância aumenta o acoplamento e cria ponto único de falha."
+    },
+    {
+      "id": "clfc02-conceitos-elasticidade-preditiva-69",
+      "topico": "Elasticidade",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Um site de ingressos observa picos previsíveis toda segunda-feira às 10h quando novos eventos são anunciados. A equipe quer que os servidores já estejam escalados ANTES do pico, não apenas reagindo ao aumento de carga. Qual tipo de escalabilidade atende a esse requisito?",
+      "opcoes": [
+        { "texto": "Escalabilidade preditiva, que provisiona capacidade com base em padrões históricos", "correta": true },
+        { "texto": "Escalabilidade reativa, que adiciona servidores quando a CPU ultrapassa 70%", "correta": false },
+        { "texto": "Escalabilidade vertical, que troca por uma instância maior antes do pico", "correta": false },
+        { "texto": "Escalabilidade manual, com um operador adicionando servidores na sexta-feira", "correta": false }
+      ],
+      "explicacao": "Escalabilidade preditiva usa machine learning para analisar padrões de uso e provisionar capacidade antes do pico, garantindo que os recursos estejam prontos. Escalabilidade reativa age depois que a carga já aumentou, causando degradação durante o ramp-up. Escalabilidade vertical exige parar a instância para trocar o tipo, causando downtime. Escalabilidade manual depende de intervenção humana e não é confiável para picos recorrentes."
+    },
+    {
+      "id": "clfc02-conceitos-shared-resp-abstraction-70",
+      "topico": "Responsabilidade compartilhada",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe compara suas responsabilidades ao usar Amazon EC2 versus AWS Lambda. No EC2, a equipe aplica patches no sistema operacional e configura o firewall da instância. No Lambda, essas tarefas não existem. O que explica essa diferença no modelo de responsabilidade compartilhada?",
+      "opcoes": [
+        { "texto": "Quanto mais gerenciado o serviço, mais responsabilidade a AWS assume pela infraestrutura subjacente", "correta": true },
+        { "texto": "Lambda não precisa de sistema operacional, então patching não se aplica a nenhum dos dois", "correta": false },
+        { "texto": "A equipe ainda precisa aplicar patches no Lambda, mas a AWS os automatiza por padrão", "correta": false },
+        { "texto": "EC2 é mais seguro que Lambda porque o cliente controla o sistema operacional", "correta": false }
+      ],
+      "explicacao": "Em serviços gerenciados como Lambda, a AWS cuida do SO, patching e infraestrutura — o cliente só é responsável pelo código e permissões IAM. Lambda roda sobre um SO que a AWS mantém; dizer que não precisa de SO é incorreto. O cliente não aplica patches no Lambda; a AWS faz isso internamente, e não é configurável. Controle do SO não equivale a maior segurança — é maior responsabilidade, e configuração errada é um risco que serviços gerenciados eliminam."
+    },
+    {
+      "id": "clfc02-conceitos-multiregion-compliance-71",
+      "topico": "Infraestrutura global da AWS",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa europeia é obrigada pela GDPR a manter os dados de clientes dentro da União Europeia. Ao implantar a aplicação na AWS, qual decisão de infraestrutura garante que os dados permaneçam na jurisdição exigida?",
+      "opcoes": [
+        { "texto": "Selecionar uma Região AWS localizada na União Europeia (como eu-west-1 na Irlanda)", "correta": true },
+        { "texto": "Habilitar criptografia em trânsito para todas as comunicações", "correta": false },
+        { "texto": "Usar Amazon CloudFront com edge locations na Europa", "correta": false },
+        { "texto": "Criar uma VPC dedicada com o nome 'EU-Compliance'", "correta": false }
+      ],
+      "explicacao": "Os dados na AWS ficam na Região escolhida e não são replicados para outras regiões automaticamente — selecionar uma Região na UE garante residência dos dados. Criptografia em trânsito protege dados durante a transferência mas não controla onde são armazenados. Edge locations do CloudFront fazem cache temporário para entrega, o dado de origem pode estar em qualquer Região. O nome da VPC não tem efeito na localização física dos dados."
+    },
+    {
+      "id": "clfc02-conceitos-beneficio-global-reach-72",
+      "topico": "Benefícios da nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Tailwind Traders, sediada no Brasil, precisa lançar sua aplicação de e-commerce simultaneamente no Japão e na Alemanha em duas semanas. No modelo on-premises, provisionar datacenters nesses países levaria meses. Qual benefício da nuvem torna isso viável?",
+      "opcoes": [
+        { "texto": "Alcance global em minutos — implantar em qualquer Região disponível sem infraestrutura física própria", "correta": true },
+        { "texto": "Economia de escala — o custo por servidor é menor quando distribuído entre muitos clientes", "correta": false },
+        { "texto": "Elasticidade — a capacidade aumenta automaticamente conforme a demanda", "correta": false },
+        { "texto": "Agilidade — novas funcionalidades podem ser implantadas mais rapidamente", "correta": false }
+      ],
+      "explicacao": "Alcance global permite implantar em Regiões no Japão e na Europa em minutos, sem construir ou alugar datacenter — é o benefício que resolve o problema de presença geográfica. Economia de escala reduz custo unitário mas não endereça a necessidade de presença internacional. Elasticidade ajusta capacidade com demanda mas pressupõe que a infraestrutura já existe naquela localidade. Agilidade acelera ciclos de desenvolvimento, não resolve a questão de presença física em outros países."
+    },
+    {
+      "id": "clfc02-conceitos-caf-governanca-73",
+      "topico": "Cloud Adoption Framework",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Durante a migração para a AWS, o diretor de compliance da Contoso quer garantir que todas as contas AWS obedeçam a políticas de retenção de dados, restrições orçamentárias e rastreabilidade de mudanças. Qual perspectiva do AWS Cloud Adoption Framework endereça essas preocupações?",
+      "opcoes": [
+        { "texto": "Governança", "correta": true },
+        { "texto": "Segurança", "correta": false },
+        { "texto": "Operações", "correta": false },
+        { "texto": "Plataforma", "correta": false }
+      ],
+      "explicacao": "A perspectiva de Governança trata de orquestrar iniciativas na nuvem com controle de custos, compliance, gestão de riscos e rastreabilidade — exatamente o que o cenário descreve. Segurança cuida de proteção de dados, controle de acesso e detecção de ameaças, não de orçamento e retenção. Operações foca em operar e monitorar workloads para atender SLAs. Plataforma trata da arquitetura e construção do ambiente de nuvem."
+    },
+    {
+      "id": "clfc02-conceitos-dr-associacao-74",
+      "topico": "Estratégias de recuperação de desastres",
+      "tipo": "Associacao",
+      "enunciado": "A equipe de arquitetura precisa mapear cada requisito de recuperação de desastres à estratégia AWS correspondente. Associe cada cenário à estratégia adequada.",
+      "associacoes": [
+        { "alvo": "Sistema crítico financeiro que não pode ter nenhuma interrupção, mesmo durante falha regional completa", "item": "Multi-Site Active/Active", "correta": true },
+        { "alvo": "Aplicação web que tolera até 1 hora de indisponibilidade e precisa de custo mínimo de DR", "item": "Backup and Restore", "correta": true },
+        { "alvo": "ERP que precisa recuperar em até 15 minutos mantendo apenas os componentes essenciais ligados", "item": "Pilot Light", "correta": true },
+        { "alvo": "Plataforma de vendas online que precisa de recuperação em poucos minutos com ambiente funcional reduzido sempre ativo", "item": "Warm Standby", "correta": true }
+      ],
+      "itensExtras": ["Cold Standby"],
+      "explicacao": "Multi-Site Active/Active é a única estratégia com zero downtime, adequada para sistemas que não toleram interrupção. Backup and Restore tem o menor custo mas o maior tempo de recuperação (horas), ideal quando alguma indisponibilidade é aceitável. Pilot Light mantém apenas componentes críticos (ex: banco replicado) e escala os demais sob demanda, com recuperação em minutos a dezenas de minutos. Warm Standby mantém um ambiente funcional completo em escala reduzida, pronto para escalar em poucos minutos. Cold Standby não é uma estratégia AWS oficial e serve como distrator."
+    },
+    {
+      "id": "clfc02-conceitos-multiregion-multipla-75",
+      "topico": "Infraestrutura global da AWS",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "A equipe de arquitetura está avaliando como a infraestrutura global da AWS contribui para a resiliência e o desempenho das aplicações. Quais afirmações estão corretas sobre Regiões e Availability Zones?",
+      "opcoes": [
+        { "texto": "Cada Região contém múltiplas Availability Zones fisicamente separadas", "correta": true },
+        { "texto": "As AZs dentro de uma Região são conectadas por rede de alta largura de banda e baixa latência", "correta": true },
+        { "texto": "Os dados são replicados automaticamente entre todas as Regiões para alta disponibilidade", "correta": false },
+        { "texto": "Uma Availability Zone é composta por um ou mais datacenters com energia e rede independentes", "correta": true },
+        { "texto": "Todas as Regiões AWS oferecem exatamente os mesmos serviços e recursos", "correta": false }
+      ],
+      "explicacao": "Cada Região tem 2 ou mais AZs (tipicamente 3), conectadas por rede dedicada de alta velocidade. Cada AZ é um ou mais datacenters com infraestrutura independente. Os dados NÃO são replicados automaticamente entre Regiões — o cliente precisa configurar isso explicitamente com serviços como S3 Cross-Region Replication. Nem todas as Regiões oferecem os mesmos serviços — novos serviços geralmente são lançados primeiro em regiões maiores como us-east-1."
+    },
+    {
+      "id": "clfc02-conceitos-cloud-economics-multipla-76",
+      "topico": "Economia da nuvem",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "O diretor financeiro da Fabrikam pediu à equipe de TI uma análise de Total Cost of Ownership (TCO) comparando manter o datacenter on-premises versus migrar para a AWS. Quais custos devem ser incluídos no cálculo do TCO on-premises que seriam eliminados ou reduzidos na nuvem?",
+      "opcoes": [
+        { "texto": "Custos de energia elétrica e refrigeração do datacenter", "correta": true },
+        { "texto": "Salários da equipe de segurança física do datacenter", "correta": true },
+        { "texto": "Licenças de software das aplicações de negócio que rodam nos servidores", "correta": false },
+        { "texto": "Depreciação de servidores físicos e equipamentos de rede", "correta": true },
+        { "texto": "Custos de treinamento da equipe de desenvolvimento em novas tecnologias", "correta": false }
+      ],
+      "explicacao": "Energia, refrigeração, segurança física e depreciação de hardware são custos de datacenter eliminados na nuvem — a AWS absorve todos. Licenças de software de negócio continuam existindo na nuvem (exceto quando substituídas por SaaS), não são eliminadas pela migração. Treinamento da equipe existe em qualquer modelo e pode até aumentar na migração para a nuvem."
+    },
+    {
+      "id": "clfc02-conceitos-migration-ordenacao-77",
+      "topico": "Processo de migração",
+      "tipo": "Ordenacao",
+      "enunciado": "A Contoso está planejando migrar seus workloads on-premises para a AWS usando o AWS Cloud Adoption Framework. Ordene as fases de migração na sequência correta.",
+      "sequencia": [
+        "Avaliar — identificar lacunas, dependências e prontidão dos workloads",
+        "Mobilizar — criar a fundação na nuvem, treinar equipes e construir o plano de migração",
+        "Migrar — mover os workloads para a AWS usando as estratégias definidas",
+        "Modernizar — otimizar os workloads migrados aproveitando serviços gerenciados e cloud-native"
+      ],
+      "itensExtras": ["Certificar — obter certificação AWS para validar a arquitetura"],
+      "explicacao": "A jornada de migração AWS segue a sequência Avaliar→Mobilizar→Migrar→Modernizar. Avaliar descobre o portfólio e identifica dependências. Mobilizar prepara a organização (landing zone, equipes, plano). Migrar executa a movimentação usando as estratégias escolhidas (rehost, replatform etc.). Modernizar otimiza o que foi migrado para aproveitar serviços nativos da nuvem. Certificar não é uma fase do CAF — certificações AWS são para profissionais, não para workloads."
+    }
+  ]
+}

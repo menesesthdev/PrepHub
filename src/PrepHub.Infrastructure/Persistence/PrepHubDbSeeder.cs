@@ -144,7 +144,7 @@ public static class PrepHubDbSeeder
                 new AreaDeExame("tecnologia-servicos", "Tecnologia e serviços de nuvem", 34m),
                 new AreaDeExame("faturamento-precos-suporte", "Faturamento, preços e suporte", 12m)
             ],
-            Publicado: false,
+            Publicado: true,
             Fornecedor: FornecedorDoExame.Aws)
     ];
 

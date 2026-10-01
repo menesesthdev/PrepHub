@@ -1,0 +1,164 @@
+{
+  "exameCode": "CLF-C02",
+  "area": "faturamento-precos-suporte",
+  "questoes": [
+    {
+      "id": "clfc02-fat-ext-cur-01",
+      "topico": "Relatórios de custo",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O time financeiro da Contoso precisa de um relatório detalhado que mostre cada item de linha de faturamento — incluindo uso por hora, tipo de recurso, tags e descontos aplicados — para importar em ferramentas de análise internas. O Cost Explorer mostra visões agregadas, mas a equipe precisa dos dados brutos. Qual ferramenta AWS fornece esse nível de detalhe?",
+      "opcoes": [
+        { "texto": "AWS Cost and Usage Report (CUR)", "correta": true },
+        { "texto": "AWS Cost Explorer", "correta": false },
+        { "texto": "AWS Budgets", "correta": false },
+        { "texto": "AWS Billing Dashboard", "correta": false }
+      ],
+      "explicacao": "O CUR é o relatório mais granular da AWS — inclui cada item de faturamento com até 100+ colunas (conta, serviço, tipo, região, tags, preço, descontos), exportado para S3 em CSV/Parquet para análise externa. Cost Explorer visualiza custos de forma agregada com filtros, mas não exporta dados brutos no mesmo nível de detalhe. Budgets define alertas e limites de gasto, não gera relatórios detalhados. Billing Dashboard mostra um resumo mensal, sem granularidade por recurso."
+    },
+    {
+      "id": "clfc02-fat-ext-anomaly-02",
+      "topico": "Monitoramento de custos",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Na última semana, um desenvolvedor da Fabrikam lançou instâncias EC2 em uma região errada, triplicando os custos sem que ninguém percebesse até a fatura mensal chegar. A equipe quer ser notificada automaticamente quando o padrão de gasto mudar de forma inesperada. Qual serviço detecta anomalias de custo usando machine learning?",
+      "opcoes": [
+        { "texto": "AWS Cost Anomaly Detection", "correta": true },
+        { "texto": "AWS Budgets", "correta": false },
+        { "texto": "Amazon CloudWatch Alarms", "correta": false },
+        { "texto": "AWS Trusted Advisor", "correta": false }
+      ],
+      "explicacao": "Cost Anomaly Detection usa ML para aprender o padrão de gastos e notifica automaticamente quando detecta desvios inesperados — como o salto causado pela região errada. Budgets alerta quando o gasto ultrapassa um valor absoluto definido, mas não detecta anomalias no padrão. CloudWatch Alarms monitora métricas operacionais (CPU, latência), não gastos. Trusted Advisor faz recomendações de boas práticas, incluindo custos, mas não monitora anomalias em tempo real."
+    },
+    {
+      "id": "clfc02-fat-ext-costtags-03",
+      "topico": "Alocação de custos",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Litware tem três equipes (Marketing, Engenharia e Vendas) compartilhando a mesma conta AWS. O CFO quer saber quanto cada equipe gasta por mês para cobrar internamente (chargeback). Qual mecanismo da AWS permite rastrear custos por equipe sem separar em contas diferentes?",
+      "opcoes": [
+        { "texto": "Tags de alocação de custos aplicadas aos recursos de cada equipe", "correta": true },
+        { "texto": "Criar um orçamento separado no AWS Budgets para cada equipe", "correta": false },
+        { "texto": "Filtrar por serviço no Cost Explorer, um serviço por equipe", "correta": false },
+        { "texto": "Usar o AWS Organizations com uma conta por equipe", "correta": false }
+      ],
+      "explicacao": "Tags de alocação de custos (cost allocation tags) permitem marcar cada recurso com a equipe responsável (ex: Team=Marketing) e filtrar o relatório de custos por essa tag — mecanismo nativo para chargeback dentro da mesma conta. Budgets separados definem alertas por limites, não rastreiam gastos por equipe automaticamente. Filtrar por serviço assume que cada equipe usa serviços diferentes, o que raramente é verdade. Contas separadas por equipe funcionariam mas o cenário pede solução sem essa separação."
+    },
+    {
+      "id": "clfc02-fat-ext-datatransfer-04",
+      "topico": "Precificação",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de arquitetura está estimando os custos de transferência de dados para uma aplicação que recebe uploads de clientes e distribui conteúdo globalmente. Qual afirmação sobre custos de transferência de dados na AWS é correta?",
+      "opcoes": [
+        { "texto": "Transferência de dados para dentro da AWS (inbound) é gratuita; transferência para fora (outbound) para a internet é cobrada", "correta": true },
+        { "texto": "Toda transferência de dados, inclusive entre serviços na mesma região, é cobrada", "correta": false },
+        { "texto": "Transferência de dados entre regiões é gratuita para clientes com suporte Enterprise", "correta": false },
+        { "texto": "O custo de transferência é fixo independentemente do volume — não há economia por escala", "correta": false }
+      ],
+      "explicacao": "Dados entrando na AWS (inbound) são gratuitos; dados saindo para a internet (outbound) são cobrados por GB com preço decrescente por volume. Nem toda transferência interna é cobrada — entre serviços na mesma AZ usando IP privado geralmente é gratuita, entre AZs é cobrada. Transferência entre regiões é cobrada para todos os planos de suporte. O preço por GB diminui em tiers de volume (ex: primeiros 10 TB custam mais que os próximos 40 TB)."
+    },
+    {
+      "id": "clfc02-fat-ext-developer-plan-05",
+      "topico": "Planos de suporte",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Um desenvolvedor individual está aprendendo a usar a AWS para projetos pessoais e quer acesso a orientação de boas práticas e suporte técnico por e-mail, mas não precisa de tempos de resposta rápidos nem suporte por chat/telefone. Qual plano de suporte é mais adequado e econômico?",
+      "opcoes": [
+        { "texto": "Developer", "correta": true },
+        { "texto": "Basic", "correta": false },
+        { "texto": "Business", "correta": false },
+        { "texto": "Enterprise On-Ramp", "correta": false }
+      ],
+      "explicacao": "O plano Developer oferece suporte técnico por e-mail com resposta em até 12h (sistema prejudicado) ou 24h (orientação geral), orientação de boas práticas e acesso a todas as verificações do Trusted Advisor — ideal para desenvolvimento individual. Basic é gratuito mas não inclui suporte técnico (apenas documentação, fóruns e verificações básicas do Trusted Advisor). Business inclui suporte 24/7 por chat/telefone com SLA de 1h, desnecessário para projetos pessoais. Enterprise On-Ramp é para empresas com workloads de produção, com custo muito acima do necessário."
+    },
+    {
+      "id": "clfc02-fat-ext-reservedvsconvertible-06",
+      "topico": "Modelos de economia",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de infraestrutura da Contoso vai reservar capacidade EC2 por 3 anos para workloads estáveis. No entanto, pode precisar trocar de tipo de instância se os requisitos mudarem. A equipe quer o desconto de reserva com flexibilidade de mudar a família de instância. Qual opção oferece essa combinação?",
+      "opcoes": [
+        { "texto": "Convertible Reserved Instances", "correta": true },
+        { "texto": "Standard Reserved Instances", "correta": false },
+        { "texto": "On-Demand Instances", "correta": false },
+        { "texto": "Spot Instances", "correta": false }
+      ],
+      "explicacao": "Convertible RIs permitem trocar a família, SO, tenancy e tamanho da instância durante o termo, com desconto menor que Standard RIs (até ~54% vs ~72%) mas com a flexibilidade exigida. Standard RIs oferecem o maior desconto mas são restritas à mesma família de instância — mudança de requisitos desperdiçaria a reserva. On-Demand não tem desconto por compromisso. Spot oferece até 90% de desconto mas com risco de interrupção, inadequado para workloads estáveis."
+    },
+    {
+      "id": "clfc02-fat-ext-servicequotas-07",
+      "topico": "Governança de custos",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de desenvolvimento da Litware lançou acidentalmente 200 instâncias EC2 num script mal configurado, gerando custos inesperados. A equipe quer prevenir esse tipo de incidente definindo limites no número de recursos que podem ser criados por serviço. Qual ferramenta gerencia esses limites?",
+      "opcoes": [
+        { "texto": "AWS Service Quotas", "correta": true },
+        { "texto": "AWS Budgets", "correta": false },
+        { "texto": "AWS Config", "correta": false },
+        { "texto": "IAM Policies", "correta": false }
+      ],
+      "explicacao": "Service Quotas define e gerencia limites máximos de recursos por serviço (ex: máximo de 50 instâncias EC2 por região), com dashboard e possibilidade de solicitar aumento — é o mecanismo nativo de controle de quantidade. Budgets alerta sobre gastos mas não impede a criação de recursos. Config monitora conformidade de configuração mas não limita a quantidade de recursos. IAM Policies controlam quem pode fazer o quê, mas definir condições complexas de contagem exigiria políticas elaboradas e frágeis."
+    },
+    {
+      "id": "clfc02-fat-ext-budgetsactions-08",
+      "topico": "Controle de custos",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam definiu um orçamento mensal de $10.000 no AWS Budgets e quer que, ao atingir 90% do limite, a conta aplique automaticamente uma política IAM que impede a criação de novos recursos — sem esperar que um humano tome ação. Qual recurso do Budgets permite essa automação?",
+      "opcoes": [
+        { "texto": "AWS Budgets Actions — executa ação automatizada quando o limiar é atingido", "correta": true },
+        { "texto": "AWS Budgets Alerts — envia notificação por e-mail ou SNS", "correta": false },
+        { "texto": "AWS Cost Anomaly Detection — detecta padrões de gasto incomuns", "correta": false },
+        { "texto": "AWS Organizations SCPs — restringe ações em contas membro", "correta": false }
+      ],
+      "explicacao": "Budgets Actions permite configurar ações automáticas (aplicar IAM policy, SCP ou parar instâncias) quando um limiar de orçamento é atingido — automação de resposta a gasto. Budgets Alerts apenas notifica por e-mail/SNS, sem ação automática. Cost Anomaly Detection detecta padrões anômalos, não executa ações baseadas em limiares absolutos. SCPs restringem contas na organização mas não são aplicadas automaticamente por limiar de gasto."
+    },
+    {
+      "id": "clfc02-fat-ext-precificacao-regiao-09",
+      "topico": "Precificação",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe da Tailwind Traders percebeu que o mesmo tipo de instância EC2 (m6i.large) custa $0.096/hora em us-east-1 (Virginia) e $0.115/hora em sa-east-1 (São Paulo). O que explica a diferença de preço entre as duas regiões?",
+      "opcoes": [
+        { "texto": "Custos de infraestrutura (energia, imóvel, taxas locais) variam entre regiões geográficas", "correta": true },
+        { "texto": "São Paulo cobra mais porque tem menos serviços disponíveis", "correta": false },
+        { "texto": "A diferença existe apenas para clientes sem contrato Enterprise", "correta": false },
+        { "texto": "O preço mais alto inclui suporte técnico 24/7 automaticamente", "correta": false }
+      ],
+      "explicacao": "Preços AWS variam por região devido a custos locais de operação — energia elétrica, impostos, custo de construção, conectividade de rede. Regiões menores como São Paulo custam mais que Virginia (hub principal da AWS). A disponibilidade de serviços não determina o preço por recurso. A diferença de preço se aplica a todos os clientes, independentemente do plano de suporte. Suporte técnico é cobrado separadamente e não está incluído no preço da instância."
+    },
+    {
+      "id": "clfc02-fat-ext-apn-repost-assoc-10",
+      "topico": "Recursos de suporte",
+      "tipo": "Associacao",
+      "enunciado": "A equipe precisa encontrar o recurso de suporte adequado para cada necessidade. Associe cada cenário ao recurso correto.",
+      "associacoes": [
+        { "alvo": "Contratar uma empresa consultora certificada pela AWS para ajudar na migração", "item": "AWS Partner Network (APN)", "correta": true },
+        { "alvo": "Perguntar para a comunidade sobre uma configuração específica de VPC", "item": "AWS re:Post", "correta": true },
+        { "alvo": "Contratar um freelancer certificado AWS para um projeto curto de otimização", "item": "AWS IQ", "correta": true }
+      ],
+      "itensExtras": ["AWS Trusted Advisor", "AWS Support Center"],
+      "explicacao": "APN é a rede de parceiros da AWS (consultoras, ISVs, MSPs) certificados para ajudar em projetos de migração e implementação. re:Post é o fórum da comunidade AWS (substituto do antigo AWS Forums) para perguntas técnicas. AWS IQ conecta clientes a especialistas individuais certificados para projetos sob demanda. Trusted Advisor é ferramenta automatizada de recomendações, não um canal de suporte humano. Support Center é para abrir tickets de suporte técnico com a própria AWS, diferente dos outros canais."
+    },
+    {
+      "id": "clfc02-fat-ext-otimizacao-ordenacao-11",
+      "topico": "Otimização de custos",
+      "tipo": "Ordenacao",
+      "enunciado": "A equipe financeira da Contoso quer implementar uma estratégia estruturada de otimização de custos na AWS. Ordene as etapas da mais fundamental à mais avançada.",
+      "sequencia": [
+        "Implementar tags de alocação de custos e ativar o Cost and Usage Report para visibilidade",
+        "Usar o Compute Optimizer e Cost Explorer para identificar recursos superdimensionados ou ociosos",
+        "Comprar Savings Plans ou Reserved Instances para workloads estáveis já dimensionados",
+        "Configurar Cost Anomaly Detection e Budgets Actions para governança contínua automatizada"
+      ],
+      "itensExtras": ["Migrar toda a infraestrutura para Spot Instances para maximizar economia"],
+      "explicacao": "A otimização segue: visibilidade (tags e CUR para saber quem gasta o quê) → right-sizing (eliminar desperdício antes de comprometer) → compromisso (Savings Plans/RIs sobre workloads já otimizados) → governança contínua (anomalias e ações automáticas). Migrar tudo para Spot é o distrator: Spot é para workloads tolerantes a interrupção, não para toda a infraestrutura — usá-lo indiscriminadamente causaria instabilidade."
+    },
+    {
+      "id": "clfc02-fat-ext-precificacao-multipla-12",
+      "topico": "Precificação",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "A equipe de arquitetura está estimando custos para uma nova aplicação na AWS. Quais fatores afetam o custo total de um workload EC2 na AWS?",
+      "opcoes": [
+        { "texto": "O tipo e tamanho da instância EC2 escolhida", "correta": true },
+        { "texto": "A região AWS onde a instância é executada", "correta": true },
+        { "texto": "O volume de dados transferidos para fora da AWS", "correta": true },
+        { "texto": "O número de usuários IAM criados na conta", "correta": false },
+        { "texto": "O modelo de compra (On-Demand, Reserved, Spot)", "correta": true }
+      ],
+      "explicacao": "O custo de EC2 depende do tipo/tamanho da instância (CPU, memória, armazenamento), da região (custos locais variam), da transferência de dados outbound (cobrada por GB) e do modelo de compra (On-Demand paga mais, Reserved e Spot oferecem descontos). Usuários IAM são gratuitos — o IAM não cobra por identidades criadas, apenas os serviços que elas acessam."
+    }
+  ]
+}

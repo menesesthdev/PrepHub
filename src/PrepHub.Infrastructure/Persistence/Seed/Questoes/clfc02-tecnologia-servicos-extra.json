@@ -1,0 +1,458 @@
+{
+  "exameCode": "CLF-C02",
+  "area": "tecnologia-servicos",
+  "questoes": [
+    {
+      "id": "clfc02-tec-ext-apprunner-01",
+      "topico": "Computação serverless",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de desenvolvimento da Contoso quer implantar uma aplicação web containerizada sem gerenciar servidores, balanceadores de carga ou configurar pipelines de CI/CD na infraestrutura. A equipe quer apontar para a imagem do container e ter tudo provisionado automaticamente. Qual serviço AWS oferece essa simplicidade?",
+      "opcoes": [
+        { "texto": "AWS App Runner", "correta": true },
+        { "texto": "Amazon ECS com Fargate", "correta": false },
+        { "texto": "Amazon EKS", "correta": false },
+        { "texto": "AWS Elastic Beanstalk", "correta": false }
+      ],
+      "explicacao": "App Runner é o serviço mais simples para rodar containers web: basta apontar para uma imagem ou repositório de código e ele provisiona build, deploy, TLS, load balancing e auto scaling automaticamente. ECS com Fargate elimina gerenciamento de servidores mas ainda exige configurar task definitions, serviços e load balancers. EKS gerencia Kubernetes, com complexidade muito maior. Elastic Beanstalk automatiza deploy mas é orientado a plataformas (Java, .NET etc.), não a containers como foco principal."
+    },
+    {
+      "id": "clfc02-tec-ext-memorydb-02",
+      "topico": "Banco de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma fintech precisa de um banco de dados em memória compatível com Redis que garanta durabilidade dos dados — se o nó reiniciar, nenhuma transação pode ser perdida. O ElastiCache padrão atende ao desempenho mas não garante persistência. Qual serviço oferece latência de microssegundos com durabilidade Multi-AZ?",
+      "opcoes": [
+        { "texto": "Amazon MemoryDB for Redis", "correta": true },
+        { "texto": "Amazon ElastiCache for Redis", "correta": false },
+        { "texto": "Amazon DynamoDB", "correta": false },
+        { "texto": "Amazon Aurora", "correta": false }
+      ],
+      "explicacao": "MemoryDB for Redis combina performance in-memory com durabilidade Multi-AZ usando log transacional — dados sobrevivem a reinícios e failover. ElastiCache for Redis é otimizado para cache com desempenho mas não garante durabilidade por padrão (dados podem ser perdidos em failover). DynamoDB é durável e rápido (milissegundos) mas não oferece latência de microssegundos nem compatibilidade com Redis. Aurora é banco relacional durável mas opera em disco, com latência de milissegundos."
+    },
+    {
+      "id": "clfc02-tec-ext-datasync-03",
+      "topico": "Migração de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Litware precisa transferir 50 TB de dados de um servidor NFS on-premises para o Amazon S3 pela rede, com criptografia em trânsito e verificação automática de integridade. A transferência precisa ser repetível para sincronizações incrementais. Qual serviço gerencia essa transferência?",
+      "opcoes": [
+        { "texto": "AWS DataSync", "correta": true },
+        { "texto": "AWS Transfer Family", "correta": false },
+        { "texto": "AWS Snow Family", "correta": false },
+        { "texto": "Amazon S3 CLI (aws s3 sync)", "correta": false }
+      ],
+      "explicacao": "DataSync automatiza transferência de dados entre on-premises e AWS com criptografia, verificação de integridade, agendamento e transferências incrementais — projetado para migrações de grande volume pela rede. Transfer Family fornece endpoints SFTP/FTPS/FTP para S3, voltado para workflows de parceiros que já usam esses protocolos, não para migração em massa. Snow Family é para transferência física quando a rede é insuficiente, mas 50 TB pela rede é viável. S3 CLI funciona mas não tem verificação automática de integridade nem otimização de rede."
+    },
+    {
+      "id": "clfc02-tec-ext-fsx-04",
+      "topico": "Armazenamento",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa migrou aplicações Windows para EC2 e precisa de um file system compartilhado compatível com SMB e integrado ao Active Directory, para que as mesmas permissões NTFS do on-premises funcionem na nuvem. Qual serviço oferece file system Windows gerenciado?",
+      "opcoes": [
+        { "texto": "Amazon FSx for Windows File Server", "correta": true },
+        { "texto": "Amazon EFS", "correta": false },
+        { "texto": "Amazon S3", "correta": false },
+        { "texto": "Amazon EBS Multi-Attach", "correta": false }
+      ],
+      "explicacao": "FSx for Windows File Server fornece file system Windows nativo com SMB, NTFS, Active Directory e DFS — projetado para workloads Windows migrados. EFS é file system NFS para Linux, não suporta SMB nem integração com AD. S3 é armazenamento de objetos sem protocolo de file system compatível com Windows. EBS Multi-Attach permite que um volume seja montado em várias instâncias, mas é block storage sem SMB nem AD."
+    },
+    {
+      "id": "clfc02-tec-ext-backup-05",
+      "topico": "Proteção de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de operações da Tailwind Traders gerencia backups de EC2, RDS, DynamoDB e EFS separadamente em cada serviço. A equipe quer centralizar todas as políticas de backup em um único lugar com agendamento, retenção e relatórios de conformidade. Qual serviço unifica o gerenciamento de backups?",
+      "opcoes": [
+        { "texto": "AWS Backup", "correta": true },
+        { "texto": "Amazon S3 Lifecycle Policies", "correta": false },
+        { "texto": "AWS Storage Gateway", "correta": false },
+        { "texto": "Amazon Data Lifecycle Manager", "correta": false }
+      ],
+      "explicacao": "AWS Backup centraliza a gestão de backups de mais de 15 serviços AWS (EC2, RDS, DynamoDB, EFS, S3 etc.) com políticas unificadas, agendamento, retenção e auditoria de conformidade. S3 Lifecycle Policies gerenciam transição e expiração de objetos dentro do S3, não backups de outros serviços. Storage Gateway conecta on-premises ao armazenamento AWS, não gerencia backups. Data Lifecycle Manager automatiza snapshots de EBS e AMIs especificamente, não é centralizado para todos os serviços."
+    },
+    {
+      "id": "clfc02-tec-ext-xray-06",
+      "topico": "Monitoramento",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A aplicação de microsserviços da Contoso tem latência alta intermitente. A equipe precisa rastrear uma requisição individual desde o API Gateway, passando pelo Lambda, até o DynamoDB, para identificar qual componente introduz o atraso. Qual serviço oferece esse rastreamento distribuído?",
+      "opcoes": [
+        { "texto": "AWS X-Ray", "correta": true },
+        { "texto": "Amazon CloudWatch Logs", "correta": false },
+        { "texto": "AWS CloudTrail", "correta": false },
+        { "texto": "Amazon EventBridge", "correta": false }
+      ],
+      "explicacao": "X-Ray rastreia requisições end-to-end através de microsserviços, gerando um mapa de serviço e identificando gargalos de latência em cada componente da cadeia. CloudWatch Logs captura logs de cada serviço individualmente mas não correlaciona uma requisição entre serviços automaticamente. CloudTrail registra chamadas de API de gerenciamento, não requisições de dados da aplicação. EventBridge roteia eventos entre serviços, não rastreia latência."
+    },
+    {
+      "id": "clfc02-tec-ext-codepipeline-07",
+      "topico": "DevOps",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de desenvolvimento quer automatizar o fluxo completo de entrega de software: quando um commit é feito no repositório, o código é compilado, testado e implantado automaticamente em produção se todos os testes passarem. Qual serviço AWS orquestra esse pipeline de CI/CD?",
+      "opcoes": [
+        { "texto": "AWS CodePipeline", "correta": true },
+        { "texto": "AWS CodeBuild", "correta": false },
+        { "texto": "AWS CodeDeploy", "correta": false },
+        { "texto": "AWS CloudFormation", "correta": false }
+      ],
+      "explicacao": "CodePipeline orquestra as etapas do pipeline de CI/CD — source, build, test, deploy — conectando serviços como CodeBuild e CodeDeploy em um fluxo automatizado. CodeBuild compila e testa código (é uma etapa do pipeline, não o orquestrador). CodeDeploy automatiza deploys em EC2, Lambda ou ECS (é outra etapa, não o pipeline inteiro). CloudFormation provisiona infraestrutura como código mas não orquestra pipelines de software."
+    },
+    {
+      "id": "clfc02-tec-ext-workspaces-08",
+      "topico": "Computação de usuário final",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam precisa fornecer desktops Windows para 200 funcionários remotos. A equipe de TI não quer gerenciar hardware físico nem VPN para cada usuário, e precisa que os desktops sejam acessíveis de qualquer dispositivo com navegador. Qual serviço AWS fornece desktops virtuais gerenciados?",
+      "opcoes": [
+        { "texto": "Amazon WorkSpaces", "correta": true },
+        { "texto": "Amazon AppStream 2.0", "correta": false },
+        { "texto": "Amazon EC2 com Windows", "correta": false },
+        { "texto": "AWS Client VPN", "correta": false }
+      ],
+      "explicacao": "WorkSpaces fornece desktops virtuais (VDI) Windows ou Linux gerenciados, acessíveis de qualquer dispositivo, com persistência de dados do usuário e cobrança por hora ou mês. AppStream 2.0 transmite aplicações específicas (não desktops completos) para o navegador — é para acesso a apps, não desktops. EC2 com Windows requer gerenciar instâncias, RDP, licenças e escalabilidade manualmente. Client VPN dá acesso à rede corporativa mas não fornece desktops."
+    },
+    {
+      "id": "clfc02-tec-ext-globalaccelerator-09",
+      "topico": "Rede",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa global tem endpoints de aplicação em us-east-1 e eu-west-1. Usuários na Ásia relatam latência alta porque o tráfego atravessa a internet pública até chegar ao endpoint mais próximo. A equipe quer que o tráfego entre na rede global da AWS o mais perto possível do usuário. Qual serviço melhora o desempenho usando a rede backbone da AWS?",
+      "opcoes": [
+        { "texto": "AWS Global Accelerator", "correta": true },
+        { "texto": "Amazon CloudFront", "correta": false },
+        { "texto": "Amazon Route 53 com roteamento por latência", "correta": false },
+        { "texto": "AWS Direct Connect", "correta": false }
+      ],
+      "explicacao": "Global Accelerator roteia tráfego TCP/UDP pela rede backbone da AWS em vez da internet pública, usando endereços IP anycast que direcionam ao edge location mais próximo — reduz latência e melhora disponibilidade. CloudFront é CDN para conteúdo HTTP, não para tráfego TCP/UDP genérico. Route 53 com latência roteia DNS para a Região mais próxima mas o tráfego ainda percorre a internet pública. Direct Connect é conexão física dedicada de um datacenter, não para usuários finais globais."
+    },
+    {
+      "id": "clfc02-tec-ext-natgateway-10",
+      "topico": "Rede",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma instância EC2 em uma subnet privada precisa baixar atualizações de segurança da internet, mas não deve ser acessível diretamente de fora. A subnet não tem rota para o Internet Gateway. Qual recurso permite tráfego de saída para a internet sem expor a instância a tráfego de entrada?",
+      "opcoes": [
+        { "texto": "NAT Gateway na subnet pública, com rota da subnet privada apontando para ele", "correta": true },
+        { "texto": "Mover a instância para uma subnet pública", "correta": false },
+        { "texto": "Adicionar uma rota direta para o Internet Gateway na subnet privada", "correta": false },
+        { "texto": "Criar um VPC Endpoint para o repositório de atualizações", "correta": false }
+      ],
+      "explicacao": "NAT Gateway permite que instâncias em subnets privadas iniciem conexões de saída para a internet enquanto bloqueia conexões de entrada — é o mecanismo padrão para esse cenário. Mover para subnet pública expõe a instância a tráfego de entrada, violando o requisito. Adicionar rota para o Internet Gateway na subnet privada sem NAT não funciona — a instância não tem IP público. VPC Endpoint funciona para serviços AWS específicos (S3, DynamoDB) mas repositórios de atualização genéricos na internet não são acessíveis via endpoint."
+    },
+    {
+      "id": "clfc02-tec-ext-auroraserverless-11",
+      "topico": "Banco de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma startup tem um banco de dados MySQL que fica ocioso durante a noite e tem picos imprevisíveis durante o dia. A equipe não quer pagar por capacidade fixa nas horas de baixa demanda e precisa que o banco escale automaticamente com a carga. Qual opção de banco de dados gerenciado da AWS atende?",
+      "opcoes": [
+        { "texto": "Amazon Aurora Serverless", "correta": true },
+        { "texto": "Amazon RDS MySQL com instância reservada", "correta": false },
+        { "texto": "Amazon DynamoDB", "correta": false },
+        { "texto": "Amazon Redshift Serverless", "correta": false }
+      ],
+      "explicacao": "Aurora Serverless escala capacidade de computação automaticamente com base na demanda e pode pausar durante inatividade, cobrando apenas pelo uso real — ideal para cargas imprevisíveis. RDS com instância reservada tem custo fixo independentemente da carga, pagando por capacidade ociosa à noite. DynamoDB é NoSQL, não compatível com MySQL — exigiria reescrever a aplicação. Redshift Serverless é para data warehouse analítico, não para banco transacional."
+    },
+    {
+      "id": "clfc02-tec-ext-lakeformation-12",
+      "topico": "Analytics",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Contoso quer criar um data lake centralizado no S3 com controle granular de acesso — definir quais analistas podem ver quais colunas de quais tabelas. Configurar isso manualmente com políticas S3 e IAM é complexo. Qual serviço simplifica a criação e governança de data lakes?",
+      "opcoes": [
+        { "texto": "AWS Lake Formation", "correta": true },
+        { "texto": "AWS Glue sozinho", "correta": false },
+        { "texto": "Amazon Athena", "correta": false },
+        { "texto": "Amazon Redshift Spectrum", "correta": false }
+      ],
+      "explicacao": "Lake Formation centraliza a criação de data lakes com catalogação automática, transformação e controle de acesso granular por coluna e linha — simplifica o que levaria dezenas de políticas IAM e S3. Glue faz ETL e catalogação mas não oferece controle de acesso granular por coluna/linha nativamente. Athena consulta dados no S3 mas não governa acesso ao data lake. Redshift Spectrum consulta dados externos a partir do Redshift, não governa o data lake."
+    },
+    {
+      "id": "clfc02-tec-ext-forecast-13",
+      "topico": "Machine Learning",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma rede de varejo quer prever a demanda de produtos para as próximas 4 semanas com base em dados históricos de vendas, sem ter cientistas de dados na equipe. Qual serviço AWS gera previsões de séries temporais automaticamente usando machine learning?",
+      "opcoes": [
+        { "texto": "Amazon Forecast", "correta": true },
+        { "texto": "Amazon SageMaker", "correta": false },
+        { "texto": "Amazon Personalize", "correta": false },
+        { "texto": "Amazon Comprehend", "correta": false }
+      ],
+      "explicacao": "Amazon Forecast gera previsões de séries temporais (demanda, receita, capacidade) usando ML automaticamente — o usuário fornece dados históricos e recebe previsões sem construir modelos. SageMaker permite construir modelos ML customizados mas exige expertise em ciência de dados. Personalize gera recomendações personalizadas para usuários (produtos, conteúdo), não previsões de demanda. Comprehend analisa texto com NLP (sentimento, entidades), não séries temporais."
+    },
+    {
+      "id": "clfc02-tec-ext-kendra-14",
+      "topico": "Machine Learning",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa tem documentação técnica espalhada em SharePoint, wikis internas e buckets S3. Os funcionários gastam horas procurando informações em múltiplas fontes. A equipe quer um mecanismo de busca inteligente que entenda perguntas em linguagem natural e encontre respostas exatas nos documentos. Qual serviço atende?",
+      "opcoes": [
+        { "texto": "Amazon Kendra", "correta": true },
+        { "texto": "Amazon OpenSearch Service", "correta": false },
+        { "texto": "Amazon Comprehend", "correta": false },
+        { "texto": "Amazon Textract", "correta": false }
+      ],
+      "explicacao": "Kendra é um serviço de busca inteligente que usa ML para entender perguntas em linguagem natural e retornar respostas exatas de múltiplas fontes de dados (S3, SharePoint, wikis) com conectores nativos. OpenSearch oferece busca de texto completo mas requer indexação manual e não entende linguagem natural no mesmo nível. Comprehend analisa texto para extrair entidades e sentimento, não faz busca em documentos. Textract extrai texto de imagens e PDFs, não faz busca inteligente."
+    },
+    {
+      "id": "clfc02-tec-ext-healthdashboard-15",
+      "topico": "Monitoramento",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de operações da Litware recebeu reclamações de que a aplicação está lenta. Antes de investigar o código, a equipe quer verificar se algum serviço AWS na região us-east-1 está com problemas operacionais que possam afetar seus recursos. Qual ferramenta mostra o status dos serviços AWS e notificações específicas para a conta?",
+      "opcoes": [
+        { "texto": "AWS Health Dashboard", "correta": true },
+        { "texto": "AWS Trusted Advisor", "correta": false },
+        { "texto": "Amazon CloudWatch", "correta": false },
+        { "texto": "AWS Systems Manager", "correta": false }
+      ],
+      "explicacao": "Health Dashboard (antigo Personal Health Dashboard + Service Health Dashboard) mostra o status operacional dos serviços AWS por região e notificações personalizadas sobre eventos que afetam recursos específicos da conta. Trusted Advisor faz recomendações de boas práticas, não mostra status operacional de serviços. CloudWatch monitora métricas dos recursos do cliente, não o status dos próprios serviços AWS. Systems Manager gerencia e configura instâncias, não monitora status de serviços AWS."
+    },
+    {
+      "id": "clfc02-tec-ext-computeoptimizer-16",
+      "topico": "Otimização",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam suspeita que muitas instâncias EC2 estão superdimensionadas — consumindo menos de 20% da CPU alocada. A equipe quer recomendações automáticas de tipos de instância mais adequados baseadas em dados reais de utilização. Qual serviço analisa o uso e sugere right-sizing?",
+      "opcoes": [
+        { "texto": "AWS Compute Optimizer", "correta": true },
+        { "texto": "AWS Cost Explorer", "correta": false },
+        { "texto": "AWS Trusted Advisor", "correta": false },
+        { "texto": "Amazon CloudWatch", "correta": false }
+      ],
+      "explicacao": "Compute Optimizer analisa métricas de utilização (CPU, memória, rede) e recomenda tipos de instância EC2, funções Lambda e volumes EBS otimizados usando ML. Cost Explorer mostra custos e tendências de gastos mas não recomenda tipos de instância específicos com base em utilização. Trusted Advisor tem verificações de instâncias ociosas/subutilizadas mas não oferece recomendações granulares de tipo baseadas em ML. CloudWatch coleta as métricas mas não gera recomendações de right-sizing."
+    },
+    {
+      "id": "clfc02-tec-ext-licensemanager-17",
+      "topico": "Governança",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de compliance da Contoso precisa rastrear o uso de licenças Oracle e SQL Server em instâncias EC2 para garantir que a empresa não está usando mais licenças do que o contratado, evitando multas de auditoria de software. Qual serviço AWS ajuda a gerenciar e rastrear licenças?",
+      "opcoes": [
+        { "texto": "AWS License Manager", "correta": true },
+        { "texto": "AWS Config", "correta": false },
+        { "texto": "AWS Systems Manager Inventory", "correta": false },
+        { "texto": "AWS Service Catalog", "correta": false }
+      ],
+      "explicacao": "License Manager rastreia o uso de licenças de software (Oracle, SQL Server, Windows) em EC2 e on-premises, define regras de licenciamento e gera alertas quando o limite é excedido. Config monitora configuração de recursos AWS, não rastreia licenças de software. Systems Manager Inventory lista software instalado em instâncias mas não gerencia regras de licenciamento nem limites. Service Catalog governa o provisionamento de recursos, não o rastreamento de licenças."
+    },
+    {
+      "id": "clfc02-tec-ext-msk-18",
+      "topico": "Streaming de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de engenharia da Tailwind Traders já usa Apache Kafka on-premises para streaming de eventos em tempo real e quer migrar para a AWS sem reescrever os produtores e consumidores existentes. Qual serviço oferece Kafka totalmente gerenciado?",
+      "opcoes": [
+        { "texto": "Amazon MSK (Managed Streaming for Apache Kafka)", "correta": true },
+        { "texto": "Amazon Kinesis Data Streams", "correta": false },
+        { "texto": "Amazon SQS", "correta": false },
+        { "texto": "Amazon EventBridge", "correta": false }
+      ],
+      "explicacao": "MSK fornece Apache Kafka totalmente gerenciado, compatível com APIs Kafka existentes — produtores e consumidores migram sem reescrita. Kinesis Data Streams é o serviço de streaming nativo da AWS mas tem APIs próprias, exigindo reescrita. SQS é fila de mensagens com semântica diferente de streaming (não mantém log ordenado e imutável). EventBridge é event bus serverless para integração de serviços, não substitui Kafka para streaming."
+    },
+    {
+      "id": "clfc02-tec-ext-elasticdisasterrecovery-19",
+      "topico": "Recuperação de desastres",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Litware quer replicar continuamente seus servidores on-premises para a AWS, mantendo uma cópia atualizada pronta para ser ativada em caso de desastre, sem manter instâncias EC2 rodando. Qual serviço gerencia essa replicação contínua com failover sob demanda?",
+      "opcoes": [
+        { "texto": "AWS Elastic Disaster Recovery (DRS)", "correta": true },
+        { "texto": "AWS Backup", "correta": false },
+        { "texto": "AWS DataSync", "correta": false },
+        { "texto": "AWS Migration Hub", "correta": false }
+      ],
+      "explicacao": "Elastic Disaster Recovery replica continuamente discos de servidores para a AWS em segundo plano e permite failover rápido lançando instâncias EC2 a partir das réplicas, sem manter instâncias rodando continuamente — custo de Pilot Light com recuperação rápida. AWS Backup faz backups periódicos (não replicação contínua) e restaurar a partir de backup leva mais tempo. DataSync transfere dados entre on-premises e AWS, não replica servidores inteiros para failover. Migration Hub monitora o progresso da migração, não fornece DR."
+    },
+    {
+      "id": "clfc02-tec-ext-vpcpeering-vs-tgw-20",
+      "topico": "Rede",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de rede da Contoso tem duas VPCs que precisam se comunicar diretamente sem passar pela internet pública. A comunicação é entre dois projetos apenas e a equipe não planeja conectar mais VPCs no futuro. Qual opção de conectividade é a mais simples e econômica para este cenário específico?",
+      "opcoes": [
+        { "texto": "VPC Peering entre as duas VPCs", "correta": true },
+        { "texto": "AWS Transit Gateway", "correta": false },
+        { "texto": "AWS Site-to-Site VPN entre as VPCs", "correta": false },
+        { "texto": "AWS PrivateLink", "correta": false }
+      ],
+      "explicacao": "VPC Peering é a solução mais simples e sem custo de infraestrutura (paga-se apenas transferência de dados) para conectar duas VPCs diretamente — ideal quando são poucas VPCs. Transit Gateway é hub centralizado para muitas VPCs (dezenas), com custo fixo por hora que não se justifica para apenas duas. VPN entre VPCs adiciona complexidade de criptografia desnecessária quando ambas estão na AWS. PrivateLink expõe serviços específicos via endpoint, não conecta redes inteiras."
+    },
+    {
+      "id": "clfc02-tec-ext-devtools-assoc-21",
+      "topico": "Ferramentas de desenvolvedor",
+      "tipo": "Associacao",
+      "enunciado": "A equipe de DevOps está montando um pipeline de CI/CD na AWS e precisa escolher o serviço adequado para cada etapa. Associe cada etapa ao serviço AWS correspondente.",
+      "associacoes": [
+        { "alvo": "Armazenar o código-fonte com controle de versão baseado em Git", "item": "AWS CodeCommit", "correta": true },
+        { "alvo": "Compilar o código e executar testes automatizados", "item": "AWS CodeBuild", "correta": true },
+        { "alvo": "Automatizar o deploy em instâncias EC2, Lambda ou ECS", "item": "AWS CodeDeploy", "correta": true },
+        { "alvo": "Orquestrar as etapas de source, build, test e deploy em um fluxo automatizado", "item": "AWS CodePipeline", "correta": true }
+      ],
+      "itensExtras": ["AWS CloudFormation"],
+      "explicacao": "CodeCommit é repositório Git gerenciado (source). CodeBuild compila e testa em ambientes gerenciados (build/test). CodeDeploy automatiza deploys com estratégias como blue-green e canary (deploy). CodePipeline orquestra todas as etapas em um fluxo contínuo (pipeline). CloudFormation provisiona infraestrutura como código mas não substitui nenhuma das etapas de CI/CD — é complementar para provisionamento de ambiente."
+    },
+    {
+      "id": "clfc02-tec-ext-armazenamento-assoc-22",
+      "topico": "Armazenamento",
+      "tipo": "Associacao",
+      "enunciado": "A equipe de arquitetura precisa escolher o serviço de armazenamento correto para cada cenário. Associe cada necessidade ao serviço adequado.",
+      "associacoes": [
+        { "alvo": "File system compartilhado entre múltiplas instâncias Linux via NFS", "item": "Amazon EFS", "correta": true },
+        { "alvo": "File system compatível com SMB integrado ao Active Directory para workloads Windows", "item": "Amazon FSx for Windows File Server", "correta": true },
+        { "alvo": "Armazenamento de objetos com durabilidade de 11 noves e classes de custo por acesso", "item": "Amazon S3", "correta": true },
+        { "alvo": "Disco de bloco persistente para uma instância EC2 individual com snapshots", "item": "Amazon EBS", "correta": true }
+      ],
+      "itensExtras": ["Amazon S3 Glacier"],
+      "explicacao": "EFS fornece NFS gerenciado para múltiplas instâncias Linux com escala automática. FSx for Windows File Server oferece SMB com AD para workloads Windows migrados. S3 é armazenamento de objetos com 99.999999999% de durabilidade e múltiplas classes de armazenamento. EBS é block storage para uma instância EC2 com suporte a snapshots e diferentes tipos de performance (gp3, io2). S3 Glacier é para arquivamento de longo prazo, não encaixa nos cenários ativos descritos."
+    },
+    {
+      "id": "clfc02-tec-ext-analytics-assoc-23",
+      "topico": "Analytics",
+      "tipo": "Associacao",
+      "enunciado": "A equipe de dados da Fabrikam precisa escolher o serviço adequado para cada etapa do pipeline de análise. Associe cada necessidade ao serviço correto.",
+      "associacoes": [
+        { "alvo": "Consultar dados armazenados no S3 usando SQL padrão, sem provisionar servidores", "item": "Amazon Athena", "correta": true },
+        { "alvo": "Criar dashboards interativos e visualizações de BI acessíveis via navegador", "item": "Amazon QuickSight", "correta": true },
+        { "alvo": "Descobrir, catalogar e transformar dados com jobs ETL serverless", "item": "AWS Glue", "correta": true },
+        { "alvo": "Processar grandes volumes de dados com Apache Spark e Hadoop gerenciados", "item": "Amazon EMR", "correta": true }
+      ],
+      "itensExtras": ["Amazon Kinesis"],
+      "explicacao": "Athena consulta dados no S3 com SQL serverless (pay per query). QuickSight é o serviço de BI com dashboards, gráficos e compartilhamento via navegador. Glue cataloga metadados e executa ETL serverless com Spark. EMR gerencia clusters Hadoop/Spark para processamento de big data em escala. Kinesis é para streaming de dados em tempo real, não para ETL ou consultas ad-hoc em dados armazenados."
+    },
+    {
+      "id": "clfc02-tec-ext-datalake-ordenacao-24",
+      "topico": "Analytics",
+      "tipo": "Ordenacao",
+      "enunciado": "A equipe de dados da Contoso está construindo um pipeline de análise de dados na AWS. Ordene as etapas do pipeline, da ingestão até a visualização.",
+      "sequencia": [
+        "Ingerir dados de múltiplas fontes e armazená-los no Amazon S3 como data lake",
+        "Catalogar e transformar os dados com AWS Glue para padronizar esquemas",
+        "Consultar os dados transformados com Amazon Athena usando SQL",
+        "Criar dashboards interativos no Amazon QuickSight para apresentar os insights"
+      ],
+      "itensExtras": ["Migrar o banco de dados transacional com AWS DMS"],
+      "explicacao": "O pipeline de dados segue: ingestão (S3 como data lake) → transformação (Glue cataloga e padroniza) → consulta (Athena faz queries SQL serverless) → visualização (QuickSight cria dashboards). DMS migra bancos transacionais entre engines — pode ser uma etapa anterior de migração mas não faz parte do pipeline de análise em si."
+    },
+    {
+      "id": "clfc02-tec-ext-serverlessapi-ordenacao-25",
+      "topico": "Serverless",
+      "tipo": "Ordenacao",
+      "enunciado": "A equipe da Litware está projetando uma API REST serverless na AWS. Ordene os componentes na sequência em que uma requisição do cliente os atravessa.",
+      "sequencia": [
+        "Amazon API Gateway recebe a requisição HTTPS e a roteia",
+        "AWS Lambda executa a lógica de negócio da função invocada",
+        "Amazon DynamoDB persiste ou consulta os dados solicitados",
+        "A resposta percorre o caminho inverso até chegar ao cliente"
+      ],
+      "itensExtras": ["Amazon EC2 processa a requisição em um servidor dedicado"],
+      "explicacao": "A requisição chega primeiro ao API Gateway (ponto de entrada HTTPS com autenticação e throttling), que invoca a função Lambda (lógica de negócio sem servidor), que interage com DynamoDB (banco NoSQL serverless) e a resposta retorna pelo mesmo caminho. EC2 é o distrator: em uma arquitetura serverless, não há servidores dedicados — esse é justamente o ponto."
+    },
+    {
+      "id": "clfc02-tec-ext-containers-ordenacao-26",
+      "topico": "Containers",
+      "tipo": "Ordenacao",
+      "enunciado": "A equipe da Tailwind Traders está containerizando uma aplicação monolítica para rodar na AWS. Ordene as etapas do processo de containerização e deploy.",
+      "sequencia": [
+        "Escrever o Dockerfile e construir a imagem do container",
+        "Enviar a imagem para o Amazon ECR (Elastic Container Registry)",
+        "Definir a task definition no Amazon ECS especificando a imagem e recursos",
+        "O AWS Fargate provisiona a infraestrutura e executa o container sem gerenciar servidores"
+      ],
+      "itensExtras": ["Instalar Docker em uma instância EC2 e executar o container manualmente"],
+      "explicacao": "O fluxo é: construir a imagem (Dockerfile) → armazenar no ECR (registro privado) → definir como executar no ECS (task definition) → Fargate provisiona e roda sem servidor. Instalar Docker em EC2 e rodar manualmente é viável mas não é a abordagem gerenciada — Fargate elimina essa responsabilidade, que é justamente o benefício descrito no cenário."
+    },
+    {
+      "id": "clfc02-tec-ext-servicos-rede-multipla-27",
+      "topico": "Rede",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "A equipe de rede está revisando os componentes de uma VPC na AWS. Quais componentes são obrigatórios ou disponíveis em toda VPC?",
+      "opcoes": [
+        { "texto": "Route tables que controlam para onde o tráfego de cada subnet é direcionado", "correta": true },
+        { "texto": "Internet Gateway para conectar a VPC à internet pública", "correta": true },
+        { "texto": "NAT Gateway para permitir tráfego de saída de subnets privadas", "correta": false },
+        { "texto": "Subnets que segmentam a VPC em redes menores associadas a Availability Zones", "correta": true },
+        { "texto": "AWS Transit Gateway para conectar a VPC a outras VPCs", "correta": false }
+      ],
+      "explicacao": "Route tables, Internet Gateway e subnets são componentes fundamentais de uma VPC — route tables existem por padrão, IGW conecta à internet e subnets segmentam a rede por AZ. NAT Gateway é opcional, usado apenas quando subnets privadas precisam de acesso à internet de saída — muitas VPCs não o têm. Transit Gateway é para conectar múltiplas VPCs ou redes on-premises, completamente opcional e com custo adicional."
+    },
+    {
+      "id": "clfc02-tec-ext-monitoramento-multipla-28",
+      "topico": "Monitoramento",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "A equipe de operações está implementando uma estratégia de observabilidade na AWS. Quais serviços fazem parte da stack de monitoramento e observabilidade da AWS?",
+      "opcoes": [
+        { "texto": "Amazon CloudWatch para métricas, alarmes e dashboards", "correta": true },
+        { "texto": "AWS X-Ray para rastreamento distribuído de requisições entre microsserviços", "correta": true },
+        { "texto": "AWS CloudTrail para auditoria de chamadas de API na conta AWS", "correta": true },
+        { "texto": "Amazon SQS para coletar e processar logs de aplicação", "correta": false },
+        { "texto": "AWS Config para monitorar alterações de configuração de recursos", "correta": true }
+      ],
+      "explicacao": "CloudWatch monitora métricas e logs operacionais. X-Ray rastreia requisições entre serviços para diagnóstico de latência. CloudTrail audita chamadas de API para segurança e conformidade. Config rastreia mudanças de configuração para governança. SQS é fila de mensagens para desacoplamento de aplicações, não é ferramenta de observabilidade — embora possa transportar mensagens, não coleta nem visualiza logs."
+    },
+    {
+      "id": "clfc02-tec-ext-ml-multipla-29",
+      "topico": "Machine Learning",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "A equipe de produto quer adicionar funcionalidades de inteligência artificial à aplicação sem treinar modelos próprios. Quais serviços AWS oferecem ML pré-treinado que pode ser usado via API sem expertise em ciência de dados?",
+      "opcoes": [
+        { "texto": "Amazon Rekognition para análise de imagens e vídeo (detecção de objetos, faces, texto)", "correta": true },
+        { "texto": "Amazon Comprehend para análise de texto com processamento de linguagem natural", "correta": true },
+        { "texto": "Amazon SageMaker para construir e treinar modelos customizados", "correta": false },
+        { "texto": "Amazon Polly para converter texto em fala natural em múltiplos idiomas", "correta": true },
+        { "texto": "Amazon Lex para construir interfaces conversacionais (chatbots) com voz e texto", "correta": true }
+      ],
+      "explicacao": "Rekognition, Comprehend, Polly e Lex são serviços de ML pré-treinados acessíveis via API sem necessidade de treinar modelos — basta enviar dados e receber resultados. SageMaker é uma plataforma para construir, treinar e implantar modelos customizados — requer expertise em ciência de dados e ML, exatamente o que o cenário quer evitar."
+    },
+    {
+      "id": "clfc02-tec-ext-s3classes-multipla-30",
+      "topico": "Armazenamento",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "A equipe de arquitetura precisa escolher classes de armazenamento S3 para diferentes padrões de acesso. Quais classes são projetadas para dados acessados com pouca frequência, com custo de armazenamento menor que o S3 Standard?",
+      "opcoes": [
+        { "texto": "S3 Standard-IA (Infrequent Access) com disponibilidade Multi-AZ", "correta": true },
+        { "texto": "S3 One Zone-IA com dados em uma única Availability Zone", "correta": true },
+        { "texto": "S3 Standard para acesso frequente de baixa latência", "correta": false },
+        { "texto": "S3 Glacier Instant Retrieval para dados acessados raramente com recuperação em milissegundos", "correta": true },
+        { "texto": "S3 Intelligent-Tiering para migração automática entre tiers", "correta": false }
+      ],
+      "explicacao": "Standard-IA, One Zone-IA e Glacier Instant Retrieval são classes para acesso infrequente com custo de armazenamento menor que Standard — diferem em disponibilidade e latência de recuperação. S3 Standard é para acesso frequente com o maior custo de armazenamento. S3 Intelligent-Tiering move dados automaticamente entre tiers mas não é uma classe de acesso infrequente em si — é um mecanismo de otimização automática."
+    },
+    {
+      "id": "clfc02-tec-ext-elasticip-31",
+      "topico": "Rede",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma instância EC2 pública recebe um novo endereço IP toda vez que é parada e reiniciada, quebrando a configuração de DNS dos parceiros que apontam para o IP antigo. A equipe precisa de um IP público fixo que sobreviva a reinícios. Qual recurso resolve?",
+      "opcoes": [
+        { "texto": "Elastic IP address associado à instância", "correta": true },
+        { "texto": "Criar um registro A no Route 53 para o IP atual", "correta": false },
+        { "texto": "Usar um Network Load Balancer na frente da instância", "correta": false },
+        { "texto": "Configurar um IP estático no sistema operacional da instância", "correta": false }
+      ],
+      "explicacao": "Elastic IP é um endereço IPv4 público estático que pode ser associado a uma instância EC2 e sobrevive a reinícios — é o mecanismo AWS para IP fixo. Registro A no Route 53 apontaria para o IP atual que muda no reinício, quebrando novamente. NLB resolve o problema mas adiciona complexidade e custo desnecessários para uma única instância. Configurar IP estático no SO não funciona — o IP público é atribuído pela plataforma AWS, não pelo SO."
+    },
+    {
+      "id": "clfc02-tec-ext-cloud9-32",
+      "topico": "Ferramentas de desenvolvedor",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Um novo desenvolvedor na equipe da Litware precisa começar a programar imediatamente, sem instalar IDE, SDKs ou configurar ambiente local. A equipe quer um ambiente de desenvolvimento completo acessível pelo navegador. Qual serviço oferece um IDE na nuvem?",
+      "opcoes": [
+        { "texto": "AWS Cloud9", "correta": true },
+        { "texto": "AWS CloudShell", "correta": false },
+        { "texto": "Amazon WorkSpaces", "correta": false },
+        { "texto": "AWS CodeBuild", "correta": false }
+      ],
+      "explicacao": "Cloud9 é um IDE completo na nuvem com editor de código, terminal e debugger, acessível pelo navegador, com SDKs AWS pré-instalados. CloudShell é um terminal (shell) no console AWS para rodar comandos CLI, não um IDE com editor de código. WorkSpaces é desktop virtual completo, não um IDE especializado para desenvolvimento. CodeBuild compila e testa código em ambientes gerenciados, não é um IDE interativo."
+    },
+    {
+      "id": "clfc02-tec-ext-storagegateway-33",
+      "topico": "Armazenamento híbrido",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa quer manter a interface de file server on-premises (NFS/SMB) para os usuários que estão acostumados, mas armazenar os dados no Amazon S3 em segundo plano para durabilidade e redução de custo com storage local. Qual serviço faz essa ponte entre on-premises e S3?",
+      "opcoes": [
+        { "texto": "AWS Storage Gateway (File Gateway)", "correta": true },
+        { "texto": "AWS DataSync", "correta": false },
+        { "texto": "AWS Transfer Family", "correta": false },
+        { "texto": "Amazon FSx", "correta": false }
+      ],
+      "explicacao": "Storage Gateway (modo File Gateway) apresenta uma interface NFS/SMB no on-premises e armazena os dados no S3, com cache local para baixa latência — transparente para os usuários. DataSync transfere dados em lotes entre on-premises e S3 mas não apresenta interface de file server contínua. Transfer Family fornece endpoints SFTP/FTPS para S3, para parceiros de transferência de arquivos. FSx são file systems gerenciados na nuvem, não fazem ponte com storage on-premises."
+    },
+    {
+      "id": "clfc02-tec-ext-iot-34",
+      "topico": "Internet das Coisas",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma fábrica tem 500 sensores de temperatura em suas máquinas que precisam enviar leituras a cada 5 segundos para a nuvem, onde as leituras são processadas para gerar alertas de manutenção preventiva. Qual serviço AWS conecta dispositivos IoT à nuvem de forma segura e gerenciada?",
+      "opcoes": [
+        { "texto": "AWS IoT Core", "correta": true },
+        { "texto": "Amazon Kinesis Data Streams", "correta": false },
+        { "texto": "Amazon SNS", "correta": false },
+        { "texto": "AWS Lambda", "correta": false }
+      ],
+      "explicacao": "IoT Core conecta dispositivos IoT à nuvem usando MQTT/HTTPS com autenticação por certificado, gerenciamento de dispositivos e regras para rotear mensagens para outros serviços AWS. Kinesis processa streaming de dados em grande volume mas não gerencia conexão de dispositivos nem autenticação IoT. SNS envia notificações, não conecta dispositivos IoT. Lambda executa código serverless e poderia processar as leituras, mas não é o ponto de entrada para conexão de dispositivos."
+    }
+  ]
+}
