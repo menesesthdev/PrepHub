@@ -1,0 +1,325 @@
+{
+  "exameCode": "CLF-C02",
+  "area": "seguranca-conformidade",
+  "questoes": [
+    {
+      "id": "clfc02-seg-responsabilidade-s3-01",
+      "topico": "Modelo de responsabilidade compartilhada",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa armazena documentos confidenciais de clientes no Amazon S3. Uma auditoria revelou que os buckets estavam configurados com acesso público, expondo dados sensíveis. De acordo com o modelo de responsabilidade compartilhada da AWS, quem é responsável por essa falha de configuração?",
+      "explicacao": "No modelo de responsabilidade compartilhada, a configuração de acesso aos recursos — como políticas de bucket do S3, ACLs e bloqueio de acesso público — é responsabilidade do cliente. A AWS fornece os mecanismos e ferramentas de controle de acesso, mas quem decide como configurá-los é o cliente. A AWS é responsável pela infraestrutura que executa o S3, incluindo a durabilidade e disponibilidade do serviço, mas não pelas políticas de acesso definidas pelo cliente. A responsabilidade não é compartilhada neste caso: configuração de acesso é claramente do lado do cliente. A equipe de auditoria identifica o problema, mas não tem responsabilidade sobre a configuração — ela aponta a falha para que o cliente a corrija.",
+      "opcoes": [
+        { "texto": "O cliente.", "correta": true },
+        { "texto": "A AWS.", "correta": false },
+        { "texto": "A responsabilidade é compartilhada entre o cliente e a AWS.", "correta": false },
+        { "texto": "A equipe de auditoria externa.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-iam-menor-privilegio-02",
+      "topico": "AWS IAM",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Um administrador de nuvem criou um novo usuário do IAM para um desenvolvedor que precisa apenas fazer upload de objetos para um bucket S3 específico chamado 'app-assets-prod'. O administrador está decidindo qual política do IAM associar ao usuário. Qual abordagem segue a prática recomendada do princípio do menor privilégio?",
+      "explicacao": "Criar uma política que concede apenas s3:PutObject no bucket específico 'app-assets-prod' segue o princípio do menor privilégio: o desenvolvedor recebe apenas as permissões necessárias para a tarefa que precisa executar, nada mais. A política AmazonS3FullAccess concede acesso total a todos os buckets e todas as operações do S3, muito além do necessário. A política AdministratorAccess concede acesso total a todos os serviços e recursos da conta AWS — é o oposto do menor privilégio e um risco de segurança grave para um usuário que só precisa fazer upload. Conceder s3:PutObject e s3:GetObject em todos os buckets vai além do necessário em duas dimensões: inclui leitura que o desenvolvedor não precisa e abrange todos os buckets, não apenas o específico.",
+      "opcoes": [
+        { "texto": "Criar uma política personalizada que concede apenas s3:PutObject no bucket 'app-assets-prod'.", "correta": true },
+        { "texto": "Associar a política gerenciada AmazonS3FullAccess.", "correta": false },
+        { "texto": "Associar a política gerenciada AdministratorAccess.", "correta": false },
+        { "texto": "Criar uma política que concede s3:PutObject e s3:GetObject em todos os buckets.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-iam-root-03",
+      "topico": "AWS IAM",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "Quais são práticas recomendadas da AWS em relação ao usuário-raiz (root) da conta?",
+      "explicacao": "Habilitar MFA no usuário-raiz adiciona uma segunda camada de proteção à identidade mais poderosa da conta. Não usar o root no dia a dia reduz o risco de ações acidentais ou comprometimento dessa identidade de poder total. Criar usuários do IAM para as atividades diárias permite aplicar o princípio do menor privilégio e rastrear ações individualmente. Compartilhar as credenciais do root com toda a equipe viola o princípio de responsabilidade individual e amplifica o impacto de um comprometimento — se uma pessoa é phished, a conta inteira é comprometida. Desativar o root não é possível: ele é necessário para tarefas específicas como fechar a conta, alterar o plano de suporte ou restaurar permissões do IAM — a AWS recomenda protegê-lo com MFA e restringir o uso, não desativá-lo.",
+      "opcoes": [
+        { "texto": "Habilitar autenticação multifator (MFA) no usuário-raiz.", "correta": true },
+        { "texto": "Não usar o usuário-raiz para tarefas cotidianas.", "correta": true },
+        { "texto": "Criar usuários do IAM para as atividades do dia a dia.", "correta": true },
+        { "texto": "Compartilhar as credenciais do usuário-raiz com toda a equipe de TI.", "correta": false },
+        { "texto": "Desativar o usuário-raiz após criar o primeiro administrador IAM.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-shield-ddos-04",
+      "topico": "Proteção contra DDoS",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O site de uma empresa de mídia sofreu um ataque DDoS que gerou tráfego de 50 Gbps, derrubando o serviço por duas horas. A equipe de segurança quer implementar proteção gerenciada contra DDoS que ofereça diagnósticos detalhados dos ataques e acesso a uma equipe de resposta 24/7. Qual serviço da AWS atende a esses requisitos?",
+      "explicacao": "O AWS Shield Advanced é o serviço pago que fornece proteção gerenciada contra ataques DDoS, com diagnósticos detalhados, acesso à equipe de resposta DDoS da AWS (DRT) 24/7 e integração com CloudFront, Route 53 e ELB. O AWS Shield Standard protege automaticamente todos os clientes da AWS contra os tipos de DDoS mais comuns sem custo adicional, mas não oferece diagnósticos detalhados nem acesso a equipe de resposta dedicada. O AWS WAF é um firewall de aplicação web que filtra tráfego HTTP/HTTPS com regras personalizadas, mas não é uma solução dedicada contra DDoS volumétrico — ele pode complementar o Shield, mas não substituí-lo. O Amazon GuardDuty detecta ameaças analisando logs e atividade da conta, mas é um serviço de detecção de ameaças, não de mitigação de DDoS.",
+      "opcoes": [
+        { "texto": "AWS Shield Advanced.", "correta": true },
+        { "texto": "AWS Shield Standard.", "correta": false },
+        { "texto": "AWS WAF.", "correta": false },
+        { "texto": "Amazon GuardDuty.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-responsabilidade-compartilhada-assoc-05",
+      "topico": "Modelo de responsabilidade compartilhada",
+      "tipo": "Associacao",
+      "enunciado": "De acordo com o modelo de responsabilidade compartilhada da AWS, associe cada tarefa à entidade responsável por executá-la.",
+      "explicacao": "Manter a segurança física dos datacenters é responsabilidade da AWS — nenhum cliente tem acesso aos datacenters, e a AWS gerencia toda a infraestrutura física: energia, refrigeração, controle de acesso e destruição de discos. Aplicar patches no sistema operacional de instâncias EC2 é responsabilidade do cliente — a AWS fornece a instância, mas o sistema operacional que o cliente escolhe instalar é gerenciado pelo cliente. Configurar regras de grupos de segurança e ACLs de rede é responsabilidade do cliente — a AWS fornece os mecanismos, mas o cliente define quais portas abrir e qual tráfego permitir. Gerenciar a infraestrutura de rede e virtualização subjacente é responsabilidade da AWS — isso inclui o hypervisor, a rede SDN e toda a camada que os serviços da AWS rodam sobre ela. O Amazon Inspector e o AWS Trusted Advisor são ferramentas oferecidas pela AWS para auxiliar o cliente, mas não são entidades responsáveis no modelo de responsabilidade compartilhada.",
+      "associacoes": [
+        { "alvo": "Manter a segurança física dos datacenters", "item": "AWS" },
+        { "alvo": "Aplicar patches no sistema operacional de instâncias EC2", "item": "Cliente" },
+        { "alvo": "Configurar regras de grupos de segurança e ACLs de rede", "item": "Cliente" },
+        { "alvo": "Gerenciar a infraestrutura de rede e virtualização subjacente", "item": "AWS" }
+      ],
+      "itensExtras": ["Amazon Inspector"]
+    },
+    {
+      "id": "clfc02-seg-organizations-scp-06",
+      "topico": "AWS Organizations",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa multinacional tem 15 contas AWS distribuídas entre departamentos. A equipe de governança precisa impedir que qualquer conta lance instâncias EC2 na Região eu-west-1, por exigência regulatória de residência de dados. A restrição deve valer para todos os usuários de todas as contas, inclusive os administradores locais. Qual recurso do AWS Organizations permite impor essa restrição?",
+      "explicacao": "As políticas de controle de serviço (SCPs) do AWS Organizations permitem restringir, de maneira centralizada, quais serviços e ações estão disponíveis nas contas da organização — incluindo a restrição por Região. As SCPs afetam todos os usuários e perfis das contas, inclusive administradores locais (mas não o usuário-raiz da conta de gerenciamento). As unidades organizacionais (UOs) são agrupamentos de contas que facilitam a aplicação de políticas, mas não são políticas em si — a restrição seria feita por uma SCP aplicada a uma UO. As políticas do IAM são configuradas dentro de cada conta individual e podem ser alteradas pelos administradores locais, então não garantem a restrição centralizada. A cobrança consolidada é um recurso financeiro do Organizations que unifica faturas, sem relação com restrições de acesso a serviços.",
+      "opcoes": [
+        { "texto": "Políticas de controle de serviço (SCPs).", "correta": true },
+        { "texto": "Unidades organizacionais (UOs).", "correta": false },
+        { "texto": "Políticas do IAM em cada conta.", "correta": false },
+        { "texto": "Cobrança consolidada.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-kms-criptografia-07",
+      "topico": "Criptografia e AWS KMS",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de saúde precisa criptografar dados de pacientes armazenados no Amazon S3 e no Amazon RDS. A equipe quer gerenciar as chaves de criptografia de forma centralizada, com controle granular sobre quem pode usar cada chave e logs de auditoria de todas as operações de criptografia. Qual serviço da AWS atende a esses requisitos?",
+      "explicacao": "O AWS Key Management Service (KMS) permite criar e gerenciar chaves de criptografia de forma centralizada, com controle granular de acesso por políticas de chave e logs de auditoria via CloudTrail. Ele se integra nativamente com S3 e RDS para criptografia em repouso. O AWS CloudHSM fornece módulos de segurança de hardware dedicados para gerenciar chaves, mas é mais complexo, mais caro e voltado para requisitos de conformidade que exigem hardware dedicado — seria excessivo para o cenário. O AWS Secrets Manager armazena e rotaciona segredos como senhas de banco de dados e chaves de API, mas não é um serviço de gerenciamento de chaves de criptografia para dados em repouso. O Amazon Macie usa machine learning para descobrir e proteger dados sensíveis no S3, mas é um serviço de classificação e descoberta, não de gerenciamento de chaves de criptografia.",
+      "opcoes": [
+        { "texto": "AWS Key Management Service (AWS KMS).", "correta": true },
+        { "texto": "AWS CloudHSM.", "correta": false },
+        { "texto": "AWS Secrets Manager.", "correta": false },
+        { "texto": "Amazon Macie.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-waf-regras-08",
+      "topico": "AWS WAF",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de e-commerce detectou que sua aplicação web está recebendo solicitações HTTP maliciosas de endereços IP conhecidos por tentar injeção SQL. A equipe quer bloquear essas solicitações antes que cheguem à aplicação, usando regras personalizáveis que filtrem o tráfego HTTP. Qual serviço da AWS é mais adequado?",
+      "explicacao": "O AWS WAF é um firewall de aplicação web que permite definir regras para filtrar tráfego HTTP/HTTPS. Ele inspeciona cada solicitação usando listas de controle de acesso (ACLs) web e pode bloquear IPs específicos, padrões de injeção SQL e outros ataques de camada 7. O AWS Shield protege contra ataques DDoS volumétricos, mas não inspeciona o conteúdo das solicitações HTTP para detectar injeção SQL. As ACLs de rede operam na camada de rede (camada 3/4), filtrando por IP e porta, mas não analisam o conteúdo HTTP das solicitações — não detectam injeção SQL no corpo ou parâmetros. O Amazon GuardDuty monitora logs e detecta ameaças, mas é um serviço de detecção posterior, não um firewall que bloqueia solicitações em tempo real antes de chegarem à aplicação.",
+      "opcoes": [
+        { "texto": "AWS WAF.", "correta": true },
+        { "texto": "AWS Shield.", "correta": false },
+        { "texto": "ACLs de rede (Network ACLs).", "correta": false },
+        { "texto": "Amazon GuardDuty.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-iam-grupos-09",
+      "topico": "AWS IAM",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa tem 30 desenvolvedores que precisam do mesmo conjunto de permissões para acessar recursos de desenvolvimento na AWS. Quando um desenvolvedor muda de equipe, suas permissões devem mudar junto. Qual recurso do IAM simplifica o gerenciamento dessas permissões?",
+      "explicacao": "Grupos do IAM permitem agrupar usuários e associar políticas ao grupo — todos os membros herdam as permissões automaticamente. Quando um desenvolvedor muda de equipe, basta movê-lo para outro grupo, e as permissões mudam junto. Criar uma política individual para cada um dos 30 desenvolvedores funciona tecnicamente, mas é impraticável: cada mudança de equipe exigiria editar ou substituir a política do usuário individualmente. Perfis (roles) do IAM fornecem acesso temporário e são ideais para serviços ou acesso entre contas, mas não são o mecanismo para gerenciar permissões permanentes de 30 usuários do dia a dia. Tags do IAM permitem organizar e identificar recursos, mas não são um mecanismo de atribuição de permissões — não substituem políticas nem grupos.",
+      "opcoes": [
+        { "texto": "Grupos do IAM.", "correta": true },
+        { "texto": "Políticas individuais para cada usuário.", "correta": false },
+        { "texto": "Perfis (roles) do IAM.", "correta": false },
+        { "texto": "Tags do IAM.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-artifact-conformidade-10",
+      "topico": "Conformidade",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa do setor financeiro precisa demonstrar aos auditores que a AWS atende a normas de segurança específicas, como SOC 2 e ISO 27001. Os auditores solicitaram os relatórios de conformidade da AWS emitidos por auditores terceirizados. Onde a empresa pode obter esses relatórios?",
+      "explicacao": "O AWS Artifact Reports fornece acesso sob demanda a relatórios de conformidade emitidos por auditores terceirizados, como SOC 2, ISO 27001 e PCI DSS. É o local centralizado onde a empresa pode baixar esses documentos para apresentar aos seus auditores. O AWS Artifact Agreements é a seção do Artifact para visualizar e aceitar contratos (como BAA para HIPAA), não para acessar relatórios de auditoria. O AWS Trusted Advisor faz recomendações sobre práticas recomendadas em cinco categorias (custo, performance, segurança, tolerância a falhas e limites), mas não fornece relatórios de conformidade de auditores terceirizados. O Centro de conformidade para o cliente oferece histórias de conformidade e whitepapers, mas não os relatórios oficiais de auditoria emitidos por terceiros.",
+      "opcoes": [
+        { "texto": "AWS Artifact Reports.", "correta": true },
+        { "texto": "AWS Artifact Agreements.", "correta": false },
+        { "texto": "AWS Trusted Advisor.", "correta": false },
+        { "texto": "Centro de conformidade para o cliente.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-inspector-vulnerabilidades-11",
+      "topico": "Serviços de segurança",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de segurança precisa verificar automaticamente suas instâncias EC2 e imagens de contêineres no Amazon ECR em busca de vulnerabilidades de software conhecidas e exposição não intencional da rede. Qual serviço da AWS realiza essas avaliações automaticamente?",
+      "explicacao": "O Amazon Inspector verifica automaticamente instâncias EC2, funções Lambda e imagens de contêiner no ECR em busca de vulnerabilidades de software e exposição de rede, priorizando as descobertas por gravidade. O Amazon GuardDuty monitora logs de VPC, DNS e CloudTrail para detectar ameaças ativas, como mineração de criptomoedas ou comunicação com IPs maliciosos, mas não faz varredura de vulnerabilidades em software instalado. O AWS Config monitora e registra configurações de recursos ao longo do tempo, verificando conformidade com regras, mas não faz varredura de vulnerabilidades de software dentro de instâncias. O AWS Security Hub agrega e prioriza descobertas de vários serviços de segurança (inclusive do Inspector), mas é um agregador, não o serviço que realiza a varredura.",
+      "opcoes": [
+        { "texto": "Amazon Inspector.", "correta": true },
+        { "texto": "Amazon GuardDuty.", "correta": false },
+        { "texto": "AWS Config.", "correta": false },
+        { "texto": "AWS Security Hub.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-guardduty-deteccao-12",
+      "topico": "Serviços de segurança",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de segurança de uma empresa quer monitorar continuamente a atividade da conta AWS e da rede em busca de comportamentos suspeitos, como chamadas de API de localizações geográficas incomuns, instâncias EC2 comunicando com endereços IP de mineração de criptomoedas ou credenciais comprometidas. Qual serviço detecta essas ameaças?",
+      "explicacao": "O Amazon GuardDuty monitora continuamente a atividade da conta analisando logs de VPC Flow, DNS, CloudTrail e outros para detectar ameaças como credenciais comprometidas, comunicação com IPs maliciosos e comportamentos anômalos. O Amazon Inspector faz varredura de vulnerabilidades em software e configurações de rede, mas não monitora atividade da conta em tempo real. O AWS CloudTrail registra chamadas de API, mas é um serviço de log — registra o que aconteceu, não detecta ameaças automaticamente. O AWS Shield protege contra ataques DDoS, mas não analisa comportamentos suspeitos na conta como chamadas de API anômalas ou comunicação com IPs de mineração.",
+      "opcoes": [
+        { "texto": "Amazon GuardDuty.", "correta": true },
+        { "texto": "Amazon Inspector.", "correta": false },
+        { "texto": "AWS CloudTrail.", "correta": false },
+        { "texto": "AWS Shield.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-mfa-13",
+      "topico": "AWS IAM",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa sofreu uma violação de segurança porque a senha de um administrador foi comprometida num ataque de phishing. A equipe de segurança quer adicionar uma segunda camada de proteção que exija, além da senha, uma prova física de posse — como um código temporário gerado por um dispositivo ou aplicativo — para acessar o Console de gerenciamento da AWS. Qual recurso do IAM atende a esse requisito?",
+      "explicacao": "A autenticação multifator (MFA) exige que o usuário forneça, além da senha, um segundo fator de autenticação — normalmente um código temporário gerado por um dispositivo de hardware, aplicativo no celular ou chave de segurança. Mesmo que a senha seja comprometida, o invasor não consegue acessar sem o segundo fator. Políticas de senha do IAM definem requisitos como comprimento mínimo e complexidade, mas não adicionam um segundo fator de autenticação — a senha continua sendo o único fator. Chaves de acesso (access keys) são credenciais programáticas usadas para acesso via CLI ou API, não uma camada de proteção adicional para o console — e, se comprometidas, causam o mesmo problema que a senha. A rotação de credenciais troca senhas e chaves periodicamente, o que reduz a janela de exposição, mas não impede o uso imediato de uma senha comprometida.",
+      "opcoes": [
+        { "texto": "Autenticação multifator (MFA).", "correta": true },
+        { "texto": "Políticas de senha do IAM.", "correta": false },
+        { "texto": "Chaves de acesso (access keys).", "correta": false },
+        { "texto": "Rotação de credenciais.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-iam-roles-14",
+      "topico": "AWS IAM",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma aplicação rodando numa instância EC2 precisa ler objetos de um bucket S3. A equipe não quer armazenar credenciais de acesso permanentes na instância. Qual recurso do IAM permite conceder acesso temporário ao S3 sem credenciais estáticas?",
+      "explicacao": "Um perfil (role) do IAM associado à instância EC2 fornece credenciais temporárias que são rotacionadas automaticamente pelo serviço de metadados da instância — a aplicação obtém acesso ao S3 sem que nenhuma credencial estática seja armazenada. Criar um usuário IAM com chave de acesso exigiria armazenar as credenciais na instância (em variáveis de ambiente ou arquivos de configuração), que é exatamente o que o cenário quer evitar. Uma política do IAM define permissões, mas precisa ser associada a uma identidade (usuário, grupo ou perfil) — sozinha, não resolve o problema de como a instância obtém as credenciais. Um grupo do IAM agrupa usuários para facilitar o gerenciamento de permissões, mas é voltado para pessoas, não para instâncias EC2.",
+      "opcoes": [
+        { "texto": "Perfil (role) do IAM associado à instância EC2.", "correta": true },
+        { "texto": "Usuário do IAM com chave de acesso armazenada na instância.", "correta": false },
+        { "texto": "Política do IAM aplicada diretamente ao bucket S3.", "correta": false },
+        { "texto": "Grupo do IAM com permissão de leitura ao S3.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-servicos-seguranca-assoc-15",
+      "topico": "Serviços de segurança",
+      "tipo": "Associacao",
+      "enunciado": "Uma empresa precisa implementar uma estratégia de segurança abrangente na AWS. Associe cada necessidade de segurança ao serviço mais adequado.",
+      "explicacao": "Bloquear solicitações HTTP com padrões de injeção SQL é uma regra de firewall de aplicação web, do AWS WAF — ele opera na camada 7, inspecionando o conteúdo das requisições. Detectar atividade anômala na conta, como chamadas de API de localizações incomuns, é o Amazon GuardDuty — ele monitora logs de VPC, CloudTrail e DNS em busca de ameaças. Verificar instâncias EC2 em busca de vulnerabilidades de software conhecidas é o Amazon Inspector — ele faz varredura automática e prioriza as descobertas. Gerenciar chaves de criptografia para proteger dados em repouso é o AWS KMS — ele permite criar, gerenciar e auditar o uso de chaves de criptografia. O AWS Config registra configurações, mas não é uma ferramenta de detecção de ameaças nem de filtragem de tráfego. O AWS CloudTrail registra chamadas de API para auditoria, mas não bloqueia tráfego nem detecta ameaças automaticamente.",
+      "associacoes": [
+        { "alvo": "Bloquear solicitações HTTP com padrões de injeção SQL", "item": "AWS WAF" },
+        { "alvo": "Detectar atividade anômala na conta, como chamadas de API de localizações incomuns", "item": "Amazon GuardDuty" },
+        { "alvo": "Verificar instâncias EC2 em busca de vulnerabilidades de software conhecidas", "item": "Amazon Inspector" },
+        { "alvo": "Gerenciar chaves de criptografia para proteger dados em repouso", "item": "AWS KMS" }
+      ],
+      "itensExtras": ["AWS Config", "AWS CloudTrail"]
+    },
+    {
+      "id": "clfc02-seg-acl-vs-sg-16",
+      "topico": "Segurança de rede",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma arquiteta de soluções está explicando a diferença entre ACLs de rede e grupos de segurança para um novo membro da equipe. Ela diz que um dos mecanismos é stateful e o outro é stateless. Qual afirmação está correta?",
+      "explicacao": "Grupos de segurança são stateful: quando uma requisição de entrada é permitida, a resposta é automaticamente permitida, sem precisar de regra de saída explícita. ACLs de rede são stateless: verificam as regras a cada passagem do pacote, tanto na entrada quanto na saída, independentemente. A afirmação inversa está errada — ACLs de rede são stateless e grupos de segurança são stateful, não o contrário. Dizer que ambos são stateful está errado: ACLs de rede verificam pacotes em ambas as direções sempre. Dizer que ambos são stateless está errado: grupos de segurança lembram do estado da conexão e permitem a resposta automaticamente.",
+      "opcoes": [
+        { "texto": "Grupos de segurança são stateful; ACLs de rede são stateless.", "correta": true },
+        { "texto": "ACLs de rede são stateful; grupos de segurança são stateless.", "correta": false },
+        { "texto": "Ambos são stateful.", "correta": false },
+        { "texto": "Ambos são stateless.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-responsabilidade-servicos-17",
+      "topico": "Modelo de responsabilidade compartilhada",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "De acordo com o modelo de responsabilidade compartilhada da AWS, quais das seguintes são responsabilidades do CLIENTE?",
+      "explicacao": "No modelo de responsabilidade compartilhada, o cliente é responsável pela segurança NA nuvem. Configurar regras de firewall (grupos de segurança) é responsabilidade do cliente — a AWS fornece o mecanismo, mas quem define as regras é o cliente. Gerenciar dados e criptografia no lado do cliente é responsabilidade do cliente — a AWS não acessa nem gerencia os dados dos clientes. Aplicar patches no sistema operacional de instâncias EC2 é responsabilidade do cliente — a AWS gerencia o hypervisor, mas o SO dentro da instância é do cliente. Manter a infraestrutura física dos datacenters é responsabilidade da AWS — inclui energia, refrigeração, segurança física e destruição de hardware. Garantir a segurança do hypervisor é responsabilidade da AWS — o hypervisor está na camada de virtualização que a AWS gerencia, abaixo do sistema operacional do cliente.",
+      "opcoes": [
+        { "texto": "Configurar regras de firewall em grupos de segurança.", "correta": true },
+        { "texto": "Gerenciar dados do cliente e criptografia no lado do cliente.", "correta": true },
+        { "texto": "Aplicar patches no sistema operacional de instâncias EC2.", "correta": true },
+        { "texto": "Manter a infraestrutura física dos datacenters.", "correta": false },
+        { "texto": "Garantir a segurança do hypervisor nas instâncias EC2.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-organizations-cobranca-18",
+      "topico": "AWS Organizations",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa opera 8 contas AWS — uma para cada departamento. O diretor financeiro quer uma fatura única que consolide os gastos de todas as contas e permita rastrear os custos por departamento. Além disso, quer que os descontos por volume de uso sejam calculados sobre o consumo agregado de todas as contas. Qual recurso do AWS Organizations atende a esses requisitos?",
+      "explicacao": "A cobrança consolidada (consolidated billing) do AWS Organizations emite uma fatura única para todas as contas da organização, discriminando os encargos por conta, e calcula os descontos por volume sobre o consumo agregado — atendendo aos dois requisitos. O AWS Cost Explorer permite visualizar e analisar custos, mas é uma ferramenta de análise, não um mecanismo de consolidação de faturamento. O AWS Budgets permite criar orçamentos e alertas de gasto, mas não consolida faturas de múltiplas contas. As SCPs controlam quais serviços e ações estão disponíveis nas contas da organização, sem relação com faturamento.",
+      "opcoes": [
+        { "texto": "Cobrança consolidada.", "correta": true },
+        { "texto": "AWS Cost Explorer.", "correta": false },
+        { "texto": "AWS Budgets.", "correta": false },
+        { "texto": "Políticas de controle de serviço (SCPs).", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-criptografia-transito-repouso-19",
+      "topico": "Criptografia",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa precisa proteger dados de clientes tanto quando estão armazenados no Amazon S3 quanto enquanto trafegam entre a aplicação e o bucket pela rede. Qual combinação de mecanismos cobre ambos os cenários?",
+      "explicacao": "Criptografia em repouso protege os dados enquanto armazenados (usando SSE no S3 ou chaves do KMS) e criptografia em trânsito protege os dados durante a transmissão pela rede (usando TLS/HTTPS). A combinação cobre ambos os cenários do enunciado. Usar apenas criptografia em repouso protege os dados armazenados, mas deixa o tráfego de rede vulnerável a interceptação. Usar apenas criptografia em trânsito protege a transmissão, mas os dados armazenados no S3 ficariam sem proteção adicional além do controle de acesso. O versionamento do S3 protege contra exclusão ou substituição acidental de objetos, não contra acesso não autorizado — não é um mecanismo de criptografia.",
+      "opcoes": [
+        { "texto": "Criptografia em repouso (server-side encryption) e criptografia em trânsito (TLS/HTTPS).", "correta": true },
+        { "texto": "Apenas criptografia em repouso (server-side encryption).", "correta": false },
+        { "texto": "Apenas criptografia em trânsito (TLS/HTTPS).", "correta": false },
+        { "texto": "Versionamento do S3 e criptografia em repouso.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-compliance-ordenacao-20",
+      "topico": "Conformidade e governança",
+      "tipo": "Ordenacao",
+      "enunciado": "Uma empresa está preparando sua infraestrutura AWS para uma auditoria de conformidade regulatória. Selecione e ordene os passos que a equipe deve seguir para demonstrar conformidade.",
+      "explicacao": "A sequência começa identificando os requisitos regulatórios e padrões aplicáveis ao setor da empresa — sem saber quais normas cumprir, nenhum controle pode ser avaliado. Em seguida, acessar os relatórios de conformidade da AWS no AWS Artifact confirma que a infraestrutura subjacente atende aos padrões necessários (SOC, ISO, PCI). Por fim, implementar controles adicionais no lado do cliente, como criptografia de dados e configuração de IAM, cobre a parte que o modelo de responsabilidade compartilhada atribui ao cliente. Implementar controles sem saber os requisitos desperdiçaria esforço em controles desnecessários ou deixaria lacunas. Acessar o Artifact antes de conhecer os requisitos deixaria a equipe sem saber quais relatórios precisa. Migrar para outra região pode ser necessário em alguns casos, mas não é um passo padrão de conformidade, e criar uma segunda conta AWS para auditoria é desnecessário — a auditoria examina a conta existente.",
+      "sequencia": [
+        "Identificar os requisitos regulatórios e padrões de conformidade aplicáveis ao setor.",
+        "Acessar os relatórios de conformidade da AWS no AWS Artifact para verificar a aderência da AWS aos padrões.",
+        "Implementar controles de segurança do lado do cliente, como criptografia, IAM e logs de auditoria."
+      ],
+      "itensExtras": [
+        "Migrar todos os workloads para a região mais próxima da sede da empresa.",
+        "Criar uma segunda conta AWS dedicada exclusivamente para auditoria."
+      ]
+    },
+    {
+      "id": "clfc02-seg-shield-standard-21",
+      "topico": "Proteção contra DDoS",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Um arquiteto de soluções está explicando as camadas de proteção contra DDoS na AWS. Ele menciona que existe uma proteção automática, sem custo adicional, que já está habilitada para todos os clientes da AWS. A qual serviço ele se refere?",
+      "explicacao": "O AWS Shield Standard é habilitado automaticamente para todos os clientes da AWS sem custo adicional, protegendo contra os tipos de ataques DDoS mais comuns e frequentes usando técnicas de análise de tráfego em tempo real. O AWS Shield Advanced é um serviço pago que oferece proteção aprimorada, diagnósticos detalhados e acesso à equipe de resposta a DDoS. O AWS WAF é um firewall de aplicação web pago que filtra tráfego HTTP/HTTPS com regras personalizadas. O Amazon GuardDuty é um serviço de detecção de ameaças que analisa logs, não uma proteção contra DDoS.",
+      "opcoes": [
+        { "texto": "AWS Shield Standard.", "correta": true },
+        { "texto": "AWS Shield Advanced.", "correta": false },
+        { "texto": "AWS WAF.", "correta": false },
+        { "texto": "Amazon GuardDuty.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-iam-politica-exemplo-22",
+      "topico": "AWS IAM",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Um administrador precisa conceder a um grupo de desenvolvedores permissão para criar e gerenciar funções Lambda, mas sem acesso a nenhum outro serviço da AWS. Ele cria uma política do IAM com efeito Allow para as ações lambda:* e recurso arn:aws:lambda:*. Onde essa política deve ser associada para funcionar corretamente?",
+      "explicacao": "A política deve ser associada ao grupo do IAM que contém os desenvolvedores — assim todos os membros herdam as permissões de Lambda, e adicionar ou remover um desenvolvedor é trocar o grupo, não editar políticas. Associar ao usuário-raiz é uma violação de práticas recomendadas: o usuário-raiz já tem permissão total e não deve ser usado no dia a dia. Associar a uma instância EC2 daria a instância acesso ao Lambda, não aos desenvolvedores que querem usar o serviço pelo console ou CLI. Associar a uma função Lambda daria à função permissão de invocar outras funções, não aos desenvolvedores de criar e gerenciar funções.",
+      "opcoes": [
+        { "texto": "Ao grupo do IAM que contém os desenvolvedores.", "correta": true },
+        { "texto": "Ao usuário-raiz da conta AWS.", "correta": false },
+        { "texto": "A uma instância EC2 de desenvolvimento.", "correta": false },
+        { "texto": "A uma função Lambda existente.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-direct-connect-vpn-23",
+      "topico": "Segurança de rede",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa precisa de uma conexão privada e dedicada entre seu datacenter on-premises e a VPC na AWS, sem passar pela internet pública. A conexão precisa ter largura de banda consistente e latência previsível para transferências de dados sensíveis de grande volume. Qual serviço da AWS atende a esse requisito?",
+      "explicacao": "O AWS Direct Connect estabelece uma conexão de rede privada e dedicada entre o datacenter da empresa e a AWS, sem usar a internet pública, oferecendo largura de banda consistente e latência previsível. Um gateway privado virtual com VPN cria uma conexão criptografada entre o datacenter e a VPC, mas trafega pela internet pública, sujeita a variações de largura de banda e latência. Um gateway de internet conecta a VPC à internet pública, que é o oposto de uma conexão privada dedicada. O Amazon CloudFront é um CDN para distribuir conteúdo com baixa latência, não uma conexão de rede dedicada entre datacenter e VPC.",
+      "opcoes": [
+        { "texto": "AWS Direct Connect.", "correta": true },
+        { "texto": "Gateway privado virtual com VPN.", "correta": false },
+        { "texto": "Gateway de internet.", "correta": false },
+        { "texto": "Amazon CloudFront.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-vpc-subnets-24",
+      "topico": "Segurança de rede",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa está arquitetando uma aplicação na AWS com um servidor web acessível ao público e um banco de dados que só deve ser acessado pelo servidor web, nunca diretamente pela internet. Qual configuração de VPC implementa essa separação?",
+      "explicacao": "Colocar o servidor web numa sub-rede pública (com rota para o gateway de internet) e o banco de dados numa sub-rede privada (sem rota para o gateway de internet) é a separação correta — o servidor web aceita tráfego externo e se comunica com o banco internamente, enquanto o banco fica inacessível pela internet. Colocar ambos na mesma sub-rede pública expõe o banco de dados à internet, o que o cenário proíbe. Colocar ambos numa sub-rede privada impediria o servidor web de receber tráfego da internet. Usar VPCs separadas funcionaria tecnicamente com VPC peering, mas adiciona complexidade desnecessária — sub-redes públicas e privadas dentro da mesma VPC são o padrão para esse cenário.",
+      "opcoes": [
+        { "texto": "Servidor web em sub-rede pública e banco de dados em sub-rede privada, na mesma VPC.", "correta": true },
+        { "texto": "Ambos na mesma sub-rede pública, com grupo de segurança no banco de dados.", "correta": false },
+        { "texto": "Ambos em sub-rede privada, com NAT gateway para o servidor web.", "correta": false },
+        { "texto": "Servidor web e banco de dados em VPCs separadas, sem peering.", "correta": false }
+      ]
+    }
+  ]
+}

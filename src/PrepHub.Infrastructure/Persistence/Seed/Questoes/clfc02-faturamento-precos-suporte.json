@@ -1,0 +1,165 @@
+{
+  "exameCode": "CLF-C02",
+  "area": "faturamento-precos-suporte",
+  "questoes": [
+    {
+      "id": "clfc02-fat-free-tier-01",
+      "topico": "Nível gratuito da AWS",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma estudante quer experimentar o AWS Lambda sem custo. Ela encontra na documentação que o Lambda oferece um milhão de solicitações gratuitas por mês, sem prazo de expiração. Qual tipo de oferta do nível gratuito da AWS se aplica ao Lambda?",
+      "explicacao": "A oferta 'sempre gratuita' do nível gratuito da AWS aplica-se ao Lambda: um milhão de solicitações e 400.000 GB-segundos de computação por mês estão disponíveis indefinidamente, sem prazo. A oferta de 12 meses gratuitos cobre serviços como EC2 (750 horas/mês de t2.micro) e S3 (5 GB), mas expira 12 meses após a criação da conta. As versões de teste são ofertas pontuais de duração limitada, como 90 dias do Amazon Inspector, não uma oferta permanente. O AWS Budgets ajuda a monitorar gastos, mas não é um tipo de oferta do nível gratuito.",
+      "opcoes": [
+        { "texto": "Sempre gratuito.", "correta": true },
+        { "texto": "12 meses gratuitos.", "correta": false },
+        { "texto": "Versão de teste.", "correta": false },
+        { "texto": "AWS Budgets.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-cost-explorer-02",
+      "topico": "AWS Cost Explorer",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O diretor financeiro de uma empresa quer visualizar os custos da AWS dos últimos seis meses, agrupados por serviço, e identificar quais serviços tiveram o maior crescimento de gastos. Ele quer filtrar por conta, Região e tag para entender os padrões de custo. Qual ferramenta da AWS fornece essa análise?",
+      "explicacao": "O AWS Cost Explorer permite visualizar, interpretar e gerenciar custos ao longo do tempo, com filtros por serviço, conta, Região e tags, e inclui relatórios padrão dos serviços de maior custo. O AWS Budgets permite criar orçamentos e alertas quando o gasto se aproxima do limite, mas não é uma ferramenta de análise histórica e visualização de tendências. O painel de faturamento (Billing Dashboard) mostra o resumo do mês atual e previsão do próximo, mas não oferece a análise detalhada de seis meses com filtros avançados. A Calculadora de Preços da AWS estima custos futuros para novos workloads, mas não analisa gastos passados reais.",
+      "opcoes": [
+        { "texto": "AWS Cost Explorer.", "correta": true },
+        { "texto": "AWS Budgets.", "correta": false },
+        { "texto": "Painel de faturamento (Billing Dashboard).", "correta": false },
+        { "texto": "Calculadora de Preços da AWS.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-budgets-alerta-03",
+      "topico": "AWS Budgets",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma startup definiu um orçamento mensal de $5.000 para sua conta AWS e quer receber uma notificação por e-mail quando o gasto atingir 80% desse valor, para ter tempo de investigar antes de estourar o limite. Qual serviço da AWS permite configurar esse alerta?",
+      "explicacao": "O AWS Budgets permite criar orçamentos personalizados e configurar alertas automáticos (por e-mail ou SNS) quando o gasto atinge um percentual definido do orçamento — como 80% de $5.000. O AWS Cost Explorer permite visualizar e analisar custos, mas não cria alertas automáticos baseados em orçamento. Os alarmes do CloudWatch monitoram métricas de performance (CPU, memória, rede), não gastos financeiros da conta. O AWS Trusted Advisor faz recomendações de otimização, inclusive de custos, mas não cria orçamentos nem alertas de gasto.",
+      "opcoes": [
+        { "texto": "AWS Budgets.", "correta": true },
+        { "texto": "AWS Cost Explorer.", "correta": false },
+        { "texto": "Alarmes do Amazon CloudWatch.", "correta": false },
+        { "texto": "AWS Trusted Advisor.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-planos-suporte-04",
+      "topico": "Planos de suporte AWS",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa com cargas de trabalho em produção na AWS precisa de um plano de suporte que inclua acesso a todas as verificações do AWS Trusted Advisor, suporte para software de terceiros e tempo de resposta de menos de uma hora para sistemas em produção fora do ar. Qual plano de suporte atende a esses requisitos?",
+      "explicacao": "O plano Empresarial (Business) oferece acesso a todas as verificações do Trusted Advisor, suporte limitado para software de terceiros e tempo de resposta de menos de uma hora para sistemas de produção fora do ar. O plano Básico (gratuito) inclui apenas um conjunto limitado de verificações do Trusted Advisor e não oferece suporte técnico. O plano Desenvolvedor oferece orientações sobre práticas recomendadas, mas não inclui todas as verificações do Trusted Advisor nem suporte a software de terceiros. O plano Empresarial de Grande Porte oferece tudo isso e mais (TAM designado, tempo de resposta de 15 minutos), mas é significativamente mais caro do que o necessário para os requisitos descritos.",
+      "opcoes": [
+        { "texto": "Empresarial (Business).", "correta": true },
+        { "texto": "Básico (Basic).", "correta": false },
+        { "texto": "Desenvolvedor (Developer).", "correta": false },
+        { "texto": "Empresarial de Grande Porte (Enterprise).", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-tam-05",
+      "topico": "Planos de suporte AWS",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma grande corporação quer um ponto de contato técnico designado pela AWS que conheça a infraestrutura da empresa, oriente proativamente sobre práticas recomendadas e coordene o acesso a programas e especialistas da AWS. Qual recurso de suporte atende a essa necessidade?",
+      "explicacao": "O Technical Account Manager (TAM) é um ponto de contato designado pela AWS, disponível nos planos Empresarial Rápido e Empresarial de Grande Porte, que conhece a infraestrutura do cliente e orienta proativamente sobre práticas recomendadas. O AWS Trusted Advisor faz recomendações automatizadas sobre a conta, mas não é um ponto de contato humano que conhece o contexto do cliente. O suporte Concierge auxilia com questões de cobrança e conta, não com orientação técnica sobre arquitetura. O AWS Support Center é o portal para abrir tickets de suporte, mas não é um recurso dedicado com conhecimento específico da infraestrutura do cliente.",
+      "opcoes": [
+        { "texto": "Technical Account Manager (TAM).", "correta": true },
+        { "texto": "AWS Trusted Advisor.", "correta": false },
+        { "texto": "Equipe de suporte Concierge.", "correta": false },
+        { "texto": "AWS Support Center.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-calculadora-precos-06",
+      "topico": "Calculadora de preços",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa está planejando migrar para a AWS e quer estimar quanto custaria rodar sua aplicação com diferentes configurações de EC2, S3 e RDS antes de gastar qualquer dinheiro. A equipe quer comparar cenários de custo por Região e tipo de instância. Qual ferramenta da AWS permite criar essas estimativas?",
+      "explicacao": "A Calculadora de Preços da AWS permite criar estimativas detalhadas de custo para diferentes combinações de serviços, configurações e Regiões, sem precisar ter uma conta AWS ou gastar dinheiro. O AWS Cost Explorer analisa custos reais já incorridos na conta, mas não estima cenários futuros para workloads que ainda não existem. O AWS Budgets monitora gastos contra orçamentos definidos, mas não cria estimativas de custo para planejamento de migração. O AWS Trusted Advisor faz recomendações sobre recursos já em uso, mas não estima custos de workloads futuros.",
+      "opcoes": [
+        { "texto": "Calculadora de Preços da AWS.", "correta": true },
+        { "texto": "AWS Cost Explorer.", "correta": false },
+        { "texto": "AWS Budgets.", "correta": false },
+        { "texto": "AWS Trusted Advisor.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-marketplace-07",
+      "topico": "AWS Marketplace",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa precisa de um firewall de próxima geração de um fornecedor terceirizado para sua VPC na AWS. Em vez de negociar licença e instalação diretamente com o fornecedor, a equipe quer encontrar, comprar e implantar a solução diretamente no console da AWS. Onde podem buscar essa solução?",
+      "explicacao": "O AWS Marketplace é um catálogo digital com milhares de ofertas de software de provedores independentes, onde é possível encontrar, comparar, comprar e implantar soluções diretamente na conta AWS. O AWS Service Catalog é um serviço para organizações criarem e gerenciarem seus próprios catálogos de produtos de TI aprovados internamente, não um marketplace público de terceiros. O Amazon Partner Network (APN) é o programa de parceiros da AWS para consultores e fornecedores, mas não é um catálogo onde se compra e implanta software. A Console de gerenciamento da AWS é a interface web para gerenciar serviços da AWS, mas não é um marketplace de software de terceiros.",
+      "opcoes": [
+        { "texto": "AWS Marketplace.", "correta": true },
+        { "texto": "AWS Service Catalog.", "correta": false },
+        { "texto": "Amazon Partner Network (APN).", "correta": false },
+        { "texto": "Console de gerenciamento da AWS.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-ferramentas-custo-assoc-08",
+      "topico": "Ferramentas de gerenciamento de custos",
+      "tipo": "Associacao",
+      "enunciado": "A equipe financeira de uma empresa precisa usar diferentes ferramentas da AWS para diferentes objetivos de gerenciamento de custos. Associe cada objetivo à ferramenta mais adequada.",
+      "explicacao": "Visualizar tendências de custo dos últimos 12 meses agrupadas por serviço é o AWS Cost Explorer, projetado para análise histórica com filtros por serviço, conta, Região e tags. Receber um alerta quando o gasto mensal atingir 90% do orçamento definido é o AWS Budgets, que permite criar orçamentos e notificações automáticas por percentual ou valor absoluto. Estimar o custo mensal de uma nova aplicação antes de implantá-la é a Calculadora de Preços da AWS, que permite criar estimativas detalhadas sem conta AWS. Identificar instâncias EC2 com baixa utilização que poderiam ser reduzidas é o AWS Trusted Advisor, que analisa recursos em uso e recomenda otimizações de custo, entre outras categorias. O AWS Config registra configurações de recursos, mas não é uma ferramenta de gerenciamento de custos. O Amazon CloudWatch monitora métricas de performance, não custos financeiros.",
+      "associacoes": [
+        { "alvo": "Visualizar tendências de custo dos últimos 12 meses agrupadas por serviço", "item": "AWS Cost Explorer" },
+        { "alvo": "Receber um alerta quando o gasto mensal atingir 90% do orçamento definido", "item": "AWS Budgets" },
+        { "alvo": "Estimar o custo mensal de uma nova aplicação antes de implantá-la", "item": "Calculadora de Preços da AWS" },
+        { "alvo": "Identificar instâncias EC2 com baixa utilização que poderiam ser reduzidas", "item": "AWS Trusted Advisor" }
+      ],
+      "itensExtras": ["AWS Config"]
+    },
+    {
+      "id": "clfc02-fat-cobranca-consolidada-09",
+      "topico": "Cobrança consolidada",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "Quais são benefícios da cobrança consolidada do AWS Organizations?",
+      "explicacao": "A cobrança consolidada oferece três benefícios: fatura única para todas as contas, simplificando a contabilidade; descontos por volume compartilhados, calculando o uso agregado de todas as contas para atingir faixas de desconto maiores; e discriminação de custos por conta, permitindo rastrear gastos de cada departamento. A cobrança consolidada não impede que contas individuais ultrapassem limites de gasto — para isso é necessário usar o AWS Budgets com ações automáticas, que é um recurso separado. Desconto automático de 50% não existe — os descontos por volume variam conforme o serviço e o nível de uso agregado, e são incrementais, não um percentual fixo universal.",
+      "opcoes": [
+        { "texto": "Receber uma fatura única para todas as contas da organização.", "correta": true },
+        { "texto": "Compartilhar descontos por volume de uso entre todas as contas.", "correta": true },
+        { "texto": "Rastrear custos discriminados por cada conta membro.", "correta": true },
+        { "texto": "Impedir que contas individuais ultrapassem um limite de gasto.", "correta": false },
+        { "texto": "Receber desconto automático de 50% em todos os serviços da AWS.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-savings-plans-10",
+      "topico": "Modelos de precificação",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa usa diversas famílias de instâncias EC2 e funções Lambda em várias Regiões. Quer obter descontos em computação sem se prender a um tipo de instância específico. Eles preferem um compromisso flexível de gasto por hora, aplicável tanto a EC2 quanto a Lambda. Qual modelo de economia da AWS atende a essa necessidade?",
+      "explicacao": "Compute Savings Plans oferecem até 66% de economia com um compromisso de gasto por hora, aplicável a qualquer família de instância EC2, Fargate e Lambda em qualquer Região — a flexibilidade que o cenário exige. Instâncias reservadas Standard exigem compromisso com um tipo de instância, sistema operacional e Região específicos, sem a flexibilidade entre famílias e serviços que o cenário pede. Instâncias reservadas conversíveis permitem trocar a família de instância, mas não cobrem Lambda e não oferecem a flexibilidade de Região dos Savings Plans. Instâncias Spot oferecem o maior desconto, mas podem ser interrompidas e não funcionam com Lambda.",
+      "opcoes": [
+        { "texto": "Compute Savings Plans.", "correta": true },
+        { "texto": "Instâncias reservadas Standard.", "correta": false },
+        { "texto": "Instâncias reservadas conversíveis.", "correta": false },
+        { "texto": "Instâncias Spot.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-suporte-basico-11",
+      "topico": "Planos de suporte AWS",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "Quais recursos estão incluídos gratuitamente no plano de suporte Básico da AWS?",
+      "explicacao": "O plano Básico (gratuito) inclui acesso a whitepapers, documentação e fóruns da comunidade, que são recursos públicos de conhecimento. Também inclui uma seleção limitada de verificações do Trusted Advisor nas categorias de segurança e limites de serviço. E permite contato com a AWS para questões de cobrança e aumento de limites. O Technical Account Manager (TAM) é exclusivo dos planos Empresarial Rápido e Empresarial de Grande Porte — é um recurso premium de orientação proativa personalizada. Suporte técnico por chat 24/7 com engenheiros começa no plano Empresarial (Business) — o plano Básico não oferece suporte técnico individual, apenas documentação e comunidade.",
+      "opcoes": [
+        { "texto": "Acesso a whitepapers, documentação e comunidades de suporte.", "correta": true },
+        { "texto": "Uma seleção limitada de verificações do AWS Trusted Advisor.", "correta": true },
+        { "texto": "Contato com a AWS para tratar de questões de cobrança.", "correta": true },
+        { "texto": "Acesso a um Technical Account Manager (TAM).", "correta": false },
+        { "texto": "Suporte técnico por chat 24/7 com engenheiros da AWS.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-precificacao-s3-12",
+      "topico": "Modelos de precificação",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa armazena 500 GB de dados no Amazon S3 Standard e faz 100.000 solicitações GET por mês. Ela quer entender melhor os componentes de custo do S3. Qual dos seguintes NÃO é um componente de custo do Amazon S3?",
+      "explicacao": "O Amazon S3 não cobra pela quantidade de buckets criados — os componentes de custo são armazenamento (por GB/mês), solicitações e recuperação de dados (por operação), transferência de dados para fora (por GB transferido) e recursos de gerenciamento como inventário e tags. O armazenamento por GB é o componente base, cobrado pelo volume total armazenado na storage class escolhida. As solicitações GET e PUT são cobradas por número de operações realizadas. A transferência de dados para fora é cobrada por GB transferido para a internet (transferências de entrada e entre serviços na mesma Região são gratuitas).",
+      "opcoes": [
+        { "texto": "Quantidade de buckets criados na conta.", "correta": true },
+        { "texto": "Volume de armazenamento por GB/mês.", "correta": false },
+        { "texto": "Número de solicitações GET e PUT.", "correta": false },
+        { "texto": "Transferência de dados para fora da AWS.", "correta": false }
+      ]
+    }
+  ]
+}

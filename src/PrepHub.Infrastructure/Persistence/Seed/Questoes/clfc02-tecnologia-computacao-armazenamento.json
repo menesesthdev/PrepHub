@@ -1,0 +1,202 @@
+{
+  "exameCode": "CLF-C02",
+  "area": "tecnologia-servicos",
+  "questoes": [
+    {
+      "id": "clfc02-tec-ec2-tipos-instancia-01",
+      "topico": "Amazon EC2",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de análise financeira precisa executar simulações de Monte Carlo que envolvem bilhões de cálculos matemáticos de ponto flutuante. A carga de trabalho é puramente computacional e não requer grandes quantidades de memória nem armazenamento rápido. Qual família de instâncias EC2 é mais adequada?",
+      "explicacao": "Instâncias otimizadas para computação (família C) oferecem a melhor relação de poder de processamento por custo, ideais para cargas que exigem alta capacidade de CPU, como simulações numéricas e processamento em lote. Instâncias de uso geral (família M/T) equilibram CPU, memória e rede, mas não maximizam o poder de computação — pagaria por memória e rede que o cenário não precisa. Instâncias otimizadas para memória (família R/X) priorizam grandes quantidades de RAM para bancos de dados em memória e processamento de dados grandes em RAM, que não é o perfil da carga. Instâncias otimizadas para armazenamento (família I/D) oferecem alto throughput de disco para data warehouses e sistemas OLTP, desnecessário para cálculos puramente em CPU.",
+      "opcoes": [
+        { "texto": "Instâncias otimizadas para computação.", "correta": true },
+        { "texto": "Instâncias de uso geral.", "correta": false },
+        { "texto": "Instâncias otimizadas para memória.", "correta": false },
+        { "texto": "Instâncias otimizadas para armazenamento.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-ec2-precos-reservada-02",
+      "topico": "Modelos de precificação do EC2",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de ERP mantém servidores de aplicação que rodam 24 horas por dia, 7 dias por semana, durante o ano inteiro. A carga é previsível, o tipo de instância não vai mudar e a empresa quer o maior desconto possível num compromisso de três anos. Qual modelo de compra do Amazon EC2 oferece a maior economia para essa carga?",
+      "explicacao": "Instâncias reservadas Standard com pagamento total antecipado e prazo de três anos oferecem o maior desconto (até 72%) para cargas de trabalho previsíveis e constantes que não precisam de flexibilidade para mudar o tipo de instância. Instâncias reservadas conversíveis permitem trocar a família de instância durante o contrato, mas o desconto é menor (até 54%) por causa dessa flexibilidade que o cenário não precisa. Instâncias sob demanda cobram por hora sem compromisso, ideais para cargas imprevisíveis, mas sem nenhum desconto para uso constante. Instâncias Spot oferecem até 90% de desconto usando capacidade ociosa, mas podem ser interrompidas a qualquer momento — inaceitável para um ERP que precisa rodar 24/7.",
+      "opcoes": [
+        { "texto": "Instâncias reservadas Standard com pagamento total antecipado por três anos.", "correta": true },
+        { "texto": "Instâncias reservadas conversíveis por três anos.", "correta": false },
+        { "texto": "Instâncias sob demanda.", "correta": false },
+        { "texto": "Instâncias Spot.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-ec2-spot-03",
+      "topico": "Modelos de precificação do EC2",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de ciência de dados precisa processar um lote de dados históricos. O processamento pode ser interrompido e retomado sem perda de progresso, não tem prazo fixo de entrega e a equipe quer minimizar custos. Qual modelo de compra do Amazon EC2 é mais econômico para essa carga?",
+      "explicacao": "Instâncias Spot oferecem até 90% de desconto aproveitando capacidade ociosa da AWS. São ideais para cargas tolerantes a interrupção, sem prazo fixo — exatamente o perfil descrito. A AWS pode interromper a qualquer momento, mas o processamento pode ser retomado. Instâncias sob demanda não oferecem desconto e não fazem sentido quando a carga é flexível o suficiente para tolerar interrupções. Instâncias reservadas exigem compromisso de um ou três anos e são voltadas para cargas constantes 24/7, não para um lote pontual. Savings Plans oferecem desconto por compromisso de gasto por hora, voltados para uso contínuo previsível — não para um lote que termina e não volta.",
+      "opcoes": [
+        { "texto": "Instâncias Spot.", "correta": true },
+        { "texto": "Instâncias sob demanda.", "correta": false },
+        { "texto": "Instâncias reservadas Standard.", "correta": false },
+        { "texto": "Compute Savings Plans.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-lambda-serverless-04",
+      "topico": "Computação serverless",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma startup quer processar imagens de perfil enviadas pelos usuários: redimensionar para três tamanhos e salvar no S3. O upload acontece de forma imprevisível — pode haver centenas num minuto e zero na hora seguinte. A equipe não quer gerenciar servidores, instalar runtime nem configurar Auto Scaling. Qual serviço da AWS atende a esse requisito?",
+      "explicacao": "O AWS Lambda executa código sem a necessidade de provisionar ou gerenciar servidores, cobra apenas pelo tempo de computação consumido e escala automaticamente com base no número de eventos — ideal para processamento de eventos imprevisíveis sem gerenciamento de infraestrutura. O Amazon EC2 exige que a equipe lance instâncias, instale o runtime de processamento de imagens, configure o Auto Scaling e gerencie patches — exatamente o que o cenário quer evitar. O Amazon ECS gerencia contêineres e, embora o Fargate elimine o gerenciamento de servidores, ainda exige definir tasks, configurar o cluster e gerenciar as imagens de contêiner. O AWS Elastic Beanstalk automatiza o deploy, mas gerencia instâncias EC2 por baixo e é voltado para aplicações web persistentes, não para processamento de eventos pontuais.",
+      "opcoes": [
+        { "texto": "AWS Lambda.", "correta": true },
+        { "texto": "Amazon EC2 com Auto Scaling.", "correta": false },
+        { "texto": "Amazon ECS com Fargate.", "correta": false },
+        { "texto": "AWS Elastic Beanstalk.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-auto-scaling-05",
+      "topico": "Amazon EC2 Auto Scaling",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma loja virtual tem picos de tráfego previsíveis todo fim de semana e queda de demanda durante a semana. A equipe quer que a quantidade de instâncias EC2 aumente automaticamente às sextas à noite e diminua às segundas de manhã, sem intervenção manual. Qual abordagem do Amazon EC2 Auto Scaling atende a esse padrão?",
+      "explicacao": "O scaling preditivo (ou scheduled scaling) programa automaticamente o número de instâncias com base em padrões previsíveis de demanda — agendando mais instâncias para sexta e menos para segunda, sem intervenção. O scaling dinâmico responde a alterações reais na demanda em tempo real (como uso de CPU acima de 70%), o que funcionaria mas com atraso: as instâncias só subiriam depois que a demanda aumentasse, não antes. A capacidade mínima fixa no maior pico garantiria capacidade, mas pagaria por instâncias ociosas durante toda a semana — é o problema que o Auto Scaling resolve. Scaling manual exigiria que alguém alterasse a capacidade toda sexta e segunda — é exatamente a intervenção que o cenário quer eliminar.",
+      "opcoes": [
+        { "texto": "Scaling preditivo, que programa instâncias com base na demanda prevista.", "correta": true },
+        { "texto": "Scaling dinâmico, que responde a métricas em tempo real.", "correta": false },
+        { "texto": "Definir a capacidade mínima fixa no valor do maior pico.", "correta": false },
+        { "texto": "Scaling manual, ajustando a capacidade desejada toda semana.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-elb-06",
+      "topico": "Elastic Load Balancing",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma aplicação web roda em três instâncias EC2 num grupo de Auto Scaling. A equipe quer que o tráfego de entrada seja distribuído automaticamente entre as instâncias, e que se uma instância falhar, o tráfego seja redirecionado para as saudáveis sem que o usuário perceba. Qual serviço da AWS atende a esse requisito?",
+      "explicacao": "O Elastic Load Balancing (ELB) distribui automaticamente o tráfego de entrada entre múltiplas instâncias e faz verificações de saúde, redirecionando o tráfego para instâncias saudáveis quando uma falha. O Amazon Route 53 é um serviço de DNS que pode fazer roteamento baseado em saúde, mas opera na camada de resolução de nomes, não na distribuição de tráfego HTTP entre instâncias dentro de um grupo de Auto Scaling. O Amazon CloudFront é um CDN que distribui conteúdo em pontos de presença globais, mas não substitui um load balancer para distribuir tráfego entre instâncias numa mesma Região. O AWS Global Accelerator melhora a disponibilidade e performance de aplicações globais usando a rede da AWS, mas opera numa camada diferente do balanceamento entre instâncias de um único grupo.",
+      "opcoes": [
+        { "texto": "Elastic Load Balancing (ELB).", "correta": true },
+        { "texto": "Amazon Route 53.", "correta": false },
+        { "texto": "Amazon CloudFront.", "correta": false },
+        { "texto": "AWS Global Accelerator.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-s3-classes-07",
+      "topico": "Amazon S3",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de mídia armazena fotos de eventos no Amazon S3. As fotos são muito acessadas nos primeiros 30 dias após o evento, mas depois quase nunca são visualizadas novamente. A equipe quer reduzir custos movendo automaticamente as fotos antigas para uma storage class mais barata. Qual recurso do S3 automatiza essa transição?",
+      "explicacao": "O S3 Intelligent-Tiering monitora os padrões de acesso de cada objeto e move automaticamente os que não são acessados por 30 dias para o nível de acesso pouco frequente, com custo menor — e os traz de volta se forem acessados novamente, sem taxa de recuperação. Lifecycle policies (regras de ciclo de vida) do S3 também movem objetos entre classes, mas baseadas em tempo fixo, não em padrão de acesso real — funcionam, mas sem a inteligência de monitorar quando cada objeto é realmente acessado. O S3 Glacier é uma storage class para arquivamento de longo prazo com recuperação de horas, mas mover diretamente para o Glacier pode ser excessivo para fotos que ainda podem ser acessadas eventualmente. O S3 Replication copia objetos entre buckets ou Regiões para redundância ou conformidade, mas não move entre storage classes.",
+      "opcoes": [
+        { "texto": "S3 Intelligent-Tiering.", "correta": true },
+        { "texto": "Lifecycle policies do S3 para mover para S3 Standard-IA após 30 dias.", "correta": false },
+        { "texto": "S3 Glacier Flexible Retrieval.", "correta": false },
+        { "texto": "S3 Cross-Region Replication.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-ebs-vs-s3-08",
+      "topico": "Armazenamento",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de edição de vídeo precisa de armazenamento de alta performance para um projeto de pós-produção. Os editores fazem alterações frequentes em partes específicas de arquivos de vídeo grandes (dezenas de gigabytes cada), e a latência de leitura/escrita deve ser baixa e consistente. Qual serviço de armazenamento da AWS é mais adequado?",
+      "explicacao": "O Amazon EBS fornece volumes de armazenamento em bloco com latência baixa e consistente, ideal para operações de leitura/escrita aleatória em partes específicas de arquivos grandes — que é como a edição de vídeo funciona. O Amazon S3 armazena objetos inteiros; qualquer alteração exige reescrever o objeto completo, tornando inviável a edição de partes de um vídeo de dezenas de gigabytes. O Amazon EFS é um sistema de arquivos compartilhado e elástico, mas tem latência maior que o EBS para operações intensivas de I/O aleatório como edição de vídeo. O Amazon S3 Glacier é para arquivamento de dados acessados raramente, com recuperação de horas — o oposto de edição ativa de vídeo.",
+      "opcoes": [
+        { "texto": "Amazon EBS.", "correta": true },
+        { "texto": "Amazon S3.", "correta": false },
+        { "texto": "Amazon EFS.", "correta": false },
+        { "texto": "Amazon S3 Glacier.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-efs-compartilhado-09",
+      "topico": "Armazenamento",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma aplicação web roda em múltiplas instâncias EC2 em diferentes Zonas de Disponibilidade. Todas as instâncias precisam ler e escrever no mesmo sistema de arquivos compartilhado simultaneamente, e o armazenamento deve crescer automaticamente conforme mais dados são adicionados. Qual serviço da AWS atende a esse requisito?",
+      "explicacao": "O Amazon EFS é um sistema de arquivos elástico que pode ser montado por múltiplas instâncias EC2 em diferentes Zonas de Disponibilidade simultaneamente, e dimensiona automaticamente conforme dados são adicionados ou removidos. O Amazon EBS fornece volumes de bloco de alta performance, mas um volume EBS só pode ser anexado a uma instância EC2 por vez (exceto em multi-attach para io1/io2, que tem limitações), e precisa estar na mesma Zona de Disponibilidade. O Amazon S3 armazena objetos e pode ser acessado por múltiplas instâncias, mas não é um sistema de arquivos que pode ser montado como um diretório — as aplicações precisariam ser reescritas para usar a API do S3. O armazenamento de instância (instance store) é temporário, não pode ser compartilhado entre instâncias e é perdido quando a instância é encerrada.",
+      "opcoes": [
+        { "texto": "Amazon EFS.", "correta": true },
+        { "texto": "Amazon EBS.", "correta": false },
+        { "texto": "Amazon S3.", "correta": false },
+        { "texto": "Armazenamento de instância (instance store).", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-containers-ecs-eks-10",
+      "topico": "Contêineres",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa já usa Docker para empacotar suas aplicações e quer orquestrá-las na AWS. A equipe tem familiaridade com o ecossistema Docker e quer uma solução gerenciada pela AWS que permita iniciar e interromper contêineres usando APIs compatíveis com Docker. Qual serviço é mais adequado?",
+      "explicacao": "O Amazon ECS é um serviço de orquestração de contêineres altamente gerenciado, compatível com Docker, que permite iniciar e interromper contêineres usando APIs Docker. O Amazon EKS é o serviço gerenciado de Kubernetes na AWS — ideal para equipes que já usam Kubernetes, mas adiciona complexidade desnecessária para uma equipe que quer simplesmente orquestrar contêineres Docker. O AWS Fargate é um mecanismo de computação serverless para contêineres que funciona COM ECS ou EKS, eliminando a necessidade de gerenciar servidores, mas não é um serviço de orquestração por si só. O AWS Lambda é serverless para funções orientadas a eventos, não para orquestrar contêineres Docker existentes.",
+      "opcoes": [
+        { "texto": "Amazon ECS.", "correta": true },
+        { "texto": "Amazon EKS.", "correta": false },
+        { "texto": "AWS Fargate.", "correta": false },
+        { "texto": "AWS Lambda.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-rds-aurora-11",
+      "topico": "Banco de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa precisa de um banco de dados relacional de alta disponibilidade na AWS que seja compatível com MySQL e replique automaticamente os dados em três Zonas de Disponibilidade, com backup contínuo para o S3. A carga exige performance até cinco vezes superior a um MySQL convencional. Qual serviço atende a esses requisitos?",
+      "explicacao": "O Amazon Aurora é um banco de dados relacional compatível com MySQL (e PostgreSQL), até cinco vezes mais rápido que MySQL convencional, que replica automaticamente seis cópias dos dados em três Zonas de Disponibilidade e faz backup contínuo para o S3. O Amazon RDS com MySQL oferece MySQL gerenciado com backup automático e Multi-AZ, mas não atinge a performance cinco vezes superior nem a replicação de seis cópias que o Aurora oferece. O Amazon DynamoDB é um banco de dados NoSQL, não relacional — não é compatível com MySQL e não atende ao requisito de banco relacional. O Amazon Redshift é um data warehouse para análise de grandes volumes de dados, não um banco de dados transacional relacional.",
+      "opcoes": [
+        { "texto": "Amazon Aurora.", "correta": true },
+        { "texto": "Amazon RDS com MySQL.", "correta": false },
+        { "texto": "Amazon DynamoDB.", "correta": false },
+        { "texto": "Amazon Redshift.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-dynamodb-nosql-12",
+      "topico": "Banco de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de jogos online precisa de um banco de dados que ofereça latência de milissegundos em qualquer escala, sem a necessidade de provisionar servidores, aplicar patches ou gerenciar infraestrutura. O esquema dos dados varia entre tipos de itens do jogo. Qual serviço da AWS atende a esses requisitos?",
+      "explicacao": "O Amazon DynamoDB é um banco de dados NoSQL serverless que oferece desempenho de milissegundos em qualquer escala, com auto scaling automático e sem necessidade de provisionar servidores, aplicar patches ou gerenciar infraestrutura. Seu modelo de dados flexível (chave-valor e documento) acomoda esquemas variáveis. O Amazon RDS é um banco de dados relacional gerenciado que automatiza algumas tarefas, mas ainda exige escolher o tipo de instância e não é verdadeiramente serverless. O Amazon Aurora Serverless oferece escalabilidade automática para cargas variáveis de bancos relacionais, mas é relacional — exige esquema definido, o que não combina com dados de esquema variável. O Amazon ElastiCache é um serviço de cache em memória (Redis ou Memcached), não um banco de dados persistente para armazenar itens do jogo.",
+      "opcoes": [
+        { "texto": "Amazon DynamoDB.", "correta": true },
+        { "texto": "Amazon RDS.", "correta": false },
+        { "texto": "Amazon Aurora Serverless.", "correta": false },
+        { "texto": "Amazon ElastiCache.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-armazenamento-assoc-13",
+      "topico": "Armazenamento",
+      "tipo": "Associacao",
+      "enunciado": "Uma empresa precisa escolher o serviço de armazenamento correto da AWS para cada caso de uso. Associe cada necessidade ao serviço mais adequado.",
+      "explicacao": "Hospedar um site estático com imagens e vídeos acessíveis pela internet é o caso clássico do Amazon S3, que armazena objetos com URLs próprias e serve conteúdo web diretamente. Fornecer armazenamento em bloco de alta performance para um banco de dados PostgreSQL numa instância EC2 é o Amazon EBS, que oferece volumes de bloco anexados a instâncias com latência baixa para operações de I/O intensivas. Compartilhar arquivos de configuração entre dez instâncias EC2 em diferentes Zonas de Disponibilidade é o Amazon EFS, que é um sistema de arquivos compartilhado e elástico montável por múltiplas instâncias simultaneamente. Arquivar registros de auditoria que só precisam ser acessados uma vez por ano, com recuperação em até 12 horas, é o S3 Glacier Flexible Retrieval, a storage class de menor custo para dados raramente acessados com recuperação de horas. O Amazon Redshift é um data warehouse, não um serviço de armazenamento de arquivos. O AWS Storage Gateway é um serviço híbrido que conecta armazenamento on-premises ao S3, não um destino final de armazenamento.",
+      "associacoes": [
+        { "alvo": "Hospedar um site estático com imagens e vídeos acessíveis pela internet", "item": "Amazon S3" },
+        { "alvo": "Fornecer armazenamento em bloco de alta performance para um banco PostgreSQL numa EC2", "item": "Amazon EBS" },
+        { "alvo": "Compartilhar arquivos entre dez instâncias EC2 em diferentes Zonas de Disponibilidade", "item": "Amazon EFS" },
+        { "alvo": "Arquivar registros de auditoria acessados uma vez por ano, com recuperação em até 12 horas", "item": "S3 Glacier Flexible Retrieval" }
+      ],
+      "itensExtras": ["Amazon Redshift", "AWS Storage Gateway"]
+    },
+    {
+      "id": "clfc02-tec-fargate-serverless-14",
+      "topico": "Contêineres",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe quer executar contêineres Docker na AWS sem precisar provisionar, gerenciar ou escalar instâncias EC2 para o cluster. Eles querem focar apenas no código e nas definições de contêiner. Qual serviço complementar permite isso?",
+      "explicacao": "O AWS Fargate é um mecanismo de computação serverless para contêineres que funciona com ECS e EKS, eliminando a necessidade de provisionar ou gerenciar servidores — a equipe define o contêiner e o Fargate cuida da infraestrutura. O Amazon EC2 com ECS exigiria que a equipe gerenciasse as instâncias do cluster, incluindo tipo de instância, patches e escalabilidade. O AWS Lambda é serverless para funções orientadas a eventos, não para contêineres Docker completos com seus próprios binários e dependências. O Amazon Lightsail oferece servidores virtuais simplificados, mas não é uma plataforma de orquestração de contêineres serverless.",
+      "opcoes": [
+        { "texto": "AWS Fargate.", "correta": true },
+        { "texto": "Amazon EC2 com Amazon ECS.", "correta": false },
+        { "texto": "AWS Lambda.", "correta": false },
+        { "texto": "Amazon Lightsail.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-redshift-warehouse-15",
+      "topico": "Banco de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma rede varejista acumula terabytes de dados de vendas de centenas de lojas e precisa de um serviço para executar consultas analíticas complexas sobre todo o histórico, gerando relatórios de tendências e sazonalidade. A base de dados é grande demais para um banco relacional transacional. Qual serviço da AWS é projetado para esse cenário?",
+      "explicacao": "O Amazon Redshift é um serviço de data warehouse projetado para análises de Big Data, capaz de armazenar e consultar petabytes de dados estruturados e semiestruturados. Ele é otimizado para consultas analíticas complexas sobre grandes volumes de dados históricos. O Amazon RDS é um banco de dados relacional gerenciado para cargas transacionais (OLTP), não para análises de data warehouse sobre terabytes de histórico. O Amazon DynamoDB é um banco NoSQL otimizado para transações de baixa latência, não para consultas analíticas complexas sobre grandes conjuntos de dados. O Amazon S3 armazena dados como objetos e pode servir como data lake, mas não é um mecanismo de consulta — para consultar dados no S3 seria necessário outro serviço como Athena.",
+      "opcoes": [
+        { "texto": "Amazon Redshift.", "correta": true },
+        { "texto": "Amazon RDS.", "correta": false },
+        { "texto": "Amazon DynamoDB.", "correta": false },
+        { "texto": "Amazon S3.", "correta": false }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,269 @@
+{
+  "exameCode": "CLF-C02",
+  "area": "conceitos-de-nuvem",
+  "questoes": [
+    {
+      "id": "clfc02-conceitos-modelos-implantacao-01",
+      "topico": "Modelos de implantação em nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa farmacêutica mantém sistemas regulatórios que, por exigência legal, devem permanecer em servidores próprios no datacenter corporativo. Ao mesmo tempo, a equipe de marketing quer lançar um portal de conteúdo acessível ao público usando serviços da AWS. A empresa decide conectar o datacenter à AWS por VPN para que os dois ambientes compartilhem dados internos com segurança. Qual modelo de implantação em nuvem descreve essa arquitetura?",
+      "explicacao": "A implantação híbrida combina infraestrutura on-premises com recursos na nuvem, conectados entre si — que é exatamente o que o cenário descreve: sistemas regulatórios ficam no datacenter próprio e o portal público vai para a AWS, com VPN ligando os dois. A implantação totalmente na nuvem exigiria migrar todos os workloads, inclusive os regulatórios, para a AWS, o que a exigência legal impede. A implantação on-premises (nuvem privada) usaria virtualização no próprio datacenter sem envolver a AWS, então o portal público não estaria na nuvem. Multi-cloud significa usar dois ou mais provedores de nuvem pública simultaneamente (por exemplo, AWS e Azure), o que não é o caso — o datacenter próprio não é um provedor de nuvem.",
+      "opcoes": [
+        { "texto": "Implantação híbrida.", "correta": true },
+        { "texto": "Implantação totalmente na nuvem.", "correta": false },
+        { "texto": "Implantação on-premises (nuvem privada).", "correta": false },
+        { "texto": "Implantação multi-cloud.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-beneficios-escala-02",
+      "topico": "Benefícios da computação em nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma startup planeja lançar um aplicativo móvel e não sabe se terá mil ou um milhão de usuários no primeiro mês. O CTO quer evitar tanto o desperdício de pagar por capacidade ociosa quanto o risco de ficar sem recursos se a demanda explodir. Qual benefício da computação em nuvem da AWS resolve diretamente essa incerteza?",
+      "explicacao": "Parar de tentar adivinhar a capacidade é o benefício que aborda exatamente este dilema: na nuvem, a empresa provisiona o que precisa agora e escala para cima ou para baixo conforme a demanda real, sem precisar prever o futuro. Trocar despesa antecipada por variável elimina o investimento inicial em hardware, mas não resolve a incerteza sobre quanto provisionar — a empresa ainda poderia reservar demais ou de menos. Ter alcance global em minutos permite implantar em várias regiões rapidamente, o que ajuda na latência e disponibilidade geográfica, mas não na questão de dimensionamento da capacidade. Beneficiar-se de economias de escala significa que o custo unitário cai porque a AWS distribui os investimentos entre milhões de clientes, mas isso é uma vantagem de preço, não uma solução para a incerteza de demanda.",
+      "opcoes": [
+        { "texto": "Parar de tentar adivinhar a capacidade.", "correta": true },
+        { "texto": "Trocar despesa antecipada por despesa variável.", "correta": false },
+        { "texto": "Ter alcance global em minutos.", "correta": false },
+        { "texto": "Beneficiar-se de enormes economias de escala.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-well-architected-seguranca-03",
+      "topico": "AWS Well-Architected Framework",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de arquitetura revisou uma aplicação e recomendou criptografar todos os dados em repouso e em trânsito, aplicar o princípio do menor privilégio nas políticas de IAM e habilitar logs de auditoria em todos os serviços usados. Essas recomendações estão alinhadas com qual pilar do AWS Well-Architected Framework?",
+      "explicacao": "O pilar de segurança trata da proteção de informações, sistemas e ativos por meio de avaliações de risco e estratégias de mitigação — criptografia, menor privilégio e auditoria são práticas centrais desse pilar. O pilar de excelência operacional foca em executar e monitorar sistemas para entregar valor e melhorar processos continuamente, como automatizar deploys e documentar runbooks. O pilar de confiabilidade trata da capacidade do sistema de se recuperar de falhas e atender à demanda, como executar em múltiplas Zonas de Disponibilidade. O pilar de eficiência de desempenho trata de usar recursos computacionais de forma eficiente para atender requisitos do sistema, como escolher o tipo de instância correto para a carga de trabalho.",
+      "opcoes": [
+        { "texto": "Segurança.", "correta": true },
+        { "texto": "Excelência operacional.", "correta": false },
+        { "texto": "Confiabilidade.", "correta": false },
+        { "texto": "Eficiência de desempenho.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-well-architected-pilares-04",
+      "topico": "AWS Well-Architected Framework",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "Uma empresa contratou uma consultoria para avaliar sua arquitetura na AWS usando o AWS Well-Architected Framework. Quais dos seguintes são pilares desse framework?",
+      "explicacao": "Os seis pilares do AWS Well-Architected Framework são: excelência operacional, segurança, confiabilidade, eficiência de desempenho, otimização de custos e sustentabilidade. Otimização de custos trata de entregar valor comercial com o menor custo. Sustentabilidade foca em reduzir o impacto ambiental maximizando a utilização de recursos. Confiabilidade trata da capacidade de se recuperar de falhas e atender à demanda. Escalabilidade é uma característica desejável de arquiteturas em nuvem, mas não é um pilar do Well-Architected Framework — ela é abordada dentro dos pilares de confiabilidade e eficiência de desempenho. Velocidade de desenvolvimento é um benefício geral da nuvem, mas não é um pilar do framework.",
+      "opcoes": [
+        { "texto": "Otimização de custos", "correta": true },
+        { "texto": "Sustentabilidade", "correta": true },
+        { "texto": "Confiabilidade", "correta": true },
+        { "texto": "Escalabilidade", "correta": false },
+        { "texto": "Velocidade de desenvolvimento", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-migracao-6rs-05",
+      "topico": "Estratégias de migração",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de varejo opera um sistema de inventário legado em servidores físicos no datacenter. A diretoria definiu prazo de três meses para migrar para a AWS e não quer alterar nenhum código da aplicação. A equipe planeja recriar as mesmas máquinas virtuais na AWS com a mesma configuração. Qual estratégia de migração dos 6 R's está sendo aplicada?",
+      "explicacao": "Redefinir hospedagem (lift-and-shift) é a movimentação de aplicações sem alterações — recria o mesmo ambiente na nuvem, que é exatamente o que a equipe planeja. A redefinição de plataforma (lift-tinker-and-shift) envolveria otimizações pontuais sem alterar a arquitetura central, como migrar o banco de dados para o Amazon RDS em vez de manter um banco autogerenciado numa EC2 — o que já seria uma alteração que o cenário descarta. A refatoração reescreveria parte ou toda a aplicação para usar recursos nativos da nuvem, como microsserviços ou serverless, e exigiria mudanças significativas de código. A recompra substituiria o sistema atual por um produto SaaS equivalente, como trocar o sistema de inventário próprio por uma solução de mercado.",
+      "opcoes": [
+        { "texto": "Redefinir hospedagem (rehosting).", "correta": true },
+        { "texto": "Redefinir plataforma (replatforming).", "correta": false },
+        { "texto": "Refatorar (re-architecting).", "correta": false },
+        { "texto": "Recomprar (repurchasing).", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-despesa-variavel-06",
+      "topico": "Benefícios da computação em nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de consultoria mantém um datacenter com servidores comprados há três anos. Os servidores ficam subutilizados na maior parte do tempo, mas foram pagos integralmente na aquisição. A empresa está avaliando migrar para a AWS. Qual vantagem da computação em nuvem elimina diretamente o problema descrito?",
+      "explicacao": "Trocar despesa antecipada por despesa variável significa que, na nuvem, a empresa paga apenas pelo consumo real em vez de investir antecipadamente em hardware que pode ficar ocioso — que é exatamente o problema dos servidores subutilizados comprados há três anos. Aumentar a velocidade e a agilidade se refere à capacidade de provisionar recursos em minutos em vez de semanas, mas não aborda o problema financeiro de hardware já comprado e subutilizado. Parar de gastar com manutenção de datacenter elimina custos operacionais como energia, refrigeração e segurança física, mas o problema central aqui é o investimento inicial, não a operação. Beneficiar-se de economias de escala reduz o custo unitário, mas não resolve o fato de já ter pago por capacidade que não usa.",
+      "opcoes": [
+        { "texto": "Trocar despesa antecipada por despesa variável.", "correta": true },
+        { "texto": "Aumentar a velocidade e a agilidade.", "correta": false },
+        { "texto": "Parar de gastar dinheiro com execução e manutenção de data centers.", "correta": false },
+        { "texto": "Beneficiar-se de enormes economias de escala.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-caf-perspectivas-07",
+      "topico": "AWS Cloud Adoption Framework",
+      "tipo": "Associacao",
+      "enunciado": "Uma empresa está planejando sua migração para a AWS usando o AWS Cloud Adoption Framework (AWS CAF). Associe cada necessidade identificada à perspectiva do CAF que a aborda.",
+      "explicacao": "A perspectiva de negócio garante que a TI esteja alinhada às necessidades comerciais e que os investimentos em TI estejam vinculados aos resultados de negócio — o que inclui definir como o retorno sobre investimento será medido. A perspectiva de pessoas desenvolve estratégias de gerenciamento de mudanças, incluindo treinamento e capacitação — preencher lacunas de habilidades em nuvem na equipe é o foco. A perspectiva de operações ativa, executa, usa e recupera cargas de trabalho de acordo com os níveis de serviço combinados — definir runbooks e procedimentos operacionais é central nessa perspectiva. A perspectiva de plataforma inclui princípios e padrões para implementar soluções na nuvem e migrar workloads — a arquitetura de referência para os novos ambientes é seu produto. O AWS Well-Architected Framework é uma ferramenta de avaliação de arquitetura, não uma perspectiva do CAF, e o modelo de responsabilidade compartilhada é um conceito de segurança, não de governança organizacional.",
+      "associacoes": [
+        { "alvo": "Medir o retorno sobre investimento da migração para a nuvem", "item": "Perspectiva de negócio" },
+        { "alvo": "Preencher lacunas de habilidades em nuvem na equipe de TI", "item": "Perspectiva de pessoas" },
+        { "alvo": "Definir runbooks e procedimentos operacionais para os ambientes na AWS", "item": "Perspectiva de operações" },
+        { "alvo": "Criar a arquitetura de referência para os novos ambientes na nuvem", "item": "Perspectiva de plataforma" }
+      ],
+      "itensExtras": ["Perspectiva de automação", "Perspectiva de custo"]
+    },
+    {
+      "id": "clfc02-conceitos-cloudformation-iac-08",
+      "topico": "Provisionamento de recursos",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de DevOps precisa replicar um ambiente completo — incluindo VPCs, sub-redes, instâncias EC2 e buckets S3 — de forma idêntica em três Regiões diferentes da AWS. Eles querem que qualquer alteração futura na arquitetura seja aplicada de forma consistente em todas as Regiões, sem passos manuais no console. Qual serviço da AWS atende a esse requisito?",
+      "explicacao": "O AWS CloudFormation permite definir toda a infraestrutura em templates JSON ou YAML e implantá-los em qualquer Região de forma idêntica e repetível — qualquer alteração no template é aplicada consistentemente em todos os ambientes. O AWS Elastic Beanstalk automatiza o deploy de aplicações web (capacidade, balanceamento, Auto Scaling), mas não é uma ferramenta de infraestrutura como código para replicar VPCs, sub-redes e toda a topologia entre Regiões. O Console de gerenciamento da AWS permite criar recursos manualmente, o que introduz inconsistências e não escala para três Regiões. O AWS CLI permite criar recursos por scripts, mas sem a gestão de estado e rollback que o CloudFormation oferece, cada mudança exigiria scripts de atualização e verificação manuais.",
+      "opcoes": [
+        { "texto": "AWS CloudFormation.", "correta": true },
+        { "texto": "AWS Elastic Beanstalk.", "correta": false },
+        { "texto": "Console de gerenciamento da AWS.", "correta": false },
+        { "texto": "AWS Command Line Interface (CLI).", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-well-architected-confiabilidade-09",
+      "topico": "AWS Well-Architected Framework",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa distribui sua aplicação em apenas uma Zona de Disponibilidade. Após uma falha de hardware nessa zona, a aplicação ficou fora do ar por quatro horas. A equipe de arquitetura recomenda distribuir os recursos em pelo menos duas Zonas de Disponibilidade e configurar recuperação automática. Qual pilar do AWS Well-Architected Framework essa recomendação fortalece?",
+      "explicacao": "O pilar de confiabilidade trata da capacidade de um sistema se recuperar de interrupções, adquirir recursos dinamicamente e reduzir problemas causados por falhas de infraestrutura — distribuir em múltiplas Zonas de Disponibilidade e automatizar a recuperação são práticas centrais desse pilar. O pilar de eficiência de desempenho foca em usar recursos computacionais de forma eficiente, como escolher o tipo de instância correto ou usar caching, não em tolerância a falhas. O pilar de excelência operacional trata de melhorar processos e procedimentos operacionais, como documentar runbooks e automatizar deploys. O pilar de sustentabilidade trata de reduzir o impacto ambiental maximizando a utilização de recursos, não da resiliência do sistema.",
+      "opcoes": [
+        { "texto": "Confiabilidade.", "correta": true },
+        { "texto": "Eficiência de desempenho.", "correta": false },
+        { "texto": "Excelência operacional.", "correta": false },
+        { "texto": "Sustentabilidade.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-pay-as-you-go-10",
+      "topico": "Economia da nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de mídia precisa processar e transcodificar vídeos enviados por usuários. O volume varia drasticamente: nos dias de grande evento esportivo, o tráfego é dez vezes maior que no dia normal. No modelo on-premises atual, a empresa provisiona para o pico e os servidores ficam ociosos 90% do tempo. Qual princípio de precificação da AWS aborda diretamente esse desperdício?",
+      "explicacao": "Pagar somente pelo que usar (pay-as-you-go) significa que a empresa paga pelo consumo real de recursos, sem capacidade ociosa — nos dias normais paga por pouco, nos picos de evento paga por mais, e nos dias sem processamento não paga nada. Pagar menos ao fazer reserva oferece descontos para compromisso de uso contínuo, o que faria sentido para uma base constante de carga, mas não resolve o desperdício da variação drástica entre pico e ociosidade. Pagar menos com descontos por volume reduz o custo unitário à medida que o consumo total aumenta, mas é um benefício de escala, não uma solução para a variação de demanda. A definição de preço em camadas é o mecanismo pelo qual o desconto por volume funciona e, assim como ele, não endereça a variação de carga.",
+      "opcoes": [
+        { "texto": "Pague somente pelo que usar.", "correta": true },
+        { "texto": "Pague menos ao fazer reserva.", "correta": false },
+        { "texto": "Pague menos com descontos baseados em volume.", "correta": false },
+        { "texto": "Definição de preço em camadas.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-migracao-refatorar-11",
+      "topico": "Estratégias de migração",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de e-commerce opera um monólito em servidores dedicados. A equipe decidiu dividir a aplicação em microsserviços usando AWS Lambda e Amazon API Gateway, redesenhando a arquitetura para aproveitar recursos nativos da nuvem. Qual estratégia de migração dos 6 R's descreve essa abordagem?",
+      "explicacao": "Refatorar (re-architecting) envolve reimaginar como a aplicação é arquitetada usando recursos nativos da nuvem — dividir um monólito em microsserviços serverless é o exemplo clássico. Redefinir plataforma faria otimizações pontuais sem alterar a arquitetura central, como mover o banco para RDS, mas sem redesenhar a aplicação inteira. Redefinir hospedagem moveria o monólito como está para a nuvem, sem nenhuma alteração de código ou arquitetura. Reter manteria a aplicação no ambiente atual, sem migrar para a nuvem.",
+      "opcoes": [
+        { "texto": "Refatorar (re-architecting).", "correta": true },
+        { "texto": "Redefinir plataforma (replatforming).", "correta": false },
+        { "texto": "Redefinir hospedagem (rehosting).", "correta": false },
+        { "texto": "Reter (retain).", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-elasticidade-12",
+      "topico": "Benefícios da computação em nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma rede de restaurantes lançou uma promoção relâmpago que quadruplicou o tráfego no aplicativo de pedidos em minutos. O Amazon EC2 Auto Scaling adicionou instâncias automaticamente para atender à demanda e, quando a promoção acabou, removeu as instâncias extras. Qual conceito de nuvem esse comportamento demonstra?",
+      "explicacao": "Elasticidade é a capacidade de escalar recursos automaticamente para cima quando a demanda aumenta e para baixo quando diminui — exatamente o que o Auto Scaling fez ao adicionar e remover instâncias conforme o tráfego. Escalabilidade é a capacidade de um sistema lidar com crescimento de carga, mas pode ser manual e não implica necessariamente a redução automática quando a demanda cai. Alta disponibilidade é a capacidade do sistema continuar operando mesmo quando há falhas, como distribuir em múltiplas Zonas de Disponibilidade. Tolerância a falhas é a capacidade de continuar funcionando corretamente mesmo quando componentes individuais falham, como replicação de dados.",
+      "opcoes": [
+        { "texto": "Elasticidade.", "correta": true },
+        { "texto": "Escalabilidade.", "correta": false },
+        { "texto": "Alta disponibilidade.", "correta": false },
+        { "texto": "Tolerância a falhas.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-interacao-aws-13",
+      "topico": "Formas de interagir com a AWS",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "Uma equipe precisa interagir com os serviços da AWS para criar e gerenciar recursos. Quais das seguintes opções são formas válidas de interagir com a AWS?",
+      "explicacao": "A AWS oferece três formas principais de interação: o Console de gerenciamento (interface web), o AWS CLI (linha de comando para scripts e automação) e os SDKs (bibliotecas para linguagens como Python, Java, JavaScript). Todas utilizam as mesmas APIs subjacentes da AWS. Conexão SSH direta aos datacenters da AWS não existe — nenhum cliente tem acesso físico ou de rede direto à infraestrutura dos datacenters da AWS, que são gerenciados exclusivamente pela AWS. API REST por telefone com o suporte não é uma forma de interagir com os serviços — o suporte da AWS atende dúvidas e incidentes, mas não processa chamadas de API por telefone.",
+      "opcoes": [
+        { "texto": "Console de gerenciamento da AWS", "correta": true },
+        { "texto": "AWS Command Line Interface (CLI)", "correta": true },
+        { "texto": "Kits de desenvolvimento de software (SDKs) da AWS", "correta": true },
+        { "texto": "Conexão SSH direta aos datacenters da AWS", "correta": false },
+        { "texto": "API REST por telefone com o suporte da AWS", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-elastic-beanstalk-14",
+      "topico": "Provisionamento de recursos",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma desenvolvedora quer implantar uma aplicação web em Python na AWS sem precisar configurar manualmente instâncias EC2, balanceador de carga ou Auto Scaling. Ela quer apenas enviar o código e deixar que a AWS provisione e gerencie a infraestrutura necessária. Qual serviço atende a esse requisito?",
+      "explicacao": "O AWS Elastic Beanstalk permite enviar código e configurações para que ele provisione automaticamente a infraestrutura — instâncias EC2, balanceador de carga, Auto Scaling e monitoramento de saúde. A desenvolvedora não precisa configurar nada disso manualmente. O AWS CloudFormation define infraestrutura como código em templates, mas exige que a desenvolvedora descreva cada recurso (VPC, sub-redes, instâncias, balanceador) no template — não é \"enviar o código e pronto\". O Amazon EC2 diretamente exige que a desenvolvedora lance instâncias, configure segurança, instale o runtime, configure o balanceador e o Auto Scaling manualmente. O AWS Lambda executa funções sem servidor, mas não é um serviço de deploy de aplicações web tradicionais com servidor — exigiria reescrever a aplicação como funções orientadas a eventos.",
+      "opcoes": [
+        { "texto": "AWS Elastic Beanstalk.", "correta": true },
+        { "texto": "AWS CloudFormation.", "correta": false },
+        { "texto": "Amazon EC2.", "correta": false },
+        { "texto": "AWS Lambda.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-migracao-recompra-15",
+      "topico": "Estratégias de migração",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O departamento de RH de uma empresa usa um sistema de folha de pagamento instalado em um servidor local. A licença do software está vencendo e a empresa decide substituí-lo por um sistema SaaS disponível no AWS Marketplace em vez de renovar a licença e migrar o servidor. Qual estratégia de migração dos 6 R's está sendo aplicada?",
+      "explicacao": "Recompra (repurchasing) envolve substituir o software atual por um produto diferente, tipicamente um modelo SaaS — que é exatamente o que a empresa faz ao trocar o sistema local por um SaaS do Marketplace. Redefinir hospedagem moveria o servidor com o sistema atual para a nuvem sem alterar nada, mantendo a mesma licença. Redefinir plataforma faria otimizações durante a migração, como trocar o banco de dados, mas continuaria usando o mesmo software. Retirar removeria o sistema completamente, sem substituí-lo por outro — aqui a empresa ainda precisa da folha de pagamento.",
+      "opcoes": [
+        { "texto": "Recomprar (repurchasing).", "correta": true },
+        { "texto": "Redefinir hospedagem (rehosting).", "correta": false },
+        { "texto": "Redefinir plataforma (replatforming).", "correta": false },
+        { "texto": "Retirar (retire).", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-alcance-global-16",
+      "topico": "Benefícios da computação em nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma fintech brasileira conquistou um grande cliente na Ásia e precisa que a aplicação tenha baixa latência para os usuários naquela região. No modelo on-premises atual, colocar servidores na Ásia levaria meses para negociar com provedores locais, comprar hardware e configurar tudo. Na AWS, a equipe estima que pode lançar na Região de Tóquio em um dia. Qual vantagem da nuvem esse cenário demonstra?",
+      "explicacao": "Ter alcance global em minutos é a vantagem que permite implantar aplicações em diversas Regiões do mundo rapidamente, sem negociar com provedores locais ou comprar hardware — que é exatamente o ganho do cenário. Aumentar a velocidade e a agilidade é um benefício mais geral sobre a rapidez de provisionar recursos, mas o foco do cenário é especificamente a capacidade de operar em outra região geográfica, não apenas a velocidade de criar recursos. Parar de adivinhar capacidade aborda o dimensionamento correto de recursos, não a expansão geográfica. Trocar despesa antecipada por variável aborda o modelo financeiro de pagamento, não a velocidade de expansão internacional.",
+      "opcoes": [
+        { "texto": "Ter alcance global em minutos.", "correta": true },
+        { "texto": "Aumentar a velocidade e a agilidade.", "correta": false },
+        { "texto": "Parar de tentar adivinhar a capacidade.", "correta": false },
+        { "texto": "Trocar despesa antecipada por despesa variável.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-well-architected-custo-17",
+      "topico": "AWS Well-Architected Framework",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de engenharia está revisando os gastos de sua aplicação na AWS. Eles identificaram instâncias EC2 que rodam 24/7 mas são usadas apenas em horário comercial, e buckets S3 com objetos que não são acessados há mais de um ano. A equipe planeja usar instâncias reservadas para as máquinas de horário fixo e mover objetos antigos para o S3 Glacier. Qual pilar do AWS Well-Architected Framework guia essas decisões?",
+      "explicacao": "O pilar de otimização de custos trata de executar sistemas entregando valor comercial com o menor custo — instâncias reservadas para carga previsível e storage class mais barata para dados raramente acessados são práticas centrais desse pilar. O pilar de eficiência de desempenho trata de usar recursos computacionais de forma eficiente para cumprir requisitos técnicos, não financeiros. O pilar de sustentabilidade trata de reduzir impacto ambiental, o que pode coincidir com otimização de custos mas tem motivação diferente. O pilar de excelência operacional trata de melhorar processos operacionais, como automatizar mudanças e responder a eventos.",
+      "opcoes": [
+        { "texto": "Otimização de custos.", "correta": true },
+        { "texto": "Eficiência de desempenho.", "correta": false },
+        { "texto": "Sustentabilidade.", "correta": false },
+        { "texto": "Excelência operacional.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-snow-family-ordenacao-18",
+      "topico": "AWS Snow Family",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de geologia realiza pesquisas em locais remotos onde a conectividade com a internet é limitada a poucos megabits por segundo. Eles geram cerca de 50 TB de dados sísmicos por expedição e precisam transferi-los para a AWS para processamento. Pela conexão disponível, o upload levaria mais de dois meses. Qual serviço da AWS permite transferir esses dados de forma mais eficiente?",
+      "explicacao": "O AWS Snowball é um dispositivo físico que permite transferir dezenas de terabytes de dados para a AWS por transporte terrestre, contornando as limitações de largura de banda — é a solução para cenários em que o upload pela internet levaria semanas ou meses. O AWS Direct Connect estabelece uma conexão de rede dedicada entre o datacenter da empresa e a AWS, mas exige infraestrutura no local de partida e não resolve o problema de localidade remota sem fibra. O Amazon S3 Transfer Acceleration usa a rede de pontos de presença do CloudFront para acelerar uploads, mas depende da largura de banda disponível, que no cenário é insuficiente. O AWS DataSync automatiza e acelera transferências entre armazenamento local e a AWS, mas também depende da largura de banda da rede, que é o gargalo do cenário.",
+      "opcoes": [
+        { "texto": "AWS Snowball.", "correta": true },
+        { "texto": "AWS Direct Connect.", "correta": false },
+        { "texto": "Amazon S3 Transfer Acceleration.", "correta": false },
+        { "texto": "AWS DataSync.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-shared-responsibility-intro-19",
+      "topico": "Modelo de responsabilidade compartilhada",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa migrou seus servidores web para instâncias Amazon EC2. Após a migração, o gerente de TI quer entender claramente de quem é a responsabilidade de aplicar patches no sistema operacional dessas instâncias. De acordo com o modelo de responsabilidade compartilhada da AWS, quem é responsável por essa tarefa?",
+      "explicacao": "No modelo de responsabilidade compartilhada, o sistema operacional instalado nas instâncias EC2 é responsabilidade do cliente — isso inclui atualizações, patches de segurança e configurações. A AWS é responsável pela segurança DA nuvem: hardware físico, rede, hypervisor e infraestrutura que sustenta os serviços, mas não pelo que roda dentro das instâncias do cliente. A responsabilidade não é compartilhada igualmente — cada parte tem responsabilidades distintas e bem definidas. Uma equipe terceirizada pode ajudar, mas a responsabilidade perante a AWS continua sendo do cliente.",
+      "opcoes": [
+        { "texto": "O cliente.", "correta": true },
+        { "texto": "A AWS.", "correta": false },
+        { "texto": "A responsabilidade é compartilhada igualmente entre o cliente e a AWS.", "correta": false },
+        { "texto": "Uma equipe terceirizada contratada pela AWS.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-sustentabilidade-20",
+      "topico": "AWS Well-Architected Framework",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa está revisando sua arquitetura na AWS com o objetivo de reduzir a pegada de carbono de suas operações. A equipe planeja maximizar a utilização das instâncias, usar serviços gerenciados sempre que possível e escolher Regiões com fonte de energia mais limpa. Qual pilar do AWS Well-Architected Framework orienta essas iniciativas?",
+      "explicacao": "O pilar de sustentabilidade trata de melhorar continuamente o impacto ambiental, maximizando a utilização de recursos e minimizando o consumo de energia — maximizar utilização, usar serviços gerenciados e escolher Regiões com energia limpa são práticas recomendadas desse pilar. O pilar de otimização de custos pode se sobrepor (instância mais utilizada custa menos por unidade de trabalho), mas a motivação aqui é ambiental, não financeira. O pilar de eficiência de desempenho trata de usar recursos de forma eficiente para cumprir requisitos técnicos, como latência e throughput. O pilar de excelência operacional trata de procedimentos operacionais e melhoria contínua de processos.",
+      "opcoes": [
+        { "texto": "Sustentabilidade.", "correta": true },
+        { "texto": "Otimização de custos.", "correta": false },
+        { "texto": "Eficiência de desempenho.", "correta": false },
+        { "texto": "Excelência operacional.", "correta": false }
+      ]
+    }
+  ]
+}

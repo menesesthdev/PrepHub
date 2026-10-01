@@ -1,0 +1,175 @@
+{
+  "exameCode": "CLF-C02",
+  "area": "tecnologia-servicos",
+  "questoes": [
+    {
+      "id": "clfc02-tec-vpc-conceito-01",
+      "topico": "Amazon VPC",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa quer isolar seus recursos na AWS em uma rede virtual própria, onde ela defina o intervalo de endereços IP, sub-redes, tabelas de roteamento e gateways. Qual serviço da AWS permite criar essa rede isolada?",
+      "explicacao": "O Amazon VPC permite criar uma rede virtual isolada na nuvem AWS, onde o cliente define sub-redes, tabelas de roteamento, gateways e regras de segurança de rede. O AWS Direct Connect estabelece uma conexão de rede dedicada entre o datacenter on-premises e a AWS, mas não cria a rede virtual em si. O Amazon Route 53 é um serviço de DNS que resolve nomes de domínio em endereços IP, mas não cria redes virtuais. O AWS CloudFormation permite provisionar infraestrutura como código, inclusive VPCs, mas é a ferramenta de provisionamento, não o recurso de rede em si.",
+      "opcoes": [
+        { "texto": "Amazon VPC.", "correta": true },
+        { "texto": "AWS Direct Connect.", "correta": false },
+        { "texto": "Amazon Route 53.", "correta": false },
+        { "texto": "AWS CloudFormation.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-cloudfront-cdn-02",
+      "topico": "Amazon CloudFront",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa brasileira tem um site hospedado na Região de São Paulo, mas recebe muitos acessos de usuários na Europa e na Ásia, que relatam lentidão. A equipe quer reduzir a latência armazenando cópias em cache do conteúdo estático em pontos mais próximos dos usuários globais, sem mover os servidores de origem. Qual serviço da AWS resolve esse problema?",
+      "explicacao": "O Amazon CloudFront é um CDN que armazena cópias em cache de conteúdo estático em pontos de presença (edge locations) ao redor do mundo, reduzindo a latência para usuários distantes do servidor de origem. O Amazon Route 53 é um serviço de DNS que roteia tráfego, mas não armazena cache de conteúdo em pontos de presença. O Elastic Load Balancing distribui tráfego entre instâncias dentro de uma Região, mas não tem pontos de presença globais. O AWS Global Accelerator melhora a performance roteando tráfego pela rede da AWS até a Região mais próxima, mas não armazena cache de conteúdo em edge locations como o CloudFront.",
+      "opcoes": [
+        { "texto": "Amazon CloudFront.", "correta": true },
+        { "texto": "Amazon Route 53.", "correta": false },
+        { "texto": "Elastic Load Balancing.", "correta": false },
+        { "texto": "AWS Global Accelerator.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-route53-dns-03",
+      "topico": "Amazon Route 53",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa registrou o domínio 'meuapp.com.br' e quer que ele aponte para sua aplicação rodando em instâncias EC2 atrás de um Application Load Balancer na AWS. A equipe precisa de um serviço de DNS que faça a resolução de nomes e ofereça health checks para rotear tráfego apenas para endpoints saudáveis. Qual serviço da AWS atende a esses requisitos?",
+      "explicacao": "O Amazon Route 53 é o serviço de DNS da AWS que faz a resolução de nomes de domínio para endereços IP, permite gerenciar registros DNS e oferece health checks para roteamento baseado em saúde dos endpoints. O Amazon CloudFront é um CDN para distribuir conteúdo com baixa latência, não um serviço de DNS. O AWS Certificate Manager gerencia certificados SSL/TLS para HTTPS, mas não faz resolução de nomes. O Elastic Load Balancing distribui tráfego entre instâncias, mas não é um serviço de DNS — ele recebe o tráfego que o Route 53 encaminha.",
+      "opcoes": [
+        { "texto": "Amazon Route 53.", "correta": true },
+        { "texto": "Amazon CloudFront.", "correta": false },
+        { "texto": "AWS Certificate Manager.", "correta": false },
+        { "texto": "Elastic Load Balancing.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-cloudwatch-alarme-04",
+      "topico": "Amazon CloudWatch",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de operações quer ser notificada automaticamente quando a utilização de CPU de suas instâncias EC2 ultrapassar 80% por mais de cinco minutos consecutivos, para que possa investigar antes que os usuários percebam lentidão. Qual recurso da AWS permite criar essa notificação automática?",
+      "explicacao": "Os alarmes do Amazon CloudWatch permitem definir limites em métricas (como utilização de CPU) e executar ações automaticamente quando o limite é ultrapassado — como enviar uma notificação via SNS ou acionar o Auto Scaling. O AWS CloudTrail registra chamadas de API para auditoria, mas não monitora métricas de performance de instâncias EC2. O AWS Trusted Advisor faz recomendações de práticas recomendadas em cinco categorias, mas não cria alertas baseados em métricas de performance em tempo real. O Amazon SNS é o serviço de notificação que entrega as mensagens dos alarmes, mas não é ele quem monitora a métrica e decide quando disparar — é o CloudWatch.",
+      "opcoes": [
+        { "texto": "Alarmes do Amazon CloudWatch.", "correta": true },
+        { "texto": "AWS CloudTrail.", "correta": false },
+        { "texto": "AWS Trusted Advisor.", "correta": false },
+        { "texto": "Amazon SNS.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-cloudtrail-auditoria-05",
+      "topico": "AWS CloudTrail",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O gerente de segurança de uma empresa precisa descobrir quem apagou um bucket S3 na conta de produção ontem às 15h. Ele quer consultar o histórico de chamadas de API com detalhes como a identidade do chamador, o horário e o endereço IP de origem. Qual serviço da AWS registra essas informações?",
+      "explicacao": "O AWS CloudTrail registra todas as chamadas de API feitas na conta AWS, incluindo a identidade de quem fez a chamada, o horário, o IP de origem e qual ação foi executada — é a trilha de auditoria da conta. O Amazon CloudWatch monitora métricas de performance e permite criar alarmes, mas não registra o histórico de chamadas de API com identidade do chamador. O AWS Config registra configurações de recursos ao longo do tempo e permite verificar conformidade, mas não é um registro de chamadas de API. O Amazon GuardDuty detecta ameaças analisando logs (incluindo os do CloudTrail), mas é um serviço de detecção, não o registro de auditoria em si.",
+      "opcoes": [
+        { "texto": "AWS CloudTrail.", "correta": true },
+        { "texto": "Amazon CloudWatch.", "correta": false },
+        { "texto": "AWS Config.", "correta": false },
+        { "texto": "Amazon GuardDuty.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-trusted-advisor-06",
+      "topico": "AWS Trusted Advisor",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa quer uma avaliação automatizada de sua conta AWS que identifique oportunidades de economia, verifique limites de serviço prestes a serem atingidos e aponte configurações de segurança que não seguem as práticas recomendadas. Qual serviço da AWS fornece essas recomendações?",
+      "explicacao": "O AWS Trusted Advisor inspeciona o ambiente AWS e faz recomendações em tempo real nas cinco categorias: otimização de custos, performance, segurança, tolerância a falhas e limites de serviço. O Amazon Inspector verifica vulnerabilidades de software em instâncias EC2 e imagens de contêiner, mas não avalia custos, performance ou limites de serviço. O AWS Config registra configurações de recursos e verifica conformidade com regras, mas não faz recomendações de otimização de custos ou performance. O Amazon CloudWatch monitora métricas e permite criar alarmes, mas não faz recomendações de práticas recomendadas.",
+      "opcoes": [
+        { "texto": "AWS Trusted Advisor.", "correta": true },
+        { "texto": "Amazon Inspector.", "correta": false },
+        { "texto": "AWS Config.", "correta": false },
+        { "texto": "Amazon CloudWatch.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-regioes-azs-07",
+      "topico": "Infraestrutura global",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa está escolhendo em qual Região da AWS implantar sua aplicação. A regulamentação do setor exige que todos os dados de clientes permaneçam no Brasil. Qual fator deve ser o principal critério na escolha da Região?",
+      "explicacao": "Conformidade com regulamentações de dados é o fator mais importante quando há exigência legal de residência de dados — a empresa deve escolher a Região de São Paulo (sa-east-1) para garantir que os dados permaneçam no Brasil. Proximidade dos clientes finais é importante para latência, mas secundário quando existe uma exigência legal sobre localização dos dados. Disponibilidade de serviços é relevante quando um serviço específico não está disponível em todas as Regiões, mas a maioria dos serviços principais está disponível em São Paulo. Preço varia entre Regiões, mas não pode sobrepor uma exigência regulatória — a empresa não pode escolher uma Região mais barata se isso viola a lei.",
+      "opcoes": [
+        { "texto": "Conformidade com regulamentações de dados.", "correta": true },
+        { "texto": "Proximidade dos clientes finais.", "correta": false },
+        { "texto": "Disponibilidade de serviços específicos.", "correta": false },
+        { "texto": "Preço dos serviços na Região.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-sns-sqs-08",
+      "topico": "Mensageria",
+      "tipo": "Associacao",
+      "enunciado": "Uma empresa precisa implementar comunicação entre componentes de suas aplicações na AWS. Associe cada necessidade ao serviço de mensageria mais adequado.",
+      "explicacao": "Enviar uma notificação para milhares de assinantes simultaneamente (padrão pub/sub) é o Amazon SNS — ele publica mensagens em tópicos e entrega a todos os assinantes inscritos, que podem ser endpoints HTTP, e-mails, funções Lambda ou filas SQS. Desacoplar dois microsserviços com uma fila que armazena mensagens até que o consumidor esteja pronto é o Amazon SQS — ele garante que nenhuma mensagem é perdida se o consumidor estiver indisponível. Executar código automaticamente em resposta a eventos de upload no S3 é o AWS Lambda — ele é acionado por eventos de diversos serviços AWS, incluindo o S3. O Amazon Kinesis Data Streams é projetado para ingestão de dados em tempo real em grande volume, não para notificação pub/sub ou filas de mensagens entre microsserviços. O Amazon MQ é um serviço gerenciado de broker de mensagens para migração de aplicações que já usam protocolos como AMQP ou MQTT, não o serviço nativo da AWS para novos designs.",
+      "associacoes": [
+        { "alvo": "Enviar uma notificação para milhares de assinantes simultaneamente", "item": "Amazon SNS" },
+        { "alvo": "Desacoplar dois microsserviços com uma fila que armazena mensagens até o consumidor estar pronto", "item": "Amazon SQS" },
+        { "alvo": "Executar código automaticamente em resposta a eventos de upload no S3", "item": "AWS Lambda" }
+      ],
+      "itensExtras": ["Amazon Kinesis Data Streams", "Amazon MQ"]
+    },
+    {
+      "id": "clfc02-tec-servicos-ia-09",
+      "topico": "Serviços de IA/ML",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de atendimento ao cliente quer transcrever automaticamente as gravações das chamadas telefônicas em texto pesquisável, para que os supervisores possam buscar palavras-chave e analisar tendências. Qual serviço gerenciado de IA da AWS realiza essa conversão de fala em texto?",
+      "explicacao": "O Amazon Transcribe converte fala em texto automaticamente, suportando vários idiomas, identificação de locutor e vocabulário personalizado — ideal para transcrever chamadas de atendimento. O Amazon Polly faz o inverso: converte texto em fala (síntese de voz), não fala em texto. O Amazon Comprehend analisa texto para extrair sentimento, entidades e frases-chave, mas precisa receber texto como entrada — não converte áudio. O Amazon Lex cria chatbots de voz e texto, mas é voltado para interação conversacional, não para transcrever gravações existentes.",
+      "opcoes": [
+        { "texto": "Amazon Transcribe.", "correta": true },
+        { "texto": "Amazon Polly.", "correta": false },
+        { "texto": "Amazon Comprehend.", "correta": false },
+        { "texto": "Amazon Lex.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-dms-migracao-10",
+      "topico": "Migração de banco de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa precisa migrar um banco de dados Oracle on-premises para o Amazon Aurora PostgreSQL na AWS. O banco de origem deve permanecer operacional durante toda a migração para não interromper o serviço. Qual serviço da AWS permite migrar os dados mantendo o banco de origem ativo?",
+      "explicacao": "O AWS Database Migration Service (DMS) permite migrar bancos de dados de forma contínua, mantendo o banco de origem operacional durante todo o processo. Ele suporta migração entre tipos diferentes de banco (heterogênea), como Oracle para Aurora PostgreSQL. O AWS Schema Conversion Tool (SCT) converte o esquema do banco de origem para o destino, mas não migra os dados — ele complementa o DMS, não o substitui. O AWS DataSync automatiza transferências de dados entre armazenamento local e AWS, mas é voltado para sistemas de arquivos (NFS, SMB, S3), não para migração de bancos de dados. O Amazon S3 pode ser usado como staging intermediário, mas não é um serviço de migração de banco de dados que mantém a origem operacional.",
+      "opcoes": [
+        { "texto": "AWS Database Migration Service (DMS).", "correta": true },
+        { "texto": "AWS Schema Conversion Tool (SCT).", "correta": false },
+        { "texto": "AWS DataSync.", "correta": false },
+        { "texto": "Amazon S3.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-az-regiao-11",
+      "topico": "Infraestrutura global",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de arquitetura quer garantir que sua aplicação continue funcionando mesmo se um datacenter inteiro falhar dentro de uma Região da AWS. Eles decidem distribuir as instâncias EC2 em locais fisicamente separados dentro da mesma Região, próximos o suficiente para baixa latência. Como a AWS chama esses locais?",
+      "explicacao": "Zonas de Disponibilidade são datacenters ou grupos de datacenters fisicamente separados dentro de uma Região, próximos o suficiente para oferecer baixa latência entre si e longe o suficiente para reduzir o risco de uma mesma falha atingir múltiplas zonas. Regiões são áreas geográficas separadas (como São Paulo e Norte da Virgínia), não locais dentro de uma mesma Região. Locais de borda (edge locations) são pontos de presença usados pelo CloudFront para cache de conteúdo, não para rodar instâncias EC2. Grupos de Auto Scaling são configurações que definem quantas instâncias manter, não locais físicos de infraestrutura.",
+      "opcoes": [
+        { "texto": "Zonas de Disponibilidade.", "correta": true },
+        { "texto": "Regiões.", "correta": false },
+        { "texto": "Locais de borda (edge locations).", "correta": false },
+        { "texto": "Grupos de Auto Scaling.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-sagemaker-ml-12",
+      "topico": "Serviços de IA/ML",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de ciência de dados quer construir, treinar e implantar seus próprios modelos de machine learning na AWS, usando um ambiente integrado com notebooks, experimentos e deploys gerenciados. Qual serviço da AWS oferece essa plataforma completa de ML?",
+      "explicacao": "O Amazon SageMaker AI é uma plataforma completa e gerenciada para construir, treinar e implantar modelos de ML, com IDE integrado, notebooks, rastreamento de experimentos e deploys automatizados. O Amazon Bedrock é um serviço para trabalhar com modelos de base (foundation models) pré-treinados e criar aplicações de IA generativa, não para construir e treinar modelos próprios desde o início. O Amazon Comprehend é um serviço de NLP pré-treinado para extrair insights de texto, mas não é uma plataforma para construir modelos ML customizados. O AWS Lambda executa funções serverless em resposta a eventos, mas não é uma plataforma de desenvolvimento de ML com notebooks e treinamento.",
+      "opcoes": [
+        { "texto": "Amazon SageMaker AI.", "correta": true },
+        { "texto": "Amazon Bedrock.", "correta": false },
+        { "texto": "Amazon Comprehend.", "correta": false },
+        { "texto": "AWS Lambda.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-bedrock-ia-gen-13",
+      "topico": "IA generativa",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa quer criar um assistente virtual que responda perguntas dos clientes sobre seus produtos, usando um modelo de linguagem grande (LLM) de provedores como Anthropic ou Meta, sem precisar gerenciar a infraestrutura de ML. Qual serviço da AWS permite acessar esses modelos de base por uma API unificada?",
+      "explicacao": "O Amazon Bedrock é um serviço totalmente gerenciado que fornece acesso a modelos de base (FMs) de provedores como Anthropic (Claude), Meta (Llama) e Amazon por uma API unificada, sem gerenciar infraestrutura de ML. O Amazon SageMaker AI é uma plataforma para construir e treinar modelos próprios, com mais controle mas também mais responsabilidade sobre a infraestrutura de treinamento. O Amazon Lex cria chatbots conversacionais, mas usa NLU e ASR próprios, não modelos de linguagem grande de terceiros via API. O Amazon Q é um assistente de IA da AWS para produtividade empresarial e desenvolvimento, mas não é a plataforma para acessar modelos de base de múltiplos provedores.",
+      "opcoes": [
+        { "texto": "Amazon Bedrock.", "correta": true },
+        { "texto": "Amazon SageMaker AI.", "correta": false },
+        { "texto": "Amazon Lex.", "correta": false },
+        { "texto": "Amazon Q.", "correta": false }
+      ]
+    }
+  ]
+}

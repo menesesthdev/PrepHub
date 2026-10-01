@@ -126,6 +126,25 @@ public static class PrepHubDbSeeder
                 new AreaDeExame("seguranca-conformidade-governanca", "Segurança, conformidade e governança para soluções de IA", 14m)
             ],
             Publicado: true,
+            Fornecedor: FornecedorDoExame.Aws),
+
+        // Segundo exame AWS. Exam guide oficial CLF-C02: 65 questões em 90 minutos — mesma
+        // estrutura do AIF-C01. Os pesos vêm do exam guide v3.0 do CLF-C02, publicado pela AWS.
+        // A AWS não publica faixas como a Microsoft — são percentuais exatos.
+        new DefinicaoDeExame(
+            Code: "CLF-C02",
+            Name: "AWS Certified Cloud Practitioner",
+            TimeLimitMinutes: 90,
+            PassingScorePercent: 70,
+            TotalQuestions: 65,
+            Areas:
+            [
+                new AreaDeExame("conceitos-de-nuvem", "Conceitos de nuvem", 24m),
+                new AreaDeExame("seguranca-conformidade", "Segurança e conformidade", 30m),
+                new AreaDeExame("tecnologia-servicos", "Tecnologia e serviços de nuvem", 34m),
+                new AreaDeExame("faturamento-precos-suporte", "Faturamento, preços e suporte", 12m)
+            ],
+            Publicado: false,
             Fornecedor: FornecedorDoExame.Aws)
     ];
 
