@@ -1,0 +1,446 @@
+{
+  "exameCode": "CLF-C02",
+  "area": "seguranca-conformidade",
+  "questoes": [
+    {
+      "id": "clfc02-seg-config-rastreamento-25",
+      "topico": "AWS Config",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de governança precisa manter um inventário contínuo de todos os recursos AWS da conta e registrar cada alteração de configuração — por exemplo, quando um grupo de segurança é modificado ou quando uma instância EC2 muda de tipo. A equipe quer consultar o histórico de configurações e verificar se os recursos estão em conformidade com políticas internas. Qual serviço da AWS fornece esse rastreamento contínuo?",
+      "explicacao": "O AWS Config registra continuamente as configurações dos recursos da conta e mantém um histórico de alterações, permitindo consultar o estado de qualquer recurso em qualquer ponto no tempo e avaliar conformidade com regras definidas. O AWS CloudTrail registra chamadas de API (quem fez o quê e quando), mas não mantém um inventário de configurações dos recursos nem avalia conformidade — ele diz 'alguém alterou o grupo de segurança', não 'o grupo de segurança está em conformidade'. O AWS Systems Manager oferece gerenciamento operacional (patches, automação, inventário de software), mas não rastreia configurações de recursos AWS como grupos de segurança ou VPCs. O Amazon Inspector verifica vulnerabilidades de software e exposição de rede em instâncias, mas não rastreia alterações de configuração de recursos como S3 ou IAM.",
+      "opcoes": [
+        { "texto": "AWS Config.", "correta": true },
+        { "texto": "AWS CloudTrail.", "correta": false },
+        { "texto": "AWS Systems Manager.", "correta": false },
+        { "texto": "Amazon Inspector.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-config-regras-26",
+      "topico": "AWS Config",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A política de segurança de uma empresa exige que todos os buckets S3 tenham versionamento habilitado e que todos os volumes EBS estejam criptografados. A equipe quer que a AWS avalie automaticamente se os recursos novos e existentes cumprem essas regras e gere um relatório de conformidade contínuo. Qual recurso permite definir essas regras e avaliar conformidade automaticamente?",
+      "explicacao": "As regras do AWS Config (Config Rules) avaliam automaticamente se os recursos estão em conformidade com políticas definidas — existem regras gerenciadas prontas para cenários como 's3-bucket-versioning-enabled' e 'encrypted-volumes', além de regras personalizadas. O AWS Trusted Advisor verifica práticas recomendadas em cinco categorias, mas são verificações fixas e genéricas, não regras personalizáveis de conformidade que o cliente define. As SCPs do AWS Organizations restringem quais ações são permitidas nas contas, mas não avaliam se recursos existentes estão em conformidade — elas impedem ações futuras, não relatam o estado atual. O Amazon GuardDuty detecta ameaças ativas analisando logs, mas não avalia conformidade de configuração de recursos como versionamento de S3 ou criptografia de EBS.",
+      "opcoes": [
+        { "texto": "Regras do AWS Config (Config Rules).", "correta": true },
+        { "texto": "Verificações do AWS Trusted Advisor.", "correta": false },
+        { "texto": "Políticas de controle de serviço (SCPs) do AWS Organizations.", "correta": false },
+        { "texto": "Amazon GuardDuty.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-security-hub-27",
+      "topico": "AWS Security Hub",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa usa Amazon GuardDuty, Amazon Inspector, AWS Config e Amazon Macie. A equipe de segurança reclama de precisar alternar entre quatro consoles diferentes para analisar as descobertas de cada serviço. Ela quer um painel centralizado que agregue as descobertas de todos esses serviços, priorize por gravidade e verifique automaticamente as práticas recomendadas de segurança. Qual serviço da AWS atende a essa necessidade?",
+      "explicacao": "O AWS Security Hub agrega e normaliza descobertas de vários serviços de segurança da AWS (GuardDuty, Inspector, Macie, Config, Firewall Manager e outros), apresenta-as num painel centralizado priorizado por gravidade e executa verificações automáticas contra padrões como CIS AWS Foundations Benchmark e AWS Foundational Security Best Practices. O Amazon GuardDuty é um dos serviços que alimenta o Security Hub, mas só detecta ameaças — não agrega descobertas de outros serviços. O AWS CloudWatch coleta métricas e logs para monitoramento operacional, mas não agrega descobertas de segurança de serviços como Inspector e Macie. O AWS Artifact fornece relatórios de conformidade emitidos por auditores terceirizados, mas não agrega nem prioriza descobertas operacionais de segurança.",
+      "opcoes": [
+        { "texto": "AWS Security Hub.", "correta": true },
+        { "texto": "Amazon GuardDuty.", "correta": false },
+        { "texto": "Amazon CloudWatch.", "correta": false },
+        { "texto": "AWS Artifact.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-macie-dados-sensiveis-28",
+      "topico": "Amazon Macie",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa armazena milhões de documentos no Amazon S3 e precisa identificar automaticamente quais buckets contêm dados sensíveis — como números de cartão de crédito, CPFs e credenciais — para priorizar a proteção desses dados. Qual serviço da AWS usa machine learning para descobrir e classificar dados sensíveis no S3?",
+      "explicacao": "O Amazon Macie usa machine learning e correspondência de padrões para descobrir automaticamente dados sensíveis armazenados no Amazon S3, como informações pessoais identificáveis (PII), dados financeiros e credenciais, gerando descobertas classificadas por gravidade. O AWS Config rastreia configurações de recursos e avalia conformidade, mas não analisa o conteúdo dos objetos armazenados no S3 — ele verifica se o bucket está criptografado, não se contém cartões de crédito. O Amazon Comprehend é um serviço de processamento de linguagem natural para análise de sentimentos, extração de entidades e classificação de texto, mas não é voltado para descoberta de dados sensíveis em buckets S3. O Amazon Inspector verifica vulnerabilidades em instâncias EC2 e imagens de contêiner, mas não analisa o conteúdo de objetos no S3.",
+      "opcoes": [
+        { "texto": "Amazon Macie.", "correta": true },
+        { "texto": "AWS Config.", "correta": false },
+        { "texto": "Amazon Comprehend.", "correta": false },
+        { "texto": "Amazon Inspector.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-secrets-manager-29",
+      "topico": "AWS Secrets Manager",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma aplicação se conecta a um banco de dados Amazon RDS e as credenciais estão armazenadas num arquivo de configuração no servidor. A equipe de segurança exige que as credenciais sejam armazenadas de forma segura e rotacionadas automaticamente a cada 30 dias, sem exigir alteração no código da aplicação nem deploy a cada rotação. Qual serviço da AWS atende a esses requisitos?",
+      "explicacao": "O AWS Secrets Manager armazena credenciais de forma segura (criptografadas com KMS), permite rotação automática programada (por exemplo, a cada 30 dias para RDS) e fornece uma API para a aplicação obter a credencial atual — quando o segredo é rotacionado, a aplicação obtém a nova credencial na próxima chamada, sem redeploy. O AWS KMS gerencia chaves de criptografia para cifrar e decifrar dados, mas não armazena credenciais de banco de dados nem faz rotação de senhas — ele protege a chave que o Secrets Manager usa, mas não substitui a função de armazenamento e rotação. O AWS Systems Manager Parameter Store armazena parâmetros de configuração (inclusive seguros com criptografia), mas a rotação automática integrada com RDS é um recurso nativo do Secrets Manager, não do Parameter Store. O AWS Certificate Manager gerencia certificados SSL/TLS, não credenciais de banco de dados.",
+      "opcoes": [
+        { "texto": "AWS Secrets Manager.", "correta": true },
+        { "texto": "AWS Key Management Service (KMS).", "correta": false },
+        { "texto": "AWS Systems Manager Parameter Store.", "correta": false },
+        { "texto": "AWS Certificate Manager.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-cloudhsm-30",
+      "topico": "AWS CloudHSM",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma instituição financeira precisa gerar e armazenar chaves de criptografia em módulos de segurança de hardware (HSMs) dedicados e de locatário único, para atender a requisitos regulatórios que proíbem o uso de infraestrutura de gerenciamento de chaves compartilhada. Qual serviço da AWS fornece HSMs dedicados sob controle exclusivo do cliente?",
+      "explicacao": "O AWS CloudHSM fornece módulos de segurança de hardware dedicados (de locatário único) dentro da VPC do cliente, onde apenas o cliente tem acesso às chaves — a AWS administra o hardware, mas não tem acesso ao material criptográfico. É o serviço certo quando a regulamentação exige HSMs dedicados. O AWS KMS é um serviço gerenciado e multilocatário de gerenciamento de chaves — embora use HSMs internamente, o material criptográfico é gerenciado pela AWS e compartilhado em infraestrutura comum, o que não atende a requisitos de locatário único. O AWS Secrets Manager armazena e rotaciona segredos como senhas e chaves de API, mas não fornece módulos de hardware dedicados para geração e custódia de chaves criptográficas. O AWS Certificate Manager gerencia certificados SSL/TLS para serviços da AWS, mas não fornece HSMs dedicados para custódia de chaves.",
+      "opcoes": [
+        { "texto": "AWS CloudHSM.", "correta": true },
+        { "texto": "AWS Key Management Service (KMS).", "correta": false },
+        { "texto": "AWS Secrets Manager.", "correta": false },
+        { "texto": "AWS Certificate Manager.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-acm-certificados-31",
+      "topico": "AWS Certificate Manager",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa hospeda um site no Amazon CloudFront e quer habilitar HTTPS para proteger o tráfego entre os usuários e o site. A equipe precisa provisionar, gerenciar e renovar automaticamente o certificado SSL/TLS, sem custo adicional pelo certificado em si. Qual serviço da AWS fornece certificados SSL/TLS públicos gratuitos com renovação automática para uso com CloudFront?",
+      "explicacao": "O AWS Certificate Manager (ACM) permite provisionar, gerenciar e renovar automaticamente certificados SSL/TLS públicos sem custo, para uso com serviços integrados como CloudFront, Elastic Load Balancing e API Gateway. O AWS KMS gerencia chaves de criptografia para cifrar dados, mas não provisiona certificados SSL/TLS para HTTPS. O AWS CloudHSM fornece módulos de hardware dedicados para chaves criptográficas, mas não emite nem renova certificados SSL/TLS públicos — seria necessário gerar o certificado externamente e importá-lo. O AWS Secrets Manager armazena segredos como credenciais e chaves de API, mas não emite certificados SSL/TLS.",
+      "opcoes": [
+        { "texto": "AWS Certificate Manager (ACM).", "correta": true },
+        { "texto": "AWS Key Management Service (KMS).", "correta": false },
+        { "texto": "AWS CloudHSM.", "correta": false },
+        { "texto": "AWS Secrets Manager.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-cognito-autenticacao-32",
+      "topico": "Amazon Cognito",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma startup está desenvolvendo uma aplicação móvel e precisa adicionar funcionalidades de cadastro, login com e-mail/senha, login social (Google, Apple) e controle de acesso baseado em tokens JWT, sem construir toda a infraestrutura de autenticação do zero. Qual serviço da AWS fornece esses recursos prontos para uso?",
+      "explicacao": "O Amazon Cognito fornece user pools para cadastro, login (inclusive social), MFA e emissão de tokens JWT, além de identity pools para acesso a recursos AWS — é a solução gerenciada de autenticação para aplicações web e móveis. O IAM Identity Center (AWS SSO) gerencia acesso centralizado de funcionários a múltiplas contas AWS e aplicações empresariais, não autenticação de usuários finais de aplicações móveis. O AWS Directory Service gerencia diretórios compatíveis com Microsoft Active Directory na nuvem, voltado para infraestrutura corporativa, não para autenticação de usuários de apps. O AWS Amplify inclui módulos de autenticação que internamente usam Cognito, mas Amplify é um framework completo de desenvolvimento, não o serviço de autenticação em si — a pergunta pede o serviço de autenticação.",
+      "opcoes": [
+        { "texto": "Amazon Cognito.", "correta": true },
+        { "texto": "IAM Identity Center (AWS SSO).", "correta": false },
+        { "texto": "AWS Directory Service.", "correta": false },
+        { "texto": "AWS Amplify.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-identity-center-33",
+      "topico": "IAM Identity Center",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa com 20 contas AWS organizadas pelo AWS Organizations quer que seus 200 funcionários acessem as contas apropriadas usando um único login corporativo, sem criar usuários do IAM separados em cada conta. Cada funcionário deve ver apenas as contas e os perfis de permissão a que tem direito. Qual serviço da AWS permite gerenciar esse acesso centralizado?",
+      "explicacao": "O IAM Identity Center (antigo AWS SSO) permite gerenciar acesso centralizado a múltiplas contas AWS e aplicações empresariais usando um único login. Ele se integra com o AWS Organizations e suporta provedores de identidade externos (como Azure AD ou Okta), eliminando a necessidade de criar usuários do IAM em cada conta. O Amazon Cognito é para autenticação de usuários finais de aplicações web e móveis, não para acesso de funcionários a contas AWS e console de gerenciamento. O AWS Directory Service gerencia diretórios Microsoft AD na nuvem, mas não fornece o portal de acesso centralizado a múltiplas contas e atribuição de permissões que o IAM Identity Center oferece. O IAM em cada conta é o que o cenário quer evitar: criar e manter 200 usuários em 20 contas significaria gerenciar até 4.000 identidades.",
+      "opcoes": [
+        { "texto": "IAM Identity Center (AWS SSO).", "correta": true },
+        { "texto": "Amazon Cognito.", "correta": false },
+        { "texto": "AWS Directory Service.", "correta": false },
+        { "texto": "Usuários do IAM em cada conta.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-access-analyzer-34",
+      "topico": "IAM Access Analyzer",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de segurança de uma empresa quer identificar automaticamente quais recursos da AWS — como buckets S3, filas SQS e perfis do IAM — estão compartilhados com entidades externas à conta ou à organização, para garantir que nenhum acesso externo não intencional exista. Qual recurso da AWS analisa políticas de acesso e identifica esse compartilhamento?",
+      "explicacao": "O IAM Access Analyzer analisa políticas de recursos (S3, SQS, KMS, Lambda, IAM roles e outros) e identifica automaticamente quando um recurso está acessível por entidades externas à conta ou organização, gerando descobertas que a equipe pode investigar e remediar. O AWS Config rastreia configurações e avalia conformidade com regras, mas não analisa políticas de acesso para identificar compartilhamento externo — uma regra do Config poderia verificar se um bucket é público, mas não faz a análise de política que o Access Analyzer faz. O AWS Trusted Advisor oferece verificações de práticas recomendadas, incluindo algumas de segurança como buckets S3 públicos, mas são verificações limitadas e genéricas, sem a análise profunda de políticas de recursos. O AWS CloudTrail registra chamadas de API para auditoria, mas mostra o que aconteceu, não o que é possível — ele registra acessos que ocorreram, não identifica acessos que poderiam ocorrer.",
+      "opcoes": [
+        { "texto": "IAM Access Analyzer.", "correta": true },
+        { "texto": "AWS Config.", "correta": false },
+        { "texto": "AWS Trusted Advisor.", "correta": false },
+        { "texto": "AWS CloudTrail.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-criptografia-envelope-35",
+      "topico": "Criptografia",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Um arquiteto de soluções está explicando como o AWS KMS protege grandes volumes de dados de maneira eficiente. Ele menciona que o KMS gera uma chave de dados (data key), usa essa chave para criptografar os dados localmente e depois criptografa a própria chave de dados com a chave-mestre do KMS. Como se chama esse padrão de criptografia?",
+      "explicacao": "A criptografia de envelope (envelope encryption) é o padrão em que uma chave de dados criptografa os dados em si e uma chave-mestre criptografa a chave de dados. Isso é eficiente porque não é necessário enviar grandes volumes de dados ao KMS pela rede — apenas a chave de dados (pequena) trafega para ser criptografada. A criptografia assimétrica usa um par de chaves (pública e privada), mas não descreve o padrão de encapsular uma chave de dados com uma chave-mestre. A criptografia do lado do servidor (SSE) descreve quem realiza a criptografia (o serviço, e não o cliente), não o padrão de chave dentro de chave. A criptografia ponta a ponta protege dados entre duas partes sem que intermediários possam ler, mas não é o nome do padrão de usar uma chave-mestre para proteger chaves de dados.",
+      "opcoes": [
+        { "texto": "Criptografia de envelope (envelope encryption).", "correta": true },
+        { "texto": "Criptografia assimétrica.", "correta": false },
+        { "texto": "Criptografia do lado do servidor (SSE).", "correta": false },
+        { "texto": "Criptografia ponta a ponta.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-client-vs-server-side-36",
+      "topico": "Criptografia",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa regulada exige que os dados sejam criptografados antes de saírem da aplicação do cliente — ou seja, os dados devem chegar ao Amazon S3 já cifrados, de modo que nem a AWS tenha acesso ao conteúdo em texto puro. Qual abordagem de criptografia atende a esse requisito?",
+      "explicacao": "Na criptografia do lado do cliente (client-side encryption), a aplicação criptografa os dados antes de enviá-los ao S3 — os dados trafegam e são armazenados cifrados, e a AWS nunca tem acesso ao texto puro nem à chave de descriptografia usada pelo cliente. Na criptografia do lado do servidor com chaves gerenciadas pelo S3 (SSE-S3), o S3 criptografa os dados após recebê-los, então eles trafegam em texto puro dentro da rede da AWS e a AWS gerencia as chaves — não atende ao requisito de chegar já cifrado. Na SSE-KMS, o S3 recebe o dado em texto e chama o KMS para criptografar — a AWS ainda vê o dado antes de criptografar, violando o requisito. O versionamento do S3 mantém versões anteriores dos objetos para proteção contra exclusão acidental, mas não tem relação com criptografia.",
+      "opcoes": [
+        { "texto": "Criptografia do lado do cliente (client-side encryption).", "correta": true },
+        { "texto": "Criptografia do lado do servidor com chaves gerenciadas pelo S3 (SSE-S3).", "correta": false },
+        { "texto": "Criptografia do lado do servidor com AWS KMS (SSE-KMS).", "correta": false },
+        { "texto": "Versionamento de objetos no S3.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-compliance-hipaa-37",
+      "topico": "Conformidade",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de telemedicina que processa dados de saúde protegidos (PHI) quer usar a AWS e precisa assinar um contrato que defina as responsabilidades de cada parte no manuseio de informações de saúde, de acordo com a lei HIPAA dos Estados Unidos. Onde na AWS a empresa pode revisar e aceitar esse contrato (BAA — Business Associate Addendum)?",
+      "explicacao": "O AWS Artifact Agreements permite visualizar e aceitar contratos como o Business Associate Addendum (BAA) exigido pela HIPAA, diretamente no console da AWS. É o local correto para estabelecer o acordo entre a empresa e a AWS sobre dados de saúde. O AWS Artifact Reports fornece relatórios de conformidade de auditores terceirizados (SOC, ISO), mas contratos e acordos ficam na seção Agreements, não Reports. O AWS Compliance Center oferece informações educativas sobre conformidade, whitepapers e histórias de clientes, mas não é onde se assina contratos formais. O AWS Support não é o canal para aceitar contratos de conformidade — o BAA é aceito por meio do Artifact Agreements, não de um chamado de suporte.",
+      "opcoes": [
+        { "texto": "AWS Artifact Agreements.", "correta": true },
+        { "texto": "AWS Artifact Reports.", "correta": false },
+        { "texto": "AWS Compliance Center.", "correta": false },
+        { "texto": "AWS Support.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-incidente-credenciais-38",
+      "topico": "Resposta a incidentes",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Um desenvolvedor publicou acidentalmente uma chave de acesso do IAM num repositório público no GitHub. A equipe de segurança foi alertada minutos depois. Qual é a PRIMEIRA ação que a equipe deve tomar?",
+      "explicacao": "A primeira ação ao descobrir que credenciais foram expostas é desativá-las ou excluí-las imediatamente no IAM, para impedir que qualquer pessoa que já tenha copiado a chave possa usá-la. Cada minuto conta: a chave está num repositório público e bots automatizados varrem o GitHub em busca de credenciais da AWS em segundos. Analisar os logs do CloudTrail é importante para entender se a chave já foi usada indevidamente, mas é a segunda etapa — enquanto a chave está ativa, o dano pode continuar crescendo. Criar uma nova chave de acesso sem desativar a comprometida mantém as duas ativas — a chave exposta continua utilizável. Alterar a senha do console do usuário não resolve: a chave de acesso é uma credencial independente da senha, e a chave comprometida continuaria funcionando.",
+      "opcoes": [
+        { "texto": "Desativar ou excluir a chave de acesso comprometida no IAM imediatamente.", "correta": true },
+        { "texto": "Analisar os logs do CloudTrail para verificar se a chave foi usada.", "correta": false },
+        { "texto": "Criar uma nova chave de acesso e atualizar as aplicações.", "correta": false },
+        { "texto": "Alterar a senha do console do usuário do IAM.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-vpn-site-to-site-39",
+      "topico": "Segurança de rede",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de médio porte precisa conectar seu escritório à VPC na AWS usando uma conexão criptografada pela internet. A empresa não quer investir numa conexão dedicada e aceita variações de latência. A configuração deve ser rápida e funcionar sobre a infraestrutura de internet existente. Qual serviço da AWS atende a esse cenário?",
+      "explicacao": "A VPN site-to-site da AWS cria um túnel criptografado IPsec entre o roteador do escritório e um virtual private gateway na VPC, usando a internet existente. É mais rápida de configurar e mais barata que uma conexão dedicada. O AWS Direct Connect fornece uma conexão de rede privada e dedicada, mas exige provisionar uma conexão física num local de co-locação — é mais cara, demora semanas para configurar e o cenário diz que a empresa não quer conexão dedicada. O VPC Peering conecta duas VPCs na AWS entre si, não um escritório on-premises à AWS. O AWS Transit Gateway é um hub central que conecta VPCs e redes on-premises, mas é o orquestrador — a conexão do escritório em si ainda seria feita por VPN ou Direct Connect.",
+      "opcoes": [
+        { "texto": "AWS VPN site-to-site.", "correta": true },
+        { "texto": "AWS Direct Connect.", "correta": false },
+        { "texto": "VPC Peering.", "correta": false },
+        { "texto": "AWS Transit Gateway.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-privatelink-40",
+      "topico": "Segurança de rede",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa quer que suas instâncias EC2 numa sub-rede privada acessem o Amazon S3 e o Amazon DynamoDB sem que o tráfego saia para a internet pública. A equipe quer manter todo o tráfego dentro da rede da AWS. Qual recurso permite criar esse caminho privado entre a VPC e os serviços da AWS?",
+      "explicacao": "Os VPC endpoints permitem que recursos numa VPC acessem serviços da AWS (como S3 e DynamoDB) por um caminho privado dentro da rede da AWS, sem necessidade de gateway de internet, NAT gateway ou VPN. Existem dois tipos: gateway endpoints (S3 e DynamoDB) e interface endpoints (via AWS PrivateLink, para outros serviços). O NAT gateway permite que instâncias em sub-redes privadas acessem a internet para downloads e atualizações, mas o tráfego sai para a internet pública — é justamente o que o cenário quer evitar. O gateway de internet conecta a VPC à internet pública, o oposto de um caminho privado. O AWS Direct Connect é uma conexão dedicada entre um datacenter on-premises e a AWS, não um caminho privado entre recursos da VPC e serviços da AWS.",
+      "opcoes": [
+        { "texto": "VPC endpoints.", "correta": true },
+        { "texto": "NAT gateway.", "correta": false },
+        { "texto": "Gateway de internet.", "correta": false },
+        { "texto": "AWS Direct Connect.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-logs-auditoria-assoc-41",
+      "topico": "Logging e auditoria",
+      "tipo": "Associacao",
+      "enunciado": "Uma equipe de segurança precisa implementar logging abrangente na AWS. Associe cada necessidade de monitoramento ao serviço que a atende.",
+      "explicacao": "Registrar todas as chamadas de API feitas na conta AWS — quem fez o quê e quando — é a função do AWS CloudTrail, que registra cada ação como um evento auditável. Monitorar tráfego de rede que entra e sai de interfaces de rede na VPC, incluindo IPs de origem e destino, portas e se o tráfego foi aceito ou rejeitado, é a função dos VPC Flow Logs — eles operam na camada de rede. Gerar alertas quando métricas ultrapassam limites definidos — como CPU acima de 80% ou erros HTTP acima de 100/min — é a função do Amazon CloudWatch Alarms, que monitora métricas e dispara ações. Analisar e pesquisar logs de aplicação centralizados — como logs de erro de uma aplicação web — é a função do Amazon CloudWatch Logs, que ingere, armazena e permite consultas em logs de diversas fontes. O AWS X-Ray rastreia requisições distribuídas entre microsserviços para diagnóstico de performance, mas não é um serviço de logging genérico nem de captura de tráfego de rede.",
+      "associacoes": [
+        { "alvo": "Registrar todas as chamadas de API feitas na conta AWS", "item": "AWS CloudTrail" },
+        { "alvo": "Monitorar tráfego de rede aceito e rejeitado em interfaces da VPC", "item": "VPC Flow Logs" },
+        { "alvo": "Gerar alertas quando métricas ultrapassam limites definidos", "item": "Amazon CloudWatch Alarms" },
+        { "alvo": "Analisar e pesquisar logs de aplicação centralizados", "item": "Amazon CloudWatch Logs" }
+      ],
+      "itensExtras": ["AWS X-Ray"]
+    },
+    {
+      "id": "clfc02-seg-firewall-manager-42",
+      "topico": "AWS Firewall Manager",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa com 30 contas AWS no AWS Organizations precisa aplicar regras do AWS WAF de forma centralizada em todas as contas e garantir que novas contas adicionadas à organização recebam automaticamente as mesmas regras. A equipe não quer configurar o WAF individualmente em cada conta. Qual serviço permite essa gestão centralizada?",
+      "explicacao": "O AWS Firewall Manager permite configurar e gerenciar regras de segurança — incluindo AWS WAF, Shield Advanced, grupos de segurança da VPC e Network Firewall — de forma centralizada em todas as contas de uma organização do AWS Organizations. Novas contas herdam as políticas automaticamente. O AWS WAF sozinho permite criar regras de firewall de aplicação web, mas cada conta precisa ser configurada individualmente — sem o Firewall Manager, a gestão centralizada e automática não existe. As SCPs do AWS Organizations restringem quais ações e serviços são permitidos, mas não gerenciam regras de WAF — SCPs dizem o que pode ser feito, Firewall Manager define como a proteção é aplicada. O AWS Config monitora configurações e conformidade, mas não aplica regras de WAF — ele poderia detectar que uma conta não tem WAF configurado, mas não consegue aplicar as regras.",
+      "opcoes": [
+        { "texto": "AWS Firewall Manager.", "correta": true },
+        { "texto": "AWS WAF configurado individualmente.", "correta": false },
+        { "texto": "Políticas de controle de serviço (SCPs).", "correta": false },
+        { "texto": "AWS Config.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-audit-manager-43",
+      "topico": "AWS Audit Manager",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa precisa se preparar para uma auditoria de conformidade SOC 2 e quer automatizar a coleta de evidências de controles — como logs do CloudTrail, configurações do Config e resultados do Security Hub — em vez de reunir tudo manualmente a cada ciclo de auditoria. Qual serviço da AWS automatiza a coleta contínua de evidências para avaliações de conformidade?",
+      "explicacao": "O AWS Audit Manager automatiza a coleta contínua de evidências de múltiplas fontes da AWS (CloudTrail, Config, Security Hub) e as organiza em avaliações alinhadas a frameworks de conformidade como SOC 2, PCI DSS e GDPR, simplificando a preparação para auditorias. O AWS Artifact fornece os relatórios de conformidade da AWS (emitidos por auditores terceirizados), mas não coleta evidências dos controles do cliente — é a conformidade da AWS, não a do cliente. O AWS Config avalia conformidade de configurações com regras, mas é apenas uma das fontes de evidências — não organiza as evidências em avaliações nem as mapeia para frameworks de auditoria. O AWS Security Hub agrega descobertas de segurança, mas não é voltado para preparação de auditorias nem para coleta organizada de evidências de conformidade.",
+      "opcoes": [
+        { "texto": "AWS Audit Manager.", "correta": true },
+        { "texto": "AWS Artifact.", "correta": false },
+        { "texto": "AWS Config.", "correta": false },
+        { "texto": "AWS Security Hub.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-defense-in-depth-44",
+      "topico": "Segurança em camadas",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "Uma empresa está implementando uma estratégia de defesa em profundidade (defense in depth) para proteger uma aplicação web na AWS. Quais camadas de segurança fazem parte dessa estratégia?",
+      "explicacao": "A defesa em profundidade aplica controles de segurança em múltiplas camadas, de modo que a falha de uma camada não comprometa todo o sistema. Usar ACLs de rede para filtrar tráfego na camada de sub-rede fornece proteção na camada de rede. Aplicar grupos de segurança nas instâncias adiciona controle na camada da instância. Criptografar dados em repouso no S3 protege a camada de dados, garantindo que mesmo com acesso não autorizado ao armazenamento, os dados permaneçam ilegíveis. Usar AWS WAF para filtrar tráfego HTTP malicioso protege a camada de aplicação. Desativar o CloudTrail eliminaria a camada de auditoria e rastreabilidade, enfraquecendo a estratégia em vez de fortalecê-la — logging é parte essencial da defesa em profundidade.",
+      "opcoes": [
+        { "texto": "Usar ACLs de rede para filtrar tráfego na camada de sub-rede.", "correta": true },
+        { "texto": "Aplicar grupos de segurança restritivos nas instâncias EC2.", "correta": true },
+        { "texto": "Criptografar dados em repouso no Amazon S3.", "correta": true },
+        { "texto": "Usar AWS WAF para filtrar solicitações HTTP maliciosas.", "correta": true },
+        { "texto": "Desativar o AWS CloudTrail para reduzir custos operacionais.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-servicos-protecao-dados-assoc-45",
+      "topico": "Proteção de dados",
+      "tipo": "Associacao",
+      "enunciado": "Uma empresa precisa implementar proteções para diferentes tipos de dados e segredos na AWS. Associe cada necessidade ao serviço mais adequado.",
+      "explicacao": "Armazenar e rotacionar automaticamente credenciais de banco de dados é a função do AWS Secrets Manager — ele armazena segredos criptografados e possui integração nativa com RDS para rotação automática. Provisionar e renovar automaticamente certificados SSL/TLS para HTTPS é a função do AWS Certificate Manager (ACM) — ele emite certificados públicos gratuitos e os renova antes do vencimento. Descobrir automaticamente dados sensíveis como PII e números de cartão de crédito armazenados no S3 é a função do Amazon Macie — ele usa machine learning para classificar e identificar dados sensíveis. Gerenciar chaves de criptografia com controle de acesso granular e logs de auditoria é a função do AWS KMS — ele permite criar, gerenciar e auditar o uso de chaves para criptografia de dados em diversos serviços. O AWS Shield protege contra ataques DDoS, não contra exposição de dados sensíveis, credenciais ou certificados.",
+      "associacoes": [
+        { "alvo": "Armazenar e rotacionar automaticamente credenciais de banco de dados", "item": "AWS Secrets Manager" },
+        { "alvo": "Provisionar e renovar automaticamente certificados SSL/TLS para HTTPS", "item": "AWS Certificate Manager" },
+        { "alvo": "Descobrir automaticamente dados sensíveis como PII armazenados no S3", "item": "Amazon Macie" },
+        { "alvo": "Gerenciar chaves de criptografia com controle de acesso e auditoria", "item": "AWS KMS" }
+      ],
+      "itensExtras": ["AWS Shield"]
+    },
+    {
+      "id": "clfc02-seg-cloudtrail-vs-config-46",
+      "topico": "Logging e auditoria",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma auditora precisa responder a duas perguntas diferentes: 'Quem alterou as permissões deste bucket S3 na terça-feira às 14h?' e 'Quais buckets S3 da conta estão atualmente sem criptografia padrão habilitada?' Quais serviços respondem a cada pergunta, respectivamente?",
+      "explicacao": "O AWS CloudTrail responde 'quem fez o quê e quando' porque registra todas as chamadas de API — ele mostraria que o usuário X chamou PutBucketPolicy às 14h de terça. O AWS Config responde 'qual é o estado atual dos recursos' porque rastreia configurações e avalia conformidade — uma regra do Config mostraria quais buckets não têm criptografia padrão. Usar o Config para ambas não funcionaria porque o Config registra estados, não ações — ele poderia mostrar que a política mudou, mas não necessariamente quem executou a chamada de API. Usar o CloudTrail para ambas não funcionaria porque o CloudTrail registra eventos, não avalia conformidade contínua — seria necessário filtrar manualmente cada evento para montar um inventário de conformidade. O Security Hub agrega descobertas de segurança, mas não registra chamadas de API individuais nem rastreia configurações — ele recebe informações de outros serviços.",
+      "opcoes": [
+        { "texto": "CloudTrail para a primeira pergunta (quem alterou) e Config para a segunda (quais estão sem criptografia).", "correta": true },
+        { "texto": "Config para ambas as perguntas.", "correta": false },
+        { "texto": "CloudTrail para ambas as perguntas.", "correta": false },
+        { "texto": "Security Hub para ambas as perguntas.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-vpc-flow-logs-47",
+      "topico": "Logging e auditoria",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de rede de uma empresa precisa investigar por que certas instâncias EC2 numa sub-rede privada não conseguem se comunicar com um serviço externo. Eles querem analisar os registros de tráfego de rede para ver quais pacotes estão sendo aceitos ou rejeitados na interface de rede da instância. Qual recurso da AWS fornece essas informações?",
+      "explicacao": "Os VPC Flow Logs capturam informações sobre o tráfego IP que entra e sai das interfaces de rede na VPC, incluindo IP de origem e destino, portas, protocolo e se o pacote foi aceito (ACCEPT) ou rejeitado (REJECT). São essenciais para diagnosticar problemas de conectividade. O AWS CloudTrail registra chamadas de API, não tráfego de rede — ele mostraria que alguém criou ou modificou um grupo de segurança, mas não os pacotes de rede em si. O Amazon CloudWatch Logs armazena e permite pesquisar logs de diversas fontes (inclusive VPC Flow Logs após configuração), mas não é a fonte que gera os logs de tráfego de rede — é um destino possível. O AWS Network Firewall é um firewall de rede gerenciado que filtra tráfego, mas não é um serviço de logging de tráfego de interfaces de rede.",
+      "opcoes": [
+        { "texto": "VPC Flow Logs.", "correta": true },
+        { "texto": "AWS CloudTrail.", "correta": false },
+        { "texto": "Amazon CloudWatch Logs.", "correta": false },
+        { "texto": "AWS Network Firewall.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-incidente-resposta-ord-48",
+      "topico": "Resposta a incidentes",
+      "tipo": "Ordenacao",
+      "enunciado": "Uma instância EC2 foi comprometida e está enviando tráfego malicioso para endereços IP externos. A equipe de segurança precisa conter o incidente e investigar. Selecione e ordene as etapas de resposta ao incidente.",
+      "explicacao": "A primeira ação é isolar a instância alterando seu grupo de segurança para bloquear todo o tráfego de entrada e saída — isso contém o dano imediatamente, impedindo que a instância continue a se comunicar com os atacantes ou com outros recursos internos. Em seguida, capturar um snapshot do volume EBS preserva as evidências forenses no estado em que estão, antes de qualquer alteração. Por fim, analisar os logs do CloudTrail, VPC Flow Logs e os processos da instância ajuda a entender como a comprometimento ocorreu e qual foi o alcance. Encerrar a instância imediatamente destruiria as evidências forenses sem possibilidade de investigação. Alterar a senha do console não resolve: o atacante está na instância (via SSH, exploit ou malware), não no console, e não usar o console não é o que causou o incidente.",
+      "sequencia": [
+        "Isolar a instância comprometida alterando o grupo de segurança para bloquear todo o tráfego.",
+        "Capturar um snapshot do volume EBS para preservar evidências forenses.",
+        "Analisar logs do CloudTrail e VPC Flow Logs para determinar a origem e o alcance do comprometimento."
+      ],
+      "itensExtras": [
+        "Encerrar (terminate) a instância imediatamente para impedir mais danos.",
+        "Alterar a senha do console de gerenciamento da AWS."
+      ]
+    },
+    {
+      "id": "clfc02-seg-cognito-vs-iam-49",
+      "topico": "Autenticação",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa desenvolve uma aplicação SaaS com milhares de usuários finais que precisam criar contas e fazer login. A empresa também tem 50 funcionários que administram a infraestrutura AWS. Qual é a combinação correta de serviços para cada cenário?",
+      "explicacao": "O Amazon Cognito é projetado para autenticação de usuários finais de aplicações (milhares a milhões de usuários, login social, MFA, JWT), enquanto o IAM é para identidades que interagem diretamente com a infraestrutura AWS (funcionários que acessam o console ou CLI). Usar IAM para todos criaria milhares de usuários IAM para clientes finais, o que é inviável de gerenciar e não oferece funcionalidades como login social ou páginas de login personalizáveis. Usar Cognito para todos não funciona porque o Cognito não gerencia permissões de infraestrutura AWS como criar instâncias EC2 ou modificar VPCs — ele fornece tokens para aplicações, não credenciais do console. O IAM Identity Center gerencia acesso de funcionários a múltiplas contas AWS, não autenticação de clientes de uma aplicação SaaS.",
+      "opcoes": [
+        { "texto": "Amazon Cognito para os usuários finais da aplicação e IAM para os funcionários que administram a AWS.", "correta": true },
+        { "texto": "IAM para todos — tanto usuários finais quanto funcionários.", "correta": false },
+        { "texto": "Amazon Cognito para todos — tanto usuários finais quanto funcionários.", "correta": false },
+        { "texto": "IAM Identity Center para os usuários finais e Cognito para os funcionários.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-security-hub-padroes-50",
+      "topico": "AWS Security Hub",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "Uma equipe de segurança habilitou o AWS Security Hub e quer executar verificações automáticas contra padrões de segurança reconhecidos pela indústria. Quais padrões o Security Hub suporta nativamente para verificações automatizadas?",
+      "explicacao": "O Security Hub suporta nativamente verificações automáticas contra vários padrões de segurança. O CIS AWS Foundations Benchmark é um conjunto de práticas recomendadas de segurança publicado pelo Center for Internet Security, amplamente adotado. O AWS Foundational Security Best Practices (FSBP) é um padrão mantido pela própria AWS com controles de segurança recomendados. O PCI DSS é um padrão de segurança de dados da indústria de cartões de pagamento. O OWASP Top 10 é uma lista de vulnerabilidades comuns de aplicações web — é um guia de desenvolvimento, não um padrão de verificação automatizada de infraestrutura que o Security Hub avalia. O ITIL é um framework de gerenciamento de serviços de TI, não um padrão de segurança de infraestrutura de nuvem.",
+      "opcoes": [
+        { "texto": "CIS AWS Foundations Benchmark.", "correta": true },
+        { "texto": "AWS Foundational Security Best Practices (FSBP).", "correta": true },
+        { "texto": "PCI DSS.", "correta": true },
+        { "texto": "OWASP Top 10.", "correta": false },
+        { "texto": "ITIL.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-macie-alerta-51",
+      "topico": "Amazon Macie",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Depois de habilitar o Amazon Macie, a equipe de segurança recebeu uma descoberta indicando que um bucket S3 contém um grande volume de dados pessoais identificáveis (PII), incluindo números de passaporte e endereços de e-mail, sem criptografia habilitada. Qual é a combinação adequada de ações corretivas?",
+      "explicacao": "Habilitar a criptografia padrão no bucket protege os dados em repouso, e revisar as políticas de acesso com o IAM Access Analyzer garante que o bucket não esteja compartilhado com entidades externas — as duas ações tratam diretamente os dois riscos da descoberta (dados sensíveis sem criptografia e potencial acesso indevido). Excluir todos os dados do bucket eliminaria o risco, mas também destruiria dados que podem ser necessários para o negócio — é desproporcional quando a solução é criptografar e restringir acesso. Mover para o Glacier resolve o armazenamento, mas não habilita criptografia automaticamente (depende da configuração) e não aborda o problema de acesso. Desabilitar o Macie eliminaria os alertas futuros, mas não resolveria o problema de dados sensíveis expostos — é como desligar o alarme de incêndio em vez de apagar o fogo.",
+      "opcoes": [
+        { "texto": "Habilitar criptografia padrão no bucket e revisar as políticas de acesso com o IAM Access Analyzer.", "correta": true },
+        { "texto": "Excluir imediatamente todos os dados do bucket afetado.", "correta": false },
+        { "texto": "Mover os dados para o Amazon S3 Glacier e desabilitar o acesso público.", "correta": false },
+        { "texto": "Desabilitar o Amazon Macie para evitar alertas recorrentes.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-secrets-vs-parameter-52",
+      "topico": "Gerenciamento de segredos",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Um arquiteto precisa decidir entre o AWS Secrets Manager e o AWS Systems Manager Parameter Store para armazenar credenciais de banco de dados. A aplicação se conecta ao Amazon RDS e a política da empresa exige rotação automática de senha a cada 30 dias sem intervenção manual. Qual serviço é mais adequado e por quê?",
+      "explicacao": "O AWS Secrets Manager é mais adequado porque possui rotação automática integrada com o Amazon RDS — basta habilitar a rotação e definir o intervalo, e o Secrets Manager altera a senha no RDS e no segredo automaticamente, sem intervenção manual nem código adicional. O Parameter Store (parâmetro SecureString) armazena valores criptografados com KMS, mas não tem rotação automática nativa para credenciais de RDS — seria necessário criar e manter uma função Lambda customizada para fazer a rotação, que é justamente a 'intervenção' que o cenário quer evitar. O KMS gerencia chaves de criptografia, não credenciais de banco de dados, e não faz rotação de senhas. O IAM não armazena credenciais de banco de dados — ele gerencia permissões de acesso a serviços AWS, não senhas de conexão ao RDS.",
+      "opcoes": [
+        { "texto": "AWS Secrets Manager, porque possui rotação automática integrada com o Amazon RDS.", "correta": true },
+        { "texto": "Parameter Store com SecureString, porque armazena valores criptografados.", "correta": false },
+        { "texto": "AWS KMS, porque gerencia chaves de criptografia.", "correta": false },
+        { "texto": "IAM, porque gerencia credenciais de acesso.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-gdpr-servicos-53",
+      "topico": "Conformidade",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa europeia precisa garantir que os dados pessoais de seus clientes sejam processados em conformidade com o GDPR (Regulamento Geral de Proteção de Dados). A equipe quer identificar automaticamente onde estão armazenados dados pessoais nos buckets S3, para poder responder a solicitações de acesso e exclusão dos titulares. Qual serviço da AWS ajuda a localizar esses dados pessoais?",
+      "explicacao": "O Amazon Macie usa machine learning para descobrir e classificar automaticamente dados pessoais (PII) armazenados no S3 — nomes, endereços, números de identidade e outros dados cobertos pelo GDPR — permitindo que a empresa saiba exatamente onde estão esses dados para responder a solicitações dos titulares. O AWS Artifact fornece relatórios e contratos de conformidade da AWS (como o adendo de processamento de dados do GDPR), mas não localiza dados pessoais nos buckets do cliente. O AWS Config rastreia configurações de recursos, como saber se um bucket é público ou se tem criptografia, mas não analisa o conteúdo dos objetos armazenados para encontrar dados pessoais. O Amazon Comprehend processa texto com NLP (análise de sentimentos, extração de entidades), mas não foi projetado para varredura de conformidade de dados pessoais em buckets S3.",
+      "opcoes": [
+        { "texto": "Amazon Macie.", "correta": true },
+        { "texto": "AWS Artifact.", "correta": false },
+        { "texto": "AWS Config.", "correta": false },
+        { "texto": "Amazon Comprehend.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-resposta-incidente-ord-54",
+      "topico": "Resposta a incidentes",
+      "tipo": "Ordenacao",
+      "enunciado": "A equipe de segurança descobriu que credenciais de acesso do IAM de um funcionário foram comprometidas. Selecione e ordene as ações de resposta imediata.",
+      "sequencia": [
+        "Desativar as chaves de acesso comprometidas no IAM para impedir uso indevido.",
+        "Revogar todas as sessões temporárias ativas associadas ao usuário comprometido.",
+        "Revisar os logs do CloudTrail para identificar ações executadas com as credenciais comprometidas."
+      ],
+      "itensExtras": [
+        "Excluir a conta AWS inteira e criar uma nova.",
+        "Desabilitar o CloudTrail para evitar que o atacante veja os próprios logs."
+      ],
+      "explicacao": "A primeira ação é desativar as chaves de acesso comprometidas para impedir imediatamente qualquer uso futuro — enquanto as chaves estão ativas, o atacante pode continuar operando. Em seguida, revogar sessões temporárias é crucial porque um atacante que já assumiu um role com as credenciais comprometidas continua com acesso até a sessão expirar, mesmo após desativar as chaves originais. Por fim, revisar o CloudTrail permite entender o que o atacante fez durante o período de comprometimento, para remediar qualquer dano. Excluir a conta inteira é desproporcional e destrutivo — a remediação correta é conter, investigar e remediar as ações específicas. Desabilitar o CloudTrail destruiria a trilha de auditoria que é essencial para a investigação."
+    },
+    {
+      "id": "clfc02-seg-hsm-vs-kms-cenario-55",
+      "topico": "Criptografia",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma fintech precisa gerar e armazenar chaves criptográficas para transações financeiras. O regulador exige que as chaves estejam em módulos de segurança de hardware certificados FIPS 140-2 Nível 3, com controle exclusivo do cliente — a AWS não pode ter acesso ao material criptográfico em nenhum momento. Qual serviço atende a esse requisito regulatório?",
+      "explicacao": "O AWS CloudHSM fornece HSMs dedicados (locatário único) certificados FIPS 140-2 Nível 3, onde apenas o cliente tem acesso ao material criptográfico — a AWS administra o hardware, mas não pode acessar as chaves. O AWS KMS usa HSMs internos com certificação FIPS 140-2 Nível 3 para proteger as chaves-mestre, mas é um serviço gerenciado e multilocatário onde a AWS opera a infraestrutura que contém as chaves — embora a AWS não acesse as chaves diretamente, o nível de controle exclusivo é diferente do que um CloudHSM dedicado oferece. O AWS Secrets Manager armazena segredos, não opera HSMs certificados para custódia de chaves criptográficas de transações financeiras. O AWS Certificate Manager gerencia certificados SSL/TLS, não módulos de hardware para geração e armazenamento de chaves de transações.",
+      "opcoes": [
+        { "texto": "AWS CloudHSM.", "correta": true },
+        { "texto": "AWS KMS.", "correta": false },
+        { "texto": "AWS Secrets Manager.", "correta": false },
+        { "texto": "AWS Certificate Manager.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-identity-center-federacao-56",
+      "topico": "IAM Identity Center",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "Uma empresa acabou de adotar o IAM Identity Center para gerenciar o acesso de seus funcionários a múltiplas contas AWS. Quais são benefícios desse serviço?",
+      "explicacao": "O IAM Identity Center permite login único (SSO) para múltiplas contas AWS, eliminando a necessidade de fazer login separadamente em cada conta. A integração com provedores de identidade externos (Azure AD, Okta, Google Workspace) permite usar as credenciais corporativas existentes, sem criar identidades duplicadas. O gerenciamento centralizado de permissões através de permission sets permite definir uma vez e aplicar em várias contas. O IAM Identity Center gerencia acesso de pessoas a contas AWS e aplicações empresariais, não autenticação de milhões de usuários finais de aplicações — para isso existe o Amazon Cognito. O IAM Identity Center não fornece proteção contra DDoS — essa é a função do AWS Shield.",
+      "opcoes": [
+        { "texto": "Login único (SSO) para múltiplas contas AWS com um único conjunto de credenciais.", "correta": true },
+        { "texto": "Integração com provedores de identidade externos, como Azure AD e Okta.", "correta": true },
+        { "texto": "Gerenciamento centralizado de permission sets aplicáveis a várias contas.", "correta": true },
+        { "texto": "Autenticação de milhões de usuários finais de aplicações móveis.", "correta": false },
+        { "texto": "Proteção automática contra ataques DDoS.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-seg-access-analyzer-cenario-57",
+      "topico": "IAM Access Analyzer",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Depois de uma auditoria, a equipe de segurança descobriu que um perfil (role) do IAM tinha uma trust policy que permitia acesso de qualquer conta AWS, não apenas das contas da organização. Qual serviço teria identificado esse compartilhamento externo automaticamente, antes da auditoria manual?",
+      "explicacao": "O IAM Access Analyzer analisa automaticamente as políticas de recursos e trust policies de roles do IAM para identificar quando um recurso está compartilhado com entidades externas à conta ou organização. Ele teria gerado uma descoberta indicando que o role permite acesso de qualquer conta. O Amazon GuardDuty detecta atividade suspeita (como credenciais comprometidas ou chamadas de API anômalas), mas não analisa trust policies de roles do IAM em busca de compartilhamento excessivo. O AWS CloudTrail registra quando o role é assumido, mas não analisa proativamente as políticas para avisar sobre configurações permissivas — ele diria 'a conta externa X assumiu o role', não 'o role pode ser assumido por qualquer conta'. O AWS Config poderia ter uma regra para verificar trust policies, mas o IAM Access Analyzer foi projetado especificamente para essa análise de acesso externo e fornece mais contexto nas descobertas.",
+      "opcoes": [
+        { "texto": "IAM Access Analyzer.", "correta": true },
+        { "texto": "Amazon GuardDuty.", "correta": false },
+        { "texto": "AWS CloudTrail.", "correta": false },
+        { "texto": "AWS Config.", "correta": false }
+      ]
+    }
+  ]
+}

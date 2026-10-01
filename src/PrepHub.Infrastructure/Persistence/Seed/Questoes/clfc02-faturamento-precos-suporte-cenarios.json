@@ -1,0 +1,204 @@
+{
+  "exameCode": "CLF-C02",
+  "area": "faturamento-precos-suporte",
+  "questoes": [
+    {
+      "id": "clfc02-fat-adv-01",
+      "topico": "AWS Cost and Usage Report",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O departamento financeiro de uma empresa precisa de um relatório detalhado que discrimine os custos da AWS por hora, por recurso individual (incluindo o ARN de cada recurso) e por tag de alocação, entregue automaticamente em um bucket S3. A equipe pretende importar esses dados no Amazon Athena para executar consultas SQL personalizadas. Qual ferramenta da AWS fornece esse nível de detalhe?",
+      "explicacao": "O AWS Cost and Usage Report (CUR) é o relatório mais detalhado disponível, discriminando custos por hora ou por dia, por recurso individual (com ARN), por tag de alocação e por tipo de uso, entregue automaticamente em um bucket S3 para integração com Athena, Redshift ou QuickSight. O AWS Cost Explorer oferece visualizações gráficas e filtros por serviço, conta e Região, mas não fornece dados granulares por recurso individual com ARN nem exportação automática para S3 em formato consultável. O AWS Budgets monitora gastos contra orçamentos definidos e envia alertas, mas não gera relatórios detalhados com discriminação por recurso. O painel de faturamento (Billing Dashboard) mostra o resumo do mês corrente e uma previsão, mas não oferece granularidade por hora nem integração com Athena.",
+      "opcoes": [
+        { "texto": "AWS Cost and Usage Report (CUR).", "correta": true },
+        { "texto": "AWS Cost Explorer.", "correta": false },
+        { "texto": "AWS Budgets.", "correta": false },
+        { "texto": "Painel de faturamento (Billing Dashboard).", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-adv-02",
+      "topico": "AWS Cost Anomaly Detection",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de DevOps notou que, no mês passado, os custos de uma conta de desenvolvimento subiram 300% sem que nenhum workload novo fosse implantado. Eles querem um serviço que use aprendizado de máquina para detectar automaticamente picos inesperados de custo e envie alertas assim que o desvio for identificado. Qual serviço da AWS atende a essa necessidade?",
+      "explicacao": "O AWS Cost Anomaly Detection usa aprendizado de máquina para identificar automaticamente padrões incomuns de gasto, como picos inesperados, e envia alertas via e-mail ou SNS assim que detecta o desvio. O AWS Budgets permite definir limites de gasto fixos e enviar alertas quando o limite é atingido, mas não detecta padrões anômalos dinamicamente — se o pico acontece antes de atingir o orçamento absoluto, não há alerta. O Amazon GuardDuty detecta ameaças de segurança analisando logs de rede, DNS e atividade de API, mas não monitora custos financeiros. O AWS CloudTrail registra chamadas de API feitas na conta para fins de auditoria e conformidade, mas não analisa padrões de custo.",
+      "opcoes": [
+        { "texto": "AWS Cost Anomaly Detection.", "correta": true },
+        { "texto": "AWS Budgets.", "correta": false },
+        { "texto": "Amazon GuardDuty.", "correta": false },
+        { "texto": "AWS CloudTrail.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-adv-03",
+      "topico": "Tags de alocação de custos",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa com três equipes — marketing, engenharia e vendas — usa a mesma conta AWS. O diretor financeiro quer rastrear quanto cada equipe gasta por mês sem separar os recursos em contas diferentes. Qual recurso da AWS permite categorizar e rastrear custos por equipe dentro de uma única conta?",
+      "explicacao": "Tags de alocação de custos permitem categorizar recursos com pares chave-valor (como 'Equipe: marketing') e depois filtrar os relatórios de custo por essas tags no Cost Explorer e no Cost and Usage Report, sem precisar de contas separadas. O AWS Organizations permite criar contas separadas por equipe com cobrança consolidada, mas o cenário pede explicitamente uma solução dentro de uma única conta. O AWS Service Catalog gerencia catálogos de produtos de TI aprovados para governança, mas não categoriza nem rastreia custos por equipe. As políticas do IAM controlam quem pode acessar quais recursos, mas não categorizam custos — são mecanismos de autorização, não de alocação financeira.",
+      "opcoes": [
+        { "texto": "Tags de alocação de custos.", "correta": true },
+        { "texto": "AWS Organizations com contas separadas.", "correta": false },
+        { "texto": "AWS Service Catalog.", "correta": false },
+        { "texto": "Políticas do IAM por equipe.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-adv-04",
+      "topico": "Transferência de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma startup está estimando os custos de uma aplicação web hospedada na AWS que recebe uploads de arquivos de clientes (entrada) e serve páginas e downloads para os usuários (saída). A equipe quer entender a política de preços de transferência de dados da AWS. Qual afirmação sobre transferência de dados é CORRETA?",
+      "explicacao": "Na AWS, a transferência de dados de entrada (upload para a AWS) é gratuita na maioria dos serviços e Regiões, enquanto a transferência de saída (da AWS para a internet) é cobrada por GB, com o primeiro GB/mês gratuito. Os dados de saída são cobrados por GB transferido, não por número de requisições — as requisições podem ter seu próprio componente de custo dependendo do serviço, mas isso é separado da cobrança de transferência. A transferência entre Regiões diferentes é cobrada, pois os dados cruzam a infraestrutura de rede da AWS — a gratuidade se aplica dentro de uma mesma Zona de Disponibilidade em alguns serviços. A transferência de saída não é ilimitada no nível gratuito: apenas o primeiro GB/mês é gratuito, e após isso o custo é por GB.",
+      "opcoes": [
+        { "texto": "A transferência de dados de entrada para a AWS é gratuita, enquanto a de saída é cobrada por GB.", "correta": true },
+        { "texto": "Os dados de saída são cobrados por número de requisições, não por volume de dados.", "correta": false },
+        { "texto": "A transferência de dados entre Regiões AWS diferentes é sempre gratuita.", "correta": false },
+        { "texto": "A transferência de saída é ilimitada e gratuita no nível gratuito da AWS.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-adv-05",
+      "topico": "Plano de suporte Desenvolvedor",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Um desenvolvedor independente está construindo uma aplicação pessoal na AWS e quer acesso a suporte técnico por e-mail durante o horário comercial, com orientação sobre práticas recomendadas. Ele não precisa de suporte por chat 24/7 nem de tempo de resposta garantido para sistemas em produção. Qual plano de suporte da AWS é o mais adequado e econômico para esse cenário?",
+      "explicacao": "O plano Desenvolvedor oferece suporte técnico por e-mail durante o horário comercial, orientação sobre práticas recomendadas e uma conta de contato primária — ideal para quem está desenvolvendo e não precisa de SLA de produção. O plano Básico não oferece suporte técnico individual — apenas acesso a documentação, whitepapers e fóruns da comunidade, sem possibilidade de abrir tickets por e-mail. O plano Empresarial (Business) oferece suporte 24/7 por chat e telefone com SLA de uma hora para produção, mas é significativamente mais caro do que o cenário exige. O plano Empresarial de Grande Porte (Enterprise) inclui TAM designado e tempo de resposta de 15 minutos para sistemas críticos, muito além das necessidades de um desenvolvedor independente.",
+      "opcoes": [
+        { "texto": "Desenvolvedor (Developer).", "correta": true },
+        { "texto": "Básico (Basic).", "correta": false },
+        { "texto": "Empresarial (Business).", "correta": false },
+        { "texto": "Empresarial de Grande Porte (Enterprise).", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-adv-06",
+      "topico": "EC2 Savings Plans vs Compute Savings Plans",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa usa exclusivamente instâncias m5.xlarge em us-east-1 para uma aplicação estável e não planeja mudar a família de instância nem a Região nos próximos três anos. A equipe quer o maior desconto possível. Qual tipo de Savings Plan oferece a economia máxima nesse cenário?",
+      "explicacao": "EC2 Instance Savings Plans oferecem o maior desconto (até 72%) porque exigem compromisso com uma família de instância específica (m5) em uma Região específica (us-east-1) — quanto mais restritivo o compromisso, maior a economia. Compute Savings Plans oferecem até 66% de economia com mais flexibilidade (qualquer família, Região, e também cobre Lambda e Fargate), mas exatamente por essa flexibilidade o desconto é menor. Instâncias reservadas Standard com pagamento antecipado total oferecem descontos semelhantes aos EC2 Instance Savings Plans, mas exigem um tipo de instância específico (m5.xlarge, não apenas a família m5), e o cenário pede Savings Plans especificamente. Instâncias Spot oferecem os maiores descontos (até 90%), mas podem ser interrompidas a qualquer momento e não são adequadas para uma aplicação estável que precisa de disponibilidade contínua.",
+      "opcoes": [
+        { "texto": "EC2 Instance Savings Plans.", "correta": true },
+        { "texto": "Compute Savings Plans.", "correta": false },
+        { "texto": "Instâncias reservadas Standard com pagamento antecipado total.", "correta": false },
+        { "texto": "Instâncias Spot.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-adv-07",
+      "topico": "Right-sizing",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Um administrador de nuvem percebeu que várias instâncias EC2 de produção estão constantemente com utilização de CPU abaixo de 10%. Ele quer identificar sistematicamente quais instâncias estão superdimensionadas e receber recomendações de tipos menores que atendam à carga real, para reduzir custos sem afetar o desempenho. Qual serviço da AWS fornece essas recomendações?",
+      "explicacao": "O AWS Compute Optimizer analisa métricas históricas de utilização (CPU, memória, rede) das instâncias EC2 e recomenda tipos de instância que melhor se adequam à carga real — é a ferramenta específica para right-sizing. O AWS Trusted Advisor identifica instâncias com baixa utilização de forma mais geral (apenas pela CPU), mas o Compute Optimizer fornece recomendações mais granulares e preditivas usando aprendizado de máquina. O AWS Cost Explorer mostra onde o dinheiro está sendo gasto, mas não analisa utilização de recursos nem recomenda tipos de instância específicos. O Amazon CloudWatch coleta as métricas de utilização (CPU, disco, rede), mas não analisa esses dados para produzir recomendações de right-sizing — é a fonte de dados, não a ferramenta de recomendação.",
+      "opcoes": [
+        { "texto": "AWS Compute Optimizer.", "correta": true },
+        { "texto": "AWS Trusted Advisor.", "correta": false },
+        { "texto": "AWS Cost Explorer.", "correta": false },
+        { "texto": "Amazon CloudWatch.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-adv-08",
+      "topico": "Precificação Lambda",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa está migrando uma API de processamento de imagens de EC2 para AWS Lambda. O arquiteto quer entender exatamente como a AWS cobrará pelo uso do Lambda para estimar os custos. Quais são os dois componentes de custo do AWS Lambda?",
+      "explicacao": "O AWS Lambda cobra por dois componentes: número de solicitações (por milhão de invocações) e duração da computação (por GB-segundo, ou seja, a memória alocada multiplicada pelo tempo de execução). Solicitações e armazenamento de código não representam o modelo de cobrança real — o armazenamento do código da função existe, mas é um limite de cota (75 GB por conta), não um componente de custo variável proporcional ao uso. Solicitações e tráfego de rede de saída: a transferência de saída é cobrada separadamente como transferência de dados da AWS, não como componente de custo específico do Lambda. Número de funções implantadas e memória reservada: Lambda não cobra por função implantada nem por memória reservada inativa — a cobrança é pelo uso real (invocação + tempo de execução com memória alocada).",
+      "opcoes": [
+        { "texto": "Número de solicitações e duração da computação (GB-segundos).", "correta": true },
+        { "texto": "Número de solicitações e armazenamento do código da função.", "correta": false },
+        { "texto": "Número de solicitações e tráfego de rede de saída.", "correta": false },
+        { "texto": "Número de funções implantadas e memória reservada.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-adv-09",
+      "topico": "Precificação EC2",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa quer executar instâncias EC2 Linux sob demanda para uma aplicação web. O gerente financeiro quer entender a granularidade mínima de cobrança para planejar custos de instâncias que rodam por períodos curtos. Qual é a granularidade mínima de cobrança de instâncias EC2 Linux sob demanda?",
+      "explicacao": "Instâncias EC2 Linux sob demanda são cobradas por segundo, com um mínimo de 60 segundos por execução. Se uma instância rodar por 90 segundos, a cobrança é de 90 segundos, não de duas horas. A cobrança por hora era o modelo antigo da AWS; desde outubro de 2017, instâncias Linux sob demanda passaram a ser cobradas por segundo. Instâncias Windows e instâncias RHEL com licença continuam por hora — mas o cenário especifica Linux. Cobrança por minuto não é a granularidade usada pela AWS para EC2; o modelo é por segundo com mínimo de 60 segundos. Cobrança por milissegundo aplica-se ao AWS Lambda (arredondado para o ms mais próximo), não ao EC2.",
+      "opcoes": [
+        { "texto": "Por segundo, com mínimo de 60 segundos.", "correta": true },
+        { "texto": "Por hora, arredondando para a hora seguinte.", "correta": false },
+        { "texto": "Por minuto, com mínimo de 10 minutos.", "correta": false },
+        { "texto": "Por milissegundo, sem cobrança mínima.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-adv-10",
+      "topico": "AWS Organizations contas",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa usa o AWS Organizations para gerenciar suas 20 contas AWS. O administrador precisa vincular contas membro ao provedor de pagamento e aplicar SCPs a toda a organização. De qual conta essas ações devem ser realizadas?",
+      "explicacao": "A conta de gerenciamento (management account) é a conta que cria a organização e tem controle total sobre ela: gerencia pagamentos, convida e remove contas, e aplica SCPs. Essas ações não podem ser feitas de contas membro. Qualquer conta membro da organização está sujeita às SCPs, mas não pode aplicá-las a outras contas nem alterar configurações de faturamento da organização. A conta com a política AdministratorAccess dentro de uma conta membro tem poder total dentro daquela conta, mas não sobre a organização como um todo — gerenciar SCPs e pagamentos é prerrogativa da conta de gerenciamento. Não existe o conceito de 'conta de auditoria' como tipo especial no Organizations — é uma nomenclatura informal para uma conta delegada de segurança, sem os poderes da conta de gerenciamento.",
+      "opcoes": [
+        { "texto": "Da conta de gerenciamento (management account).", "correta": true },
+        { "texto": "De qualquer conta membro da organização.", "correta": false },
+        { "texto": "De qualquer conta com a política AdministratorAccess.", "correta": false },
+        { "texto": "Da conta de auditoria (audit account).", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-adv-11",
+      "topico": "Savings Plans e Reserved Instances compartilhadas",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma organização com cinco contas AWS sob cobrança consolidada comprou Savings Plans na conta de gerenciamento. Uma conta membro está executando instâncias EC2 que se encaixam no compromisso. Sem nenhuma configuração adicional, como os Savings Plans são aplicados?",
+      "explicacao": "Por padrão, com a cobrança consolidada habilitada no AWS Organizations, os Savings Plans e as Reserved Instances são compartilhados entre todas as contas da organização — o desconto é aplicado automaticamente ao uso elegível em qualquer conta membro, sem configuração adicional. Os Savings Plans não são aplicados apenas à conta que os comprou por padrão — a AWS distribui o benefício entre todas as contas com uso elegível, maximizando a economia. Cada conta membro não precisa comprar seus próprios Savings Plans — o compartilhamento é automático com cobrança consolidada. O compartilhamento é ativado por padrão com a cobrança consolidada — não é necessário ativá-lo manualmente no AWS Organizations, embora seja possível desativá-lo se desejado.",
+      "opcoes": [
+        { "texto": "São compartilhados automaticamente entre todas as contas da organização.", "correta": true },
+        { "texto": "São aplicados apenas à conta que os comprou.", "correta": false },
+        { "texto": "Cada conta membro precisa comprar seus próprios Savings Plans.", "correta": false },
+        { "texto": "É necessário ativar manualmente o compartilhamento no Organizations.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-adv-12",
+      "topico": "Suporte e comunidade AWS",
+      "tipo": "Associacao",
+      "enunciado": "Uma empresa quer orientar seus funcionários sobre os diferentes canais de suporte e ajuda disponíveis na AWS. Associe cada necessidade ao recurso mais adequado.",
+      "associacoes": [
+        { "alvo": "Encontrar e contratar um especialista certificado pela AWS para um projeto de migração de curto prazo", "item": "AWS IQ" },
+        { "alvo": "Fazer perguntas técnicas à comunidade e buscar respostas verificadas por especialistas da AWS", "item": "AWS re:Post" },
+        { "alvo": "Encontrar um parceiro de consultoria que implemente soluções AWS sob contrato para a empresa", "item": "AWS Partner Network (APN)" },
+        { "alvo": "Obter orientação proativa contínua de um engenheiro designado que conhece a infraestrutura da empresa", "item": "Technical Account Manager (TAM)" }
+      ],
+      "itensExtras": ["AWS Personal Health Dashboard"],
+      "explicacao": "O AWS IQ conecta clientes a especialistas certificados pela AWS para projetos pontuais — contratação sob demanda por escopo, ideal para migração de curto prazo. O AWS re:Post é o fórum da comunidade que substituiu o AWS Forums, onde é possível perguntar, responder e buscar respostas curadas por especialistas da AWS. O AWS Partner Network (APN) é o programa global de parceiros que inclui consultores e provedores de tecnologia que implementam soluções sob contrato contínuo. O TAM é um recurso dos planos Empresarial Rápido e de Grande Porte que fornece orientação personalizada contínua. O AWS Personal Health Dashboard notifica sobre eventos que afetam os recursos da conta, mas não é um canal de suporte nem consultoria."
+    },
+    {
+      "id": "clfc02-fat-adv-13",
+      "topico": "Planos de suporte Enterprise",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "Quais recursos são exclusivos do plano de suporte Empresarial de Grande Porte (Enterprise), e NÃO estão disponíveis no plano Empresarial Rápido (Enterprise On-Ramp)?",
+      "explicacao": "O tempo de resposta de 15 minutos para sistemas críticos para o negócio é exclusivo do plano de Grande Porte — o Empresarial Rápido oferece 30 minutos para a mesma gravidade. O acesso à equipe de suporte Concierge para questões de cobrança e conta também é exclusivo do plano de Grande Porte. Um TAM designado (dedicado à conta) é do plano de Grande Porte — o Empresarial Rápido oferece um pool de TAMs, não um designado. O acesso a todas as verificações do Trusted Advisor está disponível a partir do plano Empresarial (Business), incluindo os dois planos Enterprise. O suporte técnico 24/7 por chat e telefone também começa no plano Business e está disponível em todos os planos acima dele.",
+      "opcoes": [
+        { "texto": "Tempo de resposta de 15 minutos para sistemas críticos para o negócio.", "correta": true },
+        { "texto": "Acesso à equipe de suporte Concierge.", "correta": true },
+        { "texto": "TAM designado (dedicado à conta, não um pool).", "correta": true },
+        { "texto": "Acesso a todas as verificações do AWS Trusted Advisor.", "correta": false },
+        { "texto": "Suporte técnico 24/7 por chat e telefone.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-adv-14",
+      "topico": "Precificação por Região",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa está decidindo em qual Região AWS implantar sua aplicação. O arquiteto comparou os preços de instâncias EC2 m5.large e notou que o custo por hora varia entre Regiões. Qual fator explica PRINCIPALMENTE essa diferença de preço?",
+      "explicacao": "Os preços dos serviços AWS variam entre Regiões principalmente por causa dos custos operacionais locais — energia elétrica, refrigeração, custo de terreno, impostos locais e custo da infraestrutura de rede variam significativamente entre locais geográficos. São Paulo (sa-east-1) é historicamente mais cara que US East (us-east-1). A demanda dos clientes na Região pode influenciar marginalmente, mas a AWS define preços com base nos custos de operação do datacenter, não por oferta e demanda dinâmica como instâncias Spot. A distância física até a sede da Amazon em Seattle não tem relação com o preço — us-west-2 (Oregon), perto da sede, e us-east-1 (Virginia), longe dela, têm preços semelhantes. O nível de conformidade regulatória exigido na Região pode afetar custos operacionais indiretamente, mas o fator principal é o custo de infraestrutura e operação local.",
+      "opcoes": [
+        { "texto": "Os custos operacionais locais (energia, terreno, impostos) variam entre localizações geográficas.", "correta": true },
+        { "texto": "A demanda dos clientes é maior em algumas Regiões, e a AWS cobra mais onde há mais demanda.", "correta": false },
+        { "texto": "Regiões mais distantes da sede da Amazon em Seattle têm custos de transporte maiores.", "correta": false },
+        { "texto": "O nível de conformidade regulatória exigido pelo governo local define o preço.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-fat-adv-15",
+      "topico": "Otimização de custos",
+      "tipo": "Ordenacao",
+      "enunciado": "Uma empresa quer implementar uma estratégia completa de otimização de custos na AWS. Ordene as etapas na sequência recomendada, da primeira à última.",
+      "sequencia": [
+        "Ativar tags de alocação de custos e aplicá-las a todos os recursos para obter visibilidade de quem gasta o quê.",
+        "Analisar os dados de custo no Cost Explorer para identificar os maiores gastos e tendências.",
+        "Usar o AWS Compute Optimizer para identificar recursos superdimensionados e aplicar right-sizing.",
+        "Avaliar e adquirir Savings Plans ou Reserved Instances para workloads estáveis e previsíveis."
+      ],
+      "itensExtras": ["Migrar todos os workloads para instâncias Spot para obter o menor custo possível."],
+      "explicacao": "A sequência correta de otimização de custos começa pela visibilidade: ativar tags de alocação permite saber quem gasta o quê, condição necessária para qualquer análise. Em seguida, analisar os dados no Cost Explorer revela os maiores gastos e tendências, direcionando o esforço. Com os dados em mãos, usar o Compute Optimizer para right-sizing elimina desperdício imediato em recursos superdimensionados. Por último, avaliar Savings Plans ou Reserved Instances para workloads já estabilizados e otimizados garante economia de longo prazo. Migrar todos os workloads para Spot é uma prática inadequada e não faz parte de uma estratégia de otimização responsável — instâncias Spot podem ser interrompidas a qualquer momento e são adequadas apenas para workloads tolerantes a interrupção, como processamento em lote."
+    }
+  ]
+}

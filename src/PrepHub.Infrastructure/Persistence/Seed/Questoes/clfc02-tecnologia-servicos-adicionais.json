@@ -1,0 +1,568 @@
+{
+  "exameCode": "CLF-C02",
+  "area": "tecnologia-servicos",
+  "questoes": [
+    {
+      "id": "clfc02-tec-adv-lightsail-01",
+      "topico": "Amazon Lightsail",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma pequena empresa de contabilidade quer hospedar um site WordPress na AWS, mas a equipe não tem experiência com infraestrutura em nuvem. Precisam de um servidor virtual com preço previsível mensal que já inclua armazenamento, transferência de dados e endereço IP estático, sem precisar configurar VPCs, sub-redes ou grupos de segurança manualmente. Qual serviço da AWS é mais adequado?",
+      "explicacao": "O Amazon Lightsail oferece servidores virtuais com preço fixo mensal que incluem armazenamento SSD, transferência de dados e IP estático, com templates pré-configurados para WordPress — ideal para quem não tem experiência com infraestrutura AWS. O Amazon EC2 oferece máxima flexibilidade, mas exige configurar VPCs, sub-redes, grupos de segurança, tipo de instância, armazenamento e modelo de preço separadamente — bem acima do nível de experiência da equipe. O AWS Elastic Beanstalk simplifica o deploy de aplicações web, mas ainda exige escolher plataforma de runtime e lidar com conceitos como Auto Scaling e load balancers. O Amazon S3 hospeda sites estáticos, mas o WordPress é uma aplicação dinâmica com banco de dados, que não roda no S3.",
+      "opcoes": [
+        { "texto": "Amazon Lightsail.", "correta": true },
+        { "texto": "Amazon EC2.", "correta": false },
+        { "texto": "AWS Elastic Beanstalk.", "correta": false },
+        { "texto": "Amazon S3.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-outposts-02",
+      "topico": "AWS Outposts",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma fábrica precisa rodar cargas de trabalho que exigem latência ultrabaixa para os equipamentos do chão de fábrica. Por questões regulatórias, os dados de produção devem permanecer fisicamente dentro das instalações da empresa. Mesmo assim, a equipe quer usar os mesmos serviços e APIs da AWS que já conhece. Qual serviço permite executar infraestrutura AWS dentro do datacenter local da empresa?",
+      "explicacao": "O AWS Outposts é um rack totalmente gerenciado pela AWS instalado no datacenter do cliente, oferecendo os mesmos serviços, APIs e ferramentas da nuvem AWS com os dados permanecendo fisicamente no local — atende a requisitos de latência e residência de dados. O AWS Local Zones são extensões de Regiões AWS mais próximas de centros urbanos para reduzir latência, mas continuam sendo infraestrutura da AWS fora do datacenter do cliente. O Amazon CloudFront coloca conteúdo em cache em pontos de presença para reduzir latência de entrega de conteúdo, mas não é infraestrutura de computação no datacenter local. O AWS Direct Connect estabelece uma conexão de rede dedicada entre o datacenter e a AWS, mas os serviços ainda rodam na Região da AWS, não no local do cliente.",
+      "opcoes": [
+        { "texto": "AWS Outposts.", "correta": true },
+        { "texto": "AWS Local Zones.", "correta": false },
+        { "texto": "Amazon CloudFront.", "correta": false },
+        { "texto": "AWS Direct Connect.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-kinesis-03",
+      "topico": "Amazon Kinesis",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma plataforma de jogos online gera milhões de eventos por segundo — movimentações de personagens, pontuações e interações — e precisa processá-los em tempo real para atualizar placares e detectar comportamento suspeito. Os dados chegam continuamente e devem ser processados em intervalos de segundos, não de horas. Qual serviço da AWS é projetado para ingestão e processamento de streaming de dados em tempo real?",
+      "explicacao": "O Amazon Kinesis Data Streams é projetado para coletar, processar e analisar dados de streaming em tempo real, suportando milhões de eventos por segundo com latência de subsegundos — ideal para cenários de dados contínuos como telemetria de jogos. O Amazon SQS é uma fila de mensagens para comunicação assíncrona entre componentes, mas processa mensagens individualmente, não como um fluxo contínuo de streaming em tempo real. O AWS Batch processa lotes de trabalho em escala, mas é para processamento em lote com início e fim, não para dados de streaming contínuo. O Amazon S3 armazena objetos, mas não processa dados em tempo real — os dados precisariam ser escritos primeiro e processados depois, adicionando latência incompatível com o requisito de segundos.",
+      "opcoes": [
+        { "texto": "Amazon Kinesis Data Streams.", "correta": true },
+        { "texto": "Amazon SQS.", "correta": false },
+        { "texto": "AWS Batch.", "correta": false },
+        { "texto": "Amazon S3.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-step-functions-04",
+      "topico": "AWS Step Functions",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de e-commerce quer automatizar o processamento de pedidos: validar pagamento, verificar estoque, separar itens e enviar notificação ao cliente. Cada etapa é uma função Lambda independente, e a ordem de execução precisa incluir decisões condicionais (estoque insuficiente cancela o pedido) e tratamento de erros com retentativas automáticas. Qual serviço da AWS orquestra essas etapas como um fluxo de trabalho visual?",
+      "explicacao": "O AWS Step Functions orquestra múltiplas funções Lambda e serviços AWS em fluxos de trabalho visuais com suporte a ramificações condicionais, paralelismo, retentativas automáticas e tratamento de erros — ideal para processos com várias etapas interdependentes. O Amazon SQS conecta componentes com filas, mas não orquestra um fluxo sequencial com decisões condicionais e tratamento de erros — apenas desacopla produtores e consumidores. O Amazon EventBridge roteia eventos entre serviços com base em regras, mas não gerencia fluxos de trabalho sequenciais com estado e decisões condicionais entre etapas. O AWS Lambda executa funções individuais, mas não coordena a sequência entre múltiplas funções nem oferece retentativa automática com estado visual entre elas.",
+      "opcoes": [
+        { "texto": "AWS Step Functions.", "correta": true },
+        { "texto": "Amazon SQS.", "correta": false },
+        { "texto": "Amazon EventBridge.", "correta": false },
+        { "texto": "AWS Lambda.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-eventbridge-05",
+      "topico": "Amazon EventBridge",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa quer que sempre que um novo usuário for criado no sistema de CRM (aplicação SaaS de terceiro), uma função Lambda seja acionada automaticamente para provisionar o acesso do usuário nos sistemas internos da AWS. A equipe precisa de um barramento de eventos serverless que receba eventos de aplicações SaaS e roteie para serviços AWS com base em regras. Qual serviço atende a esse requisito?",
+      "explicacao": "O Amazon EventBridge é um barramento de eventos serverless que recebe eventos de aplicações SaaS, serviços AWS e aplicações customizadas, e os roteia para alvos como Lambda, SQS e Step Functions com base em regras de filtragem. O Amazon SNS envia notificações a assinantes em padrão pub/sub, mas não tem integração nativa com aplicações SaaS como fontes de eventos e não oferece filtragem avançada por conteúdo do evento. O Amazon SQS é uma fila de mensagens que desacopla produtores e consumidores, mas não oferece integração direta com SaaS nem roteamento baseado em regras. O AWS AppSync é um serviço de GraphQL gerenciado para sincronização de dados em tempo real em aplicações web e mobile, não um barramento de eventos.",
+      "opcoes": [
+        { "texto": "Amazon EventBridge.", "correta": true },
+        { "texto": "Amazon SNS.", "correta": false },
+        { "texto": "Amazon SQS.", "correta": false },
+        { "texto": "AWS AppSync.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-batch-06",
+      "topico": "AWS Batch",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa farmacêutica precisa processar simulações de modelagem molecular em larga escala. Os jobs são independentes, levam horas para executar, e a quantidade varia de dezenas a milhares por dia. A equipe quer que a AWS provisionamento automaticamente a capacidade computacional necessária, submeta os jobs em fila e gerencie a infraestrutura. Qual serviço gerenciado da AWS atende a esse cenário de processamento em lote?",
+      "explicacao": "O AWS Batch planeja, agenda e executa cargas de trabalho de processamento em lote em escala, provisionando automaticamente a quantidade certa de recursos computacionais (instâncias EC2 ou Spot) com base na fila de jobs — ideal para cenários de volume variável de jobs independentes. O Amazon EC2 com Auto Scaling permitiria rodar os jobs, mas exigiria que a equipe configurasse filas, agendamento, escalonamento e gerenciamento de falhas por conta própria. O AWS Lambda é limitado a 15 minutos de execução por invocação, insuficiente para simulações que levam horas. O Amazon EMR é otimizado para processamento distribuído com frameworks como Spark e Hadoop, não para filas de jobs independentes em lote.",
+      "opcoes": [
+        { "texto": "AWS Batch.", "correta": true },
+        { "texto": "Amazon EC2 com Auto Scaling.", "correta": false },
+        { "texto": "AWS Lambda.", "correta": false },
+        { "texto": "Amazon EMR.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-elasticache-07",
+      "topico": "Amazon ElastiCache",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma aplicação de e-commerce consulta frequentemente os mesmos dados de catálogo de produtos no Amazon RDS. A latência das consultas repetidas está impactando a experiência do usuário. A equipe quer adicionar uma camada de cache em memória entre a aplicação e o banco de dados para servir resultados em microssegundos nas consultas mais frequentes. Qual serviço da AWS oferece cache em memória gerenciado?",
+      "explicacao": "O Amazon ElastiCache é um serviço de cache em memória totalmente gerenciado, compatível com Redis e Memcached, que entrega latência de microssegundos para leituras de dados acessados frequentemente — ideal para reduzir a carga no banco de dados. O Amazon DynamoDB Accelerator (DAX) é um cache em memória compatível apenas com o DynamoDB, não com o RDS — não serve para este cenário. O Amazon RDS Read Replicas criam cópias do banco para distribuir leituras, mas continuam sendo consultas a banco de dados com latência de milissegundos, não cache em memória com latência de microssegundos. O Amazon CloudFront é um CDN que faz cache de conteúdo na borda para reduzir latência de entrega de conteúdo web, não de consultas a banco de dados.",
+      "opcoes": [
+        { "texto": "Amazon ElastiCache.", "correta": true },
+        { "texto": "Amazon DynamoDB Accelerator (DAX).", "correta": false },
+        { "texto": "Amazon RDS Read Replicas.", "correta": false },
+        { "texto": "Amazon CloudFront.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-neptune-08",
+      "topico": "Amazon Neptune",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma rede social precisa armazenar e consultar relacionamentos entre milhões de usuários — amizades, seguidores, grupos e interações. As consultas mais frequentes envolvem encontrar amigos em comum, sugerir conexões e percorrer cadeias de relacionamento com múltiplos graus de separação. Qual serviço de banco de dados da AWS é otimizado para esse tipo de dado?",
+      "explicacao": "O Amazon Neptune é um banco de dados de grafos totalmente gerenciado, otimizado para armazenar e consultar relacionamentos entre entidades — ideal para redes sociais, grafos de conhecimento e detecção de fraude, onde consultas de travessia como 'amigos de amigos' são o caso de uso central. O Amazon DynamoDB é um banco NoSQL chave-valor e documento, eficiente para consultas por chave, mas não é otimizado para percorrer relacionamentos com múltiplos graus de separação. O Amazon RDS com tabelas de relacionamento (joins) pode modelar grafos, mas o desempenho degrada rapidamente com consultas de múltiplos graus de separação em relações muitos-para-muitos. O Amazon DocumentDB armazena documentos JSON, mas não é projetado para consultas de travessia de grafos — embutir relacionamentos aninhados em documentos ficaria inviável com milhões de conexões.",
+      "opcoes": [
+        { "texto": "Amazon Neptune.", "correta": true },
+        { "texto": "Amazon DynamoDB.", "correta": false },
+        { "texto": "Amazon RDS.", "correta": false },
+        { "texto": "Amazon DocumentDB.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-documentdb-09",
+      "topico": "Amazon DocumentDB",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa quer migrar uma aplicação que usa MongoDB on-premises para a AWS. O código da aplicação usa drivers e consultas MongoDB, e a equipe não quer reescrever a camada de acesso a dados. Precisam de um serviço gerenciado na AWS que seja compatível com a API do MongoDB. Qual serviço atende a esse requisito?",
+      "explicacao": "O Amazon DocumentDB (com compatibilidade com MongoDB) é um serviço de banco de dados de documentos gerenciado que implementa a API do MongoDB, permitindo migrar aplicações MongoDB sem reescrever o código de acesso a dados. O Amazon DynamoDB é um banco NoSQL gerenciado, mas não é compatível com a API do MongoDB — a aplicação precisaria ser reescrita para usar o SDK do DynamoDB. O Amazon RDS é um serviço de banco de dados relacional que não suporta MongoDB como engine — oferece MySQL, PostgreSQL, MariaDB, Oracle e SQL Server. O Amazon Neptune é um banco de grafos que suporta Gremlin e SPARQL, não a API do MongoDB.",
+      "opcoes": [
+        { "texto": "Amazon DocumentDB.", "correta": true },
+        { "texto": "Amazon DynamoDB.", "correta": false },
+        { "texto": "Amazon RDS.", "correta": false },
+        { "texto": "Amazon Neptune.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-athena-10",
+      "topico": "Amazon Athena",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de dados acumula terabytes de logs de acesso web no Amazon S3 em formato CSV e Parquet. Precisam executar consultas SQL ad hoc sobre esses logs para investigar incidentes, sem provisionar servidores de banco de dados nem carregar os dados em um data warehouse. Qual serviço da AWS permite consultar dados diretamente no S3 usando SQL?",
+      "explicacao": "O Amazon Athena é um serviço de consulta interativo e serverless que permite executar consultas SQL diretamente sobre dados armazenados no Amazon S3, sem necessidade de provisionar infraestrutura ou carregar dados — cobra apenas pelas consultas executadas. O Amazon Redshift é um data warehouse que exige provisionamento de cluster e carga dos dados antes de consultar — exatamente o que a equipe quer evitar. O Amazon RDS é um banco de dados relacional gerenciado para dados transacionais, não para consultas ad hoc sobre logs no S3. O AWS Glue é um serviço de ETL para preparar e transformar dados, não um mecanismo de consulta SQL interativa — ele complementa o Athena ao catalogar os dados, mas não é ele quem executa as consultas.",
+      "opcoes": [
+        { "texto": "Amazon Athena.", "correta": true },
+        { "texto": "Amazon Redshift.", "correta": false },
+        { "texto": "Amazon RDS.", "correta": false },
+        { "texto": "AWS Glue.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-quicksight-11",
+      "topico": "Amazon QuickSight",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O departamento de marketing de uma empresa quer criar dashboards interativos e visualizações de dados acessíveis pelo navegador, conectados a fontes como Amazon Redshift, Amazon RDS e arquivos CSV no S3. A ferramenta deve ser serverless, cobrar por sessão de uso e permitir compartilhar os dashboards com centenas de pessoas sem exigir que cada uma tenha conta da AWS. Qual serviço da AWS atende a esse cenário de BI?",
+      "explicacao": "O Amazon QuickSight é um serviço de BI serverless que cria dashboards e visualizações interativas, cobra por sessão de usuário, conecta-se nativamente a múltiplas fontes de dados AWS e permite compartilhar com leitores que não precisam de conta da AWS. O Amazon Athena executa consultas SQL no S3, mas não cria dashboards nem visualizações — é um mecanismo de consulta, não de BI. O Amazon CloudWatch é um serviço de monitoramento e observabilidade com dashboards de métricas operacionais, não para análise de dados de negócio e BI. O AWS Glue DataBrew é um serviço visual de preparação de dados para limpar e transformar datasets, não para criar dashboards de BI para consumo final.",
+      "opcoes": [
+        { "texto": "Amazon QuickSight.", "correta": true },
+        { "texto": "Amazon Athena.", "correta": false },
+        { "texto": "Amazon CloudWatch.", "correta": false },
+        { "texto": "AWS Glue DataBrew.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-glue-12",
+      "topico": "AWS Glue",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa quer construir um data lake no Amazon S3 consolidando dados de múltiplas fontes: bancos RDS, arquivos CSV e logs de aplicação. Precisam de um serviço serverless que descubra automaticamente o esquema dos dados, mantenha um catálogo central de metadados e execute jobs de ETL (extrair, transformar e carregar) sem provisionar infraestrutura. Qual serviço da AWS foi projetado para essa finalidade?",
+      "explicacao": "O AWS Glue é um serviço de ETL serverless que inclui crawlers para descoberta automática de esquema, um Data Catalog central de metadados e mecanismo de ETL para transformar e mover dados — projetado exatamente para construção de data lakes. O Amazon EMR oferece processamento distribuído com Spark e Hadoop, mas exige provisionamento de cluster e não inclui catálogo de metadados nem descoberta automática de esquema. O Amazon Kinesis Data Firehose carrega dados de streaming em destinos como S3, mas não descobre esquemas, não mantém catálogo de metadados nem executa transformações ETL complexas. O AWS Data Pipeline orquestra movimentação de dados entre serviços AWS, mas está em declínio em favor do Glue e não oferece descoberta de esquema nem catálogo integrado.",
+      "opcoes": [
+        { "texto": "AWS Glue.", "correta": true },
+        { "texto": "Amazon EMR.", "correta": false },
+        { "texto": "Amazon Kinesis Data Firehose.", "correta": false },
+        { "texto": "AWS Data Pipeline.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-emr-13",
+      "topico": "Amazon EMR",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de telecomunicações precisa processar petabytes de registros de chamadas usando Apache Spark para análise de padrões de uso e detecção de anomalias. A equipe já tem código Spark pronto e quer executá-lo em um cluster gerenciado na AWS sem instalar nem configurar o Hadoop e o Spark manualmente. Qual serviço da AWS é mais adequado?",
+      "explicacao": "O Amazon EMR é um serviço gerenciado para executar frameworks de big data como Apache Spark, Hadoop, Hive e Presto em clusters escaláveis, sem precisar instalar ou configurar a infraestrutura — ideal para quem já tem código Spark e quer rodar em escala. O AWS Glue também suporta Spark para ETL, mas é otimizado para jobs de ETL serverless e não oferece o controle de cluster nem o ecossistema completo de frameworks (Hive, Presto, Flink) que o EMR oferece. O Amazon Redshift processa consultas analíticas SQL sobre dados estruturados em um data warehouse, mas não executa código Spark. O Amazon Athena executa consultas SQL serverless no S3, mas não é um mecanismo de processamento Spark distribuído para petabytes de dados.",
+      "opcoes": [
+        { "texto": "Amazon EMR.", "correta": true },
+        { "texto": "AWS Glue.", "correta": false },
+        { "texto": "Amazon Redshift.", "correta": false },
+        { "texto": "Amazon Athena.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-qldb-14",
+      "topico": "Amazon QLDB",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma instituição financeira precisa manter um registro imutável e criptograficamente verificável de todas as transações financeiras realizadas. O regulador exige que qualquer alteração nos dados seja rastreável e que o histórico completo não possa ser apagado nem modificado retroativamente. Qual serviço da AWS oferece um banco de dados com ledger imutável e verificação criptográfica?",
+      "explicacao": "O Amazon QLDB (Quantum Ledger Database) é um banco de dados de ledger totalmente gerenciado que mantém um log de transações imutável e criptograficamente verificável — cada alteração é rastreada e o histórico não pode ser modificado nem deletado. O Amazon DynamoDB é um banco NoSQL de alta performance, mas os dados podem ser livremente atualizados e deletados — não há garantia de imutabilidade criptográfica. O Amazon Aurora é um banco relacional de alta performance, mas não oferece ledger imutável com verificação criptográfica nativa. O Amazon Managed Blockchain cria redes de blockchain descentralizadas entre múltiplas partes, mas adiciona complexidade desnecessária quando o requisito é um ledger centralizado dentro da própria organização.",
+      "opcoes": [
+        { "texto": "Amazon QLDB.", "correta": true },
+        { "texto": "Amazon DynamoDB.", "correta": false },
+        { "texto": "Amazon Aurora.", "correta": false },
+        { "texto": "Amazon Managed Blockchain.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-rekognition-15",
+      "topico": "Amazon Rekognition",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de segurança quer adicionar detecção automática de objetos e análise facial em suas câmeras de vigilância. O sistema deve identificar pessoas, veículos e objetos em imagens e vídeo em tempo real, sem que a equipe precise treinar modelos de machine learning. Qual serviço gerenciado de IA da AWS fornece análise de imagens e vídeo pronta para uso?",
+      "explicacao": "O Amazon Rekognition é um serviço de visão computacional pré-treinado que detecta objetos, cenas, rostos, texto e atividades em imagens e vídeo — pronto para uso, sem necessidade de treinar modelos. O Amazon SageMaker AI é uma plataforma para construir e treinar modelos de ML personalizados, mas exige expertise em ciência de dados e treinamento — o cenário quer uma solução pronta. O Amazon Textract extrai texto e dados de documentos escaneados (formulários, tabelas), mas não faz detecção de objetos ou análise facial em vídeo. O Amazon Comprehend analisa texto para extrair entidades, sentimento e frases-chave — é um serviço de NLP, não de visão computacional.",
+      "opcoes": [
+        { "texto": "Amazon Rekognition.", "correta": true },
+        { "texto": "Amazon SageMaker AI.", "correta": false },
+        { "texto": "Amazon Textract.", "correta": false },
+        { "texto": "Amazon Comprehend.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-polly-16",
+      "topico": "Amazon Polly",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de educação está construindo uma plataforma de cursos acessível e quer que o conteúdo escrito das aulas seja convertido automaticamente em áudio narrado, para que alunos com deficiência visual possam consumir o material. A narração deve soar natural, com vozes realistas em português. Qual serviço da AWS converte texto em fala?",
+      "explicacao": "O Amazon Polly é um serviço que converte texto em fala realista usando deep learning, suportando múltiplos idiomas incluindo português, com vozes neurais de alta qualidade — ideal para acessibilidade. O Amazon Transcribe faz o inverso: converte fala (áudio) em texto, não texto em fala. O Amazon Translate traduz texto entre idiomas, mas não converte texto em áudio falado. O Amazon Comprehend analisa texto para extrair significado (sentimento, entidades), mas não gera áudio a partir de texto.",
+      "opcoes": [
+        { "texto": "Amazon Polly.", "correta": true },
+        { "texto": "Amazon Transcribe.", "correta": false },
+        { "texto": "Amazon Translate.", "correta": false },
+        { "texto": "Amazon Comprehend.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-lex-17",
+      "topico": "Amazon Lex",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de varejo quer criar um chatbot para atendimento ao cliente que entenda linguagem natural, reconheça intenções e conduza conversas para resolver problemas comuns como rastreamento de pedidos e trocas. O bot deve funcionar em texto e voz, integrando-se ao call center e ao site. Qual serviço da AWS permite construir esse tipo de interface conversacional?",
+      "explicacao": "O Amazon Lex é um serviço para construir interfaces conversacionais (chatbots) com reconhecimento de fala e compreensão de linguagem natural, suportando texto e voz — usa a mesma tecnologia da Alexa. O Amazon Connect é uma plataforma de contact center na nuvem que gerencia filas, roteamento e atendentes, mas não é o serviço que constrói o bot conversacional — o Lex se integra ao Connect para automatizar parte do atendimento. O Amazon Comprehend analisa texto para extrair sentimento e entidades, mas não conduz conversas bidirecionais nem reconhece intenções do usuário. O Amazon Polly converte texto em fala para narração, mas não entende linguagem natural nem conduz diálogos.",
+      "opcoes": [
+        { "texto": "Amazon Lex.", "correta": true },
+        { "texto": "Amazon Connect.", "correta": false },
+        { "texto": "Amazon Comprehend.", "correta": false },
+        { "texto": "Amazon Polly.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-connect-18",
+      "topico": "Amazon Connect",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de seguros quer montar um call center na nuvem com roteamento inteligente de chamadas, gravação automática, filas de espera e integração com CRM. A equipe não quer comprar hardware de telefonia nem contratos com operadoras de PBX. Qual serviço da AWS fornece uma solução de contact center totalmente na nuvem?",
+      "explicacao": "O Amazon Connect é um contact center omnicanal na nuvem, com roteamento de chamadas, filas, gravação, análise em tempo real e integração com CRM — sem necessidade de hardware de telefonia. O Amazon Chime é um serviço de videoconferência e comunicação empresarial, mas não é uma plataforma de contact center com filas de atendimento e roteamento inteligente. O Amazon Pinpoint é um serviço de comunicação multicanal (e-mail, SMS, push) para campanhas de marketing, não para contact center com roteamento de chamadas telefônicas. O Amazon SNS envia notificações (SMS, e-mail, push), mas não é uma plataforma de contact center com filas e roteamento de chamadas.",
+      "opcoes": [
+        { "texto": "Amazon Connect.", "correta": true },
+        { "texto": "Amazon Chime.", "correta": false },
+        { "texto": "Amazon Pinpoint.", "correta": false },
+        { "texto": "Amazon SNS.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-textract-19",
+      "topico": "Amazon Textract",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Um escritório jurídico digitaliza centenas de contratos por dia e precisa extrair automaticamente texto, tabelas e pares de chave-valor (como 'Data de assinatura: 15/03/2026') de documentos escaneados em PDF e imagem. A equipe não quer treinar modelos de OCR. Qual serviço gerenciado da AWS extrai dados estruturados de documentos?",
+      "explicacao": "O Amazon Textract extrai automaticamente texto, tabelas e dados de formulários (pares chave-valor) de documentos escaneados, PDFs e imagens — vai além de um OCR simples ao entender a estrutura do documento. O Amazon Rekognition detecta objetos, rostos e texto em imagens e vídeo, mas o texto que reconhece é texto em cenas (placas, sinais), não extração estruturada de dados de documentos com tabelas e formulários. O Amazon Comprehend analisa texto para extrair entidades, sentimento e relações, mas precisa receber texto como entrada — não processa documentos escaneados diretamente. O Amazon Kendra é um serviço de busca empresarial inteligente que indexa e busca documentos, mas não extrai dados estruturados como pares chave-valor de formulários.",
+      "opcoes": [
+        { "texto": "Amazon Textract.", "correta": true },
+        { "texto": "Amazon Rekognition.", "correta": false },
+        { "texto": "Amazon Comprehend.", "correta": false },
+        { "texto": "Amazon Kendra.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-comprehend-20",
+      "topico": "Amazon Comprehend",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de hotelaria coleta milhares de avaliações de hóspedes por mês e quer analisar automaticamente o sentimento de cada avaliação (positivo, negativo, neutro ou misto) e extrair as entidades mais mencionadas (nome do hotel, cidade, serviços). A equipe não tem expertise em processamento de linguagem natural. Qual serviço da AWS realiza análise de sentimento e extração de entidades de texto?",
+      "explicacao": "O Amazon Comprehend é um serviço de NLP gerenciado que analisa texto para determinar sentimento, extrair entidades nomeadas (pessoas, lugares, organizações), detectar frases-chave e identificar o idioma — tudo sem precisar treinar modelos. O Amazon Lex constrói chatbots conversacionais que entendem intenções em diálogos, mas não é projetado para análise em massa de sentimento e extração de entidades de textos estáticos. O Amazon Translate traduz texto entre idiomas, mas não analisa sentimento nem extrai entidades. O Amazon Transcribe converte fala em texto, mas não analisa o conteúdo semântico do texto resultante.",
+      "opcoes": [
+        { "texto": "Amazon Comprehend.", "correta": true },
+        { "texto": "Amazon Lex.", "correta": false },
+        { "texto": "Amazon Translate.", "correta": false },
+        { "texto": "Amazon Transcribe.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-personalize-21",
+      "topico": "Amazon Personalize",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma plataforma de streaming de vídeo quer recomendar filmes e séries personalizados para cada assinante com base no histórico de visualização, preferências e comportamento de usuários similares. A equipe quer um serviço gerenciado que treine modelos de recomendação automaticamente a partir dos dados da plataforma, sem contratar cientistas de dados. Qual serviço da AWS é projetado para recomendações personalizadas?",
+      "explicacao": "O Amazon Personalize é um serviço de ML gerenciado que cria sistemas de recomendação personalizados a partir dos dados do cliente, treinando modelos automaticamente e servindo recomendações em tempo real via API — sem precisar de expertise em ciência de dados. O Amazon SageMaker AI é uma plataforma para construir modelos de ML personalizados, mas exige que a equipe projete, treine e otimize o modelo de recomendação — o Personalize abstrai esse trabalho. O Amazon Bedrock oferece modelos de IA generativa, mas não é projetado para sistemas de recomendação baseados em dados de comportamento de usuários. O Amazon Kendra é um serviço de busca empresarial inteligente, não um sistema de recomendação de conteúdo personalizado.",
+      "opcoes": [
+        { "texto": "Amazon Personalize.", "correta": true },
+        { "texto": "Amazon SageMaker AI.", "correta": false },
+        { "texto": "Amazon Bedrock.", "correta": false },
+        { "texto": "Amazon Kendra.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-iot-core-22",
+      "topico": "AWS IoT Core",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa agrícola instalou sensores de umidade e temperatura em milhares de hectares de plantação. Os sensores enviam leituras a cada minuto via protocolo MQTT. A equipe precisa de um serviço na AWS que conecte esses dispositivos de forma segura, receba as mensagens e acione regras para disparar alertas quando um limite for ultrapassado. Qual serviço é projetado para conectar dispositivos IoT à nuvem AWS?",
+      "explicacao": "O AWS IoT Core é um serviço gerenciado que conecta dispositivos IoT à nuvem AWS de forma segura, suportando protocolos como MQTT, e permite definir regras que encaminham mensagens para outros serviços AWS como Lambda, S3 e DynamoDB. O Amazon Kinesis Data Streams ingere dados de streaming em grande volume, mas não é um broker de mensagens MQTT para dispositivos IoT nem oferece autenticação por certificado de dispositivo. O Amazon SNS envia notificações a assinantes, mas não é um serviço de conectividade para dispositivos IoT com protocolos como MQTT e autenticação de dispositivo. O AWS Direct Connect estabelece conexão de rede dedicada entre datacenter e AWS, não conecta milhares de sensores de campo via MQTT.",
+      "opcoes": [
+        { "texto": "AWS IoT Core.", "correta": true },
+        { "texto": "Amazon Kinesis Data Streams.", "correta": false },
+        { "texto": "Amazon SNS.", "correta": false },
+        { "texto": "AWS Direct Connect.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-api-gateway-23",
+      "topico": "Amazon API Gateway",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de desenvolvimento quer expor funções Lambda como endpoints REST para que aplicações mobile e web consumam. Precisam de um serviço que gerencie throttling, autenticação, versionamento de API e cache de respostas, sem provisionar servidores. Qual serviço da AWS gerencia APIs serverless?",
+      "explicacao": "O Amazon API Gateway é um serviço gerenciado para criar, publicar, manter e proteger APIs REST, HTTP e WebSocket em qualquer escala, com suporte a throttling, autenticação, cache e integração nativa com Lambda — sem provisionar infraestrutura. O Elastic Load Balancing distribui tráfego entre instâncias, contêineres ou funções, mas não oferece gerenciamento de API como versionamento, throttling granular e cache de respostas. O Amazon CloudFront é um CDN que pode fazer cache de respostas na borda, mas não é um gerenciador de APIs com autenticação, throttling e versionamento. O AWS AppSync gerencia APIs GraphQL em tempo real, não APIs REST — é a escolha para GraphQL, mas o cenário pede REST.",
+      "opcoes": [
+        { "texto": "Amazon API Gateway.", "correta": true },
+        { "texto": "Elastic Load Balancing.", "correta": false },
+        { "texto": "Amazon CloudFront.", "correta": false },
+        { "texto": "AWS AppSync.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-systems-manager-24",
+      "topico": "AWS Systems Manager",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de operações gerencia 200 instâncias EC2 em múltiplas contas e Regiões. Precisam aplicar patches de segurança de forma centralizada, executar comandos remotos em lotes de instâncias e manter um inventário atualizado do software instalado, sem precisar abrir conexões SSH para cada servidor. Qual serviço da AWS centraliza o gerenciamento operacional de frota?",
+      "explicacao": "O AWS Systems Manager oferece gerenciamento operacional unificado de recursos AWS: Run Command para executar comandos remotos sem SSH, Patch Manager para automatizar patches de segurança, Inventory para catalogar software instalado e Session Manager para acesso seguro sem abrir portas SSH. O Amazon EC2 Instance Connect permite conexão SSH individual a instâncias, mas não oferece gerenciamento centralizado de frota, patches automáticos nem inventário. O AWS Config registra e avalia configurações de recursos para conformidade, mas não executa comandos remotos, aplica patches nem gerencia a frota operacionalmente. O Amazon CloudWatch monitora métricas e logs, mas não gerencia operações como patches, execução de comandos e inventário de software.",
+      "opcoes": [
+        { "texto": "AWS Systems Manager.", "correta": true },
+        { "texto": "Amazon EC2 Instance Connect.", "correta": false },
+        { "texto": "AWS Config.", "correta": false },
+        { "texto": "Amazon CloudWatch.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-amplify-25",
+      "topico": "AWS Amplify",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Um desenvolvedor front-end quer construir e hospedar uma aplicação web React com backend serverless na AWS, incluindo autenticação, API GraphQL e armazenamento de arquivos. Não tem experiência com infraestrutura AWS e quer um framework que configure esses serviços automaticamente a partir do código, com deploy contínuo integrado ao Git. Qual serviço da AWS é projetado para esse cenário?",
+      "explicacao": "O AWS Amplify é um conjunto de ferramentas para desenvolvedores front-end e mobile construírem aplicações fullstack na AWS, incluindo hospedagem, autenticação (Cognito), API (AppSync/API Gateway), armazenamento (S3) e deploy contínuo a partir de repositórios Git — tudo configurado automaticamente. O Amazon S3 com CloudFront hospeda sites estáticos, mas não configura automaticamente backend serverless, autenticação ou API GraphQL. O AWS Elastic Beanstalk simplifica o deploy de aplicações web, mas é voltado para aplicações server-side tradicionais, não para SPAs com backend serverless auto-configurado. O Amazon Lightsail oferece servidores simples com preço fixo, mas não é um framework de desenvolvimento fullstack com integração de serviços serverless.",
+      "opcoes": [
+        { "texto": "AWS Amplify.", "correta": true },
+        { "texto": "Amazon S3 com Amazon CloudFront.", "correta": false },
+        { "texto": "AWS Elastic Beanstalk.", "correta": false },
+        { "texto": "Amazon Lightsail.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-cloudshell-26",
+      "topico": "AWS CloudShell",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Um administrador de sistemas está numa máquina sem a AWS CLI instalada e precisa urgentemente executar comandos AWS para investigar um incidente. Ele quer um terminal pré-configurado com credenciais da sessão ativa, acessível diretamente pelo console da AWS no navegador, sem instalar nada. Qual recurso da AWS fornece esse terminal?",
+      "explicacao": "O AWS CloudShell é um terminal baseado no navegador, integrado ao console da AWS, pré-configurado com a AWS CLI, SDKs e as credenciais da sessão ativa — disponível sem instalação nem configuração. O AWS Cloud9 é um IDE baseado na nuvem para desenvolvimento de software, mas requer criação de ambiente, provisiona uma instância EC2 e não é um terminal rápido para comandos de emergência. O AWS Systems Manager Session Manager permite sessão remota em instâncias EC2, mas é para acessar instâncias, não para executar comandos da AWS CLI. O Amazon EC2 Instance Connect abre uma sessão SSH numa instância EC2, mas a instância precisa existir e não vem pré-configurada com as credenciais do console.",
+      "opcoes": [
+        { "texto": "AWS CloudShell.", "correta": true },
+        { "texto": "AWS Cloud9.", "correta": false },
+        { "texto": "AWS Systems Manager Session Manager.", "correta": false },
+        { "texto": "Amazon EC2 Instance Connect.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-ec2-dedicated-27",
+      "topico": "Amazon EC2 Dedicated Hosts",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de software usa licenças de banco de dados Oracle que são vinculadas ao número de cores físicos do servidor (licenciamento por soquete/core). A equipe quer migrar para a AWS mantendo essas licenças existentes (BYOL) e precisa de visibilidade e controle sobre o hardware físico subjacente para reportar ao fornecedor. Qual opção de compra do EC2 permite esse controle?",
+      "explicacao": "Os Dedicated Hosts do Amazon EC2 fornecem um servidor físico dedicado ao cliente, com visibilidade sobre soquetes, cores e ID do host — permitindo usar licenças existentes (BYOL) vinculadas a hardware físico, como Oracle e SQL Server. As Instâncias Dedicadas (Dedicated Instances) rodam em hardware dedicado ao cliente, mas não fornecem visibilidade sobre o servidor físico subjacente, impedindo o mapeamento para licenças por soquete/core. As instâncias sob demanda compartilham hardware com outros clientes e não oferecem controle sobre o servidor físico, inviabilizando o licenciamento por core. As instâncias reservadas oferecem desconto por compromisso de uso, mas compartilham hardware e não atendem ao requisito de visibilidade sobre cores físicos.",
+      "opcoes": [
+        { "texto": "Amazon EC2 Dedicated Hosts.", "correta": true },
+        { "texto": "Amazon EC2 Dedicated Instances.", "correta": false },
+        { "texto": "Amazon EC2 instâncias sob demanda.", "correta": false },
+        { "texto": "Amazon EC2 instâncias reservadas Standard.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-s3-glacier-deep-28",
+      "topico": "Amazon S3 Glacier",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma clínica médica é obrigada por lei a manter prontuários digitalizados por 20 anos. Os registros raramente são acessados — talvez uma vez a cada cinco anos, em caso de auditoria. Quando necessário, a clínica aceita esperar até 12 horas para recuperar os dados. O custo de armazenamento deve ser o menor possível. Qual storage class do Amazon S3 é mais adequada?",
+      "explicacao": "O S3 Glacier Deep Archive é a storage class de menor custo do Amazon S3, projetada para dados acessados uma ou duas vezes por ano, com tempo de recuperação de até 12 horas — ideal para retenção regulatória de longo prazo. O S3 Glacier Flexible Retrieval é mais caro que o Deep Archive e oferece recuperação mais rápida (de minutos a horas), funcionalidade desnecessária quando 12 horas é aceitável. O S3 Standard-Infrequent Access (S3 Standard-IA) é para dados acessados com pouca frequência mas com recuperação imediata, e custa significativamente mais que o Glacier para retenção de 20 anos. O S3 Standard é para dados acessados frequentemente com o maior custo de armazenamento — totalmente desproporcional para prontuários acessados a cada cinco anos.",
+      "opcoes": [
+        { "texto": "S3 Glacier Deep Archive.", "correta": true },
+        { "texto": "S3 Glacier Flexible Retrieval.", "correta": false },
+        { "texto": "S3 Standard-Infrequent Access (S3 Standard-IA).", "correta": false },
+        { "texto": "S3 Standard.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-s3-one-zone-ia-29",
+      "topico": "Amazon S3",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de análise de dados gera relatórios intermediários que podem ser facilmente recriados a partir dos dados originais. Os relatórios são acessados com pouca frequência e a equipe aceita o risco de perda em caso de falha de uma única Zona de Disponibilidade, em troca de custo menor que o S3 Standard-IA. Qual storage class atende a esse cenário?",
+      "explicacao": "O S3 One Zone-IA armazena dados em uma única Zona de Disponibilidade, com custo 20% menor que o S3 Standard-IA — ideal para dados reproduzíveis ou não críticos acessados com pouca frequência, onde o risco de perda da zona é aceitável. O S3 Standard-IA armazena dados em múltiplas Zonas de Disponibilidade com recuperação imediata, mas custa mais que o One Zone-IA — funciona, porém paga por resiliência desnecessária para dados reproduzíveis. O S3 Glacier Flexible Retrieval é para arquivamento com recuperação de horas, mas os relatórios são acessados eventualmente, e esperar horas para cada consulta prejudicaria o fluxo de trabalho. O S3 Standard oferece máxima disponibilidade e durabilidade, mas é a opção mais cara — desproporcional para dados reproduzíveis de acesso pouco frequente.",
+      "opcoes": [
+        { "texto": "S3 One Zone-Infrequent Access (S3 One Zone-IA).", "correta": true },
+        { "texto": "S3 Standard-Infrequent Access (S3 Standard-IA).", "correta": false },
+        { "texto": "S3 Glacier Flexible Retrieval.", "correta": false },
+        { "texto": "S3 Standard.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-s3-object-lock-30",
+      "topico": "Amazon S3",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma corretora de valores é obrigada por regulamentação a armazenar registros de operações no formato WORM (Write Once Read Many) — uma vez gravados, os registros não podem ser deletados nem sobrescritos por nenhum usuário, incluindo o administrador da conta, durante o período de retenção. Qual recurso do Amazon S3 implementa esse controle?",
+      "explicacao": "O S3 Object Lock no modo Compliance impede que qualquer pessoa, incluindo o usuário root da conta, delete ou sobrescreva objetos durante o período de retenção — atende ao requisito WORM regulatório. O S3 Versioning mantém múltiplas versões de um objeto, mas qualquer usuário com permissão pode deletar versões, incluindo a marcação de deleção — não impede remoção. O S3 Object Lock no modo Governance protege contra deleção acidental, mas permite que usuários com permissão especial (s3:BypassGovernanceRetention) removam a proteção — insuficiente quando o regulador exige que nem o administrador possa deletar. As MFA Delete policies exigem MFA para deletar versões de objetos, mas quem tem o dispositivo MFA do root ainda pode deletar — não é WORM verdadeiro.",
+      "opcoes": [
+        { "texto": "S3 Object Lock no modo Compliance.", "correta": true },
+        { "texto": "S3 Versioning.", "correta": false },
+        { "texto": "S3 Object Lock no modo Governance.", "correta": false },
+        { "texto": "MFA Delete no bucket S3.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-transfer-family-31",
+      "topico": "AWS Transfer Family",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa recebe arquivos de parceiros comerciais por SFTP todas as noites. A equipe quer migrar o servidor SFTP on-premises para a AWS e armazenar os arquivos diretamente no Amazon S3, sem alterar os scripts de transferência dos parceiros nem mudar o protocolo usado. Qual serviço da AWS oferece um servidor SFTP gerenciado com armazenamento no S3?",
+      "explicacao": "O AWS Transfer Family é um serviço gerenciado que oferece endpoints SFTP, FTPS e FTP mapeados diretamente para o Amazon S3 (ou EFS), permitindo que parceiros continuem usando seus scripts e clientes SFTP existentes sem alteração. O Amazon S3 aceita uploads via API, CLI e console, mas não expõe um endpoint SFTP nativo — os parceiros precisariam mudar seus scripts para usar a API do S3 ou a AWS CLI. O AWS DataSync automatiza a transferência de dados entre armazenamento on-premises e AWS, mas é um agente que a empresa instala, não um servidor SFTP que parceiros externos acessam. O AWS Storage Gateway conecta armazenamento local ao S3, mas funciona como um gateway de armazenamento local, não como um servidor SFTP acessível por parceiros externos.",
+      "opcoes": [
+        { "texto": "AWS Transfer Family.", "correta": true },
+        { "texto": "Amazon S3 diretamente.", "correta": false },
+        { "texto": "AWS DataSync.", "correta": false },
+        { "texto": "AWS Storage Gateway.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-lambda-edge-32",
+      "topico": "Edge computing",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma plataforma de conteúdo quer personalizar as respostas do CloudFront com base na localização geográfica do visitante — por exemplo, redirecionar para a versão regional do site ou adicionar cabeçalhos de cache personalizados — executando lógica leve diretamente nos pontos de presença, antes que a requisição chegue ao servidor de origem. Qual recurso permite executar código nos pontos de presença do CloudFront?",
+      "explicacao": "O Lambda@Edge permite executar funções Lambda nos pontos de presença do CloudFront, manipulando requisições e respostas antes ou depois de chegar ao servidor de origem — ideal para personalização por geolocalização com latência mínima. O CloudFront Functions também executa código na borda com menor latência, mas é limitado a manipulações simples de cabeçalhos e URL (sem acesso a rede, tempo de execução máximo de 1ms) — cenários que envolvem lógica condicional com redirecionamento e personalização baseada em dados geográficos beneficiam-se do Lambda@Edge. O AWS Global Accelerator melhora performance roteando tráfego pela rede da AWS, mas não executa código customizado nos pontos de presença. O Amazon Route 53 faz roteamento de DNS baseado em geolocalização, mas opera na camada de resolução de nomes, não na manipulação de requisições HTTP no ponto de presença.",
+      "opcoes": [
+        { "texto": "Lambda@Edge.", "correta": true },
+        { "texto": "CloudFront Functions.", "correta": false },
+        { "texto": "AWS Global Accelerator.", "correta": false },
+        { "texto": "Amazon Route 53.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-ia-servicos-assoc-33",
+      "topico": "Serviços de IA/ML",
+      "tipo": "Associacao",
+      "enunciado": "Uma empresa quer usar serviços de IA/ML gerenciados da AWS para automatizar diferentes tarefas. Associe cada necessidade ao serviço mais adequado.",
+      "explicacao": "Extrair texto, tabelas e pares chave-valor de documentos escaneados é o Amazon Textract — ele vai além de OCR simples ao entender a estrutura de formulários e tabelas, retornando dados estruturados. Analisar o sentimento de milhares de avaliações de clientes é o Amazon Comprehend — ele é o serviço de NLP da AWS que detecta sentimento, entidades e frases-chave em texto. Gerar recomendações de produtos personalizadas para cada usuário é o Amazon Personalize — ele treina modelos de recomendação a partir de dados de comportamento do cliente. Detectar rostos e objetos em imagens de câmeras de segurança é o Amazon Rekognition — ele é o serviço de visão computacional que detecta objetos, rostos e atividades em imagens e vídeo. O Amazon Translate traduz texto entre idiomas, mas nenhuma das necessidades envolve tradução. O Amazon Forecast usa ML para gerar previsões de séries temporais (demanda, vendas), mas nenhuma das tarefas é previsão.",
+      "associacoes": [
+        { "alvo": "Extrair texto, tabelas e pares chave-valor de documentos escaneados", "item": "Amazon Textract" },
+        { "alvo": "Analisar o sentimento de milhares de avaliações de clientes", "item": "Amazon Comprehend" },
+        { "alvo": "Gerar recomendações de produtos personalizadas para cada usuário", "item": "Amazon Personalize" },
+        { "alvo": "Detectar rostos e objetos em imagens de câmeras de segurança", "item": "Amazon Rekognition" }
+      ],
+      "itensExtras": ["Amazon Translate", "Amazon Forecast"]
+    },
+    {
+      "id": "clfc02-tec-adv-bancos-assoc-34",
+      "topico": "Banco de dados",
+      "tipo": "Associacao",
+      "enunciado": "Uma empresa precisa escolher o serviço de banco de dados correto da AWS para cada caso de uso. Associe cada necessidade ao serviço de banco de dados mais adequado.",
+      "explicacao": "Armazenar documentos JSON flexíveis com compatibilidade com a API do MongoDB é o Amazon DocumentDB — ele oferece um banco de documentos gerenciado compatível com MongoDB, permitindo migrar sem reescrever o código. Consultar relacionamentos entre milhões de nós num grafo de fraude financeira é o Amazon Neptune — ele é otimizado para consultas de travessia em grafos, como detectar cadeias de transações suspeitas com múltiplos graus de separação. Manter um registro imutável e verificável de todas as transações reguladas é o Amazon QLDB — seu ledger criptograficamente verificável garante que nenhuma transação possa ser alterada ou deletada retroativamente. Servir dados de sessão de aplicação web com latência de microssegundos é o Amazon ElastiCache — ele mantém dados em memória (Redis/Memcached) para acesso ultrabaixo, ideal para sessões e cache. O Amazon Timestream é um banco de séries temporais para dados de IoT e telemetria, nenhum dos cenários é série temporal. O Amazon Keyspaces é um banco compatível com Apache Cassandra, mas nenhum cenário pede migração de Cassandra.",
+      "associacoes": [
+        { "alvo": "Armazenar documentos JSON flexíveis com compatibilidade com a API do MongoDB", "item": "Amazon DocumentDB" },
+        { "alvo": "Consultar relacionamentos entre milhões de nós num grafo de fraude financeira", "item": "Amazon Neptune" },
+        { "alvo": "Manter um registro imutável e verificável de todas as transações reguladas", "item": "Amazon QLDB" },
+        { "alvo": "Servir dados de sessão de aplicação web com latência de microssegundos", "item": "Amazon ElastiCache" }
+      ],
+      "itensExtras": ["Amazon Timestream", "Amazon Keyspaces"]
+    },
+    {
+      "id": "clfc02-tec-adv-compute-assoc-35",
+      "topico": "Computação",
+      "tipo": "Associacao",
+      "enunciado": "Uma empresa precisa escolher o serviço de computação correto da AWS para cada perfil de carga de trabalho. Associe cada cenário ao serviço mais adequado.",
+      "explicacao": "Hospedar um blog WordPress com preço fixo mensal e configuração mínima é o Amazon Lightsail — ele oferece servidores virtuais com tudo incluso (armazenamento, IP, transferência) por um preço previsível, ideal para iniciantes. Executar milhares de simulações científicas independentes em fila, com escalonamento automático, é o AWS Batch — ele gerencia filas de jobs, provisiona recursos automaticamente e escala conforme a demanda sem intervenção manual. Processar um evento por segundo quando um arquivo é salvo no S3, sem manter servidor ativo, é o AWS Lambda — é a escolha natural para lógica event-driven serverless que roda por milissegundos sob demanda. Executar contêineres Docker sem gerenciar instâncias EC2 é o AWS Fargate — ele é o mecanismo de computação serverless para contêineres que funciona com ECS e EKS. O Amazon EC2 Auto Scaling ajusta capacidade de instâncias EC2, mas exige gerenciar a infraestrutura — nenhum dos cenários pede esse nível de controle. O Amazon EKS gerencia clusters Kubernetes, mas nenhum cenário menciona orquestração Kubernetes especificamente.",
+      "associacoes": [
+        { "alvo": "Hospedar um blog WordPress com preço fixo mensal e configuração mínima", "item": "Amazon Lightsail" },
+        { "alvo": "Executar milhares de simulações científicas independentes em fila, com escalonamento automático", "item": "AWS Batch" },
+        { "alvo": "Processar um evento por segundo quando um arquivo é salvo no S3, sem manter servidor ativo", "item": "AWS Lambda" },
+        { "alvo": "Executar contêineres Docker sem gerenciar instâncias EC2", "item": "AWS Fargate" }
+      ],
+      "itensExtras": ["Amazon EC2 Auto Scaling", "Amazon EKS"]
+    },
+    {
+      "id": "clfc02-tec-adv-analytics-multipla-36",
+      "topico": "Analytics",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "Uma empresa quer construir um pipeline de dados na AWS. Quais serviços são usados para análise e processamento de dados em grande escala?",
+      "explicacao": "O Amazon Athena permite consultas SQL interativas diretamente sobre dados no S3, sem provisionar infraestrutura — é uma peça central de análise em data lakes. O AWS Glue é o serviço de ETL serverless que descobre esquemas, cataloga metadados e transforma dados para alimentar o pipeline. O Amazon EMR executa frameworks de big data como Spark e Hadoop em clusters gerenciados para processamento distribuído de grandes volumes de dados. O Amazon Connect é um serviço de contact center na nuvem, sem relação com pipelines de análise de dados. O AWS CloudFormation é um serviço de infraestrutura como código para provisionar recursos, não um serviço de análise de dados.",
+      "opcoes": [
+        { "texto": "Amazon Athena.", "correta": true },
+        { "texto": "AWS Glue.", "correta": true },
+        { "texto": "Amazon EMR.", "correta": true },
+        { "texto": "Amazon Connect.", "correta": false },
+        { "texto": "AWS CloudFormation.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-serverless-multipla-37",
+      "topico": "Computação serverless",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "Quais serviços da AWS são considerados serverless, ou seja, não exigem que o cliente provisione nem gerencie servidores?",
+      "explicacao": "O AWS Lambda executa código em resposta a eventos sem provisionar servidores — é o serviço serverless mais conhecido. O AWS Fargate executa contêineres sem gerenciar instâncias EC2 — a infraestrutura é totalmente gerenciada pela AWS. O Amazon DynamoDB é um banco de dados NoSQL serverless que escala automaticamente sem necessidade de provisionar capacidade de servidor. O Amazon EC2 exige que o cliente lance, configure e gerencie instâncias de servidor virtual — é o oposto de serverless. O Amazon EMR provisiona clusters de instâncias EC2 para processamento de big data, exigindo que o cliente escolha tipos e quantidade de instâncias.",
+      "opcoes": [
+        { "texto": "AWS Lambda.", "correta": true },
+        { "texto": "AWS Fargate.", "correta": true },
+        { "texto": "Amazon DynamoDB.", "correta": true },
+        { "texto": "Amazon EC2.", "correta": false },
+        { "texto": "Amazon EMR.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-storage-classes-multipla-38",
+      "topico": "Amazon S3",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "Quais storage classes do Amazon S3 são projetadas para dados acessados com pouca frequência, oferecendo custo de armazenamento menor que o S3 Standard em troca de taxa de recuperação?",
+      "explicacao": "O S3 Standard-IA é projetado para dados acessados com pouca frequência mas que precisam de recuperação imediata, com custo de armazenamento menor que o Standard e uma taxa por GB recuperado. O S3 One Zone-IA tem o mesmo perfil do Standard-IA mas armazena em uma única Zona de Disponibilidade, com custo ainda menor — cobra taxa de recuperação igualmente. O S3 Glacier Flexible Retrieval é uma classe de arquivamento para dados raramente acessados, com custo de armazenamento muito baixo e taxa de recuperação, com opções de minutos a horas. O S3 Standard é a classe padrão para dados frequentemente acessados e não cobra taxa de recuperação — é o oposto do que a pergunta pede. O S3 Intelligent-Tiering move objetos automaticamente entre níveis com base no acesso e não cobra taxa de recuperação — o diferencial é a taxa mensal de monitoramento por objeto.",
+      "opcoes": [
+        { "texto": "S3 Standard-Infrequent Access (S3 Standard-IA).", "correta": true },
+        { "texto": "S3 One Zone-Infrequent Access (S3 One Zone-IA).", "correta": true },
+        { "texto": "S3 Glacier Flexible Retrieval.", "correta": true },
+        { "texto": "S3 Standard.", "correta": false },
+        { "texto": "S3 Intelligent-Tiering.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-gerenciamento-multipla-39",
+      "topico": "Gerenciamento e governança",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "Uma equipe quer ferramentas da AWS para gerenciar e interagir com seus recursos sem instalar software no computador local. Quais serviços permitem gerenciar recursos AWS diretamente pelo navegador?",
+      "explicacao": "O Console de Gerenciamento da AWS é a interface web principal para criar, configurar e monitorar recursos AWS no navegador. O AWS CloudShell é um terminal pré-configurado no navegador, integrado ao console, com AWS CLI e credenciais da sessão — permite executar comandos sem instalar nada. O AWS Systems Manager Session Manager permite abrir sessões remotas em instâncias EC2 pelo navegador, sem abrir portas SSH. A AWS CLI é uma ferramenta de linha de comando que precisa ser instalada localmente no computador do usuário — não funciona diretamente pelo navegador. O AWS CloudFormation é um serviço de infraestrutura como código que cria recursos a partir de templates, mas não é uma ferramenta de interação direta no navegador — é um serviço que se usa via console, CLI ou API.",
+      "opcoes": [
+        { "texto": "Console de Gerenciamento da AWS.", "correta": true },
+        { "texto": "AWS CloudShell.", "correta": true },
+        { "texto": "AWS Systems Manager Session Manager.", "correta": true },
+        { "texto": "AWS CLI.", "correta": false },
+        { "texto": "AWS CloudFormation.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-etl-ordenacao-40",
+      "topico": "Analytics",
+      "tipo": "Ordenacao",
+      "enunciado": "Uma empresa quer construir um data lake na AWS. Selecione e ordene os passos para ingerir, catalogar e consultar dados armazenados no Amazon S3.",
+      "explicacao": "O processo começa armazenando os dados brutos no Amazon S3, que serve como repositório central do data lake — sem dados não há nada a catalogar. Em seguida, o AWS Glue Crawler percorre os dados no S3, descobre automaticamente o esquema (colunas, tipos) e registra as tabelas no Glue Data Catalog, criando a referência de metadados. Por fim, o Amazon Athena consulta os dados diretamente no S3 usando SQL, referenciando as tabelas do Data Catalog para saber o esquema — sem o catálogo, o Athena não saberia como interpretar os dados. Consultar antes de catalogar falharia porque o Athena não teria tabelas definidas. Catalogar antes de armazenar falharia porque o crawler não encontraria dados para analisar. Provisionar um cluster de Redshift adicionaria etapas desnecessárias para consultas ad hoc sobre o data lake. Configurar o Amazon Kinesis seria para streaming de dados em tempo real, não para dados já armazenados em batch.",
+      "sequencia": [
+        "Armazenar os dados brutos de diversas fontes no Amazon S3.",
+        "Executar o AWS Glue Crawler para descobrir o esquema e popular o Glue Data Catalog.",
+        "Usar o Amazon Athena para consultar os dados no S3 com SQL, referenciando o Data Catalog."
+      ],
+      "itensExtras": [
+        "Provisionar um cluster do Amazon Redshift para carregar os dados.",
+        "Configurar o Amazon Kinesis Data Streams para ingestão contínua."
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-api-ordenacao-41",
+      "topico": "Arquitetura serverless",
+      "tipo": "Ordenacao",
+      "enunciado": "Uma equipe quer criar uma API REST serverless na AWS. Selecione e ordene os passos para construir e expor a API.",
+      "explicacao": "O primeiro passo é escrever a lógica de negócio em funções AWS Lambda que processarão as requisições — sem a lógica implementada, não há nada para a API expor. Em seguida, configurar o Amazon API Gateway para criar os endpoints REST (rotas, métodos HTTP) e integrar cada rota à função Lambda correspondente, definindo como as requisições chegam ao código. Por fim, fazer o deploy da API no API Gateway e distribuir a URL do endpoint para os consumidores, que agora podem chamar a API. Implementar antes de configurar o gateway garantiria que os endpoints estão prontos antes de expor, mas sem o gateway primeiro não há como testar a integração. Configurar o gateway sem as funções criaria endpoints que retornariam erro. Provisionar instâncias EC2 para rodar o API Gateway é desnecessário — ele é um serviço gerenciado e serverless. Criar um Application Load Balancer substituiria o API Gateway, mas não oferece os recursos nativos de gerenciamento de API como throttling, versionamento e autenticação.",
+      "sequencia": [
+        "Implementar as funções AWS Lambda com a lógica de negócio da API.",
+        "Configurar os endpoints REST no Amazon API Gateway e integrar cada rota à função Lambda.",
+        "Fazer o deploy da API e distribuir a URL do endpoint para os consumidores."
+      ],
+      "itensExtras": [
+        "Provisionar instâncias EC2 para hospedar o Amazon API Gateway.",
+        "Criar um Application Load Balancer para substituir o API Gateway."
+      ]
+    },
+    {
+      "id": "clfc02-tec-adv-iot-ordenacao-42",
+      "topico": "IoT",
+      "tipo": "Ordenacao",
+      "enunciado": "Uma empresa quer monitorar sensores industriais usando a AWS. Selecione e ordene os passos para conectar os dispositivos, processar os dados e armazenar os resultados.",
+      "explicacao": "O primeiro passo é registrar os dispositivos no AWS IoT Core e configurar certificados de autenticação, garantindo que apenas sensores autorizados publiquem dados — sem registro, o broker MQTT rejeita as conexões. Em seguida, configurar regras no IoT Core para filtrar e encaminhar as mensagens dos sensores para outros serviços AWS (como Lambda para processamento ou DynamoDB para armazenamento), definindo o que fazer com cada leitura. Por fim, armazenar os dados processados em um serviço de persistência (DynamoDB, S3 ou Timestream) e criar dashboards de monitoramento para visualizar as leituras em tempo real. Armazenar antes de configurar as regras não funcionaria porque os dados não chegariam ao destino. Configurar regras antes de registrar os dispositivos falharia porque nenhuma mensagem seria recebida. Instalar o Amazon CloudWatch Agent nos sensores é desnecessário — o CloudWatch Agent é para instâncias EC2, não para dispositivos IoT que falam MQTT. Abrir as portas 1883 e 8883 no firewall da VPC não se aplica — o IoT Core é um serviço gerenciado, os dispositivos se conectam diretamente ao endpoint do IoT Core pela internet, não via VPC.",
+      "sequencia": [
+        "Registrar os dispositivos no AWS IoT Core e configurar certificados de autenticação.",
+        "Configurar regras no IoT Core para filtrar e encaminhar as mensagens para serviços AWS.",
+        "Armazenar os dados processados e criar dashboards de monitoramento."
+      ],
+      "itensExtras": [
+        "Instalar o Amazon CloudWatch Agent em cada sensor industrial.",
+        "Abrir as portas 1883 e 8883 no firewall da VPC para receber conexões MQTT."
+      ]
+    }
+  ]
+}

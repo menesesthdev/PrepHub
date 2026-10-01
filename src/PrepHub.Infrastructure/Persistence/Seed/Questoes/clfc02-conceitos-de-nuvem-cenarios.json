@@ -1,0 +1,446 @@
+{
+  "exameCode": "CLF-C02",
+  "area": "conceitos-de-nuvem",
+  "questoes": [
+    {
+      "id": "clfc02-conceitos-tco-capex-opex-21",
+      "topico": "Vantagens econômicas da nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de logística gasta R$ 2 milhões por ano com licenças de software, manutenção de hardware e salários de equipe de datacenter. O CFO quer entender o impacto financeiro de migrar para a AWS e pede à equipe de TI que compare o custo total atual com o custo projetado na nuvem, incluindo treinamento, migração e operação. Qual conceito financeiro a equipe deve usar para fazer essa comparação de forma completa?",
+      "explicacao": "O custo total de propriedade (TCO) captura todos os custos diretos e indiretos de possuir e operar uma solução ao longo do tempo — hardware, software, pessoal, energia, espaço físico e manutenção — permitindo comparar com o custo equivalente na nuvem. O retorno sobre investimento (ROI) mede o ganho financeiro em relação ao investimento feito, mas responde se valeu a pena, não quanto custa cada modelo. O break-even point é o momento em que o investimento se paga, mas não dá a visão completa dos custos. A análise SWOT avalia forças, fraquezas, oportunidades e ameaças de forma qualitativa, não quantifica custos.",
+      "opcoes": [
+        { "texto": "Custo total de propriedade (TCO).", "correta": true },
+        { "texto": "Retorno sobre investimento (ROI).", "correta": false },
+        { "texto": "Ponto de equilíbrio (break-even point).", "correta": false },
+        { "texto": "Análise SWOT.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-capex-opex-22",
+      "topico": "Vantagens econômicas da nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma startup de educação online precisa de infraestrutura para hospedar seu aplicativo. O CEO não quer comprometer o caixa limitado com compras de servidores e prefere pagar mensalmente conforme o uso cresce. Qual modelo de gasto a migração para a AWS transforma nesse cenário?",
+      "explicacao": "A nuvem transforma despesa de capital (CapEx) — compra antecipada de ativos como servidores, que são depreciados ao longo dos anos — em despesa operacional (OpEx), onde o pagamento é mensal e proporcional ao consumo. Essa mudança libera capital para investir no produto. Custo fixo para custo variável descreve parte do efeito, mas CapEx para OpEx é o conceito contábil correto que abrange a eliminação da capitalização de ativos. Custo direto para indireto mudaria a classificação contábil de alocação, não o modelo de gasto. Custo compartilhado para dedicado iria na direção contrária — na nuvem os recursos são compartilhados (multi-tenant), não dedicados.",
+      "opcoes": [
+        { "texto": "Despesa de capital (CapEx) para despesa operacional (OpEx).", "correta": true },
+        { "texto": "Custo fixo para custo variável.", "correta": false },
+        { "texto": "Custo direto para custo indireto.", "correta": false },
+        { "texto": "Custo compartilhado para custo dedicado.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-wa-excelencia-operacional-23",
+      "topico": "Well-Architected: excelência operacional",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de operações quer reduzir falhas humanas nos deploys da aplicação. Eles automatizaram o pipeline de CI/CD, implementaram testes automáticos antes de cada deploy e criaram runbooks documentados para incidentes. A equipe também realiza revisões pós-incidente para identificar melhorias. Qual pilar do AWS Well-Architected Framework essas práticas representam?",
+      "explicacao": "O pilar de excelência operacional foca em executar e monitorar sistemas para entregar valor e melhorar continuamente processos e procedimentos — automação de deploy, runbooks, testes automáticos e revisões pós-incidente são todas práticas centrais desse pilar. O pilar de confiabilidade trata da recuperação de falhas e atendimento da demanda, como multi-AZ e failover automático, não da melhoria de processos operacionais. O pilar de segurança trata de proteção de dados e sistemas com criptografia, IAM e auditoria. O pilar de eficiência de desempenho trata de usar recursos computacionais de forma eficiente para atender requisitos técnicos, como escolher o tipo certo de instância.",
+      "opcoes": [
+        { "texto": "Excelência operacional.", "correta": true },
+        { "texto": "Confiabilidade.", "correta": false },
+        { "texto": "Segurança.", "correta": false },
+        { "texto": "Eficiência de desempenho.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-wa-desempenho-24",
+      "topico": "Well-Architected: eficiência de desempenho",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de streaming de vídeo precisa servir conteúdo com a menor latência possível para usuários em todo o mundo. A equipe avalia diferentes tipos de instância para a transcodificação, usa cache em múltiplas camadas e distribui conteúdo estático por CDN. A cada lançamento de novos tipos de instância pela AWS, a equipe testa se podem melhorar a performance. Qual pilar do AWS Well-Architected Framework guia essas decisões?",
+      "explicacao": "O pilar de eficiência de desempenho trata de usar recursos computacionais de forma eficiente para atender requisitos do sistema e manter essa eficiência à medida que a demanda muda e a tecnologia evolui — escolher tipos de instância, usar cache, CDN e reavaliar quando surgem novos recursos são práticas centrais. O pilar de otimização de custos trata de minimizar gastos, e embora escolher a instância certa economize dinheiro, a motivação aqui é latência e throughput. O pilar de confiabilidade trata de recuperação de falhas e atendimento da demanda, não da otimização de latência. O pilar de excelência operacional trata da melhoria de processos operacionais como deploys e monitoramento.",
+      "opcoes": [
+        { "texto": "Eficiência de desempenho.", "correta": true },
+        { "texto": "Otimização de custos.", "correta": false },
+        { "texto": "Confiabilidade.", "correta": false },
+        { "texto": "Excelência operacional.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-wa-tool-25",
+      "topico": "AWS Well-Architected Tool",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O arquiteto de soluções de uma empresa quer avaliar se a aplicação principal segue as melhores práticas da AWS em todos os pilares do Well-Architected Framework. Ele precisa de um relatório que identifique riscos e recomende melhorias, sem contratar consultoria externa. Qual ferramenta da AWS automatiza essa avaliação?",
+      "explicacao": "O AWS Well-Architected Tool permite que equipes revisem suas cargas de trabalho respondendo a perguntas organizadas por pilar, gerando um relatório com riscos identificados e recomendações de melhoria — tudo sem custo adicional e sem consultoria. O AWS Trusted Advisor inspeciona a conta e recomenda otimizações em cinco categorias (custo, desempenho, segurança, tolerância a falhas, limites de serviço), mas faz verificações automatizadas pontuais, não uma revisão arquitetural estruturada por pilar. O AWS Config monitora e registra configurações de recursos e avalia conformidade com regras, mas não faz avaliação de arquitetura. O Amazon Inspector faz avaliação automatizada de segurança e vulnerabilidades em instâncias EC2 e imagens de container, não avaliação de arquitetura.",
+      "opcoes": [
+        { "texto": "AWS Well-Architected Tool.", "correta": true },
+        { "texto": "AWS Trusted Advisor.", "correta": false },
+        { "texto": "AWS Config.", "correta": false },
+        { "texto": "Amazon Inspector.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-caf-governanca-26",
+      "topico": "CAF: perspectiva de governança",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa multinacional está migrando para a AWS e precisa garantir que o uso da nuvem atenda a políticas corporativas de compliance, gestão de riscos e orçamento. A equipe quer controlar quais serviços cada departamento pode usar e estabelecer limites de gastos por equipe. Qual perspectiva do AWS Cloud Adoption Framework (AWS CAF) orienta esse trabalho?",
+      "explicacao": "A perspectiva de governança do AWS CAF trata de orquestrar iniciativas de nuvem maximizando o valor e minimizando riscos — gerenciamento de portfólio, orçamento, compliance e gestão de riscos são suas preocupações centrais. A perspectiva de negócio garante que investimentos em TI estejam alinhados a resultados comerciais, como medir ROI, não controlar conformidade. A perspectiva de segurança trata de proteção de dados, gerenciamento de identidade e detecção de ameaças, que é um subconjunto de compliance mas não abrange orçamento e portfólio. A perspectiva de operações foca em executar e monitorar cargas de trabalho em produção, não em políticas corporativas.",
+      "opcoes": [
+        { "texto": "Perspectiva de governança.", "correta": true },
+        { "texto": "Perspectiva de negócio.", "correta": false },
+        { "texto": "Perspectiva de segurança.", "correta": false },
+        { "texto": "Perspectiva de operações.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-caf-seguranca-27",
+      "topico": "CAF: perspectiva de segurança",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Durante o planejamento da migração, a equipe de segurança da informação precisa definir controles de acesso, estratégia de criptografia e um processo de resposta a incidentes para os novos ambientes na AWS. O líder da equipe quer saber qual perspectiva do AWS CAF cobre essas responsabilidades. Qual é a resposta correta?",
+      "explicacao": "A perspectiva de segurança do AWS CAF abrange confidencialidade, integridade e disponibilidade dos dados e das cargas de trabalho — controles de acesso (IAM), criptografia e resposta a incidentes são domínios centrais dessa perspectiva. A perspectiva de governança trata de políticas organizacionais, compliance regulatória e gestão de portfólio, com escopo mais amplo que segurança técnica. A perspectiva de plataforma trata da arquitetura de referência e dos padrões de engenharia para os ambientes de nuvem. A perspectiva de pessoas foca no treinamento, capacitação e gestão de mudanças organizacionais.",
+      "opcoes": [
+        { "texto": "Perspectiva de segurança.", "correta": true },
+        { "texto": "Perspectiva de governança.", "correta": false },
+        { "texto": "Perspectiva de plataforma.", "correta": false },
+        { "texto": "Perspectiva de pessoas.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-migration-hub-28",
+      "topico": "Serviços de migração",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa está migrando 200 servidores de seu datacenter para a AWS usando diferentes estratégias e ferramentas. O gerente de projeto precisa de um painel centralizado para acompanhar o progresso de cada servidor: quais já foram migrados, quais estão em andamento e quais ainda não começaram. Qual serviço da AWS oferece essa visibilidade?",
+      "explicacao": "O AWS Migration Hub fornece um painel único para acompanhar o progresso de migrações de aplicações em várias ferramentas da AWS e de parceiros — mostra status de cada servidor ou aplicação em tempo real. O AWS Application Discovery Service coleta informações sobre servidores on-premises (CPU, memória, dependências de rede) para planejar a migração, mas não rastreia o progresso da migração em si. O AWS CloudFormation gerencia infraestrutura como código, mas não é uma ferramenta de rastreamento de migração. O AWS Systems Manager gerencia instâncias e recursos operacionais já na AWS, não acompanha o progresso da migração de servidores do datacenter.",
+      "opcoes": [
+        { "texto": "AWS Migration Hub.", "correta": true },
+        { "texto": "AWS Application Discovery Service.", "correta": false },
+        { "texto": "AWS CloudFormation.", "correta": false },
+        { "texto": "AWS Systems Manager.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-discovery-service-29",
+      "topico": "Serviços de migração",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa quer migrar seu datacenter para a AWS mas não tem inventário atualizado dos servidores: não sabe exatamente quantos existem, quais são suas configurações de CPU e memória, nem quais aplicações dependem de quais servidores. Qual serviço da AWS ajuda a equipe a obter essas informações antes de começar a migração?",
+      "explicacao": "O AWS Application Discovery Service coleta automaticamente informações sobre servidores on-premises — configuração de hardware, utilização de recursos, processos em execução e dependências de rede — para ajudar no planejamento da migração. O AWS Migration Hub acompanha o progresso de migrações em andamento, mas não descobre servidores nem mapeia dependências. O AWS Server Migration Service migra VMs on-premises para a AWS, mas precisa que a equipe já saiba quais servidores migrar. O Amazon Inspector analisa vulnerabilidades de segurança em instâncias EC2 que já estão na AWS, não faz inventário de servidores on-premises.",
+      "opcoes": [
+        { "texto": "AWS Application Discovery Service.", "correta": true },
+        { "texto": "AWS Migration Hub.", "correta": false },
+        { "texto": "AWS Server Migration Service.", "correta": false },
+        { "texto": "Amazon Inspector.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-retencao-retirada-30",
+      "topico": "Estratégias de migração",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa está planejando sua migração e categorizou 150 aplicações. Uma delas é um sistema legado de relatórios que será substituído por um serviço SaaS em seis meses. A equipe decide manter esse sistema no datacenter atual até a substituição e depois desligá-lo. Qual combinação de estratégias dos 6 R's descreve esse plano?",
+      "explicacao": "Reter (retain) significa manter a aplicação no ambiente atual sem migrar — que é o que a equipe faz durante os seis meses até a substituição. Retirar (retire) significa descomissionar a aplicação por completo — que é o que acontece quando o sistema legado é desligado após a substituição. Redefinir hospedagem e recompra não se aplicam juntas: a empresa não está movendo o sistema para a nuvem como está (rehost) e depois comprando um SaaS — está apenas mantendo no local e depois desligando. Refatorar e redefinir plataforma implicam alterar e migrar a aplicação, o que não está sendo feito. Recomprar é a estratégia do novo serviço SaaS, mas a pergunta é sobre o sistema legado, não sobre o substituto.",
+      "opcoes": [
+        { "texto": "Reter (retain) seguida de retirar (retire).", "correta": true },
+        { "texto": "Redefinir hospedagem (rehosting) seguida de recomprar (repurchasing).", "correta": false },
+        { "texto": "Refatorar (re-architecting) seguida de retirar (retire).", "correta": false },
+        { "texto": "Redefinir plataforma (replatforming) seguida de reter (retain).", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-right-sizing-31",
+      "topico": "Economia da nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de operações percebeu que suas instâncias EC2 do tipo m5.2xlarge operam com utilização de CPU abaixo de 10% e memória abaixo de 15% na maior parte do tempo. A equipe planeja reduzir o tipo para m5.large, que custa um quarto do valor. Qual prática de otimização de custos da nuvem descreve essa ação?",
+      "explicacao": "Right-sizing é a prática de ajustar o tamanho dos recursos para corresponder à demanda real — reduzir uma instância superdimensionada para eliminar desperdício é o exemplo clássico. Instâncias reservadas oferecem desconto em troca de compromisso de uso (1 ou 3 anos), mas não mudam o tamanho da instância. Spot Instances fornecem capacidade excedente com desconto, mas podem ser interrompidas a qualquer momento, o que não é o que está sendo discutido. Auto Scaling ajusta a quantidade de instâncias conforme a demanda, não o tamanho individual de cada instância.",
+      "opcoes": [
+        { "texto": "Right-sizing.", "correta": true },
+        { "texto": "Instâncias reservadas.", "correta": false },
+        { "texto": "Spot Instances.", "correta": false },
+        { "texto": "Auto Scaling.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-economia-escala-detalhado-32",
+      "topico": "Economia da nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa paga R$ 0,50 por hora por uma instância EC2. A AWS opera centenas de milhares de servidores e negocia preços de hardware, energia e refrigeração em volume muito superior ao que qualquer cliente individual conseguiria. Esse poder de negociação permite que a AWS ofereça preços mais baixos do que a empresa conseguiria sozinha. Qual princípio econômico da nuvem está sendo descrito?",
+      "explicacao": "Economias de escala massivas significam que a AWS distribui seus custos de infraestrutura entre milhões de clientes, e o poder de compra em volume resulta em custos unitários menores repassados como preços mais baixos — é exatamente o que o cenário descreve. Pay-as-you-go é o modelo de pagamento pelo consumo real, não a razão pela qual o preço unitário é baixo. Elasticidade é a capacidade de escalar recursos automaticamente, não uma vantagem de preço. Computação sob demanda é a disponibilidade imediata de recursos, não o mecanismo que torna o preço competitivo.",
+      "opcoes": [
+        { "texto": "Beneficiar-se de enormes economias de escala.", "correta": true },
+        { "texto": "Pagar somente pelo que usar (pay-as-you-go).", "correta": false },
+        { "texto": "Elasticidade.", "correta": false },
+        { "texto": "Computação sob demanda.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-edge-location-33",
+      "topico": "Infraestrutura global da AWS",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa brasileira hospeda seu site na Região us-east-1 (Norte da Virgínia). Usuários no Japão reclamam de lentidão ao carregar imagens e vídeos estáticos. A equipe configura o Amazon CloudFront para servir esse conteúdo a partir de locais mais próximos dos usuários. Onde exatamente o CloudFront armazena cópias em cache desse conteúdo?",
+      "explicacao": "Os pontos de presença (edge locations) são locais distribuídos pelo mundo onde o CloudFront armazena cópias em cache do conteúdo estático para entregá-lo com baixa latência aos usuários próximos — o Japão tem vários edge locations. As Zonas de Disponibilidade são datacenters isolados dentro de uma Região, usados para alta disponibilidade de serviços como EC2 e RDS, não para cache de CDN. As Regiões são áreas geográficas com múltiplas AZs, mas o conteúdo já está na Região us-east-1 e o problema é justamente a distância. As zonas locais (Local Zones) estendem uma Região para locais metropolitanos específicos para workloads sensíveis a latência, mas não são a infraestrutura do CloudFront.",
+      "opcoes": [
+        { "texto": "Nos pontos de presença (edge locations).", "correta": true },
+        { "texto": "Nas Zonas de Disponibilidade da Região mais próxima do Japão.", "correta": false },
+        { "texto": "Na Região us-east-1 onde o site está hospedado.", "correta": false },
+        { "texto": "Nas zonas locais (Local Zones) do Japão.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-outposts-34",
+      "topico": "Infraestrutura global da AWS",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma fábrica de automóveis precisa processar dados de sensores de produção com latência inferior a 5 milissegundos. A regulamentação do setor exige que certos dados permaneçam fisicamente no local da fábrica. A equipe quer usar as mesmas APIs e ferramentas da AWS que já domina, sem aprender uma plataforma diferente. Qual solução da AWS permite executar serviços da AWS diretamente na infraestrutura local da empresa?",
+      "explicacao": "O AWS Outposts é uma infraestrutura totalmente gerenciada pela AWS instalada fisicamente no local do cliente — permite executar serviços como EC2, EBS e RDS usando as mesmas APIs, ferramentas e console da nuvem AWS, atendendo requisitos de latência ultrabaixa e residência de dados. O AWS Direct Connect cria uma conexão de rede dedicada entre o datacenter e a AWS, mas os recursos continuam na nuvem, não no local. O AWS Local Zones são extensões de Regiões AWS em áreas metropolitanas para latência menor, mas são datacenters da AWS, não infraestrutura no local do cliente. O AWS Wavelength incorpora recursos AWS na borda de redes 5G para aplicações móveis, não em instalações industriais.",
+      "opcoes": [
+        { "texto": "AWS Outposts.", "correta": true },
+        { "texto": "AWS Direct Connect.", "correta": false },
+        { "texto": "AWS Local Zones.", "correta": false },
+        { "texto": "AWS Wavelength.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-cdk-iac-35",
+      "topico": "Infraestrutura como código",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de desenvolvimento quer definir infraestrutura na AWS usando TypeScript em vez de escrever templates JSON ou YAML. Os desenvolvedores preferem usar a mesma linguagem do aplicativo, com autocomplete e verificação de tipos no IDE. Qual ferramenta da AWS permite definir recursos de infraestrutura com linguagens de programação?",
+      "explicacao": "O AWS Cloud Development Kit (CDK) permite definir infraestrutura usando linguagens de programação como TypeScript, Python, Java e C#, com suporte completo a autocomplete e verificação de tipos — internamente gera templates CloudFormation. O AWS CloudFormation usa templates JSON ou YAML declarativos, não linguagens de programação, e não oferece autocomplete nativo de IDE. O AWS CLI executa comandos individuais, não define infraestrutura como código com abstrações e verificação de tipos. O AWS SDK permite chamar APIs da AWS programaticamente, mas é para interação direta com serviços, não para definir e gerenciar infraestrutura como código com estado e atualizações incrementais.",
+      "opcoes": [
+        { "texto": "AWS Cloud Development Kit (CDK).", "correta": true },
+        { "texto": "AWS CloudFormation.", "correta": false },
+        { "texto": "AWS Command Line Interface (CLI).", "correta": false },
+        { "texto": "AWS SDK.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-iac-beneficio-36",
+      "topico": "Infraestrutura como código",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de DevOps criou um template do AWS CloudFormation para o ambiente de staging. Quando precisaram de um ambiente de testes idêntico, implantaram o mesmo template em outra conta. Quando um auditor solicitou o histórico de mudanças na infraestrutura, a equipe mostrou o histórico de commits do template no repositório Git. Qual vantagem da infraestrutura como código o cenário demonstra?",
+      "explicacao": "A reprodutibilidade e rastreabilidade são as vantagens centrais demonstradas: o mesmo template cria ambientes idênticos (reprodutibilidade) e o histórico de commits registra toda mudança (rastreabilidade). A redução de custos pode ser um efeito secundário da automação, mas o cenário não menciona economia — demonstra consistência e auditabilidade. A alta disponibilidade é a capacidade de um sistema resistir a falhas, não tem relação com templates versionados. O monitoramento em tempo real envolve observar o comportamento dos recursos em execução, não a definição ou versionamento da infraestrutura.",
+      "opcoes": [
+        { "texto": "Reprodutibilidade e rastreabilidade.", "correta": true },
+        { "texto": "Redução de custos operacionais.", "correta": false },
+        { "texto": "Alta disponibilidade.", "correta": false },
+        { "texto": "Monitoramento em tempo real.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-iaas-paas-saas-37",
+      "topico": "Modelos de serviço em nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de contabilidade contratou um software de folha de pagamento que roda inteiramente no navegador. A empresa não instala nada, não gerencia servidores, não se preocupa com patches e não escolhe o sistema operacional. O provedor do software cuida de tudo. Qual modelo de serviço em nuvem descreve essa situação?",
+      "explicacao": "Software como Serviço (SaaS) entrega a aplicação completa ao usuário final, que apenas a usa pelo navegador sem gerenciar nenhuma camada de infraestrutura, sistema operacional, runtime ou a própria aplicação — o provedor cuida de tudo. Plataforma como Serviço (PaaS) fornece uma plataforma para o cliente desenvolver e implantar seu próprio código — o cliente ainda gerencia a aplicação e os dados. Infraestrutura como Serviço (IaaS) fornece recursos computacionais virtualizados — o cliente gerencia o sistema operacional, middleware e aplicações. Function as a Service (FaaS) é um modelo serverless onde o cliente escreve funções individuais, não usa um software pronto.",
+      "opcoes": [
+        { "texto": "Software como Serviço (SaaS).", "correta": true },
+        { "texto": "Plataforma como Serviço (PaaS).", "correta": false },
+        { "texto": "Infraestrutura como Serviço (IaaS).", "correta": false },
+        { "texto": "Function as a Service (FaaS).", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-iaas-cenario-38",
+      "topico": "Modelos de serviço em nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa de segurança precisa executar um software especializado de análise forense que só roda em uma versão específica do Red Hat Enterprise Linux com módulos de kernel customizados. A equipe quer controlar totalmente o sistema operacional, instalar dependências específicas e configurar o kernel. Qual modelo de serviço em nuvem oferece esse nível de controle?",
+      "explicacao": "Infraestrutura como Serviço (IaaS) fornece recursos computacionais virtualizados — servidores, armazenamento e rede — onde o cliente tem controle total sobre o sistema operacional, incluindo a escolha da distribuição, versão e módulos de kernel, que é exatamente o que o cenário requer. O Amazon EC2 é o exemplo clássico de IaaS na AWS. Plataforma como Serviço (PaaS) gerencia o sistema operacional e o runtime, então o cliente não pode escolher a versão do Linux nem customizar módulos de kernel. Software como Serviço (SaaS) entrega uma aplicação pronta sem nenhum controle sobre a infraestrutura. Container as a Service (CaaS) permite executar containers, mas sem controle direto sobre módulos de kernel do host.",
+      "opcoes": [
+        { "texto": "Infraestrutura como Serviço (IaaS).", "correta": true },
+        { "texto": "Plataforma como Serviço (PaaS).", "correta": false },
+        { "texto": "Software como Serviço (SaaS).", "correta": false },
+        { "texto": "Container as a Service (CaaS).", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-paas-cenario-39",
+      "topico": "Modelos de serviço em nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de desenvolvedores quer implantar uma aplicação web em Java na AWS sem se preocupar com provisioning de servidores, patches do sistema operacional ou configuração de balanceamento de carga. Eles querem enviar o código da aplicação e deixar a plataforma gerenciar o restante, mas precisam de controle sobre as variáveis de ambiente e as configurações da aplicação. Qual modelo de serviço atende a esse requisito?",
+      "explicacao": "Plataforma como Serviço (PaaS) gerencia a infraestrutura (servidores, SO, patches, balanceamento) enquanto o cliente controla a aplicação e suas configurações — serviços como o AWS Elastic Beanstalk são exemplos de PaaS na AWS. Infraestrutura como Serviço (IaaS) daria mais controle do que necessário: a equipe teria que gerenciar o SO, patches e balanceamento manualmente. Software como Serviço (SaaS) não permitiria enviar código próprio — é uma aplicação pronta. Function as a Service (FaaS) exigiria decompor a aplicação em funções individuais orientadas a eventos, e não é um deploy de aplicação web tradicional.",
+      "opcoes": [
+        { "texto": "Plataforma como Serviço (PaaS).", "correta": true },
+        { "texto": "Infraestrutura como Serviço (IaaS).", "correta": false },
+        { "texto": "Software como Serviço (SaaS).", "correta": false },
+        { "texto": "Function as a Service (FaaS).", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-shared-resp-modelo-40",
+      "topico": "Responsabilidade compartilhada por modelo de serviço",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa usa o Amazon RDS para gerenciar seu banco de dados PostgreSQL. O administrador de banco de dados quer saber se precisa aplicar patches no sistema operacional da instância RDS. De acordo com o modelo de responsabilidade compartilhada, quem é responsável por patches do SO em um serviço gerenciado como o RDS?",
+      "explicacao": "Em serviços gerenciados como o Amazon RDS, a AWS é responsável por aplicar patches no sistema operacional — o cliente não tem acesso ao SO subjacente. Isso é diferente do EC2, onde o cliente gerencia o SO. O cliente é responsável por patches do SO em instâncias EC2, mas o RDS é um serviço gerenciado onde essa camada é administrada pela AWS. A responsabilidade não é compartilhada nesse caso específico: patches de SO no RDS são exclusivamente da AWS. O time de suporte da AWS não aplica patches por chamado — é um processo automatizado gerenciado pela AWS como parte do serviço.",
+      "opcoes": [
+        { "texto": "A AWS.", "correta": true },
+        { "texto": "O cliente.", "correta": false },
+        { "texto": "A responsabilidade é compartilhada: a AWS disponibiliza o patch e o cliente agenda a aplicação.", "correta": false },
+        { "texto": "O time de suporte da AWS, sob demanda do cliente.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-agilidade-time-to-market-41",
+      "topico": "Proposta de valor da nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma startup quer testar uma ideia de produto no mercado. No modelo tradicional, ela levaria três meses para comprar servidores, configurar rede, instalar software e lançar a primeira versão. Na AWS, a equipe de dois desenvolvedores coloca o MVP no ar em uma semana, usando serviços gerenciados. Se a ideia não funcionar, desligam tudo sem hardware encalhado. Qual proposta de valor da nuvem esse cenário demonstra?",
+      "explicacao": "A agilidade e redução do time-to-market permitem que empresas testem ideias rapidamente, iterem sobre feedback e abandonem experimentos fracassados sem custo irrecuperável — de três meses para uma semana, com possibilidade de desligar tudo. A elasticidade é a capacidade de escalar automaticamente conforme a demanda, que não é o foco do cenário. O alcance global permite implantar em múltiplas regiões rapidamente, mas o cenário trata de velocidade de lançamento, não de expansão geográfica. A alta disponibilidade garante que o sistema continue operando durante falhas, mas o cenário trata de experimentação rápida, não de resiliência.",
+      "opcoes": [
+        { "texto": "Agilidade e redução do time-to-market.", "correta": true },
+        { "texto": "Elasticidade.", "correta": false },
+        { "texto": "Alcance global.", "correta": false },
+        { "texto": "Alta disponibilidade.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-experimentacao-42",
+      "topico": "Proposta de valor da nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de machine learning quer testar três arquiteturas de modelo diferentes para descobrir qual oferece a melhor acurácia. Em vez de comprar GPUs dedicadas para os três experimentos, a equipe provisiona instâncias com GPU na AWS, executa os testes em paralelo durante dois dias e desliga todas as instâncias ao terminar, pagando apenas pelas 48 horas de uso. Qual vantagem da nuvem torna essa abordagem viável?",
+      "explicacao": "A experimentação de baixo custo é possível na nuvem porque recursos podem ser provisionados temporariamente e pagos pelo uso — três ambientes com GPU rodando em paralelo por 48 horas custam uma fração do que custaria comprar hardware dedicado que ficaria ocioso depois. A escalabilidade é a capacidade de lidar com carga crescente, mas o cenário é sobre experimentação paralela temporária, não sobre escalar um sistema em produção. As instâncias reservadas oferecem desconto por compromisso de uso contínuo, que é o oposto do uso temporário de 48 horas. O modelo de preço em camadas reduz o custo unitário com volume, mas o benefício aqui é poder pagar só pelo tempo usado, não o desconto por volume.",
+      "opcoes": [
+        { "texto": "Experimentação de baixo custo com pagamento por uso.", "correta": true },
+        { "texto": "Escalabilidade.", "correta": false },
+        { "texto": "Instâncias reservadas.", "correta": false },
+        { "texto": "Modelo de preço em camadas.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-organizations-basico-43",
+      "topico": "AWS Organizations",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa com quatro departamentos quer que cada um tenha sua própria conta AWS para isolar recursos e faturamento, mas precisa gerenciar políticas de segurança centralmente e receber uma fatura consolidada. Qual serviço da AWS permite organizar múltiplas contas dessa forma?",
+      "explicacao": "O AWS Organizations permite criar e gerenciar múltiplas contas AWS centralmente, agrupá-las em unidades organizacionais (UOs), aplicar políticas de controle de serviço (SCPs) e receber faturamento consolidado — atende todos os requisitos do cenário. O AWS IAM gerencia usuários, grupos e permissões dentro de uma conta, mas não cria nem gerencia múltiplas contas. O AWS Control Tower automatiza a configuração de um ambiente multi-conta seguindo melhores práticas, mas é construído sobre o Organizations — a pergunta é sobre a funcionalidade base de gerenciar as contas. O AWS Config monitora e avalia configurações de recursos, mas não organiza contas nem consolida faturamento.",
+      "opcoes": [
+        { "texto": "AWS Organizations.", "correta": true },
+        { "texto": "AWS IAM.", "correta": false },
+        { "texto": "AWS Control Tower.", "correta": false },
+        { "texto": "AWS Config.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-organizations-uo-44",
+      "topico": "AWS Organizations",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma empresa organiza suas contas AWS em grupos: Produção, Desenvolvimento e Sandbox. Cada grupo tem políticas diferentes — as contas de produção não podem usar regiões fora da América do Sul, enquanto as de sandbox podem usar qualquer região. A equipe implementou isso agrupando contas e aplicando políticas ao grupo. Qual conceito do AWS Organizations descreve esses agrupamentos?",
+      "explicacao": "As unidades organizacionais (UOs) são agrupamentos lógicos de contas no AWS Organizations que permitem aplicar políticas de controle de serviço (SCPs) a todas as contas do grupo de uma vez — é exatamente como a empresa separou Produção, Desenvolvimento e Sandbox. Grupos do IAM agrupam usuários dentro de uma conta para atribuir permissões, não organizam contas AWS separadas. Tags de recursos são metadados para classificar e filtrar recursos individuais, não para agrupar contas com políticas distintas. VPCs são redes virtuais isoladas para recursos dentro de uma conta, não para organizar contas.",
+      "opcoes": [
+        { "texto": "Unidades organizacionais (UOs).", "correta": true },
+        { "texto": "Grupos do IAM.", "correta": false },
+        { "texto": "Tags de recursos.", "correta": false },
+        { "texto": "VPCs.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-regiao-az-cenario-45",
+      "topico": "Infraestrutura global da AWS",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma fintech precisa que seus dados permaneçam fisicamente no Brasil por exigência da LGPD. A equipe escolhe implantar em sa-east-1 (São Paulo) e distribui os recursos em três datacenters isolados dentro dessa localidade para alta disponibilidade. Qual é a relação correta entre os conceitos de infraestrutura global da AWS nesse cenário?",
+      "explicacao": "Uma Região (sa-east-1) é uma área geográfica que contém múltiplas Zonas de Disponibilidade — cada AZ é um datacenter (ou grupo de datacenters) isolado com energia, refrigeração e rede independentes. Distribuir em três AZs garante alta disponibilidade dentro da mesma Região, atendendo a LGPD. Uma AZ não contém múltiplas Regiões — é a Região que contém múltiplas AZs, e cada AZ pertence a exatamente uma Região. Regiões e AZs não são sinônimos: a Região é o contêiner geográfico e as AZs são as unidades de isolamento de falhas dentro dela. Edge locations são pontos de presença para cache de CDN, não datacenters para hospedar aplicações com residência de dados.",
+      "opcoes": [
+        { "texto": "A Região sa-east-1 contém múltiplas Zonas de Disponibilidade, cada uma isolada das demais.", "correta": true },
+        { "texto": "Cada Zona de Disponibilidade contém múltiplas Regiões para redundância.", "correta": false },
+        { "texto": "Região e Zona de Disponibilidade são nomes diferentes para o mesmo conceito.", "correta": false },
+        { "texto": "Os edge locations de São Paulo são as Zonas de Disponibilidade da Região.", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-modelos-servico-associacao-46",
+      "topico": "Modelos de serviço em nuvem",
+      "tipo": "Associacao",
+      "enunciado": "Uma empresa usa diferentes serviços da AWS e precisa classificar cada cenário de uso segundo o modelo de serviço (IaaS, PaaS, SaaS). Associe cada cenário ao modelo correto.",
+      "explicacao": "Executar instâncias EC2 com controle total do SO é IaaS — o cliente gerencia tudo acima do hypervisor: sistema operacional, runtime, aplicação e dados. Implantar código no Elastic Beanstalk sem gerenciar SO ou servidor é PaaS — a plataforma cuida da infraestrutura e o cliente cuida da aplicação e dos dados. Usar o Amazon WorkMail para e-mail corporativo é SaaS — a aplicação é entregue pronta, sem nenhuma gestão de infraestrutura ou código. Executar containers no ECS com Fargate é Container como Serviço / PaaS — o cliente gerencia os containers e a aplicação, sem gerenciar servidores ou SO. O Amazon S3 para armazenamento de objetos é classificado como IaaS na visão da AWS. O AWS Lambda como FaaS é frequentemente associado a PaaS, mas é um caso distinto de serverless.",
+      "associacoes": [
+        { "alvo": "Executar instâncias EC2 com controle total do sistema operacional", "item": "Infraestrutura como Serviço (IaaS)" },
+        { "alvo": "Implantar código no Elastic Beanstalk sem gerenciar servidores", "item": "Plataforma como Serviço (PaaS)" },
+        { "alvo": "Usar o Amazon WorkMail para e-mail corporativo sem instalar nada", "item": "Software como Serviço (SaaS)" },
+        { "alvo": "Executar containers no Amazon ECS com AWS Fargate sem gerenciar servidores", "item": "Plataforma como Serviço (PaaS)" }
+      ],
+      "itensExtras": ["Database as a Service (DBaaS)", "Network as a Service (NaaS)"]
+    },
+    {
+      "id": "clfc02-conceitos-infra-global-associacao-47",
+      "topico": "Infraestrutura global da AWS",
+      "tipo": "Associacao",
+      "enunciado": "Uma equipe de arquitetura está planejando a implantação de uma aplicação global na AWS. Associe cada necessidade ao componente correto da infraestrutura global.",
+      "explicacao": "A Região é o local geográfico onde os dados são armazenados e processados, e a escolha é determinada por requisitos de conformidade, latência e custo — a LGPD exige a Região de São Paulo. As Zonas de Disponibilidade são datacenters isolados dentro de uma Região, usados para alta disponibilidade — distribuir em múltiplas AZs protege contra falha de um datacenter. Os edge locations são pontos de presença do CloudFront para cache de conteúdo estático com baixa latência. O AWS Outposts leva infraestrutura AWS para o local do cliente, atendendo requisitos de latência ultrabaixa ou residência de dados local. O AWS Direct Connect não é um componente da infraestrutura global, mas uma conexão de rede dedicada. O Amazon VPC é uma rede virtual dentro de uma Região, não um componente da infraestrutura global.",
+      "associacoes": [
+        { "alvo": "Manter dados no Brasil por exigência da LGPD", "item": "Região (sa-east-1)" },
+        { "alvo": "Garantir que a aplicação sobreviva à falha de um datacenter", "item": "Zonas de Disponibilidade" },
+        { "alvo": "Entregar imagens e vídeos com baixa latência para usuários globais", "item": "Pontos de presença (edge locations)" },
+        { "alvo": "Executar serviços AWS dentro do datacenter da empresa", "item": "AWS Outposts" }
+      ],
+      "itensExtras": ["AWS Direct Connect", "Amazon VPC"]
+    },
+    {
+      "id": "clfc02-conceitos-migracao-ordenacao-48",
+      "topico": "Processo de migração para a nuvem",
+      "tipo": "Ordenacao",
+      "enunciado": "Uma empresa decidiu migrar seu datacenter para a AWS. Selecione e ordene os passos de alto nível que a equipe deve seguir para planejar e executar a migração.",
+      "explicacao": "A sequência começa com a descoberta e o inventário do ambiente atual usando o AWS Application Discovery Service — sem saber quais servidores e dependências existem, não há como planejar a migração. Em seguida, a equipe categoriza cada aplicação em uma das estratégias dos 6 R's (rehost, replatform, refactor, repurchase, retain, retire) com base nos requisitos de cada uma. Por fim, a execução da migração segue o plano, com rastreamento centralizado no AWS Migration Hub para acompanhar o progresso. Executar antes de categorizar resultaria em migrar aplicações que deveriam ser retiradas ou substituídas. Categorizar sem descobrir primeiro levaria a estratégias baseadas em suposições. Desligar o datacenter original é posterior à validação, não faz parte do planejamento. Contratar um arquiteto de soluções é opcional e não é um passo da metodologia.",
+      "sequencia": [
+        "Descobrir e inventariar todos os servidores e dependências do ambiente atual.",
+        "Categorizar cada aplicação em uma das estratégias dos 6 R's.",
+        "Executar a migração e acompanhar o progresso no AWS Migration Hub."
+      ],
+      "itensExtras": [
+        "Desligar imediatamente o datacenter original antes de validar os ambientes na nuvem.",
+        "Contratar um arquiteto de soluções dedicado da AWS antes de qualquer outro passo."
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-wa-ordenacao-49",
+      "topico": "AWS Well-Architected Tool",
+      "tipo": "Ordenacao",
+      "enunciado": "Uma equipe quer avaliar a arquitetura de sua aplicação usando o AWS Well-Architected Tool. Selecione e ordene os passos para realizar a revisão.",
+      "explicacao": "A sequência começa definindo a carga de trabalho (workload) no Well-Architected Tool — é preciso descrever o que será avaliado antes de responder perguntas. Em seguida, a equipe responde às perguntas organizadas por pilar (segurança, confiabilidade, custos etc.), indicando quais melhores práticas já seguem. Por fim, o relatório gerado identifica riscos altos e médios com recomendações de melhoria para cada pilar. Implementar mudanças vem depois da revisão, não é parte do processo de avaliação. Responder sem definir o workload não é possível no fluxo da ferramenta. Contratar um parceiro AWS é opcional e não faz parte do fluxo nativo da ferramenta.",
+      "sequencia": [
+        "Definir a carga de trabalho (workload) no Well-Architected Tool.",
+        "Responder às perguntas de cada pilar do Well-Architected Framework.",
+        "Analisar o relatório de riscos e recomendações de melhoria gerado pela ferramenta."
+      ],
+      "itensExtras": [
+        "Implementar todas as mudanças sugeridas antes de gerar o relatório.",
+        "Contratar um parceiro AWS certificado para usar a ferramenta."
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-multicontas-beneficio-50",
+      "topico": "AWS Organizations",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "Uma empresa decidiu adotar uma estratégia multi-conta na AWS usando o AWS Organizations. Quais dos seguintes são benefícios dessa abordagem?",
+      "explicacao": "O isolamento de recursos e segurança entre departamentos garante que um problema ou violação em uma conta não afete as demais — contas são a maior fronteira de isolamento na AWS. O faturamento consolidado com visibilidade por conta permite ver o gasto total e de cada departamento em uma única fatura, simplificando a alocação de custos. A aplicação centralizada de políticas de segurança via SCPs permite restringir quais serviços ou ações cada conta pode usar, garantindo conformidade. A eliminação de toda a latência de rede entre contas não é verdade: contas diferentes que precisam se comunicar usam a rede normalmente, e multi-conta não elimina latência. O acesso root automático de todas as contas por qualquer administrador não existe: cada conta tem seu próprio usuário root, e o acesso entre contas requer configuração explícita de roles.",
+      "opcoes": [
+        { "texto": "Isolamento de recursos e segurança entre departamentos", "correta": true },
+        { "texto": "Faturamento consolidado com visibilidade por conta", "correta": true },
+        { "texto": "Aplicação centralizada de políticas de segurança via SCPs", "correta": true },
+        { "texto": "Eliminação de toda a latência de rede entre contas", "correta": false },
+        { "texto": "Acesso root automático de todas as contas por qualquer administrador", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-tco-componentes-51",
+      "topico": "Vantagens econômicas da nuvem",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "Uma empresa está calculando o custo total de propriedade (TCO) do seu datacenter atual para comparar com a migração para a AWS. Quais dos seguintes itens devem ser incluídos no cálculo do TCO on-premises?",
+      "explicacao": "Os custos com energia elétrica e refrigeração do datacenter são custos diretos de operação que desaparecem com a migração. Os salários da equipe de TI que gerencia hardware e rede são custos de pessoal associados à infraestrutura on-premises. O custo de aquisição e depreciação de servidores é a despesa de capital (CapEx) que a nuvem elimina. A taxa de transferência de dados entre AZs na AWS é um custo da nuvem, não do datacenter atual — incluí-la no TCO on-premises compararia custo errado. O custo do AWS Support é um gasto na nuvem, não um componente do TCO do datacenter existente.",
+      "opcoes": [
+        { "texto": "Custos com energia elétrica e refrigeração do datacenter", "correta": true },
+        { "texto": "Salários da equipe de TI que gerencia hardware e rede", "correta": true },
+        { "texto": "Custo de aquisição e depreciação de servidores", "correta": true },
+        { "texto": "Taxa de transferência de dados entre Zonas de Disponibilidade na AWS", "correta": false },
+        { "texto": "Custo do plano de suporte AWS Business", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-shared-resp-por-modelo-52",
+      "topico": "Responsabilidade compartilhada por modelo de serviço",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "Um arquiteto está explicando como a divisão de responsabilidades muda conforme o modelo de serviço. Quais afirmações sobre o modelo de responsabilidade compartilhada da AWS estão corretas?",
+      "explicacao": "Em IaaS (EC2), o cliente é responsável pelo SO, patches e firewall do SO — tem controle total acima do hypervisor. Em SaaS gerenciado, a AWS gerencia tudo exceto os dados do cliente e o controle de acesso a eles — o cliente decide quem acessa e o que é armazenado. Independentemente do modelo, a segurança física dos datacenters é sempre da AWS, nunca do cliente. Dizer que em PaaS (Elastic Beanstalk) o cliente configura o hypervisor é incorreto: o hypervisor é responsabilidade da AWS em todos os modelos, o cliente nunca o acessa. Afirmar que SaaS transfere toda responsabilidade de segurança para a AWS é incorreto: o cliente sempre é responsável por gerenciar o acesso aos seus dados e a configuração de identidade.",
+      "opcoes": [
+        { "texto": "Em IaaS (EC2), o cliente é responsável por patches do sistema operacional", "correta": true },
+        { "texto": "Em SaaS gerenciado, a AWS cuida de tudo exceto dos dados e do controle de acesso do cliente", "correta": true },
+        { "texto": "A segurança física dos datacenters é responsabilidade da AWS em todos os modelos", "correta": true },
+        { "texto": "Em PaaS (Elastic Beanstalk), o cliente configura o hypervisor", "correta": false },
+        { "texto": "Em SaaS, toda responsabilidade de segurança é transferida para a AWS", "correta": false }
+      ]
+    },
+    {
+      "id": "clfc02-conceitos-roi-migracao-53",
+      "topico": "Vantagens econômicas da nuvem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O CTO de uma empresa apresentou ao conselho que, após migrar 80% dos workloads para a AWS, a empresa reduziu custos de infraestrutura em 35%, acelerou o lançamento de novos produtos de trimestral para mensal e eliminou três incidentes de indisponibilidade que custavam R$ 200 mil cada. O conselho quer saber se o investimento na migração se justificou. Qual métrica financeira responde diretamente a essa pergunta?",
+      "explicacao": "O retorno sobre investimento (ROI) compara o ganho obtido (redução de custos + receita adicional + perdas evitadas) com o investimento realizado na migração — é a métrica que responde se o dinheiro gasto valeu a pena. O custo total de propriedade (TCO) compara o custo de possuir e operar em cada modelo, mas não calcula se o investimento na mudança retornou. O break-even point indica quando o investimento se paga, mas não quantifica o retorno total. O tempo de amortização é semelhante ao break-even e não mede o ganho total em relação ao investimento.",
+      "opcoes": [
+        { "texto": "Retorno sobre investimento (ROI).", "correta": true },
+        { "texto": "Custo total de propriedade (TCO).", "correta": false },
+        { "texto": "Ponto de equilíbrio (break-even point).", "correta": false },
+        { "texto": "Tempo de amortização.", "correta": false }
+      ]
+    }
+  ]
+}
