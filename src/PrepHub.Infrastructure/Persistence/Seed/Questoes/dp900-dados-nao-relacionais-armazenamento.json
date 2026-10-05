@@ -1,0 +1,372 @@
+{
+  "exameCode": "DP-900",
+  "area": "dados-nao-relacionais",
+  "questoes": [
+    {
+      "id": "dp900-nrel-arm-blob-block-01",
+      "topico": "Azure Blob Storage",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso precisa armazenar milhões de documentos PDF e imagens no Azure, acessados via HTTP/REST por aplicações web. Os arquivos variam de kilobytes a gigabytes e não precisam de compartilhamento via protocolo de sistema de arquivos. Qual serviço atende?",
+      "explicacao": "Azure Blob Storage é projetado para armazenar grandes volumes de dados não estruturados (documentos, imagens, vídeos) acessíveis via HTTP/REST. Block blobs são o tipo padrão para upload de arquivos. Azure Files é para compartilhamentos acessíveis via SMB/NFS, não via HTTP/REST direto. Azure Table Storage é chave-valor para dados estruturados simples. Azure Queue Storage é para mensageria entre componentes, não armazenamento de arquivos.",
+      "opcoes": [
+        { "texto": "Azure Blob Storage.", "correta": true },
+        { "texto": "Azure Files.", "correta": false },
+        { "texto": "Azure Table Storage.", "correta": false },
+        { "texto": "Azure Queue Storage.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-blob-tiers-cenario-02",
+      "topico": "Camadas de acesso",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe financeira da Fabrikam tem relatórios trimestrais que são acessados intensamente no mês de publicação e depois raramente consultados. Os relatórios não podem ser excluídos por cinco anos. Qual estratégia de camada de acesso no Blob Storage minimiza o custo total?",
+      "explicacao": "Hot durante o primeiro mês (acesso frequente, custo de acesso baixo), depois Cool por um ano (acesso esporádico, armazenamento mais barato que Hot), depois Archive até completar cinco anos (sem acesso, armazenamento mais barato de todos). Essa progressão acompanha a queda de acesso ao longo do tempo. Manter em Hot o tempo todo paga armazenamento premium por dados dormentes. Cool permanente é mais caro que Archive para dados que ficam anos sem acesso. Archive desde o início pagaria reidratação cara no primeiro mês de acesso intenso.",
+      "opcoes": [
+        { "texto": "Hot → Cool → Archive, acompanhando a queda de acesso.", "correta": true },
+        { "texto": "Hot permanentemente por cinco anos.", "correta": false },
+        { "texto": "Cool permanentemente por cinco anos.", "correta": false },
+        { "texto": "Archive desde o primeiro dia.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-blob-archive-reidrat-03",
+      "topico": "Camada Archive",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders moveu backups antigos para a camada Archive do Azure Blob Storage. Um auditor solicita acesso a um arquivo específico com urgência (precisa em no máximo duas horas). Qual opção de reidratação atende?",
+      "explicacao": "A reidratação com prioridade alta pode completar em até uma hora para objetos menores, tornando-se a única opção para urgência de duas horas. A prioridade padrão pode levar até 15 horas — não atende o prazo. Acessar diretamente sem reidratação não é possível: a camada Archive é offline e retorna erro ao tentar ler o blob. Mover para Cool antes de ler é a reidratação em si — mas sem especificar prioridade alta, leva horas demais.",
+      "opcoes": [
+        { "texto": "Reidratação com prioridade alta.", "correta": true },
+        { "texto": "Reidratação com prioridade padrão.", "correta": false },
+        { "texto": "Acessar diretamente o blob na camada Archive.", "correta": false },
+        { "texto": "Copiar para outra conta de armazenamento.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-files-smb-vs-blob-04",
+      "topico": "Azure Files vs Blob Storage",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works precisa migrar um file server Windows para a nuvem. As aplicações usam caminhos UNC (\\\\servidor\\compartilhamento) e a equipe não quer alterar nenhuma. Qual serviço permite manter os mesmos padrões de acesso?",
+      "explicacao": "Azure Files suporta protocolo SMB e pode ser montado como unidade de rede em Windows, Linux e macOS, mantendo a mesma experiência de caminhos UNC. Blob Storage é acessível via HTTP/REST, não via caminhos UNC/SMB. Data Lake Storage Gen2 é para análise em massa, não para file server. Azure Disk Storage fornece discos para VMs, não compartilhamentos de rede.",
+      "opcoes": [
+        { "texto": "Azure Files.", "correta": true },
+        { "texto": "Azure Blob Storage.", "correta": false },
+        { "texto": "Azure Data Lake Storage Gen2.", "correta": false },
+        { "texto": "Azure Disk Storage.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-files-nfs-05",
+      "topico": "Azure Files",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Tailspin Toys tem servidores Linux que precisam montar um compartilhamento de rede usando protocolo NFS v4.1. O serviço precisa ser gerenciado. Qual recurso do Azure Files atende?",
+      "explicacao": "Azure Files suporta protocolo NFS v4.1 (além de SMB), permitindo que servidores Linux montem compartilhamentos nativamente. Requer conta de armazenamento Premium e acesso via VNet (sem endpoint público). Azure Files com SMB funciona em Linux mas NFS é nativo e mais eficiente para cargas Linux. Blob Storage com NFS 3.0 é voltado para data lake, não para file server. Azure NetApp Files é outra opção mas mais cara e para workloads de alto desempenho.",
+      "opcoes": [
+        { "texto": "Azure Files com protocolo NFS v4.1.", "correta": true },
+        { "texto": "Azure Files com protocolo SMB.", "correta": false },
+        { "texto": "Azure Blob Storage com NFS 3.0.", "correta": false },
+        { "texto": "Azure Queue Storage.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-table-partkey-06",
+      "topico": "Azure Table Storage",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso armazena logs de atividade no Azure Table Storage. Cada registro tem PartitionKey (data no formato YYYYMMDD) e RowKey (ID único do evento). A equipe quer consultar todos os eventos de um dia específico. Qual propriedade é usada como filtro primário?",
+      "explicacao": "No Azure Table Storage, a PartitionKey é o filtro primário mais eficiente: todas as entidades com a mesma PartitionKey são armazenadas juntas e consultadas como um bloco. Filtrar por PartitionKey ('20260915') retorna todos os eventos daquele dia sem varrer toda a tabela. A RowKey é o segundo componente da chave e identifica unicamente cada entidade dentro da partição. O Timestamp é gerenciado automaticamente pelo serviço. Uma propriedade customizada pode ser filtrada mas sem a eficiência da PartitionKey.",
+      "opcoes": [
+        { "texto": "PartitionKey.", "correta": true },
+        { "texto": "RowKey.", "correta": false },
+        { "texto": "Timestamp.", "correta": false },
+        { "texto": "Uma propriedade customizada.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-table-schemaless-07",
+      "topico": "Azure Table Storage",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de IoT da Fabrikam armazena dados de sensores no Azure Table Storage. Cada tipo de sensor tem propriedades diferentes: sensores de temperatura têm 'temperature' e 'humidity', enquanto sensores de porta têm 'status' e 'lastOpened'. Todas as entidades estão na mesma tabela. Isso é possível porque o Table Storage é:",
+      "explicacao": "O Azure Table Storage é schemaless (sem esquema fixo): entidades na mesma tabela podem ter propriedades completamente diferentes. Não há definição de colunas como num banco relacional — cada entidade carrega suas próprias propriedades. Isso permite misturar tipos de sensores na mesma tabela sem NULLs desperdiçados. Dizer que é relacional é incorreto: não tem tabelas com colunas fixas. Dizer que é de documentos é impreciso: é chave-valor com propriedades. Dizer que exige esquema uniforme contradiz o comportamento observado.",
+      "opcoes": [
+        { "texto": "Sem esquema fixo (schemaless).", "correta": true },
+        { "texto": "Relacional com colunas fixas.", "correta": false },
+        { "texto": "Um banco de documentos JSON.", "correta": false },
+        { "texto": "Obrigatoriamente de esquema uniforme.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-blob-lifecycle-08",
+      "topico": "Gerenciamento de ciclo de vida",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders quer que blobs no contêiner 'logs' sejam automaticamente movidos de Hot para Cool após 30 dias e excluídos após 365 dias. Qual recurso automatiza essa política?",
+      "explicacao": "Regras de gerenciamento de ciclo de vida permitem definir políticas baseadas em tempo que movem ou excluem blobs automaticamente. Uma regra pode mover para Cool após 30 dias e excluir após 365 dias, aplicada a contêineres ou prefixos específicos. Azure Policy governa recursos Azure, não blobs individuais dentro de contas. Azure Automation poderia fazer isso via script, mas é reinventar o que o recurso nativo faz. Exclusão temporária protege contra exclusão acidental, não gerencia ciclo de vida.",
+      "opcoes": [
+        { "texto": "Regras de gerenciamento de ciclo de vida do Blob Storage.", "correta": true },
+        { "texto": "Azure Policy.", "correta": false },
+        { "texto": "Azure Automation com runbook agendado.", "correta": false },
+        { "texto": "Exclusão temporária (soft delete).", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-assoc-servicos-storage-09",
+      "topico": "Serviços do Azure Storage",
+      "tipo": "Associacao",
+      "enunciado": "A equipe de dados da Adventure Works precisa mapear cada necessidade ao serviço correto do Azure Storage. Associe cada cenário.",
+      "explicacao": "Armazenar vídeos de treinamento acessados por HTTP é Azure Blob Storage: dados não estruturados acessíveis via REST. Compartilhamento de rede SMB para estações Windows é Azure Files: compatível com caminhos UNC. Dados chave-valor simples de configuração sem consultas SQL é Azure Table Storage: NoSQL schemaless barato. Mensagens entre microsserviços com garantia de entrega é Azure Queue Storage: mensageria assíncrona. Azure Data Lake Storage Gen2 é para análise em massa, não para nenhum desses cenários operacionais específicos.",
+      "associacoes": [
+        { "alvo": "Vídeos de treinamento acessados por HTTP/REST", "item": "Azure Blob Storage" },
+        { "alvo": "Compartilhamento de rede SMB para estações Windows", "item": "Azure Files" },
+        { "alvo": "Dados chave-valor simples de configuração de aplicação", "item": "Azure Table Storage" },
+        { "alvo": "Mensagens entre microsserviços com garantia de entrega", "item": "Azure Queue Storage" }
+      ],
+      "itensExtras": [
+        "Azure Data Lake Storage Gen2"
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-blob-versioning-10",
+      "topico": "Proteção de dados do Blob",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de conteúdo da Tailspin Toys sobrescreve frequentemente arquivos de mídia no Blob Storage e precisa poder recuperar versões anteriores de um blob sem usar backups. Qual recurso permite manter automaticamente um histórico de versões?",
+      "explicacao": "Versionamento de blobs mantém automaticamente versões anteriores de cada blob quando ele é sobrescrito. Cada versão tem um identificador único e pode ser lida ou restaurada independentemente. Exclusão temporária protege contra exclusão mas não contra sobrescrita: quando um blob é reescrito, soft delete não preserva a versão anterior. Snapshots criam cópias pontuais mas precisam ser criados manualmente. Replicação geográfica copia o estado atual para outra região, não mantém histórico de versões.",
+      "opcoes": [
+        { "texto": "Versionamento de blobs.", "correta": true },
+        { "texto": "Exclusão temporária (soft delete).", "correta": false },
+        { "texto": "Snapshots manuais.", "correta": false },
+        { "texto": "Replicação geográfica.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-simnao-table-vs-cosmos-11",
+      "topico": "Table Storage vs Cosmos DB for Table",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de dados da Contoso está avaliando opções. Avalie a afirmação: Azure Table Storage e Azure Cosmos DB for Table usam a mesma API, portanto oferecem exatamente os mesmos recursos e desempenho.",
+      "explicacao": "A afirmação é falsa. Embora Azure Cosmos DB for Table use uma API compatível com Table Storage (e aplicações podem migrar trocando a string de conexão), os recursos e desempenho são diferentes. Cosmos DB oferece distribuição global, SLAs de latência abaixo de 10ms, throughput garantido e índices secundários automáticos — nada disso existe no Table Storage. Em compensação, Table Storage é significativamente mais barato para workloads que não precisam desses recursos. A API é compatível, mas os serviços são fundamentalmente diferentes.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-soft-delete-12",
+      "topico": "Proteção de dados do Blob",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Um estagiário da Fabrikam excluiu acidentalmente um blob importante do Contêiner 'documentos'. A exclusão temporária está habilitada com retenção de 14 dias. Qual é o estado do blob após a exclusão?",
+      "explicacao": "Com exclusão temporária habilitada, o blob excluído é marcado como 'soft deleted' e mantido por 14 dias antes de ser excluído permanentemente. Durante esse período, pode ser restaurado. O blob não desaparece imediatamente, não é movido para Archive (que é uma camada de acesso, não um mecanismo de proteção) e não pode ser lido diretamente sem restauração — precisa ser explicitamente restaurado (undelete) antes de ser acessado.",
+      "opcoes": [
+        { "texto": "O blob está marcado como excluído e pode ser restaurado em até 14 dias.", "correta": true },
+        { "texto": "O blob foi excluído permanentemente e não pode ser recuperado.", "correta": false },
+        { "texto": "O blob foi movido automaticamente para a camada Archive.", "correta": false },
+        { "texto": "O blob continua acessível normalmente por 14 dias.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-blob-metadata-13",
+      "topico": "Azure Blob Storage",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de marketing da Northwind Traders quer associar tags personalizadas aos blobs no Azure Storage — como 'departamento=marketing' e 'projeto=campanha2026' — para organizar e filtrar blobs sem depender de nomes de contêiner ou prefixos. Qual recurso permite isso?",
+      "explicacao": "Blob index tags permitem associar tags chave-valor aos blobs e filtrá-los usando essas tags, formando um índice secundário sobre os blobs. É diferente de metadados de blob, que são pares chave-valor associados ao blob mas não indexados para busca. Prefixos de nome organizam por convenção de nomenclatura, sem indexação. Etiquetas de recurso (resource tags) são aplicadas ao recurso da conta de armazenamento, não a blobs individuais.",
+      "opcoes": [
+        { "texto": "Blob index tags.", "correta": true },
+        { "texto": "Metadados de blob.", "correta": false },
+        { "texto": "Prefixos de nome de blob.", "correta": false },
+        { "texto": "Etiquetas de recurso (resource tags) da conta.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-files-premium-14",
+      "topico": "Azure Files",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works tem uma aplicação que faz milhares de operações de I/O por segundo em arquivos compartilhados. O desempenho do Azure Files Standard (HDD) não é suficiente. Qual opção de desempenho atende?",
+      "explicacao": "Azure Files Premium (SSD) oferece alta performance de I/O com baixa latência, adequada para workloads intensivas em I/O como bancos de dados, CMS e aplicações transacionais. Standard é baseado em HDD e adequado para file shares de uso geral. Não existe 'Ultra' para Azure Files como existe para discos. Cool tier é para arquivos raramente acessados, exatamente o oposto do cenário.",
+      "opcoes": [
+        { "texto": "Azure Files Premium (SSD).", "correta": true },
+        { "texto": "Azure Files Standard (HDD).", "correta": false },
+        { "texto": "Azure Files Ultra.", "correta": false },
+        { "texto": "Azure Files Cool.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-table-pkey-rkey-15",
+      "topico": "Azure Table Storage",
+      "tipo": "EscolhaUnica",
+      "enunciado": "No Azure Table Storage, cada entidade é identificada unicamente pela combinação de dois campos obrigatórios. Quais são eles?",
+      "explicacao": "PartitionKey e RowKey juntos formam a chave primária composta de cada entidade no Azure Table Storage. PartitionKey determina a partição (grupo de entidades armazenadas e consultadas juntas) e RowKey identifica unicamente a entidade dentro da partição. Timestamp é gerado automaticamente e indica a última modificação, mas não faz parte da chave. Id e EntityId não são campos padrão do Table Storage.",
+      "opcoes": [
+        { "texto": "PartitionKey e RowKey.", "correta": true },
+        { "texto": "PartitionKey e Timestamp.", "correta": false },
+        { "texto": "Id e PartitionKey.", "correta": false },
+        { "texto": "EntityId e RowKey.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-multipla-blob-tipos-16",
+      "topico": "Tipos de blob",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "A equipe de dados da Contoso está catalogando os tipos de blob disponíveis no Azure Blob Storage. Selecione dois tipos válidos de blob.",
+      "explicacao": "Block blobs e Append blobs são dois dos três tipos de blob suportados pelo Azure Blob Storage (o terceiro é Page blob). Block blobs são para upload de arquivos e objetos. Append blobs são para gravação sequencial ao final do arquivo (logs). Stream blobs e Archive blobs não existem como tipos de blob — Archive é uma camada de acesso, não um tipo. Dynamic blobs também não é um tipo reconhecido.",
+      "opcoes": [
+        { "texto": "Block blob.", "correta": true },
+        { "texto": "Append blob.", "correta": true },
+        { "texto": "Stream blob.", "correta": false },
+        { "texto": "Archive blob.", "correta": false },
+        { "texto": "Dynamic blob.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-cold-tier-17",
+      "topico": "Camadas de acesso",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O Azure Blob Storage adicionou uma camada de acesso entre Cool e Archive, para dados acessados a cada 90 dias ou menos. Qual é essa camada?",
+      "explicacao": "A camada Cold foi introduzida entre Cool e Archive para dados acessados raramente (a cada 90 dias ou menos). Oferece custo de armazenamento menor que Cool mas maior que Archive, com custo de acesso maior que Cool. A diferença chave é que Cold está online (acesso imediato), ao contrário de Archive que é offline (requer reidratação). Warm não é uma camada do Azure Blob Storage. Premium é uma camada de desempenho para block blobs, não uma camada intermediária.",
+      "opcoes": [
+        { "texto": "Cold.", "correta": true },
+        { "texto": "Warm.", "correta": false },
+        { "texto": "Premium.", "correta": false },
+        { "texto": "Standard.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-simnao-files-smb-only-18",
+      "topico": "Azure Files",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de TI da Fabrikam está avaliando o Azure Files. Avalie a afirmação: o Azure Files suporta apenas o protocolo SMB e não pode ser usado com servidores Linux.",
+      "explicacao": "A afirmação é falsa. Azure Files suporta tanto SMB quanto NFS v4.1. SMB funciona em Windows, Linux e macOS. NFS é nativo em Linux. Portanto, Azure Files pode ser usado com servidores Linux tanto via SMB quanto via NFS. A ideia de que Azure Files é exclusivo para Windows é um equívoco comum.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-static-website-19",
+      "topico": "Azure Blob Storage",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de marketing da Tailspin Toys quer hospedar um site estático (HTML, CSS, JavaScript) diretamente no Azure Blob Storage, sem usar um servidor web. Qual recurso permite isso?",
+      "explicacao": "O recurso de hospedagem de site estático do Azure Blob Storage serve arquivos HTML, CSS e JavaScript diretamente de um contêiner especial ($web), sem necessidade de servidor web. É a forma mais simples e barata de hospedar sites estáticos. Azure App Service é um serviço de hospedagem completo (PaaS) para aplicações web dinâmicas — funciona mas é desnecessário para conteúdo estático. Azure CDN distribui conteúdo globalmente mas precisa de uma origem. Azure Functions é para código serverless, não hospedagem de arquivos estáticos.",
+      "opcoes": [
+        { "texto": "Hospedagem de site estático do Azure Blob Storage.", "correta": true },
+        { "texto": "Azure App Service.", "correta": false },
+        { "texto": "Azure CDN.", "correta": false },
+        { "texto": "Azure Functions.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-immutable-worm-20",
+      "topico": "Armazenamento imutável",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de compliance da Contoso precisa armazenar registros financeiros no Azure Blob Storage de forma que não possam ser modificados nem excluídos por sete anos, atendendo regulamentações como SEC 17a-4. Qual recurso garante essa imutabilidade?",
+      "explicacao": "Políticas de imutabilidade baseadas em tempo (time-based retention) no Azure Blob Storage implementam o modelo WORM: uma vez gravados, os blobs não podem ser modificados nem excluídos durante o período de retenção. Quando a política é bloqueada (locked), nem administradores podem removê-la. Legal hold bloqueia indefinidamente mas pode ser removido — não substitui retenção baseada em tempo para compliance. Versionamento mantém histórico mas versões podem ser excluídas. RBAC controla quem faz o quê mas administradores podem alterar permissões.",
+      "opcoes": [
+        { "texto": "Políticas de imutabilidade baseadas em tempo (WORM).", "correta": true },
+        { "texto": "Legal hold.", "correta": false },
+        { "texto": "Versionamento de blobs.", "correta": false },
+        { "texto": "RBAC com permissão restrita.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-ordenacao-blob-upload-21",
+      "topico": "Azure Blob Storage",
+      "tipo": "Ordenacao",
+      "enunciado": "A equipe de desenvolvimento da Northwind Traders vai implementar upload de arquivos grandes para o Azure Blob Storage usando block blobs. Selecione e ordene as etapas do processo.",
+      "explicacao": "Primeiro dividir o arquivo em blocos menores (cada bloco até 4000 MiB no máximo, tipicamente muito menor). Em seguida enviar cada bloco individualmente para o Blob Storage, usando a operação Put Block — cada bloco recebe um identificador. Se algum bloco falhar, reenviar apenas aquele bloco específico, sem recomeçar do zero. Por fim confirmar o blob completo com a lista de blocos na ordem correta (Put Block List), que monta o blob final. Deletar blocos temporários manualmente não é necessário: blocos não confirmados são limpos automaticamente após 7 dias. Compactar o arquivo antes de dividir em blocos não é uma etapa obrigatória do processo de upload.",
+      "sequencia": [
+        "Dividir o arquivo em blocos menores.",
+        "Enviar cada bloco individualmente com um identificador.",
+        "Reenviar blocos que falharam, sem recomeçar do zero.",
+        "Confirmar o blob com a lista ordenada de blocos."
+      ],
+      "itensExtras": [
+        "Deletar blocos temporários manualmente após a confirmação.",
+        "Compactar o arquivo inteiro antes de dividir em blocos."
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-azcopy-22",
+      "topico": "Ferramentas de armazenamento",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works precisa copiar terabytes de dados de um servidor on-premises para o Azure Blob Storage via linha de comando, com suporte a retomada em caso de falha. Qual ferramenta é mais adequada?",
+      "explicacao": "AzCopy é uma ferramenta de linha de comando otimizada para transferência de dados de e para o Azure Storage. Suporta cópia em paralelo, retomada após falha e funciona tanto para upload quanto para cópia entre contas. Azure Storage Explorer é uma interface gráfica para gerenciar armazenamento, não otimizada para transferências em massa via CLI. Azure Data Factory é para pipelines de integração, não para cópia ad hoc em linha de comando. PowerShell pode fazer upload mas não é tão otimizado quanto AzCopy para transferências massivas.",
+      "opcoes": [
+        { "texto": "AzCopy.", "correta": true },
+        { "texto": "Azure Storage Explorer.", "correta": false },
+        { "texto": "Azure Data Factory.", "correta": false },
+        { "texto": "PowerShell com cmdlets do Azure.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-access-public-private-23",
+      "topico": "Nível de acesso do contêiner",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de marketing da Contoso quer que imagens de produtos num contêiner do Blob Storage sejam acessíveis publicamente por qualquer navegador, sem autenticação. Qual nível de acesso do contêiner permite isso?",
+      "explicacao": "O nível de acesso 'Blob (anonymous read access for blobs only)' permite que qualquer pessoa leia blobs individuais no contêiner via URL direta, sem autenticação. O contêiner em si não é listável — é preciso conhecer a URL do blob. O nível 'Container' também permite leitura pública mas inclui listagem do conteúdo do contêiner. O nível 'Private' (padrão) exige autenticação para qualquer acesso. 'Authenticated' não é um nível de acesso de contêiner — autenticação é o comportamento padrão quando o acesso é privado.",
+      "opcoes": [
+        { "texto": "Blob (leitura pública anônima apenas para blobs).", "correta": true },
+        { "texto": "Container (leitura e listagem pública).", "correta": false },
+        { "texto": "Private (somente acesso autenticado).", "correta": false },
+        { "texto": "Authenticated.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-storage-explorer-24",
+      "topico": "Ferramentas de armazenamento",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de desenvolvimento da Fabrikam quer uma ferramenta com interface gráfica para navegar, fazer upload, download e gerenciar dados em Azure Blob Storage, Files, Table Storage e Queues, tanto na nuvem quanto no emulador local. Qual ferramenta atende?",
+      "explicacao": "Azure Storage Explorer é uma aplicação desktop gratuita com interface gráfica que permite gerenciar todos os serviços do Azure Storage (blobs, files, tables, queues) com operações de upload, download, exclusão e navegação. Funciona com contas de produção e emuladores locais. O portal do Azure também permite mas não é tão ágil para operações de dados. AzCopy é linha de comando, sem interface gráfica. Azure Data Studio é para bancos de dados, não para armazenamento.",
+      "opcoes": [
+        { "texto": "Azure Storage Explorer.", "correta": true },
+        { "texto": "Portal do Azure.", "correta": false },
+        { "texto": "AzCopy.", "correta": false },
+        { "texto": "Azure Data Studio.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-container-soft-delete-25",
+      "topico": "Proteção de dados do Blob",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders tem exclusão temporária de blob habilitada mas um script excluiu um contêiner inteiro. Os blobs não aparecem na lista de excluídos. Por que e como prevenir?",
+      "explicacao": "Exclusão temporária de blob protege blobs excluídos individualmente, mas NÃO protege contra exclusão de contêiner, que é uma operação de nível acima. Para proteger contra exclusão de contêiner, é preciso habilitar separadamente a exclusão temporária de contêiner. São duas configurações independentes. Aumentar o período de retenção de blob soft delete não ajuda porque o problema é o escopo, não o prazo. Imutabilidade WORM impede qualquer exclusão, o que é excessivo. Replicação geográfica replicaria a exclusão para a região secundária.",
+      "opcoes": [
+        { "texto": "Exclusão temporária de blob não cobre contêiner; habilitar exclusão temporária de contêiner.", "correta": true },
+        { "texto": "Aumentar o período de retenção da exclusão temporária de blob.", "correta": false },
+        { "texto": "Configurar imutabilidade WORM no contêiner.", "correta": false },
+        { "texto": "Habilitar replicação geográfica para recuperar o contêiner.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-file-sync-hybrid-26",
+      "topico": "Azure File Sync",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works tem escritórios em três cidades. Cada escritório precisa de acesso rápido aos mesmos arquivos, com sincronização automática entre os locais e o Azure. Qual serviço fornece cache local com sincronização centralizada na nuvem?",
+      "explicacao": "Azure File Sync sincroniza compartilhamentos do Azure Files com servidores Windows em múltiplos locais. Cada escritório tem um cache local dos arquivos mais acessados, com tiering na nuvem que libera espaço local automaticamente. As alterações são sincronizadas entre todos os endpoints via Azure. VPN conecta redes mas não sincroniza arquivos. Robocopy copia arquivos mas não sincroniza bidireccionalmente em tempo real. Azure CDN distribui conteúdo estático, não sincroniza file servers.",
+      "opcoes": [
+        { "texto": "Azure File Sync.", "correta": true },
+        { "texto": "VPN site-to-site com Azure Files.", "correta": false },
+        { "texto": "Robocopy agendado.", "correta": false },
+        { "texto": "Azure CDN.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-table-vs-sql-27",
+      "topico": "Azure Table Storage",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Tailspin Toys precisa armazenar logs de acesso com milhões de registros simples. Cada registro tem timestamp, userId e action. Não há necessidade de JOINs, consultas complexas nem transações ACID. O custo deve ser mínimo. Qual armazenamento é mais adequado?",
+      "explicacao": "Azure Table Storage é ideal para grandes volumes de dados simples acessados por chave, sem necessidade de consultas complexas, JOINs ou transações ACID. É significativamente mais barato que Azure SQL Database para esse padrão. Azure SQL Database seria desproporcional: banco relacional completo com recursos que não serão usados, a custo maior. Azure Cosmos DB é mais poderoso e mais caro. Azure Blob Storage armazena objetos, não registros chave-valor consultáveis.",
+      "opcoes": [
+        { "texto": "Azure Table Storage.", "correta": true },
+        { "texto": "Azure SQL Database.", "correta": false },
+        { "texto": "Azure Cosmos DB.", "correta": false },
+        { "texto": "Azure Blob Storage.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-arm-encryption-rest-28",
+      "topico": "Criptografia do armazenamento",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de segurança da Contoso verificou que todos os serviços do Azure Storage (blobs, files, tables, queues) são criptografados em repouso por padrão. Avalie a afirmação: a criptografia em repouso do Azure Storage pode ser desabilitada para economizar custos de processamento.",
+      "explicacao": "A afirmação é falsa. A criptografia em repouso do Azure Storage usando AES-256 é obrigatória e não pode ser desabilitada. Ela é aplicada automaticamente a todos os dados, sem custo adicional e sem impacto perceptível de desempenho. O cliente pode escolher entre chaves gerenciadas pela Microsoft (padrão) ou chaves gerenciadas pelo cliente (CMK), mas não pode desativar a criptografia.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    }
+  ]
+}

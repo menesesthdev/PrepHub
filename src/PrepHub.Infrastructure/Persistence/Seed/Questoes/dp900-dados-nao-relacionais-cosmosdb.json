@@ -1,0 +1,360 @@
+{
+  "exameCode": "DP-900",
+  "area": "dados-nao-relacionais",
+  "questoes": [
+    {
+      "id": "dp900-nrel-cosmos-distribuicao-global-01",
+      "topico": "Cosmos DB — distribuição global",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso tem usuários em cinco continentes e precisa que cada um acesse dados com latência inferior a 10 milissegundos, independentemente da região. Qual característica do Azure Cosmos DB atende esse requisito?",
+      "explicacao": "Azure Cosmos DB oferece distribuição global turnkey: com um clique, os dados são replicados para qualquer região do Azure, e os usuários leem da réplica mais próxima. O SLA garante latência abaixo de 10ms para leituras e escritas no percentil 99. Multi-region writes permite escrita em qualquer réplica mas é uma configuração adicional, não o mesmo que distribuição global. Particionamento distribui dados dentro de uma região, não entre regiões. Geo-replicação é a tecnologia por trás, mas a resposta específica é a distribuição global com SLA de latência.",
+      "opcoes": [
+        { "texto": "Distribuição global com SLA de latência abaixo de 10 milissegundos.", "correta": true },
+        { "texto": "Multi-region writes habilitado por padrão.", "correta": false },
+        { "texto": "Particionamento automático dos dados.", "correta": false },
+        { "texto": "Cache local embutido no SDK.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-consistency-strong-02",
+      "topico": "Cosmos DB — níveis de consistência",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe financeira da Fabrikam usa o Azure Cosmos DB para registrar transações. Após uma escrita, qualquer leitura subsequente — de qualquer região — deve retornar obrigatoriamente o valor mais recente. Qual nível de consistência garante esse comportamento?",
+      "explicacao": "Strong consistency garante que toda leitura retorna a versão mais recente confirmada, independentemente da região — linearizabilidade total. É o nível mais restritivo e com maior latência/custo, porque a escrita precisa ser confirmada em todas as réplicas antes de retornar sucesso. Bounded staleness garante que a leitura é recente dentro de uma janela configurada, não necessariamente a mais recente. Session garante leitura consistente apenas para a mesma sessão de cliente. Eventual é o mais permissivo: a leitura pode retornar qualquer versão.",
+      "opcoes": [
+        { "texto": "Strong (forte).", "correta": true },
+        { "texto": "Bounded staleness (desatualização limitada).", "correta": false },
+        { "texto": "Session (sessão).", "correta": false },
+        { "texto": "Eventual.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-consistency-session-03",
+      "topico": "Cosmos DB — níveis de consistência",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma aplicação web da Northwind Traders usa Azure Cosmos DB. Cada usuário precisa ver imediatamente suas próprias alterações (read-your-writes), mas pode tolerar leituras ligeiramente desatualizadas de dados alterados por outros. Qual nível de consistência é o mais adequado?",
+      "explicacao": "Session consistency é o padrão do Cosmos DB e garante read-your-writes, monotonic reads e monotonic writes dentro de uma sessão de cliente. É o equilíbrio ideal para aplicações web: o usuário vê suas alterações imediatamente e não precisa de consistência global forte. Strong seria excessivo e mais caro. Eventual não garante read-your-writes: o próprio usuário poderia não ver sua alteração imediatamente. Consistent prefix garante ordem mas não read-your-writes.",
+      "opcoes": [
+        { "texto": "Session (sessão).", "correta": true },
+        { "texto": "Strong (forte).", "correta": false },
+        { "texto": "Eventual.", "correta": false },
+        { "texto": "Consistent prefix (prefixo consistente).", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-api-nosql-04",
+      "topico": "Cosmos DB — APIs",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works está construindo uma aplicação nova sem código legado. A equipe quer usar o Azure Cosmos DB com a API nativa que tem melhor integração com os SDKs da Microsoft e suporte a consultas semelhantes a SQL sobre documentos JSON. Qual API escolher?",
+      "explicacao": "API for NoSQL (anteriormente SQL API/Core API) é a API nativa do Cosmos DB, com a integração mais completa com SDKs Microsoft, consultas com sintaxe semelhante a SQL sobre documentos JSON e acesso a todos os recursos mais recentes primeiro. API for MongoDB é para compatibilidade com aplicações MongoDB existentes. API for Apache Cassandra é para workloads Cassandra. API for Apache Gremlin é para grafos. Para projetos novos sem legado, API for NoSQL é a recomendação padrão.",
+      "opcoes": [
+        { "texto": "API for NoSQL.", "correta": true },
+        { "texto": "API for MongoDB.", "correta": false },
+        { "texto": "API for Apache Cassandra.", "correta": false },
+        { "texto": "API for Apache Gremlin.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-api-gremlin-05",
+      "topico": "Cosmos DB — APIs",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Tailspin Toys precisa armazenar e consultar relações complexas entre pessoas (amizades, recomendações, influências) e navegar caminhos entre nós. O modelo de dados é um grafo. Qual API do Azure Cosmos DB é adequada?",
+      "explicacao": "API for Apache Gremlin é a API de grafo do Cosmos DB, projetada para modelar e consultar relacionamentos complexos entre entidades. Usa a linguagem de travessia Gremlin e é ideal para cenários como redes sociais, motores de recomendação e detecção de fraude. API for NoSQL armazena documentos JSON sem suporte nativo a travessia de grafo. API for MongoDB é para documentos, não grafos. API for Table é para dados chave-valor simples.",
+      "opcoes": [
+        { "texto": "API for Apache Gremlin.", "correta": true },
+        { "texto": "API for NoSQL.", "correta": false },
+        { "texto": "API for MongoDB.", "correta": false },
+        { "texto": "API for Table.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-ru-06",
+      "topico": "Cosmos DB — Request Units",
+      "tipo": "EscolhaUnica",
+      "enunciado": "No Azure Cosmos DB, o custo de cada operação (leitura, escrita, consulta) é medido numa unidade que combina CPU, memória e IOPS. Qual é essa unidade?",
+      "explicacao": "Request Units (RUs) são a moeda de throughput do Cosmos DB. Cada operação consome uma quantidade de RUs que depende do tamanho do documento, da complexidade da consulta e do número de propriedades indexadas. Uma leitura pontual de um documento de 1 KB custa 1 RU. O provisionamento é feito em RU/s (Request Units por segundo). DTUs são a unidade do Azure SQL Database, não do Cosmos DB. vCores medem capacidade computacional genérica. IOPS mede apenas operações de I/O, não a combinação de recursos.",
+      "opcoes": [
+        { "texto": "Request Units (RUs).", "correta": true },
+        { "texto": "DTUs (Database Transaction Units).", "correta": false },
+        { "texto": "vCores.", "correta": false },
+        { "texto": "IOPS.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-partition-key-07",
+      "topico": "Cosmos DB — chave de partição",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso armazena pedidos no Azure Cosmos DB. Cada pedido tem orderId, customerId, region e orderDate. A maioria das consultas filtra por customerId. A equipe quer distribuição uniforme dos dados e consultas eficientes. Qual propriedade é a melhor candidata a chave de partição?",
+      "explicacao": "customerId é a melhor chave de partição neste cenário porque: as consultas filtram majoritariamente por esse campo (eficiência: a consulta acessa apenas a partição relevante), e IDs de cliente tendem a ser bem distribuídos (cada cliente é uma partição lógica distinta). orderId seria único demais — cada documento seria uma partição de um item. region teria poucos valores (poucas partições grandes, hot partition). orderDate criaria partições temporais que cresceriam desigualmente e a mais recente seria sempre a mais acessada.",
+      "opcoes": [
+        { "texto": "customerId.", "correta": true },
+        { "texto": "orderId.", "correta": false },
+        { "texto": "region.", "correta": false },
+        { "texto": "orderDate.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-serverless-08",
+      "topico": "Cosmos DB — modelos de capacidade",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam tem uma aplicação experimental com padrão de uso imprevisível: pode ficar horas sem nenhuma requisição e ter picos curtos de atividade. Qual modelo de capacidade do Azure Cosmos DB evita custos quando a aplicação está ociosa?",
+      "explicacao": "O modo serverless cobra apenas pelas Request Units efetivamente consumidas, sem custo quando a aplicação está ociosa. É ideal para cargas imprevisíveis, protótipos e ambientes de desenvolvimento. O modo provisionado cobra RU/s continuamente, mesmo sem uso — ideal para cargas previsíveis. Autoscale ajusta o throughput provisionado automaticamente mas tem um mínimo de 10% do máximo configurado, nunca chega a zero. Reserved capacity é desconto de compromisso sobre provisionado, não um modelo separado.",
+      "opcoes": [
+        { "texto": "Serverless.", "correta": true },
+        { "texto": "Throughput provisionado.", "correta": false },
+        { "texto": "Autoscale.", "correta": false },
+        { "texto": "Reserved capacity.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-assoc-apis-cenarios-09",
+      "topico": "Cosmos DB — APIs",
+      "tipo": "Associacao",
+      "enunciado": "A equipe de arquitetura da Northwind Traders precisa escolher a API do Azure Cosmos DB para cada projeto. Associe cada cenário à API adequada.",
+      "explicacao": "Aplicação nova com consultas SQL-like sobre JSON é API for NoSQL: é a API nativa, sem legado para compatibilizar. Migração de cluster MongoDB existente é API for MongoDB: oferece compatibilidade de protocolo wire, permitindo migração com mínima alteração de código. Dados de séries temporais de IoT com modelo wide-column é API for Apache Cassandra: projetada para dados tabulares em grande escala com escrita intensiva. Rede social com travessias entre nós e arestas é API for Apache Gremlin: é a API de grafo para modelar relacionamentos. API for Table é para migração de Azure Table Storage, sem consultas complexas — não encaixa em nenhum dos cenários acima.",
+      "associacoes": [
+        { "alvo": "Aplicação nova com consultas SQL-like sobre JSON", "item": "API for NoSQL" },
+        { "alvo": "Migração de cluster MongoDB existente", "item": "API for MongoDB" },
+        { "alvo": "Dados de IoT com modelo wide-column e escrita intensiva", "item": "API for Apache Cassandra" },
+        { "alvo": "Rede social com travessias entre nós e arestas", "item": "API for Apache Gremlin" }
+      ],
+      "itensExtras": [
+        "API for Table"
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-changefeed-10",
+      "topico": "Cosmos DB — change feed",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works quer que toda inserção ou atualização num contêiner do Cosmos DB dispare automaticamente uma Azure Function para processar o evento. Qual recurso do Cosmos DB permite essa integração reativa?",
+      "explicacao": "Change feed é um registro ordenado de todas as inserções e atualizações num contêiner do Cosmos DB. Azure Functions tem um trigger nativo para change feed: cada alteração dispara a função automaticamente, sem polling. Stored procedures executam lógica dentro do Cosmos DB mas não são reativas — precisam ser chamadas explicitamente. Triggers (no contexto do Cosmos DB) são pre/post-triggers que rodam junto com a operação, não integrações externas. Azure Event Grid pode notificar sobre eventos de nível de conta, não sobre alterações individuais de documentos.",
+      "opcoes": [
+        { "texto": "Change feed.", "correta": true },
+        { "texto": "Stored procedures.", "correta": false },
+        { "texto": "Pre-triggers do Cosmos DB.", "correta": false },
+        { "texto": "Azure Event Grid.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-simnao-multiapi-11",
+      "topico": "Cosmos DB — APIs",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de dados da Contoso está avaliando o Azure Cosmos DB. Avalie a afirmação: é possível criar uma conta Cosmos DB e usar simultaneamente a API for NoSQL e a API for MongoDB no mesmo contêiner.",
+      "explicacao": "A afirmação é falsa. No Azure Cosmos DB, a API é escolhida no momento da criação da conta e não pode ser alterada. Uma conta configurada com API for NoSQL não pode acessar dados via protocolo MongoDB e vice-versa. São modelos de dados e protocolos de acesso diferentes. Para usar duas APIs é preciso criar duas contas separadas, cada uma com sua API. A exceção parcial é API for Table (Cosmos DB) que pode receber conexões de Azure Table Storage SDK, mas isso é compatibilidade de protocolo, não APIs simultâneas.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-indexing-12",
+      "topico": "Cosmos DB — indexação",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Tailspin Toys inseriu documentos JSON no Azure Cosmos DB (API for NoSQL) sem configurar nenhum índice manualmente. Ao consultar por qualquer propriedade, os resultados retornam corretamente. Isso acontece porque o Cosmos DB:",
+      "explicacao": "O Azure Cosmos DB com API for NoSQL indexa automaticamente todas as propriedades de todos os documentos por padrão. Não é preciso criar índices manualmente para que consultas funcionem — diferente de bancos relacionais ou MongoDB, onde índices precisam ser criados explicitamente para consultas eficientes. A política de indexação pode ser customizada para excluir propriedades ou mudar o tipo de índice, mas o padrão é indexar tudo. O Cosmos DB não faz table scan quando encontra índice disponível.",
+      "opcoes": [
+        { "texto": "Indexa automaticamente todas as propriedades por padrão.", "correta": true },
+        { "texto": "Faz table scan em todas as consultas.", "correta": false },
+        { "texto": "Exige criação manual de índices para cada propriedade.", "correta": false },
+        { "texto": "Usa apenas a chave de partição como índice.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-ttl-13",
+      "topico": "Cosmos DB — TTL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de IoT da Fabrikam armazena leituras de sensores no Cosmos DB e quer que dados com mais de 30 dias sejam excluídos automaticamente, sem script ou cron job. Qual recurso permite isso?",
+      "explicacao": "Time to Live (TTL) no Cosmos DB permite configurar expiração automática de documentos. Quando configurado no contêiner (DefaultTimeToLive), todos os documentos expiram após o período especificado. Também pode ser configurado por documento individual. A exclusão é feita automaticamente em segundo plano, consumindo RUs excedentes. Change feed + Azure Function poderia funcionar mas é uma solução manual desnecessária. Stored procedures precisariam ser invocadas. Lifecycle management é recurso do Blob Storage, não do Cosmos DB.",
+      "opcoes": [
+        { "texto": "Time to Live (TTL).", "correta": true },
+        { "texto": "Change feed com Azure Function para exclusão.", "correta": false },
+        { "texto": "Stored procedure agendada.", "correta": false },
+        { "texto": "Lifecycle management.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-bounded-staleness-14",
+      "topico": "Cosmos DB — níveis de consistência",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders tem uma aplicação multi-região no Azure Cosmos DB. Precisam de garantia de que as leituras nunca ficam mais de 5 minutos ou 100 operações atrás da escrita mais recente, mas aceitam esse atraso para ter melhor desempenho que strong consistency. Qual nível de consistência atende?",
+      "explicacao": "Bounded staleness permite configurar uma janela de atraso máxima em tempo (ex: 5 minutos) ou número de operações (ex: 100). Dentro da janela, a leitura pode estar ligeiramente atrás; fora dela, garante-se que está atualizada. É mais relaxado que strong (melhor latência) mas mais previsível que session ou eventual. Strong não permite nenhum atraso. Session garante consistência dentro de uma sessão, sem janela configurável global. Eventual não oferece garantia de janela — pode atrasar indefinidamente.",
+      "opcoes": [
+        { "texto": "Bounded staleness (desatualização limitada).", "correta": true },
+        { "texto": "Strong (forte).", "correta": false },
+        { "texto": "Session (sessão).", "correta": false },
+        { "texto": "Eventual.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-api-table-migration-15",
+      "topico": "Cosmos DB — API for Table",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works tem uma aplicação que usa o Azure Table Storage SDK. A equipe quer migrar para o Cosmos DB para ter distribuição global e SLAs de latência, mas sem reescrever o código de acesso a dados. Qual API do Cosmos DB permite isso?",
+      "explicacao": "API for Table do Cosmos DB é compatível com o protocolo e SDKs do Azure Table Storage. A migração consiste basicamente em trocar a connection string — o código existente funciona sem alteração. Em troca, ganha-se distribuição global, SLAs de latência, índices secundários e throughput garantido. API for NoSQL exigiria reescrever todo o acesso a dados para usar documentos JSON. API for MongoDB exige driver MongoDB. API for Cassandra exige driver Cassandra.",
+      "opcoes": [
+        { "texto": "API for Table.", "correta": true },
+        { "texto": "API for NoSQL.", "correta": false },
+        { "texto": "API for MongoDB.", "correta": false },
+        { "texto": "API for Apache Cassandra.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-hierarchy-16",
+      "topico": "Cosmos DB — hierarquia de recursos",
+      "tipo": "EscolhaUnica",
+      "enunciado": "No Azure Cosmos DB (API for NoSQL), os dados são organizados numa hierarquia. Qual é a sequência correta, do nível mais alto ao mais baixo?",
+      "explicacao": "A hierarquia do Cosmos DB (API for NoSQL) é: Account (conta, que define a API e regiões) → Database (banco de dados, que agrupa contêineres e define throughput compartilhado opcional) → Container (contêiner, equivalente a tabela/coleção, onde os documentos vivem) → Item (documento JSON individual). Em outras APIs os nomes mudam (ex: MongoDB usa Database → Collection → Document) mas a estrutura hierárquica é a mesma. As outras opções invertem ou omitem níveis.",
+      "opcoes": [
+        { "texto": "Account → Database → Container → Item.", "correta": true },
+        { "texto": "Database → Account → Container → Item.", "correta": false },
+        { "texto": "Account → Container → Database → Item.", "correta": false },
+        { "texto": "Account → Database → Item → Container.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-multipla-sla-17",
+      "topico": "Cosmos DB — SLAs",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "O Azure Cosmos DB oferece SLAs abrangentes. Selecione duas garantias cobertas pelo SLA do Azure Cosmos DB.",
+      "explicacao": "O Cosmos DB oferece SLAs de cinco noves (99.999%) de disponibilidade para contas multi-região e SLA de latência abaixo de 10ms no percentil 99 para leituras e escritas. São os SLAs mais abrangentes entre os serviços de banco de dados do Azure. Custo fixo mensal não é uma garantia de SLA — o custo varia conforme uso. Backup automático a cada hora não é SLA (o backup contínuo existe mas o intervalo padrão é configurável, não garantido por SLA). Zero downtime durante atualizações de região é desejável mas não é uma garantia de SLA formal.",
+      "opcoes": [
+        { "texto": "Disponibilidade de 99.999% para contas multi-região.", "correta": true },
+        { "texto": "Latência inferior a 10 milissegundos no percentil 99.", "correta": true },
+        { "texto": "Custo fixo mensal independente do consumo.", "correta": false },
+        { "texto": "Backup automático a cada hora.", "correta": false },
+        { "texto": "Zero downtime durante atualizações de região.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-crosspartition-18",
+      "topico": "Cosmos DB — consultas",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso executa uma consulta no Cosmos DB que não inclui a chave de partição no filtro WHERE. A consulta retorna resultados corretos mas com latência alta e consumo elevado de RUs. Por que isso acontece?",
+      "explicacao": "Quando a consulta não inclui a chave de partição no filtro, o Cosmos DB executa uma consulta cross-partition (fan-out): envia a consulta para todas as partições físicas, coleta os resultados e os mescla. Isso aumenta latência e consumo de RUs proporcionalmente ao número de partições. Incluir a chave de partição no filtro direciona a consulta para uma única partição (single-partition query), que é muito mais eficiente. Não é problema de índice faltando (Cosmos DB indexa tudo por padrão) nem de nível de consistência.",
+      "opcoes": [
+        { "texto": "A consulta é cross-partition e varre todas as partições.", "correta": true },
+        { "texto": "Falta um índice na propriedade consultada.", "correta": false },
+        { "texto": "O nível de consistência está definido como Strong.", "correta": false },
+        { "texto": "O contêiner está no modo serverless.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-simnao-sql-relacional-19",
+      "topico": "Cosmos DB — API for NoSQL",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de dados da Tailspin Toys notou que a API for NoSQL do Cosmos DB usa sintaxe SQL para consultas. Avalie a afirmação: como a API for NoSQL usa SQL, os dados são armazenados em tabelas relacionais com esquema fixo.",
+      "explicacao": "A afirmação é falsa. Apesar de usar sintaxe semelhante a SQL para consultas, a API for NoSQL armazena dados como documentos JSON sem esquema fixo (schemaless). A sintaxe SQL é apenas a linguagem de consulta, não indica modelo de dados relacional. Documentos no mesmo contêiner podem ter estruturas completamente diferentes. Não há JOINs entre contêineres no sentido relacional, normalização nem chaves estrangeiras. É um banco de documentos que usa SQL como linguagem de consulta por familiaridade.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-backup-continuous-20",
+      "topico": "Cosmos DB — backup",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam precisa restaurar dados do Cosmos DB para um ponto específico no tempo (30 minutos atrás) sem abrir chamado de suporte. Qual modo de backup permite self-service point-in-time restore?",
+      "explicacao": "Backup contínuo com point-in-time restore permite restaurar dados para qualquer ponto nos últimos 7 ou 30 dias (conforme o tier escolhido) diretamente pelo portal, sem precisar de suporte Microsoft. O backup periódico (padrão antigo) faz snapshots em intervalos configuráveis mas a restauração exige chamado de suporte e restaura uma conta inteira, não um ponto específico. Não existe 'geo-backup' como modo separado. Export manual não é backup automático.",
+      "opcoes": [
+        { "texto": "Backup contínuo (continuous backup).", "correta": true },
+        { "texto": "Backup periódico (periodic backup).", "correta": false },
+        { "texto": "Geo-backup.", "correta": false },
+        { "texto": "Export manual agendado.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-autoscale-21",
+      "topico": "Cosmos DB — modelos de capacidade",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works tem picos previsíveis no Cosmos DB durante promoções semanais (throughput sobe de 1.000 para 10.000 RU/s e volta ao normal em horas). A equipe quer evitar provisionamento manual e não quer pagar pelo máximo o tempo todo. Qual opção é mais adequada?",
+      "explicacao": "Autoscale escala automaticamente o throughput provisionado entre 10% do máximo configurado e o máximo, conforme a demanda. No cenário descrito, configurando máximo de 10.000 RU/s, a cobrança seria de ~1.000 RU/s nos períodos calmos e 10.000 RU/s nos picos, sem intervenção. Throughput provisionado fixo cobraria 10.000 RU/s continuamente. Serverless não tem throughput provisionado mas tem limite de 5.000 RU/s por operação, inadequado para picos altos. Escalar manualmente é o que se quer evitar.",
+      "opcoes": [
+        { "texto": "Autoscale com máximo de 10.000 RU/s.", "correta": true },
+        { "texto": "Throughput provisionado fixo em 10.000 RU/s.", "correta": false },
+        { "texto": "Modo serverless.", "correta": false },
+        { "texto": "Escalar manualmente antes de cada promoção.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-assoc-consistency-22",
+      "topico": "Cosmos DB — níveis de consistência",
+      "tipo": "Associacao",
+      "enunciado": "A equipe de arquitetura da Contoso está documentando os cinco níveis de consistência do Cosmos DB. Associe cada nível à sua garantia principal.",
+      "explicacao": "Strong garante leitura do valor mais recente sempre (linearizabilidade) — o mais restritivo. Bounded staleness garante que a leitura fica dentro de uma janela configurada de atraso (tempo ou operações). Session garante que uma sessão de cliente lê suas próprias escritas (read-your-writes). Consistent prefix garante que as leituras respeitam a ordem das escritas (se A, B, C foram escritos nessa ordem, nunca se lê A, C sem B). Eventual é o mais relaxado — sem garantia de ordem nem recência, mas com maior disponibilidade e menor latência.",
+      "associacoes": [
+        { "alvo": "Leitura sempre retorna o valor mais recente confirmado", "item": "Strong" },
+        { "alvo": "Atraso máximo configurável em tempo ou operações", "item": "Bounded staleness" },
+        { "alvo": "Cada sessão lê suas próprias escritas", "item": "Session" },
+        { "alvo": "Leituras respeitam a ordem das escritas", "item": "Consistent prefix" }
+      ],
+      "itensExtras": [
+        "Eventual"
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-mongo-migration-23",
+      "topico": "Cosmos DB — API for MongoDB",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Tailspin Toys tem uma aplicação rodando em MongoDB on-premises e quer migrar para a nuvem com mínima alteração de código. Os desenvolvedores usam o driver MongoDB e ferramentas como mongosh. Qual opção de migração mantém compatibilidade de protocolo?",
+      "explicacao": "Azure Cosmos DB for MongoDB oferece compatibilidade de protocolo wire com MongoDB: drivers, ferramentas (mongosh, Compass) e aplicações existentes funcionam trocando a connection string. Ganha-se distribuição global, SLAs do Cosmos DB e escalabilidade elástica. Migrar para API for NoSQL exigiria reescrever toda a camada de acesso. Azure SQL Database é relacional, incompatível. MongoDB Atlas é a alternativa SaaS do MongoDB, não do Azure.",
+      "opcoes": [
+        { "texto": "Azure Cosmos DB for MongoDB.", "correta": true },
+        { "texto": "Azure Cosmos DB com API for NoSQL.", "correta": false },
+        { "texto": "Azure SQL Database.", "correta": false },
+        { "texto": "MongoDB Atlas.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-multiwrite-conflict-24",
+      "topico": "Cosmos DB — multi-region writes",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso habilitou multi-region writes no Cosmos DB para que escritas sejam aceitas em qualquer região. Dois usuários em regiões diferentes atualizaram o mesmo documento simultaneamente. Como o Cosmos DB resolve esse conflito?",
+      "explicacao": "Por padrão, o Cosmos DB usa Last Writer Wins (LWW) baseado no timestamp (_ts): a escrita com o timestamp mais recente vence e a outra é descartada. Essa é a política de resolução padrão e funciona sem intervenção. É possível configurar resolução customizada via stored procedure, mas o padrão é LWW. O Cosmos DB não rejeita a segunda escrita (seria pessimistic locking), não faz merge automático dos campos e não notifica para resolução manual.",
+      "opcoes": [
+        { "texto": "Last Writer Wins (LWW), baseado no timestamp.", "correta": true },
+        { "texto": "Rejeita a segunda escrita com erro de conflito.", "correta": false },
+        { "texto": "Faz merge automático dos campos alterados.", "correta": false },
+        { "texto": "Notifica ambos os usuários para resolução manual.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-container-throughput-25",
+      "topico": "Cosmos DB — throughput",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Fabrikam tem quatro contêineres no mesmo banco de dados Cosmos DB. Três contêineres têm carga estável e baixa, mas um tem carga variável e alta. Qual estratégia de provisionamento de throughput é mais eficiente?",
+      "explicacao": "Throughput dedicado no contêiner de carga alta (com autoscale) evita que ele consuma os RUs dos outros. Throughput compartilhado no banco de dados para os três contêineres estáveis permite que eles dividam uma quota menor, economizando. Compartilhar tudo num pool faria o contêiner pesado monopolizar os RUs. Dedicar throughput a cada um dos quatro seria ineficiente para os três estáveis. O modo serverless tem limitações para cargas altas contínuas.",
+      "opcoes": [
+        { "texto": "Throughput dedicado no contêiner de carga alta e compartilhado para os demais.", "correta": true },
+        { "texto": "Throughput compartilhado no banco de dados para todos os quatro contêineres.", "correta": false },
+        { "texto": "Throughput dedicado em cada um dos quatro contêineres.", "correta": false },
+        { "texto": "Modo serverless para todos os contêineres.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-sla-singleregion-26",
+      "topico": "Cosmos DB — disponibilidade",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders tem uma conta Azure Cosmos DB em uma única região com replicação em zona de disponibilidade habilitada. Qual é o SLA de disponibilidade para essa configuração?",
+      "explicacao": "Uma conta Cosmos DB single-region com availability zones oferece SLA de 99.995% de disponibilidade. Sem availability zones, o SLA é 99.99%. Multi-region com multi-write atinge 99.999% (cinco noves). 100% de disponibilidade não é oferecido por nenhum serviço de nuvem. A diferença entre esses níveis é importante: 99.99% permite ~52 minutos de indisponibilidade por ano, enquanto 99.999% permite apenas ~5 minutos.",
+      "opcoes": [
+        { "texto": "99.995%.", "correta": true },
+        { "texto": "99.99%.", "correta": false },
+        { "texto": "99.999%.", "correta": false },
+        { "texto": "100%.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-nrel-cosmos-nao-encaixa-27",
+      "topico": "Cosmos DB — quando não usar",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works precisa de um banco de dados com JOINs complexos entre 15 tabelas normalizadas, transações ACID multi-tabela e stored procedures SQL-Server. Qual opção é mais adequada que o Azure Cosmos DB para esse cenário?",
+      "explicacao": "Azure SQL Database é o serviço adequado para cenários que exigem modelo relacional altamente normalizado com JOINs complexos entre muitas tabelas, transações ACID completas e stored procedures T-SQL. O Cosmos DB favorece desnormalização, tem transações ACID limitadas ao escopo de uma partição lógica e suas stored procedures são em JavaScript. Forçar um modelo relacional complexo no Cosmos DB resultaria em múltiplas consultas cross-partition e complexidade desnecessária. Azure Database for PostgreSQL também serviria mas a menção explícita a stored procedures SQL-Server aponta para Azure SQL.",
+      "opcoes": [
+        { "texto": "Azure SQL Database.", "correta": true },
+        { "texto": "Azure Cosmos DB com API for NoSQL.", "correta": false },
+        { "texto": "Azure Cosmos DB com API for MongoDB.", "correta": false },
+        { "texto": "Azure Table Storage.", "correta": false }
+      ]
+    }
+  ]
+}
