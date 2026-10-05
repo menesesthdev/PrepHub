@@ -1,0 +1,387 @@
+{
+  "exameCode": "DP-900",
+  "area": "analitica",
+  "questoes": [
+    {
+      "id": "dp900-anl-pbi-desktop-vs-service-01",
+      "topico": "Power BI — componentes",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de BI da Contoso quer criar relatórios interativos com visualizações, conectar fontes de dados e modelar relacionamentos entre tabelas. Essa autoria é feita localmente, sem publicar. Qual ferramenta é usada?",
+      "explicacao": "Power BI Desktop é a ferramenta de autoria instalada localmente para criar relatórios: conectar fontes, transformar dados (Power Query), modelar relacionamentos e construir visualizações. É gratuita e não requer licença Premium. Power BI Service (app.powerbi.com) é a plataforma na nuvem para publicar, compartilhar e colaborar. Power BI Mobile é para visualizar relatórios em dispositivos móveis. Power BI Report Builder é para relatórios paginados (formato tabular fixo).",
+      "opcoes": [
+        { "texto": "Power BI Desktop.", "correta": true },
+        { "texto": "Power BI Service.", "correta": false },
+        { "texto": "Power BI Mobile.", "correta": false },
+        { "texto": "Power BI Report Builder.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-service-compartilhar-02",
+      "topico": "Power BI Service",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam publicou relatórios no Power BI e quer compartilhá-los com colegas, agendar refresh automático e criar dashboards que combinam visuais de múltiplos relatórios. Onde isso é feito?",
+      "explicacao": "Power BI Service (app.powerbi.com) é a plataforma na nuvem para publicar, compartilhar, colaborar e consumir relatórios. Permite agendar atualização automática de dados, criar dashboards (que fixam visuais de diferentes relatórios numa única tela) e gerenciar workspaces. Power BI Desktop é para autoria local. Power BI Mobile é para consumo em dispositivos. SharePoint pode hospedar relatórios embarcados mas não é o Power BI Service.",
+      "opcoes": [
+        { "texto": "Power BI Service.", "correta": true },
+        { "texto": "Power BI Desktop.", "correta": false },
+        { "texto": "Power BI Mobile.", "correta": false },
+        { "texto": "SharePoint Online.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-dataset-report-dashboard-03",
+      "topico": "Power BI — artefatos",
+      "tipo": "EscolhaUnica",
+      "enunciado": "No Power BI Service da Northwind Traders, um artefato apresenta uma coleção de visuais fixados (pins) de diferentes relatórios numa única tela, sem capacidade de drill-down nos dados. Qual artefato é esse?",
+      "explicacao": "Dashboard no Power BI é uma tela única que reúne tiles (blocos) fixados de diferentes relatórios e datasets. É uma visão consolidada de alto nível. Dashboards não suportam drill-down direto — clicar num tile abre o relatório de origem. Report (relatório) é um documento com múltiplas páginas de visuais interativos com drill-down. Dataset (modelo semântico) é o modelo de dados subjacente. Dataflow é para preparação de dados na nuvem.",
+      "opcoes": [
+        { "texto": "Dashboard.", "correta": true },
+        { "texto": "Report (relatório).", "correta": false },
+        { "texto": "Dataset (modelo semântico).", "correta": false },
+        { "texto": "Dataflow.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-import-vs-directquery-04",
+      "topico": "Power BI — modos de conexão",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works precisa que o relatório no Power BI mostre sempre os dados mais recentes do Azure SQL Database, em tempo real, sem armazenar uma cópia local. Qual modo de conexão atende?",
+      "explicacao": "DirectQuery não importa dados para o modelo Power BI: cada interação com o relatório envia uma consulta ao banco de dados de origem, retornando dados em tempo real. Não há cópia local. Import carrega os dados na memória do Power BI e precisa de refresh para atualizar. Live Connection é semelhante a DirectQuery mas específico para Analysis Services. Dual combina ambos para diferentes tabelas num mesmo modelo.",
+      "opcoes": [
+        { "texto": "DirectQuery.", "correta": true },
+        { "texto": "Import.", "correta": false },
+        { "texto": "Live Connection.", "correta": false },
+        { "texto": "Dual.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-import-performance-05",
+      "topico": "Power BI — modos de conexão",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de BI da Contoso criou um relatório que será usado por 200 pessoas simultaneamente. Os dados mudam apenas uma vez por dia. A performance das visualizações precisa ser instantânea. Qual modo de conexão é mais adequado?",
+      "explicacao": "Import mode carrega os dados na memória do Power BI (engine VertiPaq), comprimidos e otimizados. As interações com o relatório são instantâneas porque os dados estão locais. Refresh agendado uma vez por dia é suficiente para dados que mudam diariamente. DirectQuery enviaria 200 consultas simultâneas ao banco de origem, sobrecarregando-o e com latência maior. Composite é para cenários mistos. Export não é um modo de conexão.",
+      "opcoes": [
+        { "texto": "Import.", "correta": true },
+        { "texto": "DirectQuery.", "correta": false },
+        { "texto": "Composite.", "correta": false },
+        { "texto": "Export.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-star-schema-06",
+      "topico": "Power BI — modelagem",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de BI da Fabrikam está modelando dados no Power BI Desktop. Para otimizar performance de consulta e simplicidade de DAX, qual modelo de dados é recomendado pela Microsoft como best practice?",
+      "explicacao": "Star schema é o modelo recomendado pela Microsoft para Power BI: tabelas de fatos (medidas numéricas, chaves estrangeiras) no centro, conectadas a tabelas de dimensão desnormalizadas. O engine VertiPaq é otimizado para esse padrão: compressão eficiente por coluna, relações 1:N claras e DAX simples. Modelo ER normalizado aumenta o número de JOINs e complica o DAX. Modelo plano (uma tabela) funciona para datasets pequenos mas não escala. Modelo de grafos não é aplicável a Power BI.",
+      "opcoes": [
+        { "texto": "Star schema (esquema estrela).", "correta": true },
+        { "texto": "Modelo ER normalizado (3NF).", "correta": false },
+        { "texto": "Modelo de tabela única (flat table).", "correta": false },
+        { "texto": "Modelo de grafos.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-power-query-07",
+      "topico": "Power BI — Power Query",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders precisa conectar a 10 fontes de dados diferentes no Power BI Desktop, limpar dados (remover duplicatas, renomear colunas, alterar tipos), mesclar tabelas e filtrar linhas antes de carregar no modelo. Qual componente faz essa transformação?",
+      "explicacao": "Power Query (Editor de consulta) é o componente de ETL do Power BI Desktop. Conecta fontes, aplica transformações visuais (sem código) e carrega dados limpos no modelo. Usa a linguagem M por baixo. DAX é a linguagem de expressões para medidas e colunas calculadas no modelo, não para transformação de dados. Query Editor do SQL é para escrever SQL contra bancos de dados. Data Flows são a versão cloud do Power Query no Service.",
+      "opcoes": [
+        { "texto": "Power Query.", "correta": true },
+        { "texto": "DAX.", "correta": false },
+        { "texto": "SQL Query Editor.", "correta": false },
+        { "texto": "Visualizations Pane.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-dax-measures-08",
+      "topico": "Power BI — DAX",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works criou uma medida no Power BI: Total de Vendas = SUM(Vendas[Valor]). Quando usada num visual com filtro de região, o resultado se recalcula para mostrar apenas as vendas daquela região. Qual linguagem define essa medida?",
+      "explicacao": "DAX (Data Analysis Expressions) é a linguagem de fórmulas do Power BI para criar medidas calculadas, colunas calculadas e tabelas calculadas. As medidas são sensíveis ao contexto de filtro: SUM(Vendas[Valor]) retorna o total filtrado pelo visual. M é a linguagem do Power Query para transformação de dados antes do carregamento. T-SQL é a linguagem do SQL Server. KQL é do Kusto/Data Explorer.",
+      "opcoes": [
+        { "texto": "DAX (Data Analysis Expressions).", "correta": true },
+        { "texto": "M (linguagem do Power Query).", "correta": false },
+        { "texto": "T-SQL.", "correta": false },
+        { "texto": "KQL.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-assoc-componentes-09",
+      "topico": "Power BI — componentes",
+      "tipo": "Associacao",
+      "enunciado": "A equipe de BI da Contoso está documentando os componentes do Power BI. Associe cada componente à sua função principal.",
+      "explicacao": "Power BI Desktop é a ferramenta de autoria local para criar relatórios — conectar dados, modelar e visualizar. Power BI Service é a plataforma na nuvem para publicar, compartilhar e colaborar em relatórios e dashboards. Power BI Mobile é o aplicativo para consumir relatórios em smartphones e tablets, com notificações e favoritos. Power BI Report Builder é para criar relatórios paginados (formato tabular fixo, pixel-perfect, ideal para impressão). Power Query é um componente dentro do Desktop, não um produto separado na lista de distribuição.",
+      "associacoes": [
+        { "alvo": "Autoria local de relatórios e modelagem de dados", "item": "Power BI Desktop" },
+        { "alvo": "Publicação, compartilhamento e colaboração na nuvem", "item": "Power BI Service" },
+        { "alvo": "Consumo de relatórios em smartphones e tablets", "item": "Power BI Mobile" },
+        { "alvo": "Criação de relatórios paginados para impressão", "item": "Power BI Report Builder" }
+      ],
+      "itensExtras": [
+        "Power BI Embedded"
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-paginated-report-10",
+      "topico": "Power BI — relatórios paginados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O departamento financeiro da Fabrikam precisa gerar um relatório de contas a receber com formato tabular fixo, cabeçalho e rodapé em cada página, otimizado para impressão e exportação para PDF. Qual tipo de relatório do Power BI atende?",
+      "explicacao": "Relatórios paginados (paginated reports) são formatados para impressão, com layout fixo (pixel-perfect), cabeçalho/rodapé, quebra de página controlada e exportação para PDF, Word e Excel. São criados no Power BI Report Builder. Relatórios interativos (padrão do Desktop) são otimizados para exploração na tela, não para impressão. Dashboards são visuais consolidados, não imprimíveis. Scorecards são para métricas e metas, não relatórios tabulares.",
+      "opcoes": [
+        { "texto": "Relatório paginado.", "correta": true },
+        { "texto": "Relatório interativo do Power BI Desktop.", "correta": false },
+        { "texto": "Dashboard.", "correta": false },
+        { "texto": "Scorecard.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-rls-11",
+      "topico": "Power BI — segurança",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders tem um relatório de vendas que deve mostrar apenas os dados da região de cada gerente. O gerente da região Sul deve ver somente vendas da região Sul, sem acesso a outras regiões. Qual recurso do Power BI implementa isso?",
+      "explicacao": "Row-Level Security (RLS) permite definir regras DAX que filtram dados por usuário. Cada gerente vê apenas as linhas permitidas pela regra. É configurado no modelo e aplicado no Service quando o relatório é publicado. Filtro no relatório pode ser alterado pelo usuário, sem segurança. Workspace roles controlam quem vê o relatório inteiro, não quais dados dentro dele. Sensitivity labels classificam dados mas não filtram linhas.",
+      "opcoes": [
+        { "texto": "Row-Level Security (RLS).", "correta": true },
+        { "texto": "Filtro de página no relatório.", "correta": false },
+        { "texto": "Workspace roles.", "correta": false },
+        { "texto": "Sensitivity labels.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-workspace-12",
+      "topico": "Power BI — workspaces",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de BI da Adventure Works precisa de um espaço compartilhado no Power BI Service para que analistas colaborem em relatórios e datasets, com controle de quem pode editar ou apenas visualizar. Qual recurso organiza isso?",
+      "explicacao": "Workspaces no Power BI Service são espaços de colaboração onde equipes publicam e gerenciam relatórios, datasets, dashboards e dataflows. Têm roles (Admin, Member, Contributor, Viewer) para controle de acesso. My workspace é pessoal e não compartilhável para colaboração. Apps são pacotes de conteúdo publicados a partir de um workspace. Folders organizam itens dentro de um workspace mas não controlam acesso.",
+      "opcoes": [
+        { "texto": "Workspaces.", "correta": true },
+        { "texto": "My workspace.", "correta": false },
+        { "texto": "Apps.", "correta": false },
+        { "texto": "Folders.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-simnao-dax-m-13",
+      "topico": "Power BI — linguagens",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de dados da Contoso está aprendendo Power BI. Avalie a afirmação: no Power BI, DAX e M (Power Query) têm o mesmo propósito e podem ser usados de forma intercambiável.",
+      "explicacao": "A afirmação é falsa. DAX e M têm propósitos completamente diferentes. M (linguagem do Power Query) é para extração e transformação de dados ANTES do carregamento no modelo (etapa de ETL). DAX (Data Analysis Expressions) é para cálculos e medidas DEPOIS que os dados estão no modelo (análise). M transforma, DAX analisa. Não são intercambiáveis: M não cria medidas e DAX não conecta fontes de dados.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-gateway-14",
+      "topico": "Power BI — gateway",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam publicou um relatório no Power BI Service com Import mode, conectado a um SQL Server on-premises. Para que o refresh agendado funcione, os dados precisam ser acessados do Service (nuvem) para o servidor local. Qual componente faz essa ponte?",
+      "explicacao": "On-premises data gateway é um software instalado na rede local que atua como ponte segura entre o Power BI Service (nuvem) e fontes de dados on-premises. Permite refresh agendado e DirectQuery sem expor o banco à internet. VPN conecta redes mas o Power BI Service não se conecta via VPN — precisa do gateway. Azure Data Factory pode copiar dados mas não é a solução nativa do Power BI. ExpressRoute é conexão privada de rede, não integração de dados.",
+      "opcoes": [
+        { "texto": "On-premises data gateway.", "correta": true },
+        { "texto": "VPN site-to-site.", "correta": false },
+        { "texto": "Azure Data Factory.", "correta": false },
+        { "texto": "Azure ExpressRoute.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-viz-barchart-15",
+      "topico": "Power BI — visualizações",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de BI da Northwind Traders precisa comparar o faturamento de cinco regiões no último trimestre. Qual tipo de visualização do Power BI é mais adequado para comparar valores entre categorias?",
+      "explicacao": "Gráfico de barras (bar chart) ou gráfico de colunas (column chart) são ideais para comparar valores entre categorias distintas. As barras/colunas facilitam a comparação visual das magnitudes. Gráfico de pizza é para mostrar proporções de um todo, não para comparação direta de valores. Gráfico de linhas é para tendências ao longo do tempo. Mapa é para dados geográficos, não para comparação numérica direta.",
+      "opcoes": [
+        { "texto": "Gráfico de barras ou colunas.", "correta": true },
+        { "texto": "Gráfico de pizza.", "correta": false },
+        { "texto": "Gráfico de linhas.", "correta": false },
+        { "texto": "Mapa.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-refresh-schedule-16",
+      "topico": "Power BI — atualização",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works publicou um relatório com Import mode no Power BI Service. Os dados da fonte mudam diariamente. A equipe quer que o relatório reflita os dados mais recentes todas as manhãs, sem refresh manual. Qual recurso permite isso?",
+      "explicacao": "Scheduled refresh (refresh agendado) no Power BI Service permite configurar horários automáticos para atualizar datasets com Import mode. Até 8 refreshes por dia (48 com Premium). O dataset é atualizado nos horários configurados e os relatórios refletem os dados mais recentes. Manual refresh exige intervenção humana. DirectQuery não usa refresh (consulta ao vivo) mas o cenário é Import mode. Incremental refresh é um refinamento do scheduled refresh para datasets grandes, não um substituto básico.",
+      "opcoes": [
+        { "texto": "Scheduled refresh (refresh agendado).", "correta": true },
+        { "texto": "Manual refresh diário.", "correta": false },
+        { "texto": "DirectQuery.", "correta": false },
+        { "texto": "Real-time streaming.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-dataflow-17",
+      "topico": "Power BI — dataflows",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Vários analistas da Contoso conectam às mesmas fontes de dados no Power BI Desktop, aplicando as mesmas transformações repetidamente em relatórios diferentes. A equipe quer centralizar a preparação de dados na nuvem para reutilização. Qual recurso do Power BI Service permite isso?",
+      "explicacao": "Dataflows no Power BI Service permitem criar e manter a lógica de preparação de dados (Power Query) na nuvem, reutilizável por múltiplos relatórios e analistas. Os dados transformados ficam armazenados no Data Lake (Gen2) e datasets diferentes podem apontar para o mesmo dataflow. Datasets compartilhados permitem reutilizar o modelo mas não a preparação de dados. Templates de relatório reutilizam layouts, não transformações. Azure Data Factory é para orquestração de dados geral, não específico do Power BI.",
+      "opcoes": [
+        { "texto": "Dataflows.", "correta": true },
+        { "texto": "Datasets compartilhados.", "correta": false },
+        { "texto": "Templates de relatório (.pbit).", "correta": false },
+        { "texto": "Azure Data Factory.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-multipla-viz-tendencia-18",
+      "topico": "Power BI — visualizações",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "A equipe de BI da Fabrikam precisa mostrar tendências de vendas ao longo do tempo (12 meses). Selecione duas visualizações adequadas para mostrar tendências temporais.",
+      "explicacao": "Gráfico de linhas (line chart) é a visualização clássica para tendências ao longo do tempo: cada ponto de dados é conectado por uma linha que revela a direção e a velocidade da mudança. Gráfico de área (area chart) é semelhante ao de linhas mas preenche a área abaixo, sendo bom para mostrar volume acumulado ao longo do tempo. Gráfico de pizza mostra proporções num ponto no tempo, sem dimensão temporal. Gráfico de dispersão mostra correlação entre duas medidas, não tendência temporal. Funil mostra conversão em etapas.",
+      "opcoes": [
+        { "texto": "Gráfico de linhas.", "correta": true },
+        { "texto": "Gráfico de área.", "correta": true },
+        { "texto": "Gráfico de pizza.", "correta": false },
+        { "texto": "Gráfico de dispersão.", "correta": false },
+        { "texto": "Funil.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-semantic-model-19",
+      "topico": "Power BI — modelo semântico",
+      "tipo": "EscolhaUnica",
+      "enunciado": "No Power BI, a Northwind Traders tem tabelas de dados, relacionamentos entre elas, medidas DAX e hierarquias, tudo reutilizável por múltiplos relatórios. Qual artefato encapsula esse conjunto?",
+      "explicacao": "Modelo semântico (semantic model, antigo dataset) é o artefato central do Power BI que contém tabelas, relacionamentos, medidas, hierarquias e regras de segurança. Múltiplos relatórios podem apontar para o mesmo modelo semântico, reutilizando toda a lógica de modelagem. Relatório é a camada visual sobre o modelo. Dataflow prepara dados mas não é o modelo consumido por relatórios. Workspace é o contêiner organizacional.",
+      "opcoes": [
+        { "texto": "Modelo semântico (semantic model).", "correta": true },
+        { "texto": "Relatório.", "correta": false },
+        { "texto": "Dataflow.", "correta": false },
+        { "texto": "Workspace.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-app-distribuicao-20",
+      "topico": "Power BI — distribuição",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de BI da Adventure Works quer publicar um pacote curado de relatórios e dashboards para toda a organização, com conteúdo de somente leitura que os consumidores encontram num único lugar. Qual recurso do Power BI Service permite isso?",
+      "explicacao": "Apps no Power BI Service são pacotes de conteúdo publicados a partir de um workspace, oferecendo uma experiência curada de somente leitura para consumidores. Toda a organização (ou grupos específicos) pode instalar a app e ter acesso imediato ao conteúdo organizado. Compartilhar relatório individual é para casos pontuais, não para distribuição em massa organizada. Workspace dá acesso a tudo no workspace, sem curadoria. Embed em SharePoint é para integrar visuais em páginas, não para distribuição organizada.",
+      "opcoes": [
+        { "texto": "Apps.", "correta": true },
+        { "texto": "Compartilhamento de relatório individual.", "correta": false },
+        { "texto": "Acesso direto ao workspace.", "correta": false },
+        { "texto": "Embed em SharePoint.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-simnao-dashboard-drilldown-21",
+      "topico": "Power BI — dashboards vs relatórios",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de BI da Contoso está configurando o Power BI. Avalie a afirmação: dashboards no Power BI Service suportam drill-down interativo nos dados, exatamente como relatórios.",
+      "explicacao": "A afirmação é falsa. Dashboards no Power BI Service não suportam drill-down direto. Dashboards são compostos por tiles fixados de relatórios, mostrando uma visão de alto nível. Clicar num tile abre o relatório de origem, onde aí sim o drill-down está disponível. Relatórios suportam drill-down, cross-filtering, slicers e outras interatividades. Dashboards são para monitoramento rápido, relatórios são para análise detalhada.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-premium-capacity-22",
+      "topico": "Power BI — licenciamento",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam precisa que usuários com licença Free do Power BI consigam visualizar relatórios publicados internamente, sem adquirir licença Pro para cada um. Qual tipo de capacidade permite que consumidores Free acessem conteúdo?",
+      "explicacao": "Power BI Premium (Premium Per Capacity ou Fabric capacity) permite que consumidores com licença Free visualizem conteúdo publicado no workspace associado à capacidade Premium. O investimento é da organização na capacidade, não de cada usuário. Power BI Pro exige licença por usuário (mensal). Premium Per User é Premium individual, não resolve para Free. Shared capacity (gratuita) exige Pro de todos para compartilhamento.",
+      "opcoes": [
+        { "texto": "Power BI Premium (capacidade dedicada).", "correta": true },
+        { "texto": "Power BI Pro para todos.", "correta": false },
+        { "texto": "Premium Per User.", "correta": false },
+        { "texto": "Shared capacity.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-qa-natural-language-23",
+      "topico": "Power BI — Q&A",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders quer que gerentes façam perguntas em linguagem natural — como 'total de vendas por região no último trimestre' — e o Power BI gere automaticamente a visualização adequada. Qual recurso oferece isso?",
+      "explicacao": "Q&A (Perguntas e Respostas) no Power BI permite que usuários digitem perguntas em linguagem natural e recebam visualizações geradas automaticamente com base no modelo semântico. Pode ser adicionado a dashboards e relatórios. Não exige que o usuário conheça DAX ou modele consultas. Natural Language Query é o nome técnico do mesmo recurso. Smart Narratives gera texto explicativo automaticamente, não visualizações a partir de perguntas. Copilot é IA generativa no Power BI, mais amplo que Q&A.",
+      "opcoes": [
+        { "texto": "Q&A (Perguntas e Respostas).", "correta": true },
+        { "texto": "Smart Narratives.", "correta": false },
+        { "texto": "DAX query.", "correta": false },
+        { "texto": "Filtro de pesquisa.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-drillthrough-24",
+      "topico": "Power BI — navegação",
+      "tipo": "EscolhaUnica",
+      "enunciado": "No Power BI da Adventure Works, um gerente está vendo um gráfico de vendas por região e quer clicar na região 'Sudeste' para navegar a uma página detalhada com informações específicas daquela região (vendas por loja, por produto, etc.). Qual recurso permite isso?",
+      "explicacao": "Drillthrough permite que o usuário clique com o botão direito num ponto de dados e navegue para uma página de detalhes filtrada automaticamente por aquele contexto (ex: região = Sudeste). É uma navegação de nível alto para nível detalhado entre páginas. Drill-down expande hierarquias dentro do mesmo visual (ex: ano → trimestre → mês). Cross-filter destaca dados relacionados em outros visuais da mesma página. Bookmark salva um estado do relatório para navegação rápida.",
+      "opcoes": [
+        { "texto": "Drillthrough.", "correta": true },
+        { "texto": "Drill-down.", "correta": false },
+        { "texto": "Cross-filter.", "correta": false },
+        { "texto": "Bookmark.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-incremental-refresh-25",
+      "topico": "Power BI — incremental refresh",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso tem um dataset de 50 milhões de linhas no Power BI com Import mode. O refresh completo leva 3 horas. A equipe quer atualizar apenas os dados novos ou alterados dos últimos 7 dias, sem recarregar o histórico. Qual recurso permite isso?",
+      "explicacao": "Incremental refresh permite definir políticas que atualizam apenas uma janela de dados recentes (ex: últimos 7 dias), mantendo o restante inalterado. Reduz drasticamente o tempo de refresh e o consumo de recursos. O dataset é particionado internamente por período. Refresh completo recarrega tudo a cada vez. Dataflow prepara dados mas não elimina o refresh do dataset. Real-time não é aplicável a Import mode.",
+      "opcoes": [
+        { "texto": "Incremental refresh.", "correta": true },
+        { "texto": "Refresh completo agendado.", "correta": false },
+        { "texto": "Dataflow com cache.", "correta": false },
+        { "texto": "Real-time dataset.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-ordenacao-fluxo-bi-26",
+      "topico": "Fluxo de BI",
+      "tipo": "Ordenacao",
+      "enunciado": "A equipe de BI da Fabrikam está definindo o fluxo de trabalho para criar e distribuir um relatório no Power BI. Selecione e ordene as etapas.",
+      "explicacao": "Primeiro, conectar às fontes de dados e transformar (Power Query) — extrair, limpar, mesclar dados. Em seguida, modelar os dados no Power BI Desktop — criar relacionamentos, hierarquias e medidas DAX. Depois, construir visualizações e páginas de relatório sobre o modelo. Por fim, publicar no Power BI Service para compartilhamento e colaboração. Configurar alertas de dados é uma etapa posterior opcional, não parte do fluxo básico de criação. Exportar para PDF é uma ação de consumo, não de criação.",
+      "sequencia": [
+        "Conectar fontes e transformar dados (Power Query).",
+        "Modelar dados: relacionamentos, hierarquias e medidas DAX.",
+        "Construir visualizações e páginas de relatório.",
+        "Publicar no Power BI Service para compartilhamento."
+      ],
+      "itensExtras": [
+        "Configurar alertas de dados no Power BI Mobile.",
+        "Exportar o relatório para PDF antes de modelar."
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-composite-model-27",
+      "topico": "Power BI — composite model",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders quer combinar dados importados (tabelas de dimensão locais) com dados em DirectQuery (tabela de fatos grande no Azure SQL) no mesmo modelo Power BI. Qual recurso permite misturar os dois modos?",
+      "explicacao": "Composite model permite que um modelo Power BI combine tabelas em Import mode e tabelas em DirectQuery no mesmo relatório. Tabelas de dimensão (menores) são importadas para performance, enquanto tabelas de fatos (grandes) ficam em DirectQuery para dados em tempo real e sem duplicação. Dual storage mode é parte do composite model: uma tabela pode ser tanto Import quanto DirectQuery. Live Connection é exclusivamente para Analysis Services. Aggregations otimizam consultas mas não são o recurso que permite misturar modos.",
+      "opcoes": [
+        { "texto": "Composite model.", "correta": true },
+        { "texto": "Live Connection.", "correta": false },
+        { "texto": "Aggregations.", "correta": false },
+        { "texto": "Shared dataset.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-alert-dashboard-28",
+      "topico": "Power BI — alertas",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de vendas da Adventure Works quer receber uma notificação por e-mail automaticamente quando o faturamento diário ultrapassar R$ 100.000, baseado num tile do dashboard. Qual recurso do Power BI Service permite isso?",
+      "explicacao": "Alertas de dados (data alerts) no Power BI Service podem ser configurados em tiles de dashboards que contêm um único número (KPI, gauge, card). Quando o valor cruza o limite definido, o Power BI envia notificação por e-mail e no app mobile. Subscription envia relatório/dashboard por e-mail em horários agendados, sem condicional. Power Automate pode ser integrado mas não é nativo do Power BI. Comment é para comunicação entre usuários, sem automação.",
+      "opcoes": [
+        { "texto": "Alertas de dados (data alerts) no dashboard.", "correta": true },
+        { "texto": "Subscription de relatório.", "correta": false },
+        { "texto": "Power Automate.", "correta": false },
+        { "texto": "Comentários no tile.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-pbi-embedded-29",
+      "topico": "Power BI Embedded",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Tailspin Toys é um ISV (independent software vendor) que quer integrar relatórios e visualizações do Power BI dentro da sua própria aplicação web SaaS, para que os clientes vejam analytics sem precisar de licença Power BI individual. Qual serviço permite isso?",
+      "explicacao": "Power BI Embedded é um serviço do Azure que permite a ISVs e desenvolvedores integrar relatórios, dashboards e visuais do Power BI diretamente em suas aplicações. Os clientes da aplicação não precisam de licença Power BI — a capacidade é provisionada e paga pelo ISV. Power BI Pro exige licença por usuário. Power BI Premium é para organizações internas. Embed no SharePoint é para intranet, não para aplicações SaaS externas.",
+      "opcoes": [
+        { "texto": "Power BI Embedded.", "correta": true },
+        { "texto": "Power BI Pro.", "correta": false },
+        { "texto": "Power BI Premium.", "correta": false },
+        { "texto": "Power BI Embed em SharePoint.", "correta": false }
+      ]
+    }
+  ]
+}

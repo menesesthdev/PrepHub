@@ -1,0 +1,389 @@
+{
+  "exameCode": "DP-900",
+  "area": "analitica",
+  "questoes": [
+    {
+      "id": "dp900-anl-rt-batch-vs-streaming-01",
+      "topico": "Batch vs streaming",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso processa logs de servidor uma vez por noite, consolidando os dados do dia anterior em relatórios. Os dados são coletados, armazenados e processados em bloco. Qual modelo de processamento descreve esse cenário?",
+      "explicacao": "Batch processing (processamento em lote) coleta dados ao longo de um período, armazena e processa em bloco em intervalos programados (diário, horário). É adequado para cargas que toleram latência e não precisam de resultado imediato. Streaming processa dados continuamente conforme chegam. Real-time processing é sinônimo de streaming. Micro-batch é uma variação de streaming com intervalos muito curtos (segundos), não horas.",
+      "opcoes": [
+        { "texto": "Batch processing (processamento em lote).", "correta": true },
+        { "texto": "Stream processing.", "correta": false },
+        { "texto": "Real-time processing.", "correta": false },
+        { "texto": "Micro-batch processing.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-streaming-definicao-02",
+      "topico": "Stream processing",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam precisa detectar transações fraudulentas à medida que elas acontecem, em segundos. Os dados devem ser processados continuamente conforme chegam, sem esperar o fim de um período. Qual modelo de processamento atende?",
+      "explicacao": "Stream processing processa eventos continuamente conforme chegam, com latência de milissegundos a segundos. É essencial para detecção de fraude, alertas em tempo real e dashboards ao vivo. Batch processing coleta e processa em bloco depois — fraudedetectada horas depois não impede o prejuízo. Lambda combina batch e streaming mas não é um modelo de processamento isolado. ETL é padrão de integração, não de processamento em tempo real.",
+      "opcoes": [
+        { "texto": "Stream processing.", "correta": true },
+        { "texto": "Batch processing.", "correta": false },
+        { "texto": "Lambda architecture.", "correta": false },
+        { "texto": "ETL.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-stream-analytics-03",
+      "topico": "Azure Stream Analytics",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders precisa de um serviço gerenciado para processar eventos de IoT em tempo real usando consultas SQL-like, com integração nativa a Event Hubs (entrada) e Power BI (saída). Qual serviço atende?",
+      "explicacao": "Azure Stream Analytics é um serviço serverless de processamento de streams usando uma linguagem de consulta baseada em SQL (Stream Analytics Query Language). Integra-se nativamente com Event Hubs, IoT Hub, Blob Storage como entrada e Power BI, SQL Database, Data Lake, Event Hubs como saída. Apache Kafka no Azure é um serviço de mensageria, não de processamento analítico. Azure Functions pode processar eventos mas exige código customizado. Azure Databricks Structured Streaming usa Spark, não SQL nativo.",
+      "opcoes": [
+        { "texto": "Azure Stream Analytics.", "correta": true },
+        { "texto": "Apache Kafka no Azure.", "correta": false },
+        { "texto": "Azure Functions.", "correta": false },
+        { "texto": "Azure Databricks Structured Streaming.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-event-hubs-ingestao-04",
+      "topico": "Azure Event Hubs",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works precisa ingerir milhões de eventos por segundo de sensores e aplicações, com retenção temporária e entrega para múltiplos consumidores (Stream Analytics, Databricks, Functions). Qual serviço de ingestão de streaming atende?",
+      "explicacao": "Azure Event Hubs é uma plataforma de ingestão de eventos em larga escala, capaz de receber milhões de eventos por segundo. Retém dados por até 90 dias (standard) ou mais (dedicated) e suporta múltiplos consumidores independentes via consumer groups. É o serviço de ingestão padrão para streaming no Azure. IoT Hub é para dispositivos IoT com gerenciamento de dispositivo bidirecional. Service Bus é para mensageria empresarial com filas e tópicos. Event Grid é para eventos reativos de recursos Azure.",
+      "opcoes": [
+        { "texto": "Azure Event Hubs.", "correta": true },
+        { "texto": "Azure IoT Hub.", "correta": false },
+        { "texto": "Azure Service Bus.", "correta": false },
+        { "texto": "Azure Event Grid.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-iot-hub-05",
+      "topico": "Azure IoT Hub",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso precisa conectar 100.000 dispositivos IoT, enviar telemetria para a nuvem E enviar comandos de volta para os dispositivos (comunicação bidirecional), com autenticação individual por dispositivo. Qual serviço atende?",
+      "explicacao": "Azure IoT Hub é projetado para conectar, monitorar e gerenciar dispositivos IoT em escala. Suporta comunicação bidirecional (device-to-cloud e cloud-to-device), autenticação por dispositivo (chave simétrica, certificado X.509), device twins (gêmeos digitais) para estado do dispositivo, e roteamento de mensagens. Event Hubs recebe telemetria mas não envia comandos de volta — é unidirecional (produtor → consumidor). IoT Central é uma plataforma de aplicação IoT completa, camada acima do IoT Hub. Notification Hubs é para push notifications em aplicativos mobile.",
+      "opcoes": [
+        { "texto": "Azure IoT Hub.", "correta": true },
+        { "texto": "Azure Event Hubs.", "correta": false },
+        { "texto": "Azure IoT Central.", "correta": false },
+        { "texto": "Azure Notification Hubs.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-lambda-architecture-06",
+      "topico": "Arquitetura Lambda",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Fabrikam projetou uma arquitetura com duas camadas paralelas: uma camada batch que processa todos os dados históricos periodicamente (resultados precisos) e uma camada de velocidade (speed) que processa eventos em tempo real (resultados aproximados). As duas são combinadas na camada de serviço. Qual arquitetura é essa?",
+      "explicacao": "Arquitetura Lambda combina processamento batch (precisão, latência alta) com processamento de stream (aproximação, latência baixa) em camadas paralelas. A camada de serviço (serving layer) mescla os resultados. É a arquitetura clássica para cenários que precisam de ambos. Kappa simplifica eliminando a camada batch — tudo é stream. Microservices é um padrão de aplicação. Data mesh é sobre governança descentralizada de dados.",
+      "opcoes": [
+        { "texto": "Arquitetura Lambda.", "correta": true },
+        { "texto": "Arquitetura Kappa.", "correta": false },
+        { "texto": "Arquitetura de microservices.", "correta": false },
+        { "texto": "Data mesh.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-kappa-07",
+      "topico": "Arquitetura Kappa",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders quer simplificar a arquitetura analítica usando apenas processamento de stream para dados históricos e em tempo real, eliminando a camada batch separada. Os dados históricos são reprocessados a partir do log de eventos. Qual arquitetura descreve isso?",
+      "explicacao": "Arquitetura Kappa elimina a camada batch da Lambda, tratando tudo como stream — inclusive dados históricos, que são reprocessados a partir de um log imutável (ex: Kafka). Simplifica a manutenção (uma única pipeline) ao custo de exigir que o log de eventos seja retido e reprocessável. Lambda mantém batch e stream separados. CQRS separa leitura de escrita, diferente conceito. Event sourcing é padrão de persistência, não arquitetura analítica.",
+      "opcoes": [
+        { "texto": "Arquitetura Kappa.", "correta": true },
+        { "texto": "Arquitetura Lambda.", "correta": false },
+        { "texto": "CQRS (Command Query Responsibility Segregation).", "correta": false },
+        { "texto": "Event sourcing.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-window-tumbling-08",
+      "topico": "Stream Analytics — janelas temporais",
+      "tipo": "EscolhaUnica",
+      "enunciado": "No Azure Stream Analytics, a equipe de dados da Adventure Works quer calcular a média de temperatura de sensores a cada 5 minutos exatos, sem sobreposição entre intervalos. Qual tipo de janela temporal usar?",
+      "explicacao": "Tumbling window divide o stream em intervalos fixos sem sobreposição: cada evento pertence a exatamente uma janela. Uma tumbling de 5 minutos cria blocos [00:00-05:00), [05:00-10:00), etc. Hopping window é fixa mas com sobreposição (avança em incrementos menores que o tamanho). Sliding window é ativada por evento e inclui todos os eventos num período antes dele. Session window agrupa eventos próximos no tempo, sem duração fixa.",
+      "opcoes": [
+        { "texto": "Tumbling window.", "correta": true },
+        { "texto": "Hopping window.", "correta": false },
+        { "texto": "Sliding window.", "correta": false },
+        { "texto": "Session window.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-assoc-janelas-09",
+      "topico": "Stream Analytics — janelas temporais",
+      "tipo": "Associacao",
+      "enunciado": "A equipe de dados da Contoso está documentando os tipos de janela temporal do Azure Stream Analytics. Associe cada tipo de janela à sua característica.",
+      "explicacao": "Tumbling é fixa e sem sobreposição: cada evento cai em exatamente uma janela (ex: blocos de 5 minutos consecutivos). Hopping é fixa com sobreposição: a janela avança em incrementos menores que seu tamanho, então eventos aparecem em mais de uma janela (ex: janela de 10 min avançando a cada 5 min). Sliding é ativada quando um evento entra ou sai da janela, contendo todos os eventos dentro de uma duração antes do evento (ex: últimos 10 min, recalculado a cada evento). Session agrupa eventos por atividade: abre quando um evento chega e fecha após um timeout de inatividade. Snapshot é uma janela que agrupa eventos com exatamente o mesmo timestamp — não é ativada por intervalo.",
+      "associacoes": [
+        { "alvo": "Intervalos fixos consecutivos, sem sobreposição", "item": "Tumbling" },
+        { "alvo": "Intervalos fixos com sobreposição configurável", "item": "Hopping" },
+        { "alvo": "Ativada por evento, duração fixa antes dele", "item": "Sliding" },
+        { "alvo": "Agrupada por atividade, fecha por timeout de inatividade", "item": "Session" }
+      ],
+      "itensExtras": [
+        "Snapshot"
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-eventhubs-partitions-10",
+      "topico": "Event Hubs — partições",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam quer aumentar o throughput de ingestão no Azure Event Hubs. Qual conceito permite escalar a capacidade de processamento paralelo, distribuindo eventos entre múltiplos leitores?",
+      "explicacao": "Partições no Event Hubs são logs ordenados e imutáveis. Mais partições permitem mais consumidores paralelos (cada partição é lida por um consumidor de cada vez dentro de um consumer group). É o principal mecanismo de escalabilidade. Throughput units controlam a capacidade de entrada/saída mas são do namespace, não distribuem o processamento. Consumer groups permitem que múltiplas aplicações leiam o mesmo stream mas não aumentam paralelismo dentro de uma aplicação. Capture salva eventos no Data Lake, não aumenta throughput.",
+      "opcoes": [
+        { "texto": "Partições.", "correta": true },
+        { "texto": "Throughput units.", "correta": false },
+        { "texto": "Consumer groups.", "correta": false },
+        { "texto": "Capture.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-simnao-eventhubs-kafka-11",
+      "topico": "Event Hubs — compatibilidade Kafka",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de dados da Northwind Traders tem aplicações que usam Apache Kafka. Avalie a afirmação: o Azure Event Hubs oferece um endpoint compatível com o protocolo Kafka, permitindo que aplicações Kafka se conectem sem alteração de código.",
+      "explicacao": "A afirmação é verdadeira. Azure Event Hubs oferece um endpoint compatível com o protocolo Apache Kafka (versões 1.0+). Aplicações Kafka existentes podem se conectar ao Event Hubs trocando apenas a configuração de bootstrap servers e credenciais, sem mudar o código do produtor ou consumidor. Isso permite usar Event Hubs como alternativa gerenciada ao Kafka sem manter clusters.",
+      "opcoes": [
+        { "texto": "Sim", "correta": true },
+        { "texto": "Não", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-sa-reference-data-12",
+      "topico": "Stream Analytics — dados de referência",
+      "tipo": "EscolhaUnica",
+      "enunciado": "No Azure Stream Analytics, a Contoso precisa enriquecer eventos de vendas em tempo real com informações do catálogo de produtos (nome, categoria, preço). O catálogo muda raramente. Qual recurso permite combinar o stream com dados estáticos?",
+      "explicacao": "Reference data input (dados de referência) no Stream Analytics permite fazer JOIN entre o stream de eventos e um dataset estático ou que muda lentamente (Blob Storage ou SQL Database). O catálogo de produtos é carregado como referência e combinado com cada evento de venda. Temporal join é para combinar dois streams por tempo. UDF (User Defined Function) é para lógica customizada, não para dados estáticos. Output binding é para saída, não para enriquecimento.",
+      "opcoes": [
+        { "texto": "Reference data input (dados de referência).", "correta": true },
+        { "texto": "Temporal join entre dois streams.", "correta": false },
+        { "texto": "User Defined Function (UDF).", "correta": false },
+        { "texto": "Output binding.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-eventhubs-capture-13",
+      "topico": "Event Hubs — Capture",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Adventure Works quer salvar automaticamente todos os eventos do Azure Event Hubs no Azure Data Lake Storage Gen2 em formato Avro, para processamento batch posterior. Qual recurso faz isso sem código?",
+      "explicacao": "Event Hubs Capture salva automaticamente os eventos recebidos no Azure Blob Storage ou Data Lake Storage Gen2, em formato Avro, sem necessidade de código. É a ponte entre streaming e batch: os eventos são processados em tempo real E arquivados para análise histórica. Azure Functions poderia ler e salvar eventos mas exige código. Stream Analytics processa eventos mas não é o mecanismo de arquivamento nativo do Event Hubs. Data Factory pode copiar dados mas não é integrado nativamente como Capture.",
+      "opcoes": [
+        { "texto": "Event Hubs Capture.", "correta": true },
+        { "texto": "Azure Functions com trigger de Event Hubs.", "correta": false },
+        { "texto": "Azure Stream Analytics com saída para Data Lake.", "correta": false },
+        { "texto": "Azure Data Factory com trigger de evento.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-sa-output-powerbi-14",
+      "topico": "Stream Analytics — saídas",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam quer exibir um dashboard em tempo real no Power BI que mostra a contagem de pedidos por minuto, atualizado automaticamente conforme os eventos chegam. Qual combinação entrega isso?",
+      "explicacao": "Azure Stream Analytics com saída para Power BI (streaming dataset) é a integração nativa para dashboards em tempo real. O Stream Analytics processa eventos, calcula agregações por janela temporal e envia os resultados diretamente para um dataset de streaming no Power BI, que atualiza o dashboard automaticamente. Event Hubs direto não tem como enviar para Power BI. Data Factory é batch, não streaming. Scheduled refresh do Power BI atualiza periodicamente (mínimo 30 min), não em tempo real.",
+      "opcoes": [
+        { "texto": "Azure Stream Analytics com saída para Power BI.", "correta": true },
+        { "texto": "Azure Event Hubs conectado diretamente ao Power BI.", "correta": false },
+        { "texto": "Azure Data Factory com saída para Power BI.", "correta": false },
+        { "texto": "Power BI com scheduled refresh a cada minuto.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-iot-central-15",
+      "topico": "Azure IoT Central",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Tailspin Toys é uma empresa pequena que precisa conectar dispositivos IoT, monitorar telemetria, criar regras e dashboards sem gerenciar infraestrutura de IoT Hub, provisioning service ou Stream Analytics separadamente. Qual plataforma SaaS atende?",
+      "explicacao": "Azure IoT Central é uma plataforma SaaS completa para IoT que abstrai toda a infraestrutura subjacente (IoT Hub, DPS, Stream Analytics, storage). Oferece templates de dispositivo, dashboards, regras de alerta e gerenciamento de dispositivos pronto para uso, sem necessidade de código para cenários comuns. IoT Hub é PaaS — exige montagem e código. Azure Sphere é hardware seguro para IoT. Azure Digital Twins é para modelar ambientes físicos, não para conectar dispositivos diretamente.",
+      "opcoes": [
+        { "texto": "Azure IoT Central.", "correta": true },
+        { "texto": "Azure IoT Hub.", "correta": false },
+        { "texto": "Azure Sphere.", "correta": false },
+        { "texto": "Azure Digital Twins.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-sa-sql-query-16",
+      "topico": "Stream Analytics — linguagem de consulta",
+      "tipo": "EscolhaUnica",
+      "enunciado": "No Azure Stream Analytics, a equipe de dados da Contoso escreve consultas como: SELECT DeviceId, AVG(Temperature) FROM IoTInput TIMESTAMP BY EventTime GROUP BY DeviceId, TumblingWindow(minute, 5). Qual é a linguagem dessas consultas?",
+      "explicacao": "Stream Analytics Query Language (SAQL) é baseada em SQL com extensões para processamento temporal: TumblingWindow, HoppingWindow, SlidingWindow, SessionWindow, TIMESTAMP BY. A sintaxe é familiar para quem conhece SQL, reduzindo a curva de aprendizado. Não é T-SQL (que é do SQL Server), nem PySpark (que é Python), nem KQL (que é do Data Explorer/Log Analytics). As funções de janela temporal são exclusivas do SAQL.",
+      "opcoes": [
+        { "texto": "Stream Analytics Query Language (SQL-like com extensões temporais).", "correta": true },
+        { "texto": "T-SQL.", "correta": false },
+        { "texto": "PySpark.", "correta": false },
+        { "texto": "KQL (Kusto Query Language).", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-multipla-sa-saidas-17",
+      "topico": "Stream Analytics — saídas",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "A equipe de dados da Northwind Traders quer configurar saídas para o Azure Stream Analytics. Selecione dois destinos de saída suportados nativamente.",
+      "explicacao": "Azure SQL Database e Azure Cosmos DB são destinos de saída nativos do Stream Analytics. Os dados processados podem ser escritos diretamente neles sem código intermediário. Outros destinos nativos incluem Blob Storage, Data Lake, Event Hubs, Service Bus, Power BI e Azure Functions. Amazon S3 não é um destino nativo (seria necessário um intermediário). Google BigQuery também não — o Stream Analytics integra-se com serviços do Azure.",
+      "opcoes": [
+        { "texto": "Azure SQL Database.", "correta": true },
+        { "texto": "Azure Cosmos DB.", "correta": true },
+        { "texto": "Amazon S3.", "correta": false },
+        { "texto": "Google BigQuery.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-eventhubs-consumergroup-18",
+      "topico": "Event Hubs — consumer groups",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works tem um Event Hub com eventos de vendas. Três aplicações diferentes precisam ler os mesmos eventos independentemente: Stream Analytics para alertas, Databricks para análise e uma Function App para auditoria. Qual conceito permite que todas leiam o mesmo stream sem interferir?",
+      "explicacao": "Consumer groups permitem que múltiplas aplicações leiam o mesmo stream de eventos independentemente. Cada consumer group mantém seu próprio offset (posição de leitura) por partição, então cada aplicação lê todos os eventos no seu ritmo sem afetar as outras. É o padrão pub/sub do Event Hubs. Partições dividem dados para paralelismo dentro de uma aplicação. Multiple outputs é conceito do Stream Analytics, não do Event Hubs. Shared Access Policies controlam permissões, não acesso paralelo.",
+      "opcoes": [
+        { "texto": "Consumer groups.", "correta": true },
+        { "texto": "Partições.", "correta": false },
+        { "texto": "Multiple outputs.", "correta": false },
+        { "texto": "Shared Access Policies.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-late-arriving-19",
+      "topico": "Stream Analytics — eventos atrasados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "No Azure Stream Analytics da Contoso, sensores enviam dados com timestamp do dispositivo. Às vezes o evento chega ao Event Hub minutos depois do timestamp (atraso de rede). Qual configuração do Stream Analytics lida com esses eventos atrasados?",
+      "explicacao": "Late arrival tolerance (tolerância a chegada tardia) define quanto tempo o Stream Analytics espera por eventos atrasados antes de fechar uma janela de agregação. Eventos que chegam dentro da tolerância são incluídos na janela correta (baseada no timestamp do evento, não da chegada). Eventos fora da tolerância são descartados ou ajustados. Watermark policy é o mecanismo interno que implementa isso. TIMESTAMP BY especifica qual campo usar como tempo do evento, não como lidar com atrasos. Retry policy é para falhas de saída, não eventos atrasados.",
+      "opcoes": [
+        { "texto": "Late arrival tolerance (tolerância a chegada tardia).", "correta": true },
+        { "texto": "TIMESTAMP BY.", "correta": false },
+        { "texto": "Retry policy.", "correta": false },
+        { "texto": "Checkpoint interval.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-simnao-sa-serverless-20",
+      "topico": "Azure Stream Analytics",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de dados da Fabrikam quer usar o Azure Stream Analytics. Avalie a afirmação: o Azure Stream Analytics exige provisionamento e gerenciamento de clusters ou máquinas virtuais para funcionar.",
+      "explicacao": "A afirmação é falsa. Azure Stream Analytics é serverless: a capacidade é medida em Streaming Units (SUs), que combinam CPU, memória e throughput. Não há clusters nem VMs para provisionar ou gerenciar. Basta criar o job, escrever a consulta, definir entradas/saídas e iniciar. O serviço escala automaticamente (em modo autoscale) conforme a carga. A cobrança é por SU por hora enquanto o job está em execução.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-event-grid-react-21",
+      "topico": "Azure Event Grid",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders quer receber uma notificação automaticamente sempre que um blob é criado num contêiner do Azure Storage, para disparar uma Azure Function de processamento. Qual serviço de eventos reativos do Azure é mais adequado?",
+      "explicacao": "Azure Event Grid é projetado para eventos reativos: publica eventos de recursos Azure (como 'blob created' do Storage) e entrega a handlers (Functions, Logic Apps, webhooks) com baixa latência. Tem modelo pub/sub de eventos discretos. Event Hubs é para ingestão massiva de telemetria em streaming, não para eventos de recursos. Service Bus é para mensageria empresarial com filas e garantias. Storage Queue é fila simples sem pub/sub.",
+      "opcoes": [
+        { "texto": "Azure Event Grid.", "correta": true },
+        { "texto": "Azure Event Hubs.", "correta": false },
+        { "texto": "Azure Service Bus.", "correta": false },
+        { "texto": "Azure Storage Queue.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-ordenacao-streaming-pipeline-22",
+      "topico": "Pipeline de streaming",
+      "tipo": "Ordenacao",
+      "enunciado": "A Adventure Works está projetando um pipeline de processamento de eventos em tempo real no Azure. Selecione e ordene as etapas do fluxo.",
+      "explicacao": "Primeiro, os dispositivos ou aplicações geram eventos que são ingeridos pelo Azure Event Hubs (buffer de entrada). Em seguida, o Azure Stream Analytics processa os eventos em tempo real (filtragem, agregação, enriquecimento). Os resultados processados são então escritos em destinos como SQL Database, Cosmos DB ou Data Lake para persistência. Por fim, dashboards no Power BI visualizam os dados processados para tomada de decisão. Treinar modelo de ML não é uma etapa do pipeline de streaming básico — seria uma etapa separada e opcional.",
+      "sequencia": [
+        "Ingerir eventos no Azure Event Hubs.",
+        "Processar eventos em tempo real no Azure Stream Analytics.",
+        "Gravar resultados em armazenamento (SQL Database, Data Lake).",
+        "Visualizar dados processados em dashboards no Power BI."
+      ],
+      "itensExtras": [
+        "Treinar modelo de machine learning com os eventos brutos.",
+        "Converter eventos para formato Parquet antes da ingestão."
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-data-explorer-23",
+      "topico": "Azure Data Explorer",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso precisa analisar bilhões de registros de telemetria e logs em tempo quase real, usando KQL (Kusto Query Language) para investigação interativa e detecção de anomalias. Qual serviço é otimizado para esse cenário?",
+      "explicacao": "Azure Data Explorer (ADX) é otimizado para exploração interativa de grandes volumes de dados de telemetria, logs e séries temporais. Usa KQL como linguagem de consulta e oferece ingestão rápida, armazenamento colunar e consultas em segundos sobre bilhões de registros. Stream Analytics é para processamento contínuo de streams, não para exploração ad hoc. Log Analytics (Monitor) usa KQL mas é focado em logs operacionais. Azure Synapse é para analytics mais amplo, não otimizado para telemetria.",
+      "opcoes": [
+        { "texto": "Azure Data Explorer.", "correta": true },
+        { "texto": "Azure Stream Analytics.", "correta": false },
+        { "texto": "Azure Monitor Log Analytics.", "correta": false },
+        { "texto": "Azure Synapse Analytics.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-iot-hub-routing-24",
+      "topico": "IoT Hub — roteamento de mensagens",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam tem dispositivos IoT que enviam diferentes tipos de mensagens: telemetria normal, alertas críticos e diagnósticos. A equipe quer rotear alertas para uma fila do Service Bus e telemetria para o Event Hub, sem código intermediário. Qual recurso do IoT Hub permite isso?",
+      "explicacao": "Message routing do IoT Hub permite definir rotas baseadas em propriedades da mensagem ou do corpo, direcionando diferentes tipos de mensagem para diferentes endpoints (Event Hub, Service Bus Queue/Topic, Blob Storage). É configuração nativa, sem código. Azure Functions como intermediária funcionaria mas exige desenvolvimento e manutenção. Stream Analytics adicionaria complexidade desnecessária para roteamento simples. Logic Apps é para automação de workflow, não para roteamento de mensagens IoT.",
+      "opcoes": [
+        { "texto": "Message routing do IoT Hub.", "correta": true },
+        { "texto": "Azure Functions como intermediária.", "correta": false },
+        { "texto": "Azure Stream Analytics.", "correta": false },
+        { "texto": "Azure Logic Apps.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-assoc-servicos-streaming-25",
+      "topico": "Serviços de streaming",
+      "tipo": "Associacao",
+      "enunciado": "A equipe de dados da Tailspin Toys está documentando os serviços de streaming do Azure. Associe cada serviço ao seu papel principal.",
+      "explicacao": "Azure Event Hubs é a plataforma de ingestão de eventos em larga escala (milhões de eventos por segundo). Azure Stream Analytics é o serviço de processamento em tempo real com consultas SQL-like sobre streams. Azure IoT Hub é o gateway bidirecional para dispositivos IoT com gerenciamento de dispositivo. Azure Event Grid é o serviço de eventos reativos para integração pub/sub de eventos de recursos Azure. Azure Data Explorer é para exploração interativa de dados de telemetria e logs, não para ingestão ou processamento de stream.",
+      "associacoes": [
+        { "alvo": "Ingestão massiva de eventos em streaming", "item": "Azure Event Hubs" },
+        { "alvo": "Processamento de streams com consultas SQL-like", "item": "Azure Stream Analytics" },
+        { "alvo": "Gateway bidirecional para dispositivos IoT", "item": "Azure IoT Hub" },
+        { "alvo": "Eventos reativos pub/sub de recursos Azure", "item": "Azure Event Grid" }
+      ],
+      "itensExtras": [
+        "Azure Data Explorer"
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-realtime-intelligence-fabric-26",
+      "topico": "Microsoft Fabric — Real-Time Intelligence",
+      "tipo": "EscolhaUnica",
+      "enunciado": "No Microsoft Fabric, a equipe da Northwind Traders precisa criar KQL querysets, dashboards em tempo real e alertas sobre dados de streaming, tudo integrado ao OneLake. Qual experiência do Fabric atende?",
+      "explicacao": "Real-Time Intelligence (antigo Real-Time Analytics) é a experiência do Microsoft Fabric para análise de dados em streaming e séries temporais. Inclui Eventhouse (ingestão), KQL querysets, dashboards em tempo real e alertas, integrado ao OneLake. Synapse Data Engineering é para engenharia de dados com Spark. Synapse Data Warehouse é para consultas SQL analíticas em batch. Power BI é para business intelligence sobre dados já processados.",
+      "opcoes": [
+        { "texto": "Real-Time Intelligence.", "correta": true },
+        { "texto": "Synapse Data Engineering.", "correta": false },
+        { "texto": "Synapse Data Warehouse.", "correta": false },
+        { "texto": "Power BI.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-sa-at-least-once-27",
+      "topico": "Stream Analytics — garantias de entrega",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works precisa garantir que nenhum evento seja perdido pelo Azure Stream Analytics, mesmo em caso de falha ou reinício do job. Qual garantia de entrega o Stream Analytics oferece para a maioria das saídas?",
+      "explicacao": "Azure Stream Analytics garante at-least-once delivery para a maioria das saídas: cada evento será processado e entregue pelo menos uma vez, com possibilidade de duplicatas em cenários de recuperação de falha. Para Cosmos DB e SQL Database, oferece exactly-once delivery (usando upsert por ID/chave). At-most-once poderia perder eventos. Best-effort não é uma garantia formal. Exactly-once em todas as saídas exigiria mecanismos de transação distribuída que não são suportados em todos os destinos.",
+      "opcoes": [
+        { "texto": "At-least-once (pelo menos uma vez).", "correta": true },
+        { "texto": "Exactly-once em todas as saídas.", "correta": false },
+        { "texto": "At-most-once (no máximo uma vez).", "correta": false },
+        { "texto": "Best-effort (melhor esforço).", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-eventhubs-tiers-28",
+      "topico": "Event Hubs — tiers",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso precisa do Azure Event Hubs com throughput garantido, partições ilimitadas e retenção estendida de até 90 dias, para um cenário de missão crítica sem compartilhar infraestrutura com outros clientes. Qual tier atende?",
+      "explicacao": "Event Hubs Dedicated oferece um cluster exclusivo (single-tenant) com throughput garantido, sem limites de partições por Event Hub (Standard limita a 32), retenção de até 90 dias e capacidade dedicada medida em Capacity Units. Standard tem limites de throughput e partições compartilhados. Basic é o tier mais simples com funcionalidades reduzidas. Premium é intermediário (multi-tenant com recursos avançados mas não é cluster dedicado).",
+      "opcoes": [
+        { "texto": "Dedicated.", "correta": true },
+        { "texto": "Standard.", "correta": false },
+        { "texto": "Basic.", "correta": false },
+        { "texto": "Premium.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-rt-structured-streaming-spark-29",
+      "topico": "Spark Structured Streaming",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Fabrikam quer processar streams de dados usando código Python/Scala no Azure Databricks, com a mesma API do DataFrame do Spark. Qual recurso do Spark permite processamento de streaming com a API batch familiar?",
+      "explicacao": "Spark Structured Streaming é o motor de streaming do Apache Spark que trata um stream de dados como uma tabela que cresce incrementalmente. Usa a mesma API de DataFrame/Dataset do Spark batch, permitindo escrever código de streaming como se fosse código batch. É a abordagem recomendada para streaming no Databricks. Spark Streaming (DStreams) é a API antiga, baseada em RDDs. Apache Flink é outro framework de streaming, não integrado nativamente ao Databricks. Kafka Streams é uma biblioteca Java para processamento de streams com Kafka, não integrada ao Spark.",
+      "opcoes": [
+        { "texto": "Spark Structured Streaming.", "correta": true },
+        { "texto": "Spark Streaming (DStreams).", "correta": false },
+        { "texto": "Apache Flink.", "correta": false },
+        { "texto": "Kafka Streams.", "correta": false }
+      ]
+    }
+  ]
+}

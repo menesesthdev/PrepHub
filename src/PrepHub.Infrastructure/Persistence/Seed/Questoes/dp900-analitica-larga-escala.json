@@ -1,0 +1,383 @@
+{
+  "exameCode": "DP-900",
+  "area": "analitica",
+  "questoes": [
+    {
+      "id": "dp900-anl-larga-synapse-overview-01",
+      "topico": "Azure Synapse Analytics",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso precisa de uma plataforma unificada que combine ingestão de dados, data warehouse, processamento de big data com Spark e exploração de dados via SQL serverless, tudo num único workspace. Qual serviço atende?",
+      "explicacao": "Azure Synapse Analytics é uma plataforma analítica unificada que integra SQL (dedicated pools para data warehouse e serverless pools para consultas ad hoc), Apache Spark, pipelines de integração (herdados do Data Factory) e exploração de dados num único workspace. Azure Data Factory faz ingestão e orquestração mas não tem SQL pool nem Spark. Azure Databricks é focado em Spark e lakehouse. Azure HDInsight são clusters open-source gerenciados, não uma plataforma unificada.",
+      "opcoes": [
+        { "texto": "Azure Synapse Analytics.", "correta": true },
+        { "texto": "Azure Data Factory.", "correta": false },
+        { "texto": "Azure Databricks.", "correta": false },
+        { "texto": "Azure HDInsight.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-dw-vs-lake-02",
+      "topico": "Data warehouse vs data lake",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de BI da Fabrikam armazena dados estruturados e limpos em esquema estrela para relatórios e dashboards. Qual conceito descreve melhor esse repositório?",
+      "explicacao": "Data warehouse é um repositório de dados estruturados, limpos e organizados em esquemas otimizados para consultas analíticas (estrela, floco de neve). É a base para BI e relatórios. Data lake armazena dados brutos em qualquer formato (estruturado, semiestruturado, não estruturado) sem transformação prévia. Data lakehouse combina elementos dos dois. Banco transacional (OLTP) é para operações, não análise.",
+      "opcoes": [
+        { "texto": "Data warehouse.", "correta": true },
+        { "texto": "Data lake.", "correta": false },
+        { "texto": "Data lakehouse.", "correta": false },
+        { "texto": "Banco transacional (OLTP).", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-datalake-bruto-03",
+      "topico": "Data lake",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Northwind Traders precisa armazenar petabytes de dados brutos — logs de servidor, imagens, CSVs e JSONs — sem impor esquema no momento da ingestão, para processamento futuro. Qual conceito atende?",
+      "explicacao": "Data lake armazena dados brutos em qualquer formato, sem exigir esquema no momento da escrita (schema-on-read). É ideal para volumes massivos de dados variados, processados posteriormente conforme necessário. Data warehouse exige esquema definido no momento da escrita (schema-on-write). Blob Storage é a tecnologia subjacente mas data lake é o conceito arquitetural. Banco relacional impõe esquema rígido.",
+      "opcoes": [
+        { "texto": "Data lake.", "correta": true },
+        { "texto": "Data warehouse.", "correta": false },
+        { "texto": "Azure Blob Storage.", "correta": false },
+        { "texto": "Banco relacional.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-lakehouse-04",
+      "topico": "Data lakehouse",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works quer combinar a flexibilidade de armazenar dados brutos em qualquer formato (data lake) com a capacidade de consultar dados com a performance e governança de um data warehouse, sem duplicar dados entre dois sistemas. Qual arquitetura atende?",
+      "explicacao": "Data lakehouse é uma arquitetura que combina os pontos fortes do data lake (armazenamento de dados brutos, variados e em escala) com os do data warehouse (transações ACID, esquema, performance de consulta). Tecnologias como Delta Lake, Apache Iceberg e Apache Hudi viabilizam isso sobre o data lake existente. Usar data lake + data warehouse separados funciona mas duplica dados. ETL tradicional move dados mas não é uma arquitetura de armazenamento. Data mart é um subconjunto de um data warehouse.",
+      "opcoes": [
+        { "texto": "Data lakehouse.", "correta": true },
+        { "texto": "Data lake e data warehouse separados.", "correta": false },
+        { "texto": "ETL tradicional.", "correta": false },
+        { "texto": "Data mart.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-star-schema-05",
+      "topico": "Esquema estrela",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de BI da Contoso modelou o data warehouse com uma tabela central de fatos (vendas) cercada por tabelas de dimensão (produto, cliente, data, loja). Cada dimensão se conecta diretamente à tabela de fatos. Qual modelo de dados é esse?",
+      "explicacao": "Esquema estrela (star schema) é o modelo clássico de data warehouse: uma tabela de fatos central (métricas/medidas) rodeada por tabelas de dimensão (descritores). Cada dimensão se conecta diretamente à tabela de fatos, formando uma estrela. É simples de entender e otimizado para consultas analíticas. Esquema floco de neve normaliza as dimensões (subdimensões), formando uma estrutura mais complexa. Modelo ER normalizado é para OLTP. Modelo de grafos representa nós e arestas.",
+      "opcoes": [
+        { "texto": "Esquema estrela (star schema).", "correta": true },
+        { "texto": "Esquema floco de neve (snowflake schema).", "correta": false },
+        { "texto": "Modelo entidade-relacionamento normalizado.", "correta": false },
+        { "texto": "Modelo de grafos.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-fact-dimension-06",
+      "topico": "Tabelas de fatos e dimensões",
+      "tipo": "EscolhaUnica",
+      "enunciado": "No data warehouse da Fabrikam, uma tabela armazena quantidade vendida, valor total e desconto por transação. Cada linha referencia chaves de produto, cliente e data. Essa tabela é classificada como:",
+      "explicacao": "Tabela de fatos armazena métricas/medidas numéricas (quantidade, valor, desconto) e chaves estrangeiras para as dimensões. É a tabela central do esquema estrela, onde estão os eventos mensuráveis do negócio. Tabela de dimensão armazena atributos descritivos (nome do produto, categoria, endereço do cliente). Tabela de bridge conecta relações muitos-para-muitos. Tabela de staging é temporária, usada durante o processo ETL.",
+      "opcoes": [
+        { "texto": "Tabela de fatos.", "correta": true },
+        { "texto": "Tabela de dimensão.", "correta": false },
+        { "texto": "Tabela de bridge.", "correta": false },
+        { "texto": "Tabela de staging.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-adf-ingestao-07",
+      "topico": "Azure Data Factory",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders precisa orquestrar a cópia diária de dados de um SQL Server on-premises, de uma API REST e de arquivos CSV no Azure Blob Storage, tudo para o Azure Data Lake Storage Gen2. Qual serviço de integração atende?",
+      "explicacao": "Azure Data Factory é o serviço de integração e orquestração de dados do Azure. Suporta mais de 90 conectores (SQL Server, APIs REST, Blob Storage, Data Lake) e permite criar pipelines visuais para copiar, transformar e orquestrar fluxos de dados em escala. Azure Synapse Pipelines tem a mesma tecnologia mas dentro do workspace Synapse. Azure Logic Apps é para automação de workflows, não focado em integração de dados em escala. Azure Functions executa código mas não é uma plataforma de integração visual.",
+      "opcoes": [
+        { "texto": "Azure Data Factory.", "correta": true },
+        { "texto": "Azure Logic Apps.", "correta": false },
+        { "texto": "Azure Functions.", "correta": false },
+        { "texto": "Azure Service Bus.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-elt-vs-etl-08",
+      "topico": "ELT vs ETL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Adventure Works carrega dados brutos no Azure Data Lake e depois usa o poder computacional do Azure Synapse (Spark ou SQL serverless) para transformar os dados já dentro da nuvem. Qual abordagem descreve esse fluxo?",
+      "explicacao": "ELT (Extract, Load, Transform) extrai dados da origem, carrega no destino (data lake) e depois transforma usando o poder computacional do destino. É a abordagem moderna para cloud, aproveitando a escalabilidade do Synapse/Spark. ETL (Extract, Transform, Load) transforma antes de carregar, num servidor intermediário. A diferença chave é onde a transformação acontece: no destino (ELT) ou num servidor de ETL (ETL tradicional). CDC é um padrão de captura de mudanças, não um fluxo completo. Batch processing descreve a periodicidade, não o padrão de transformação.",
+      "opcoes": [
+        { "texto": "ELT (Extract, Load, Transform).", "correta": true },
+        { "texto": "ETL (Extract, Transform, Load).", "correta": false },
+        { "texto": "CDC (Change Data Capture).", "correta": false },
+        { "texto": "Batch processing.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-dedicated-pool-09",
+      "topico": "Synapse SQL — dedicated pool",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso precisa de um data warehouse com performance previsível para consultas complexas de BI que envolvem bilhões de linhas, com controle de custo baseado em capacidade provisionada. Qual componente do Azure Synapse Analytics atende?",
+      "explicacao": "Dedicated SQL pool (antigo SQL DW) é o componente de data warehouse do Synapse: armazenamento colunar (distributions) com computação provisionada em DWUs (Data Warehouse Units). Performance previsível porque os recursos são dedicados. Serverless SQL pool é pay-per-query, sem recurso provisionado — melhor para exploração ad hoc. Apache Spark pool é para processamento de big data com código. Data Explorer pool é para análise de dados de telemetria.",
+      "opcoes": [
+        { "texto": "Dedicated SQL pool.", "correta": true },
+        { "texto": "Serverless SQL pool.", "correta": false },
+        { "texto": "Apache Spark pool.", "correta": false },
+        { "texto": "Data Explorer pool.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-serverless-pool-10",
+      "topico": "Synapse SQL — serverless pool",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Fabrikam quer executar consultas SQL ad hoc sobre arquivos Parquet no Data Lake, sem provisionar infraestrutura e pagando apenas pelos dados processados por cada consulta. Qual componente do Synapse atende?",
+      "explicacao": "Serverless SQL pool permite executar consultas T-SQL diretamente sobre arquivos no Data Lake (Parquet, CSV, JSON) sem provisionar recursos. A cobrança é por TB de dados processados por consulta. Ideal para exploração ad hoc e consultas esporádicas. Dedicated SQL pool exige provisionamento e é melhor para cargas previsíveis e contínuas. Spark pool exige código (PySpark/Scala). Azure Data Factory é para orquestração, não consultas interativas.",
+      "opcoes": [
+        { "texto": "Serverless SQL pool.", "correta": true },
+        { "texto": "Dedicated SQL pool.", "correta": false },
+        { "texto": "Apache Spark pool.", "correta": false },
+        { "texto": "Azure Data Factory.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-databricks-ml-11",
+      "topico": "Azure Databricks",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders precisa de uma plataforma colaborativa para engenheiros de dados e cientistas de dados trabalharem juntos em notebooks, com suporte a Apache Spark, Delta Lake e MLflow para treinar modelos de machine learning em escala. Qual serviço atende?",
+      "explicacao": "Azure Databricks é uma plataforma analítica baseada em Apache Spark, otimizada para colaboração entre engenheiros e cientistas de dados. Oferece notebooks interativos, Delta Lake para lakehouse, MLflow para gerenciamento de modelos de ML e clusters Spark gerenciados. Azure Synapse tem Spark mas é mais focado em analytics e data warehousing. Azure Machine Learning é específico para ML mas não é uma plataforma de engenharia de dados. Azure HDInsight oferece Spark mas sem a experiência colaborativa unificada do Databricks.",
+      "opcoes": [
+        { "texto": "Azure Databricks.", "correta": true },
+        { "texto": "Azure Synapse Analytics.", "correta": false },
+        { "texto": "Azure Machine Learning.", "correta": false },
+        { "texto": "Azure HDInsight.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-fabric-saas-12",
+      "topico": "Microsoft Fabric",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works quer uma plataforma SaaS que unifique ingestão, engenharia de dados, data warehouse, data science, análise em tempo real e business intelligence numa única experiência, sem gerenciar infraestrutura de clusters. Qual é essa plataforma?",
+      "explicacao": "Microsoft Fabric é uma plataforma analítica SaaS que unifica todas as cargas analíticas (Data Factory, Synapse Data Engineering, Synapse Data Warehouse, Data Science, Real-Time Intelligence, Power BI) sobre um data lake compartilhado (OneLake). A capacidade é provisionada em Fabric Capacity Units, sem gerenciar clusters individuais. Azure Synapse é PaaS e exige gerenciamento de pools. Azure Databricks é PaaS com gestão de clusters. Power BI é parte do Fabric mas cobre apenas BI.",
+      "opcoes": [
+        { "texto": "Microsoft Fabric.", "correta": true },
+        { "texto": "Azure Synapse Analytics.", "correta": false },
+        { "texto": "Azure Databricks.", "correta": false },
+        { "texto": "Power BI Premium.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-datalake-gen2-13",
+      "topico": "Azure Data Lake Storage Gen2",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso precisa de armazenamento para o data lake com namespace hierárquico (pastas e permissões granulares), compatível com o ecossistema Hadoop e integrado com Azure Synapse e Databricks. Qual serviço atende?",
+      "explicacao": "Azure Data Lake Storage Gen2 é Blob Storage com namespace hierárquico habilitado: combina a escala e o custo do Blob Storage com o sistema de arquivos hierárquico necessário para analytics (pastas reais, ACLs POSIX, operações atômicas de renomeação). Integra-se nativamente com Synapse, Databricks e HDInsight. Blob Storage padrão (sem HNS) é flat namespace — não tem pastas reais nem ACLs granulares. Azure Files é para file server, não data lake. Cosmos DB é banco NoSQL, não storage para data lake.",
+      "opcoes": [
+        { "texto": "Azure Data Lake Storage Gen2.", "correta": true },
+        { "texto": "Azure Blob Storage sem namespace hierárquico.", "correta": false },
+        { "texto": "Azure Files.", "correta": false },
+        { "texto": "Azure Cosmos DB.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-snowflake-schema-14",
+      "topico": "Esquema floco de neve",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de BI da Fabrikam modelou o data warehouse com uma tabela de fatos central e tabelas de dimensão, mas as dimensões foram normalizadas: 'Produto' se conecta a 'Subcategoria', que se conecta a 'Categoria'. Qual modelo de dados é esse?",
+      "explicacao": "Esquema floco de neve (snowflake schema) é uma variação do esquema estrela onde as tabelas de dimensão são normalizadas em subdimensões. Reduz redundância nos dados de dimensão mas aumenta a complexidade das consultas (mais JOINs). Esquema estrela mantém dimensões desnormalizadas (mais simples, menos JOINs). Modelo ER normalizado é para OLTP. Modelo dimensional é o termo genérico que abrange tanto estrela quanto floco de neve.",
+      "opcoes": [
+        { "texto": "Esquema floco de neve (snowflake schema).", "correta": true },
+        { "texto": "Esquema estrela (star schema).", "correta": false },
+        { "texto": "Modelo entidade-relacionamento normalizado.", "correta": false },
+        { "texto": "Modelo dimensional genérico.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-simnao-synapse-spark-15",
+      "topico": "Synapse Apache Spark",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de dados da Northwind Traders usa o Azure Synapse Analytics. Avalie a afirmação: o Apache Spark pool do Synapse permite processar dados usando Python, Scala, SQL e .NET (C#).",
+      "explicacao": "A afirmação é verdadeira. O Apache Spark pool no Azure Synapse suporta múltiplas linguagens: PySpark (Python), Scala, Spark SQL e .NET for Apache Spark (C#/F#). Isso permite que equipes com diferentes habilidades colaborem na mesma plataforma. Os notebooks do Synapse permitem misturar linguagens em células diferentes do mesmo notebook.",
+      "opcoes": [
+        { "texto": "Sim", "correta": true },
+        { "texto": "Não", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-adf-ir-selfhosted-16",
+      "topico": "Azure Data Factory",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works precisa usar o Azure Data Factory para copiar dados de um SQL Server instalado num data center privado, sem acesso pela internet. Qual componente permite essa conexão segura?",
+      "explicacao": "Self-hosted Integration Runtime é um agente instalado numa máquina dentro da rede privada que faz a ponte entre o Data Factory (nuvem) e fontes de dados on-premises ou em redes privadas. Não expõe o SQL Server à internet. Azure Integration Runtime é o runtime padrão para fontes na nuvem e na internet. VPN Gateway conecta redes mas o Data Factory ainda precisa do runtime para acessar a fonte. ExpressRoute é conexão privada mas não substitui o runtime do Data Factory.",
+      "opcoes": [
+        { "texto": "Self-hosted Integration Runtime.", "correta": true },
+        { "texto": "Azure Integration Runtime.", "correta": false },
+        { "texto": "Azure VPN Gateway.", "correta": false },
+        { "texto": "Azure ExpressRoute.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-assoc-plataformas-cenarios-17",
+      "topico": "Plataformas analíticas",
+      "tipo": "Associacao",
+      "enunciado": "A equipe de TI da Contoso precisa escolher a plataforma analítica do Azure para cada cenário. Associe cada necessidade ao serviço adequado.",
+      "explicacao": "Orquestração visual de pipelines de dados com 90+ conectores é Azure Data Factory: é o serviço de integração do Azure. Consultas SQL ad hoc sobre arquivos no Data Lake sem provisionar infraestrutura é Serverless SQL pool (Synapse): paga por dado processado, sem cluster. Notebooks colaborativos com Spark, Delta Lake e MLflow é Azure Databricks: plataforma colaborativa de analytics e ML. Data warehouse com performance previsível e armazenamento colunar é Dedicated SQL pool (Synapse): MPP colunar provisionado. Microsoft Fabric unificaria tudo numa plataforma SaaS mas cada cenário acima é resolvido pelo serviço especializado.",
+      "associacoes": [
+        { "alvo": "Orquestração visual de pipelines com 90+ conectores", "item": "Azure Data Factory" },
+        { "alvo": "Consultas SQL sobre arquivos no Data Lake, pague por consulta", "item": "Serverless SQL pool (Synapse)" },
+        { "alvo": "Notebooks colaborativos com Spark e Delta Lake", "item": "Azure Databricks" },
+        { "alvo": "Data warehouse com performance previsível em escala", "item": "Dedicated SQL pool (Synapse)" }
+      ],
+      "itensExtras": [
+        "Microsoft Fabric"
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-polybase-18",
+      "topico": "Synapse — acesso externo",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de BI da Tailspin Toys quer consultar dados no Azure Data Lake Storage Gen2 usando T-SQL no Synapse dedicated SQL pool, sem copiar os dados para dentro do pool. Qual recurso permite criar tabelas que apontam para dados externos?",
+      "explicacao": "PolyBase (e a variação moderna CETAS — CREATE EXTERNAL TABLE AS SELECT) permite criar tabelas externas no Synapse dedicated SQL pool que apontam para dados no Data Lake, Blob Storage ou outros locais. As consultas T-SQL leem os dados externos como se fossem tabelas locais, sem cópia. COPY INTO é para carregar dados para dentro do pool (import), não para consulta externa. Linked services conectam serviços mas não criam tabelas virtuais. Views materializam dados, não apontam para armazenamento externo.",
+      "opcoes": [
+        { "texto": "PolyBase / tabelas externas.", "correta": true },
+        { "texto": "COPY INTO.", "correta": false },
+        { "texto": "Linked service.", "correta": false },
+        { "texto": "View materializada.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-parquet-analytics-19",
+      "topico": "Formatos de arquivo para analytics",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam precisa armazenar dados analíticos no Data Lake num formato que ofereça compressão eficiente, leitura colunar (lê apenas as colunas necessárias) e compatibilidade com Spark, Synapse e Databricks. Qual formato é mais adequado?",
+      "explicacao": "Apache Parquet é o formato colunar padrão para analytics moderno: compressão eficiente por coluna, leitura seletiva (column pruning — lê apenas as colunas da consulta), esquema embutido no arquivo e compatibilidade universal com ferramentas analíticas. CSV é formato de linhas, sem compressão nem leitura seletiva de colunas. JSON é semiestruturado e volumoso. Avro é formato de linhas otimizado para escrita e serialização, não para consultas analíticas que leem poucas colunas de muitas linhas.",
+      "opcoes": [
+        { "texto": "Apache Parquet.", "correta": true },
+        { "texto": "CSV.", "correta": false },
+        { "texto": "JSON.", "correta": false },
+        { "texto": "Apache Avro.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-synapse-workspace-20",
+      "topico": "Synapse workspace",
+      "tipo": "EscolhaUnica",
+      "enunciado": "No Azure Synapse Analytics, todos os recursos analíticos (SQL pools, Spark pools, pipelines, linked services) são organizados dentro de um recurso central. Qual é esse recurso?",
+      "explicacao": "Synapse workspace é o recurso central do Azure Synapse Analytics que agrupa e organiza todos os componentes: SQL pools (dedicated e serverless), Spark pools, pipelines de integração, linked services, datasets e notebooks. É o ponto de gerenciamento único para toda a carga analítica. Resource group é o agrupamento do Azure, não específico do Synapse. Subscription é o nível de faturamento. Data lake é o armazenamento subjacente, não o recurso de gerenciamento.",
+      "opcoes": [
+        { "texto": "Synapse workspace.", "correta": true },
+        { "texto": "Resource group.", "correta": false },
+        { "texto": "Subscription.", "correta": false },
+        { "texto": "Data lake account.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-onelake-fabric-21",
+      "topico": "Microsoft Fabric — OneLake",
+      "tipo": "EscolhaUnica",
+      "enunciado": "No Microsoft Fabric, existe um data lake único e unificado que é compartilhado por todas as cargas de trabalho (engenharia, warehouse, BI) sem duplicação de dados. Qual é o nome desse componente?",
+      "explicacao": "OneLake é o data lake unificado do Microsoft Fabric. Funciona como um único namespace para toda a organização: todos os dados ficam num só lugar (formato Delta/Parquet sobre ADLS Gen2 por baixo) e todas as cargas de trabalho do Fabric acessam os mesmos dados sem cópia. É o 'OneDrive para dados'. ADLS Gen2 é a tecnologia subjacente mas não é o nome do componente do Fabric. Data Lake Store é o serviço Gen1 descontinuado. Dataverse é para dados de aplicações Power Platform.",
+      "opcoes": [
+        { "texto": "OneLake.", "correta": true },
+        { "texto": "Azure Data Lake Storage Gen2.", "correta": false },
+        { "texto": "Azure Data Lake Store Gen1.", "correta": false },
+        { "texto": "Microsoft Dataverse.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-multipla-delta-lake-22",
+      "topico": "Delta Lake",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "A equipe de dados da Contoso adotou Delta Lake no Azure Databricks. Selecione dois benefícios que Delta Lake adiciona sobre Parquet puro.",
+      "explicacao": "Delta Lake adiciona transações ACID sobre o data lake: cada operação (insert, update, delete, merge) é atômica e isolada. Também mantém um transaction log que permite time travel (consultar dados como estavam num ponto anterior no tempo, voltar a versões anteriores). Compressão colunar já é nativa do Parquet, não é algo que o Delta Lake adiciona. Distribuição global é recurso do Cosmos DB. Acesso via SMB não é aplicável a formatos de dados.",
+      "opcoes": [
+        { "texto": "Transações ACID sobre o data lake.", "correta": true },
+        { "texto": "Time travel (consultar versões anteriores dos dados).", "correta": true },
+        { "texto": "Compressão colunar.", "correta": false },
+        { "texto": "Distribuição global automática.", "correta": false },
+        { "texto": "Acesso via protocolo SMB.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-synapse-link-23",
+      "topico": "Azure Synapse Link",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works usa Cosmos DB para a aplicação transacional e quer analisar esses dados no Synapse sem impactar a performance do Cosmos DB e sem construir um pipeline ETL. Qual recurso permite análise direta?",
+      "explicacao": "Azure Synapse Link para Cosmos DB cria um analytical store colunar automaticamente sincronizado com o transactional store do Cosmos DB. O Synapse consulta o analytical store via serverless SQL pool ou Spark, sem impactar o Cosmos DB transacional e sem pipeline ETL. É HTAP (Hybrid Transactional/Analytical Processing). Change feed + pipeline seria uma solução manual. Replicação para SQL Database exige pipeline. Export manual não é tempo real.",
+      "opcoes": [
+        { "texto": "Azure Synapse Link para Cosmos DB.", "correta": true },
+        { "texto": "Change feed com pipeline do Data Factory.", "correta": false },
+        { "texto": "Replicação para Azure SQL Database.", "correta": false },
+        { "texto": "Export manual periódico.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-distribution-hash-24",
+      "topico": "Synapse — distribuição de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "No Synapse dedicated SQL pool, a equipe da Fabrikam precisa otimizar uma tabela de fatos com bilhões de linhas para JOINs frequentes com uma tabela de dimensão 'produto'. Qual estratégia de distribuição minimiza movimentação de dados nos JOINs?",
+      "explicacao": "Hash distribution na coluna de JOIN (productId) distribui as linhas da tabela de fatos pelos 60 nós de computação usando um hash da chave de JOIN. Quando a tabela de dimensão é replicada (replicated distribution) ou distribuída pela mesma chave, os JOINs são locais (cada nó combina seus próprios dados), eliminando movimentação. Round-robin distribui uniformemente mas sem relação com a chave de JOIN — todo JOIN exige shuffle. Replicar a tabela de fatos (bilhões de linhas) desperdiçaria armazenamento.",
+      "opcoes": [
+        { "texto": "Hash distribution na coluna de JOIN.", "correta": true },
+        { "texto": "Round-robin distribution.", "correta": false },
+        { "texto": "Replicated distribution na tabela de fatos.", "correta": false },
+        { "texto": "Sem distribuição (single node).", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-purview-governanca-25",
+      "topico": "Microsoft Purview",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Northwind Traders precisa de um catálogo de dados centralizado para descobrir, classificar e rastrear a linhagem (lineage) dos dados em fontes heterogêneas — SQL Server, Data Lake, Synapse e Power BI. Qual serviço do Azure atende?",
+      "explicacao": "Microsoft Purview (antigo Azure Purview) é a plataforma de governança de dados do Azure. Oferece catálogo de dados (descoberta e busca), classificação automática (dados sensíveis), linhagem de dados (de onde vem, por onde passa, para onde vai) e gestão de políticas de acesso, tudo centralizado. Azure Data Catalog era o serviço anterior, descontinuado. Azure Monitor é para monitoramento de infraestrutura. Azure Policy é para governança de recursos Azure, não de dados.",
+      "opcoes": [
+        { "texto": "Microsoft Purview.", "correta": true },
+        { "texto": "Azure Data Catalog.", "correta": false },
+        { "texto": "Azure Monitor.", "correta": false },
+        { "texto": "Azure Policy.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-simnao-adf-transforma-26",
+      "topico": "Azure Data Factory",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de dados da Adventure Works quer usar o Azure Data Factory para transformar dados. Avalie a afirmação: o Azure Data Factory é apenas para copiar dados e não tem capacidade de transformação.",
+      "explicacao": "A afirmação é falsa. Além de copiar dados (Copy Activity), o Azure Data Factory oferece Data Flows (Mapping Data Flows) que permitem transformar dados visualmente sem código, executando as transformações em clusters Spark gerenciados. Também suporta atividades de transformação via Databricks, HDInsight, stored procedures e outras. A cópia é o recurso mais conhecido mas não é o único.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-dwu-scale-27",
+      "topico": "Synapse — escalabilidade",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso usa um Synapse dedicated SQL pool com DW200c. Durante o fechamento mensal, as consultas ficam lentas. A equipe quer escalar temporariamente para DW1000c e voltar depois. Isso é possível sem migrar dados?",
+      "explicacao": "O dedicated SQL pool do Synapse permite escalar DWUs para cima e para baixo a qualquer momento, sem migrar dados. O armazenamento é separado do compute: escalar muda apenas a capacidade de processamento. A operação leva alguns minutos e pode ser automatizada. Não é preciso criar um novo pool, migrar dados nem recriar tabelas. A cobrança é proporcional ao DWU provisionado, então escalar temporariamente é prática comum para cargas pontuais.",
+      "opcoes": [
+        { "texto": "Sim, escalar DWUs é uma operação online sem migração de dados.", "correta": true },
+        { "texto": "Não, é preciso criar um novo pool e migrar os dados.", "correta": false },
+        { "texto": "Sim, mas os dados precisam ser recarregados após escalar.", "correta": false },
+        { "texto": "Não, o DWU é definido na criação e não pode ser alterado.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-hdinsight-opensource-28",
+      "topico": "Azure HDInsight",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Tailspin Toys precisa de clusters Hadoop, Spark, Hive, HBase e Kafka gerenciados no Azure, com máximo controle sobre a configuração dos componentes open-source. Qual serviço oferece isso?",
+      "explicacao": "Azure HDInsight oferece clusters gerenciados dos principais frameworks open-source de big data: Hadoop, Spark, Hive, HBase, Kafka, Storm, entre outros. Permite controle granular sobre a configuração de cada componente. Azure Databricks é focado em Spark (não tem Hadoop, HBase nem Kafka). Azure Synapse tem Spark integrado mas não clusters Hadoop/HBase/Kafka independentes. Azure Data Factory orquestra pipelines, não executa processamento distribuído.",
+      "opcoes": [
+        { "texto": "Azure HDInsight.", "correta": true },
+        { "texto": "Azure Databricks.", "correta": false },
+        { "texto": "Azure Synapse Analytics.", "correta": false },
+        { "texto": "Azure Data Factory.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-anl-larga-datamart-29",
+      "topico": "Data mart",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O departamento de vendas da Fabrikam quer um subconjunto do data warehouse corporativo contendo apenas os dados relevantes para análise de vendas (produtos, clientes, transações), sem acesso a dados de RH ou financeiro. Qual conceito descreve esse repositório?",
+      "explicacao": "Data mart é um subconjunto do data warehouse voltado para um departamento ou domínio específico. Contém apenas os dados relevantes para aquela área de negócio, simplificando consultas e controle de acesso. Data warehouse é o repositório completo. Data lake armazena dados brutos de toda a organização. Staging area é uma área temporária para transformação de dados durante o processo ETL, não um repositório de consulta.",
+      "opcoes": [
+        { "texto": "Data mart.", "correta": true },
+        { "texto": "Data warehouse.", "correta": false },
+        { "texto": "Data lake.", "correta": false },
+        { "texto": "Staging area.", "correta": false }
+      ]
+    }
+  ]
+}
