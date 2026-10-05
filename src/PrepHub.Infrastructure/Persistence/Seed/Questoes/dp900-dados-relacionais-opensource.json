@@ -1,0 +1,306 @@
+{
+  "exameCode": "DP-900",
+  "area": "dados-relacionais",
+  "questoes": [
+    {
+      "id": "dp900-rel-os-mysql-cenario-01",
+      "topico": "Azure Database for MySQL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam tem uma aplicação web PHP/WordPress que usa MySQL on-premises. A equipe quer migrar para o Azure sem modificar a aplicação, mantendo compatibilidade total com MySQL e eliminando a administração de servidores. Qual serviço atende?",
+      "explicacao": "Azure Database for MySQL Flexible Server é um PaaS totalmente gerenciado, compatível com MySQL Community Edition, que permite migrar aplicações MySQL sem alteração de código. A Microsoft cuida de patches, backups e alta disponibilidade. Azure SQL Database é SQL Server, não MySQL — a aplicação precisaria ser reescrita. Azure Cosmos DB é NoSQL, incompatível com MySQL. Uma VM com MySQL instalado funcionaria mas exigiria administrar o SO e o MySQL manualmente.",
+      "opcoes": [
+        { "texto": "Azure Database for MySQL Flexible Server.", "correta": true },
+        { "texto": "Azure SQL Database.", "correta": false },
+        { "texto": "Azure Cosmos DB.", "correta": false },
+        { "texto": "VM do Azure com MySQL instalado.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-postgresql-cenario-02",
+      "topico": "Azure Database for PostgreSQL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Contoso usa PostgreSQL para uma aplicação de geolocalização que depende da extensão PostGIS para consultas espaciais. A equipe quer migrar para o Azure mantendo suporte a extensões PostgreSQL e sem gerenciar VMs. Qual serviço atende?",
+      "explicacao": "Azure Database for PostgreSQL Flexible Server suporta extensões PostgreSQL (incluindo PostGIS) e é PaaS gerenciado. É projetado para workloads PostgreSQL que dependem de extensões e funcionalidades específicas do ecossistema. Azure SQL Database é SQL Server e não suporta extensões PostgreSQL. Azure Database for MySQL é outro motor de banco de dados. Azure Cosmos DB for PostgreSQL (Citus) é para PostgreSQL distribuído, adequado para escala extrema, não para uma aplicação convencional com PostGIS.",
+      "opcoes": [
+        { "texto": "Azure Database for PostgreSQL Flexible Server.", "correta": true },
+        { "texto": "Azure SQL Database.", "correta": false },
+        { "texto": "Azure Database for MySQL.", "correta": false },
+        { "texto": "Azure Cosmos DB for PostgreSQL.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-mariadb-cenario-03",
+      "topico": "Azure Database for MariaDB",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders tem uma aplicação legada que usa MariaDB, um fork do MySQL criado pelos desenvolvedores originais do MySQL. A equipe quer migrar para um serviço gerenciado no Azure. Qual serviço é mais adequado?",
+      "explicacao": "Azure Database for MariaDB é o serviço PaaS dedicado para workloads MariaDB. Embora MariaDB seja compatível com MySQL em muitos aspectos, há diferenças em recursos avançados, e usar o serviço específico garante compatibilidade total. Nota: a Microsoft anunciou a aposentadoria do Azure Database for MariaDB, então novos projetos devem considerar MySQL Flexible Server. Azure Database for MySQL é compatível para muitos casos mas pode ter diferenças em funcionalidades específicas do MariaDB. Azure SQL Database é SQL Server. Azure Cosmos DB é NoSQL.",
+      "opcoes": [
+        { "texto": "Azure Database for MariaDB.", "correta": true },
+        { "texto": "Azure Database for MySQL.", "correta": false },
+        { "texto": "Azure SQL Database.", "correta": false },
+        { "texto": "Azure Cosmos DB.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-paas-beneficios-04",
+      "topico": "Benefícios do PaaS",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "A Adventure Works está avaliando os benefícios de usar Azure Database for PostgreSQL (PaaS) em vez de instalar PostgreSQL numa VM. Selecione dois benefícios do PaaS em relação ao IaaS.",
+      "explicacao": "Backups automáticos com restauração pontual são gerenciados pela Microsoft no PaaS, sem configuração manual. Patches de segurança aplicados automaticamente eliminam a necessidade de manutenção manual do servidor. No IaaS (VM), o cliente é responsável por ambos. Controle total do sistema operacional é uma vantagem do IaaS, não do PaaS. Instalar extensões customizadas no SO é IaaS. Preço sempre menor não é verdade: PaaS pode custar mais que IaaS dependendo da configuração.",
+      "opcoes": [
+        { "texto": "Backups automáticos com restauração pontual.", "correta": true },
+        { "texto": "Patches de segurança aplicados automaticamente.", "correta": true },
+        { "texto": "Controle total do sistema operacional.", "correta": false },
+        { "texto": "Possibilidade de instalar extensões customizadas no SO.", "correta": false },
+        { "texto": "Preço sempre menor que IaaS.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-flexible-server-05",
+      "topico": "Flexible Server",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Tailspin Toys quer um serviço gerenciado de MySQL no Azure com controle sobre a janela de manutenção, capacidade de parar e iniciar o servidor para economizar em desenvolvimento, e opções de alta disponibilidade configuráveis. Qual opção de implantação atende?",
+      "explicacao": "Flexible Server é a opção de implantação recomendada pela Microsoft para Azure Database for MySQL e PostgreSQL. Oferece controle sobre janela de manutenção, capacidade de parar/iniciar o servidor (economia em dev/test), alta disponibilidade configurável por zona e opções de rede mais flexíveis. Single Server é a opção legada, com menos flexibilidade, e está em caminho de aposentadoria. Pool elástico é conceito de Azure SQL Database. Hyperscale é camada de Azure SQL Database.",
+      "opcoes": [
+        { "texto": "Flexible Server.", "correta": true },
+        { "texto": "Single Server.", "correta": false },
+        { "texto": "Pool elástico.", "correta": false },
+        { "texto": "Hyperscale.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-mysql-vs-pg-06",
+      "topico": "MySQL vs PostgreSQL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso precisa escolher entre MySQL e PostgreSQL para uma nova aplicação. O requisito principal é suporte avançado a tipos de dados complexos como JSON binário, arrays, range types e extensibilidade para tipos customizados. Qual banco é mais indicado?",
+      "explicacao": "PostgreSQL tem suporte nativo e avançado a tipos complexos: JSONB (JSON binário indexável), arrays, range types, tipos geométricos e extensibilidade para tipos customizados via CREATE TYPE. É conhecido por ser o banco open-source com suporte a tipos mais rico. MySQL suporta JSON mas com menos funcionalidades de indexação e consulta que o JSONB do PostgreSQL, e não tem arrays nativos nem range types. SQL Server tem JSON mas de forma diferente. MariaDB é similar ao MySQL.",
+      "opcoes": [
+        { "texto": "PostgreSQL.", "correta": true },
+        { "texto": "MySQL.", "correta": false },
+        { "texto": "SQL Server.", "correta": false },
+        { "texto": "MariaDB.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-ha-zona-07",
+      "topico": "Alta disponibilidade",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam precisa que seu Azure Database for PostgreSQL tenha alta disponibilidade com réplica standby numa zona de disponibilidade diferente, para sobreviver à falha de uma zona inteira com failover automático. Qual configuração atende?",
+      "explicacao": "Alta disponibilidade com redundância de zona (Zone-redundant HA) no Flexible Server mantém uma réplica standby numa zona de disponibilidade diferente, com failover automático. Protege contra falha de zona. HA na mesma zona protege contra falha de servidor mas não de zona. Réplica de leitura distribui carga mas não é HA automática. Backup geográfico permite restauração em outra região após desastre, mas não é failover automático.",
+      "opcoes": [
+        { "texto": "Alta disponibilidade com redundância de zona (Zone-redundant HA).", "correta": true },
+        { "texto": "Alta disponibilidade na mesma zona (Same-zone HA).", "correta": false },
+        { "texto": "Réplica de leitura.", "correta": false },
+        { "texto": "Backup com redundância geográfica.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-assoc-bancos-cenarios-08",
+      "topico": "Bancos open-source no Azure",
+      "tipo": "Associacao",
+      "enunciado": "A equipe de arquitetura da Northwind Traders precisa escolher o banco de dados correto para diferentes projetos. Associe cada cenário ao serviço mais adequado.",
+      "explicacao": "Aplicação WordPress que usa MySQL: Azure Database for MySQL, compatibilidade direta com o stack LAMP. Aplicação de geolocalização que depende de PostGIS: Azure Database for PostgreSQL, que suporta extensões PostgreSQL. Sistema de pedidos que exige compatibilidade com SQL Server: Azure SQL Database, que É SQL Server como PaaS. Aplicação de catálogo com esquema flexível e distribuição global: Azure Cosmos DB, banco NoSQL com distribuição global. Azure Data Lake Storage é para análise em massa, não para OLTP.",
+      "associacoes": [
+        { "alvo": "Aplicação WordPress com banco MySQL", "item": "Azure Database for MySQL" },
+        { "alvo": "Aplicação de geolocalização com extensão PostGIS", "item": "Azure Database for PostgreSQL" },
+        { "alvo": "Sistema de pedidos com compatibilidade SQL Server", "item": "Azure SQL Database" },
+        { "alvo": "Catálogo com esquema flexível e distribuição global", "item": "Azure Cosmos DB" }
+      ],
+      "itensExtras": [
+        "Azure Data Lake Storage Gen2"
+      ]
+    },
+    {
+      "id": "dp900-rel-os-read-replica-09",
+      "topico": "Réplica de leitura",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works tem um Azure Database for MySQL que recebe muitas consultas de relatórios que estão impactando o desempenho das transações de escrita. A equipe quer direcionar as consultas de leitura para uma cópia do banco sem afetar a escrita. Qual recurso atende?",
+      "explicacao": "Réplicas de leitura (Read Replicas) criam cópias assíncronas do banco que aceitam apenas consultas de leitura, desviando a carga de relatórios do servidor primário. O servidor primário continua processando escritas sem impacto. Escalamento vertical (aumentar CPU/memória) não separa as cargas. Alta disponibilidade protege contra falha, não distribui carga de leitura. Cache com Redis acelera leituras específicas mas não é uma cópia completa do banco para consultas SQL.",
+      "opcoes": [
+        { "texto": "Réplicas de leitura (Read Replicas).", "correta": true },
+        { "texto": "Escalamento vertical do servidor.", "correta": false },
+        { "texto": "Configuração de alta disponibilidade.", "correta": false },
+        { "texto": "Azure Cache for Redis.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-simnao-mysql-nosql-10",
+      "topico": "MySQL",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de dados da Tailspin Toys está avaliando opções de banco de dados. Avalie a afirmação: MySQL é um banco de dados NoSQL porque seu nome não contém 'SQL Server'.",
+      "explicacao": "A afirmação é falsa. MySQL é um banco de dados relacional que usa SQL (Structured Query Language). O nome 'MySQL' vem de 'My' (nome da filha do cofundador) mais 'SQL' (a linguagem). É um dos bancos relacionais mais populares do mundo, usado massivamente em aplicações web. NoSQL refere-se a bancos que não usam o modelo relacional tabular (documentos, chave-valor, grafos, coluna), não a bancos que não têm 'SQL Server' no nome.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-pg-citus-11",
+      "topico": "Azure Cosmos DB for PostgreSQL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso tem uma aplicação multitenant com centenas de milhões de linhas que precisa de PostgreSQL distribuído: os dados devem ser repartidos entre múltiplos nós para escala horizontal, mantendo compatibilidade com SQL PostgreSQL. Qual serviço atende?",
+      "explicacao": "Azure Cosmos DB for PostgreSQL (baseado em Citus) distribui dados PostgreSQL entre múltiplos nós para escala horizontal, mantendo compatibilidade SQL. É projetado para workloads que exigem mais que um único servidor pode oferecer. Azure Database for PostgreSQL Flexible Server é um único servidor (ou com réplicas de leitura), sem distribuição nativa de dados. Azure SQL Database é SQL Server. Azure Cosmos DB for NoSQL é outro modelo de dados.",
+      "opcoes": [
+        { "texto": "Azure Cosmos DB for PostgreSQL (Citus).", "correta": true },
+        { "texto": "Azure Database for PostgreSQL Flexible Server.", "correta": false },
+        { "texto": "Azure SQL Database.", "correta": false },
+        { "texto": "Azure Cosmos DB for NoSQL.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-migracao-dms-12",
+      "topico": "Migração",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam precisa migrar um banco MySQL on-premises para Azure Database for MySQL com mínimo de downtime. A equipe quer uma ferramenta gerenciada que suporte migração online (contínua) durante a migração. Qual ferramenta atende?",
+      "explicacao": "Azure Database Migration Service (DMS) é uma ferramenta gerenciada que suporta migração online de MySQL, PostgreSQL e SQL Server para serviços Azure, com replicação contínua que minimiza o downtime. mysqldump exporta e importa dados, mas é offline e causa downtime. AzCopy copia arquivos, não migra bancos de dados. Azure Data Factory pode mover dados mas não é otimizado para migração de banco de dados com replicação contínua.",
+      "opcoes": [
+        { "texto": "Azure Database Migration Service (DMS).", "correta": true },
+        { "texto": "mysqldump e importação manual.", "correta": false },
+        { "texto": "AzCopy.", "correta": false },
+        { "texto": "Azure Data Factory.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-ssl-conexao-13",
+      "topico": "Segurança",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de segurança da Northwind Traders quer garantir que todas as conexões ao Azure Database for PostgreSQL sejam criptografadas em trânsito. Qual mecanismo garante isso?",
+      "explicacao": "SSL/TLS criptografa a conexão entre o cliente e o servidor, protegendo os dados em trânsito. No Azure Database for PostgreSQL, SSL é habilitado por padrão e pode ser configurado como obrigatório. TDE criptografa dados em repouso, não em trânsito. Firewall de IP filtra origens de conexão, não criptografa o tráfego. VNet service endpoint restringe acesso por rede, não criptografa a conexão.",
+      "opcoes": [
+        { "texto": "Conexão SSL/TLS.", "correta": true },
+        { "texto": "Transparent Data Encryption.", "correta": false },
+        { "texto": "Firewall de IP.", "correta": false },
+        { "texto": "VNet service endpoint.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-multipla-opensource-14",
+      "topico": "Bancos open-source",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "A equipe de dados da Adventure Works está listando bancos de dados open-source com serviço gerenciado no Azure. Selecione dois bancos de dados open-source suportados como PaaS no Azure.",
+      "explicacao": "MySQL e PostgreSQL têm serviços PaaS dedicados no Azure (Azure Database for MySQL e Azure Database for PostgreSQL). SQL Server é proprietário da Microsoft, não open-source. Oracle é proprietário da Oracle. MongoDB tem integração via Cosmos DB (API for MongoDB), mas não é um serviço PaaS nativo de MongoDB — é o Cosmos DB usando a API compatível.",
+      "opcoes": [
+        { "texto": "MySQL.", "correta": true },
+        { "texto": "PostgreSQL.", "correta": true },
+        { "texto": "SQL Server.", "correta": false },
+        { "texto": "Oracle.", "correta": false },
+        { "texto": "MongoDB.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-vnet-integracao-15",
+      "topico": "Segurança de rede",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Tailspin Toys precisa que o Azure Database for MySQL seja acessível apenas de dentro da rede virtual Azure (VNet) da aplicação, sem expor um endereço IP público. Qual recurso atende?",
+      "explicacao": "Acesso privado via VNet integration (ou Private Link) permite que o banco de dados seja acessível apenas de dentro da rede virtual, sem endereço IP público. O tráfego nunca sai da rede Microsoft. Firewall de IP permite conexões de IPs específicos mas o banco ainda tem endereço público. SSL criptografa a conexão mas não restringe o acesso à VNet. Réplica de leitura distribui carga, não restringe acesso de rede.",
+      "opcoes": [
+        { "texto": "Acesso privado via VNet integration.", "correta": true },
+        { "texto": "Regras de firewall de IP.", "correta": false },
+        { "texto": "Conexão SSL obrigatória.", "correta": false },
+        { "texto": "Réplica de leitura na mesma VNet.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-backup-retencao-16",
+      "topico": "Backup",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O DBA da Contoso precisa restaurar o Azure Database for PostgreSQL para o estado de 3 horas atrás, após uma atualização incorreta de dados. O banco usa a configuração padrão de backup. Qual recurso permite essa restauração?",
+      "explicacao": "Azure Database for PostgreSQL faz backups automáticos e suporta restauração pontual (PITR) para qualquer momento dentro do período de retenção (padrão 7 dias, configurável até 35 dias). A restauração cria um novo servidor com o estado do momento escolhido. Réplica de leitura é uma cópia assíncrona para distribuir carga, não para restauração pontual. Failover muda o tráfego para uma réplica em caso de falha, não restaura estado anterior. Snapshot manual não existe como recurso nativo do serviço PaaS.",
+      "opcoes": [
+        { "texto": "Restauração pontual (Point-In-Time Restore).", "correta": true },
+        { "texto": "Failover para réplica de leitura.", "correta": false },
+        { "texto": "Réplica de leitura.", "correta": false },
+        { "texto": "Snapshot manual do disco.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-simnao-pg-relacional-17",
+      "topico": "PostgreSQL",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de dados da Fabrikam discute sobre PostgreSQL. Avalie a afirmação: PostgreSQL não é um banco de dados relacional porque suporta tipos de dados JSON e documentos.",
+      "explicacao": "A afirmação é falsa. PostgreSQL é um banco de dados relacional que TAMBÉM suporta tipos de dados como JSON/JSONB, permitindo armazenar e consultar documentos. É classificado como 'relacional-objeto' e é fundamentalmente relacional: usa tabelas, SQL, transações ACID, chaves primárias e estrangeiras. O suporte a JSON é uma funcionalidade adicional que não muda sua natureza relacional — permite flexibilidade onde necessário sem abandonar o modelo relacional para o resto dos dados.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-mysql-wordpress-18",
+      "topico": "Azure Database for MySQL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de marketing da Northwind Traders quer hospedar um blog WordPress no Azure. O WordPress exige MySQL ou MariaDB como banco de dados. A equipe quer PaaS gerenciado, recomendado pela Microsoft para novos projetos MySQL. Qual opção de implantação usar?",
+      "explicacao": "Azure Database for MySQL Flexible Server é a opção recomendada pela Microsoft para novos projetos MySQL: oferece mais controle (janela de manutenção, parar/iniciar) e recursos (HA por zona, rede flexível) que o Single Server, que está em caminho de aposentadoria. Azure Database for MariaDB também está em aposentadoria. Azure SQL Database é SQL Server, incompatível com WordPress. VM com MySQL exigiria administração manual.",
+      "opcoes": [
+        { "texto": "Azure Database for MySQL Flexible Server.", "correta": true },
+        { "texto": "Azure Database for MySQL Single Server.", "correta": false },
+        { "texto": "Azure Database for MariaDB.", "correta": false },
+        { "texto": "Azure SQL Database.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-scaling-vertical-19",
+      "topico": "Escalabilidade",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O Azure Database for MySQL da Adventure Works está ficando lento durante picos de uso. A equipe quer aumentar a CPU e a memória do servidor sem migrar para outro serviço. Qual tipo de escalabilidade resolve?",
+      "explicacao": "Escalabilidade vertical (scale up) aumenta os recursos (CPU, memória, armazenamento) do servidor existente. No Flexible Server, é possível mudar a camada de computação (Burstable, General Purpose, Memory Optimized) sem recriação do servidor. Escalabilidade horizontal (scale out) adicionaria mais servidores, que não é o que o Flexible Server oferece nativamente para escritas. Réplica de leitura distribui leitura mas não aumenta capacidade de escrita. Auto-scaling no Flexible Server existe para armazenamento mas não para computação automática.",
+      "opcoes": [
+        { "texto": "Escalabilidade vertical (aumentar CPU/memória).", "correta": true },
+        { "texto": "Escalabilidade horizontal (adicionar servidores de escrita).", "correta": false },
+        { "texto": "Réplica de leitura.", "correta": false },
+        { "texto": "Auto-scaling de computação.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-pg-extensions-20",
+      "topico": "Azure Database for PostgreSQL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Tailspin Toys usa extensões PostgreSQL extensivamente: pgcrypto para criptografia, pg_trgm para busca por similaridade e uuid-ossp para geração de UUIDs. A equipe quer garantir que essas extensões funcionem no Azure. Onde verificar?",
+      "explicacao": "O Azure Database for PostgreSQL suporta um subconjunto das extensões PostgreSQL. A lista de extensões suportadas está documentada na página oficial do serviço no Microsoft Learn. Nem todas as extensões existentes são suportadas no PaaS — extensões que precisam de acesso ao sistema de arquivos ou superusuário podem não estar disponíveis. A documentação do PostgreSQL lista todas as extensões existentes, não as suportadas no Azure. A página de preços trata de custos. O portal do Azure mostra as extensões instaladas, não as disponíveis.",
+      "opcoes": [
+        { "texto": "Na documentação do Azure Database for PostgreSQL no Microsoft Learn.", "correta": true },
+        { "texto": "Na documentação oficial do PostgreSQL.", "correta": false },
+        { "texto": "Na página de preços do Azure.", "correta": false },
+        { "texto": "No portal do Azure, nas configurações do servidor.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-stop-start-dev-21",
+      "topico": "Flexible Server",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso tem um Azure Database for PostgreSQL Flexible Server usado apenas durante o horário comercial para desenvolvimento. A equipe quer economizar parando o servidor fora do expediente. O que acontece com os dados quando o servidor é parado?",
+      "explicacao": "Quando um Flexible Server é parado, a computação é interrompida (não cobra) mas o armazenamento é mantido (continua cobrando pelo armazenamento). Os dados permanecem intactos. Ao iniciar novamente, o servidor volta com todos os dados preservados. Não é como excluir e recriar — os dados NÃO são perdidos. O banco não fica acessível durante a pausa, então aplicações precisam tratar a indisponibilidade.",
+      "opcoes": [
+        { "texto": "Os dados são preservados; apenas a computação é interrompida.", "correta": true },
+        { "texto": "Os dados são excluídos e precisam ser restaurados de backup.", "correta": false },
+        { "texto": "Os dados são movidos para armazenamento frio automaticamente.", "correta": false },
+        { "texto": "O servidor não pode ser parado; só pode ser excluído.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-parametros-servidor-22",
+      "topico": "Flexible Server",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O DBA da Fabrikam precisa ajustar parâmetros do MySQL no Azure Database for MySQL Flexible Server, como max_connections e innodb_buffer_pool_size, para otimizar o desempenho. Onde ele configura esses parâmetros?",
+      "explicacao": "No Flexible Server, os parâmetros do servidor são configurados via portal do Azure, CLI ou API nas configurações do servidor (Server Parameters). Não é necessário (nem possível) editar arquivos de configuração do SO como num servidor IaaS. Editar my.cnf (arquivo de configuração do MySQL) não é possível no PaaS. Criar uma stored procedure não altera parâmetros do servidor. Abrir um ticket de suporte não é necessário para parâmetros configuráveis.",
+      "opcoes": [
+        { "texto": "Nas configurações de parâmetros do servidor, via portal, CLI ou API.", "correta": true },
+        { "texto": "Editando o arquivo my.cnf no sistema operacional.", "correta": false },
+        { "texto": "Criando uma stored procedure de configuração.", "correta": false },
+        { "texto": "Abrindo um ticket de suporte à Microsoft.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-os-geo-backup-23",
+      "topico": "Backup geográfico",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de DR da Northwind Traders precisa que os backups do Azure Database for PostgreSQL sejam armazenados numa região diferente, para que o banco possa ser restaurado em outra região caso a região primária fique indisponível. Qual configuração atende?",
+      "explicacao": "Backup com redundância geográfica (Geo-redundant backup) armazena cópias dos backups numa região emparelhada diferente, permitindo restauração em outra região após desastre regional. Backup com redundância local armazena na mesma região — não protege contra falha da região. Réplica de leitura distribui carga, não é uma estratégia de backup. Exportação manual para Blob Storage funcionaria mas não é automatizada nem gerenciada pelo serviço.",
+      "opcoes": [
+        { "texto": "Backup com redundância geográfica.", "correta": true },
+        { "texto": "Backup com redundância local.", "correta": false },
+        { "texto": "Réplica de leitura em outra região.", "correta": false },
+        { "texto": "Exportação manual para Azure Blob Storage.", "correta": false }
+      ]
+    }
+  ]
+}

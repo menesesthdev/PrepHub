@@ -1,0 +1,321 @@
+{
+  "exameCode": "DP-900",
+  "area": "dados-relacionais",
+  "questoes": [
+    {
+      "id": "dp900-rel-sql-paas-sqldb-01",
+      "topico": "Azure SQL Database",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso precisa de um banco de dados relacional totalmente gerenciado na nuvem, onde a Microsoft cuide de patches, backups e alta disponibilidade automaticamente. A equipe quer pagar apenas pelo uso e não precisa de compatibilidade total com SQL Server on-premises. Qual serviço atende?",
+      "explicacao": "Azure SQL Database é um PaaS totalmente gerenciado: a Microsoft cuida de patches, backups, alta disponibilidade e infraestrutura. Oferece modelo serverless (paga por uso) e não exige administração de VM. SQL Server em VM é IaaS com controle total, mas exige gerenciar patches e backups. Azure SQL Managed Instance é PaaS com compatibilidade quase total com SQL Server, mas é mais caro e voltado para migrações lift-and-shift. SQL Server on-premises exige toda a infraestrutura.",
+      "opcoes": [
+        { "texto": "Azure SQL Database.", "correta": true },
+        { "texto": "SQL Server em Azure Virtual Machine.", "correta": false },
+        { "texto": "Azure SQL Managed Instance.", "correta": false },
+        { "texto": "SQL Server on-premises.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-managed-instance-02",
+      "topico": "Azure SQL Managed Instance",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam quer migrar seu banco SQL Server on-premises para a nuvem como PaaS, mas usa recursos que Azure SQL Database não suporta: cross-database queries, SQL Agent jobs e CLR assemblies. A equipe não quer administrar VMs. Qual serviço oferece compatibilidade quase total com SQL Server como PaaS?",
+      "explicacao": "Azure SQL Managed Instance oferece compatibilidade de quase 100% com SQL Server on-premises como serviço gerenciado (PaaS): suporta cross-database queries, SQL Agent, CLR, Service Broker e outros recursos de instância que Azure SQL Database não oferece. É projetado para migrações lift-and-shift com mínima alteração de código. Azure SQL Database é PaaS mas não suporta esses recursos de instância. SQL Server em VM oferece tudo mas exige gerenciar a VM (IaaS). Azure Database for PostgreSQL é outro mecanismo de banco de dados.",
+      "opcoes": [
+        { "texto": "Azure SQL Managed Instance.", "correta": true },
+        { "texto": "Azure SQL Database.", "correta": false },
+        { "texto": "SQL Server em Azure Virtual Machine.", "correta": false },
+        { "texto": "Azure Database for PostgreSQL.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-vm-full-control-03",
+      "topico": "SQL Server em VM",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works precisa de controle total sobre o sistema operacional e a instância SQL Server na nuvem: instalar software de terceiros, configurar parâmetros do SO e usar versões específicas do SQL Server. Não é aceitável nenhuma limitação de PaaS. Qual opção atende?",
+      "explicacao": "SQL Server em Azure Virtual Machine é IaaS: a equipe tem controle total sobre SO, instância SQL Server, patches, configurações e pode instalar qualquer software na VM. Paga o preço de administrar tudo manualmente. Azure SQL Database e Managed Instance são PaaS com limitações sobre SO e configuração de instância. Azure Synapse Analytics é para análise, não para workloads OLTP com controle total.",
+      "opcoes": [
+        { "texto": "SQL Server em Azure Virtual Machine.", "correta": true },
+        { "texto": "Azure SQL Database.", "correta": false },
+        { "texto": "Azure SQL Managed Instance.", "correta": false },
+        { "texto": "Azure Synapse Analytics.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-serverless-04",
+      "topico": "Azure SQL Database",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Tailspin Toys tem uma aplicação com padrão de uso imprevisível: picos de atividade durante promoções e períodos longos com pouca ou nenhuma atividade. A equipe quer um banco relacional que escale automaticamente e pause quando inativo para economizar. Qual modelo de computação do Azure SQL Database atende?",
+      "explicacao": "O modelo serverless do Azure SQL Database escala automaticamente a computação com base na carga e pausa quando inativo, cobrando apenas pelo armazenamento durante a pausa. É ideal para workloads imprevisíveis com períodos de inatividade. O modelo provisionado exige escolher um nível de computação fixo. DTU é um modelo de compra, não de escalabilidade automática. Hiperescala é para bancos muito grandes (até 100 TB), não para otimização de custo com inatividade.",
+      "opcoes": [
+        { "texto": "Serverless.", "correta": true },
+        { "texto": "Provisionado.", "correta": false },
+        { "texto": "DTU.", "correta": false },
+        { "texto": "Hiperescala.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-elastic-pool-05",
+      "topico": "Azure SQL Database",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso opera um sistema multitenant onde cada inquilino tem seu próprio banco de dados. Os picos de uso dos inquilinos não coincidem: enquanto uns estão ativos, outros estão ociosos. A equipe quer compartilhar recursos entre os bancos para otimizar custo. Qual recurso do Azure SQL Database permite isso?",
+      "explicacao": "Pool elástico (Elastic Pool) permite que múltiplos bancos de dados compartilhem um conjunto de recursos de computação (DTUs ou vCores). Bancos com picos alternados aproveitam a capacidade ociosa uns dos outros, reduzindo custo total. Sem pool, cada banco precisaria ser provisionado para seu pico individual. Serverless escala cada banco individualmente, sem compartilhamento entre bancos. Geo-replicação cria réplicas de leitura, não compartilha recursos. Always On é alta disponibilidade, não otimização de custo.",
+      "opcoes": [
+        { "texto": "Pool elástico (Elastic Pool).", "correta": true },
+        { "texto": "Modelo serverless.", "correta": false },
+        { "texto": "Geo-replicação ativa.", "correta": false },
+        { "texto": "Always On Availability Groups.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-dtu-vcore-06",
+      "topico": "Modelos de compra",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de TI da Fabrikam está avaliando os modelos de compra do Azure SQL Database. Num dos modelos, os recursos são medidos em unidades que agrupam CPU, memória e I/O numa métrica combinada. No outro, CPU, memória e armazenamento são configurados independentemente. Qual modelo usa a métrica combinada?",
+      "explicacao": "O modelo DTU (Database Transaction Unit) agrupa CPU, memória e I/O numa unidade combinada: cada nível de DTU oferece uma proporção fixa desses recursos. É simples mas inflexível. O modelo vCore permite configurar CPU (número de vCores), memória e armazenamento independentemente, dando mais controle. Reserved capacity é uma forma de pagamento (adiantado por desconto), não um modelo de compra de recursos. Pay-as-you-go é cobrança por uso, aplicável a ambos os modelos.",
+      "opcoes": [
+        { "texto": "DTU (Database Transaction Unit).", "correta": true },
+        { "texto": "vCore.", "correta": false },
+        { "texto": "Reserved capacity.", "correta": false },
+        { "texto": "Pay-as-you-go.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-assoc-servicos-07",
+      "topico": "Família Azure SQL",
+      "tipo": "Associacao",
+      "enunciado": "A equipe de arquitetura da Northwind Traders precisa escolher o serviço correto para cada cenário. Associe cada necessidade ao serviço mais adequado da família Azure SQL.",
+      "explicacao": "Aplicação nova sem dependências de recursos de instância precisa de PaaS simples: Azure SQL Database. Migração lift-and-shift de SQL Server que usa SQL Agent e cross-database queries precisa de compatibilidade de instância: Azure SQL Managed Instance. Aplicação legada que exige versão específica do SQL Server e software de terceiros no SO precisa de controle total: SQL Server em VM (IaaS). Múltiplos bancos pequenos com picos alternados que precisam compartilhar recursos: Pool Elástico do Azure SQL Database. Azure Synapse é para análise, não para OLTP.",
+      "associacoes": [
+        { "alvo": "Aplicação nova, PaaS simples sem dependências de instância", "item": "Azure SQL Database" },
+        { "alvo": "Migração lift-and-shift com SQL Agent e cross-database queries", "item": "Azure SQL Managed Instance" },
+        { "alvo": "Versão específica do SQL Server com controle total do SO", "item": "SQL Server em Azure VM" },
+        { "alvo": "Múltiplos bancos pequenos compartilhando recursos", "item": "Pool Elástico do Azure SQL Database" }
+      ],
+      "itensExtras": [
+        "Azure Synapse Analytics"
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-backup-automatico-08",
+      "topico": "Azure SQL Database",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O gerente de TI da Adventure Works pergunta ao DBA se é preciso configurar backups manualmente no Azure SQL Database. Qual é a situação real?",
+      "explicacao": "Azure SQL Database faz backups automáticos: completo semanal, diferencial a cada 12 horas e log de transações a cada 5-10 minutos. A retenção padrão é de 7 dias (configurável até 35 dias). Nenhuma configuração manual é necessária para ter backups básicos. Dizer que não há backup é falso. Dizer que só há backup manual é falso. Dizer que só faz backup completo ignora os backups incrementais que permitem restauração a qualquer ponto no tempo (PITR).",
+      "opcoes": [
+        { "texto": "Backups são automáticos: completo, diferencial e de log, sem configuração manual.", "correta": true },
+        { "texto": "Não há backup automático; o DBA deve configurar manualmente.", "correta": false },
+        { "texto": "Só há backup completo uma vez por semana, sem incremental.", "correta": false },
+        { "texto": "O backup é responsabilidade exclusiva do cliente no modelo PaaS.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-tde-09",
+      "topico": "Segurança do Azure SQL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de compliance da Contoso precisa que os dados armazenados no Azure SQL Database sejam criptografados em repouso, sem alteração nas aplicações. Qual recurso atende?",
+      "explicacao": "Transparent Data Encryption (TDE) criptografa o banco de dados em repouso (arquivos de dados, log e backups) de forma transparente — as aplicações leem e escrevem normalmente sem modificação. No Azure SQL Database, TDE é habilitada por padrão. Always Encrypted criptografa colunas específicas e os dados são criptografados na aplicação, não apenas em repouso — exige alteração na aplicação. Dynamic Data Masking mascara dados na exibição, não criptografa em repouso. Row-Level Security restringe acesso a linhas, não criptografa.",
+      "opcoes": [
+        { "texto": "Transparent Data Encryption (TDE).", "correta": true },
+        { "texto": "Always Encrypted.", "correta": false },
+        { "texto": "Dynamic Data Masking.", "correta": false },
+        { "texto": "Row-Level Security.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-geo-replication-10",
+      "topico": "Azure SQL Database",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam precisa que o banco de dados principal em East US tenha uma réplica de leitura em West Europe para distribuir a carga de consultas globais e servir como failover em caso de desastre. Qual recurso do Azure SQL Database atende?",
+      "explicacao": "Geo-replicação ativa cria réplicas assíncronas de leitura em outras regiões do Azure. Serve para distribuir carga de leitura globalmente e como alvo de failover manual em caso de desastre regional. Failover groups automatizam o failover entre regiões. Pool elástico compartilha recursos entre bancos na mesma região, não replica entre regiões. Backup de longa retenção guarda backups por anos, mas não cria réplica de leitura. Always On é recurso de SQL Server em VM, não do Azure SQL Database PaaS.",
+      "opcoes": [
+        { "texto": "Geo-replicação ativa.", "correta": true },
+        { "texto": "Pool elástico.", "correta": false },
+        { "texto": "Backup de longa retenção.", "correta": false },
+        { "texto": "Always On Availability Groups.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-simnao-mi-paas-11",
+      "topico": "Azure SQL Managed Instance",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de infraestrutura da Northwind Traders está avaliando o Azure SQL Managed Instance. Avalie a afirmação: o Azure SQL Managed Instance é um serviço IaaS que exige gerenciamento manual de patches e sistema operacional.",
+      "explicacao": "A afirmação é falsa. Azure SQL Managed Instance é PaaS: a Microsoft gerencia patches, backups, alta disponibilidade e infraestrutura. A diferença em relação ao Azure SQL Database é que oferece compatibilidade de instância (SQL Agent, cross-database queries, CLR), não que exige gerenciamento de SO. Quem exige gerenciamento manual de SO e patches é SQL Server em VM (IaaS).",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-hyperscale-12",
+      "topico": "Azure SQL Database",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works tem um banco de dados que cresce rapidamente e já ultrapassou 4 TB. A equipe precisa de escalabilidade de armazenamento até 100 TB e snapshot instantâneo para backup, mantendo o modelo PaaS. Qual camada de serviço do Azure SQL Database atende?",
+      "explicacao": "A camada Hyperscale do Azure SQL Database suporta bancos de até 100 TB, com backup baseado em snapshots instantâneos e escalabilidade de armazenamento independente da computação. É projetada para bancos muito grandes. A camada General Purpose tem limite de armazenamento menor. Business Critical oferece alto desempenho mas com limites de tamanho mais restritivos. Basic/Standard são para workloads leves.",
+      "opcoes": [
+        { "texto": "Hyperscale.", "correta": true },
+        { "texto": "General Purpose.", "correta": false },
+        { "texto": "Business Critical.", "correta": false },
+        { "texto": "Basic.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-always-encrypted-13",
+      "topico": "Segurança do Azure SQL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de segurança da Tailspin Toys exige que números de cartão de crédito armazenados no Azure SQL Database sejam criptografados de forma que nem mesmo o DBA possa lê-los. A chave de criptografia deve ficar apenas na aplicação cliente. Qual recurso atende?",
+      "explicacao": "Always Encrypted mantém os dados criptografados no banco E durante o transporte: a chave de criptografia fica no cliente e o SQL Server nunca vê os dados em texto claro. Nem o DBA consegue ler os dados. TDE criptografa em repouso mas o DBA vê os dados em texto claro nas consultas. Dynamic Data Masking mascara a exibição mas os dados reais estão acessíveis ao DBA. Row-Level Security restringe quais linhas um usuário vê, não criptografa o conteúdo.",
+      "opcoes": [
+        { "texto": "Always Encrypted.", "correta": true },
+        { "texto": "Transparent Data Encryption (TDE).", "correta": false },
+        { "texto": "Dynamic Data Masking.", "correta": false },
+        { "texto": "Row-Level Security.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-dynamic-masking-14",
+      "topico": "Segurança do Azure SQL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de suporte da Contoso precisa consultar dados de clientes para resolver problemas, mas não deve ver os últimos quatro dígitos do CPF nem o endereço de e-mail completo. A equipe quer mascarar esses campos na exibição sem alterar os dados armazenados. Qual recurso atende?",
+      "explicacao": "Dynamic Data Masking permite definir regras que mascaram dados na exibição (ex: CPF aparece como XXX.XXX.***-**, e-mail como f***@contoso.com) sem alterar os dados armazenados. Usuários com permissão podem ver os dados reais. Always Encrypted criptografa os dados em repouso e transporte — a equipe de suporte não conseguiria consultar nem os dados mascarados. TDE criptografa o banco inteiro em repouso, transparente nas consultas. Row-Level Security filtra linhas, não mascara colunas.",
+      "opcoes": [
+        { "texto": "Dynamic Data Masking.", "correta": true },
+        { "texto": "Always Encrypted.", "correta": false },
+        { "texto": "Transparent Data Encryption (TDE).", "correta": false },
+        { "texto": "Row-Level Security.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-pitr-15",
+      "topico": "Azure SQL Database",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Um desenvolvedor da Fabrikam executou acidentalmente um DELETE sem WHERE na tabela de produtos às 14:35. A equipe precisa restaurar o banco para o estado de 14:34, antes do erro. Qual recurso permite isso no Azure SQL Database?",
+      "explicacao": "Point-In-Time Restore (PITR) permite restaurar um banco de dados do Azure SQL Database para qualquer segundo dentro do período de retenção de backup, criando um novo banco com o estado daquele momento. É possível porque os backups de log de transações são feitos a cada 5-10 minutos. Geo-restore restaura a partir de backups georredundantes após desastre regional. Long-term retention guarda backups por anos, mas não para qualquer ponto no tempo. Failover muda o tráfego para uma réplica, não restaura o estado anterior.",
+      "opcoes": [
+        { "texto": "Point-In-Time Restore (PITR).", "correta": true },
+        { "texto": "Geo-restore.", "correta": false },
+        { "texto": "Long-term retention (LTR).", "correta": false },
+        { "texto": "Failover para réplica.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-multipla-paas-16",
+      "topico": "Família Azure SQL",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "A equipe de TI da Northwind Traders quer saber quais serviços da família Azure SQL são oferecidos como PaaS. Selecione dois serviços PaaS.",
+      "explicacao": "Azure SQL Database e Azure SQL Managed Instance são ambos PaaS: a Microsoft gerencia infraestrutura, patches, backups e alta disponibilidade. A diferença entre eles é o nível de compatibilidade com SQL Server on-premises (Managed Instance é mais compatível). SQL Server em Azure VM é IaaS: o cliente administra o SO e o SQL Server. SQL Server on-premises não é um serviço de nuvem.",
+      "opcoes": [
+        { "texto": "Azure SQL Database.", "correta": true },
+        { "texto": "Azure SQL Managed Instance.", "correta": true },
+        { "texto": "SQL Server em Azure Virtual Machine.", "correta": false },
+        { "texto": "SQL Server on-premises.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-auditing-17",
+      "topico": "Segurança do Azure SQL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de compliance da Adventure Works precisa rastrear quem acessou o banco de dados, quais consultas foram executadas e quando, para fins de auditoria regulatória. Qual recurso do Azure SQL Database registra essa atividade?",
+      "explicacao": "O recurso de auditoria (Auditing) do Azure SQL Database registra eventos do banco de dados e os grava num log de auditoria (Azure Storage, Log Analytics ou Event Hub). Permite rastrear quem fez o quê e quando, atendendo requisitos de compliance. TDE criptografa dados, não audita acessos. Dynamic Data Masking mascara dados na exibição. Threat Detection identifica comportamentos anômalos mas não é um log de auditoria completo.",
+      "opcoes": [
+        { "texto": "Auditoria (Auditing).", "correta": true },
+        { "texto": "Transparent Data Encryption (TDE).", "correta": false },
+        { "texto": "Dynamic Data Masking.", "correta": false },
+        { "texto": "Advanced Threat Detection.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-simnao-vm-patches-18",
+      "topico": "SQL Server em VM",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de TI da Tailspin Toys escolheu SQL Server em Azure VM. Avalie a afirmação: ao escolher SQL Server em Azure Virtual Machine, a Microsoft é responsável por aplicar patches de segurança do SQL Server automaticamente.",
+      "explicacao": "A afirmação é falsa. SQL Server em Azure VM é IaaS: o cliente é responsável por gerenciar o sistema operacional E a instância SQL Server, incluindo patches de segurança. A Microsoft gerencia apenas a infraestrutura física e a plataforma de virtualização. A extensão SQL IaaS Agent pode automatizar patches, mas é o cliente que a configura e habilita — não é automático por padrão como nos serviços PaaS.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-rls-19",
+      "topico": "Segurança do Azure SQL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso tem uma tabela Sales onde vendedores de diferentes regiões inserem dados. A equipe quer que cada vendedor veja apenas os dados da sua própria região, sem criar views ou bancos separados. Qual recurso permite essa filtragem automática?",
+      "explicacao": "Row-Level Security (RLS) permite definir políticas que filtram automaticamente as linhas que cada usuário pode ver, com base na identidade ou papel do usuário. O vendedor consulta a mesma tabela e o RLS garante que só veja suas linhas. Dynamic Data Masking mascara colunas, não filtra linhas. Views poderiam filtrar, mas o enunciado quer evitar essa abordagem. Column-Level Security restringe colunas, não linhas.",
+      "opcoes": [
+        { "texto": "Row-Level Security (RLS).", "correta": true },
+        { "texto": "Dynamic Data Masking.", "correta": false },
+        { "texto": "Views com filtro por região.", "correta": false },
+        { "texto": "Column-Level Security.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-business-critical-20",
+      "topico": "Azure SQL Database",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam precisa de um banco Azure SQL Database com a menor latência possível de leitura e escrita, com réplica local de leitura incluída e garantia de failover automático em segundos. Qual camada de serviço oferece o melhor desempenho?",
+      "explicacao": "A camada Business Critical usa armazenamento SSD local e mantém réplicas Always On locais para failover em segundos, com uma réplica de leitura inclusa. É a camada de maior desempenho para OLTP. General Purpose usa armazenamento remoto e tem latência maior. Hyperscale foca em escala e não em latência mínima de I/O. Basic/Standard são para workloads leves.",
+      "opcoes": [
+        { "texto": "Business Critical.", "correta": true },
+        { "texto": "General Purpose.", "correta": false },
+        { "texto": "Hyperscale.", "correta": false },
+        { "texto": "Standard.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-entra-auth-21",
+      "topico": "Segurança do Azure SQL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de segurança da Northwind Traders quer que os desenvolvedores acessem o Azure SQL Database usando suas identidades corporativas do Microsoft Entra ID (Azure AD), com MFA e single sign-on, em vez de logins SQL com nome de usuário e senha. Qual método de autenticação atende?",
+      "explicacao": "Autenticação do Microsoft Entra (Azure Active Directory) permite que usuários acessem o Azure SQL Database com identidades corporativas, MFA, acesso condicional e single sign-on, sem precisar de logins SQL separados. Autenticação SQL usa logins com nome de usuário e senha, sem integração com identidade corporativa. Certificados de cliente e chaves de API não são métodos de autenticação suportados pelo Azure SQL Database.",
+      "opcoes": [
+        { "texto": "Autenticação do Microsoft Entra (Azure AD).", "correta": true },
+        { "texto": "Autenticação SQL (login com usuário e senha).", "correta": false },
+        { "texto": "Autenticação por certificado de cliente.", "correta": false },
+        { "texto": "Chave de API.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-firewall-22",
+      "topico": "Segurança do Azure SQL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Ao criar um Azure SQL Database, o DBA da Adventure Works percebe que não consegue se conectar nem do SQL Server Management Studio na própria estação. A conexão é recusada antes de qualquer autenticação. Qual é a causa mais provável?",
+      "explicacao": "O Azure SQL Database tem firewall no nível do servidor que, por padrão, bloqueia todo acesso externo. O DBA precisa adicionar uma regra de firewall permitindo o endereço IP da estação (ou habilitar 'Permitir serviços e recursos do Azure'). A conexão é recusada antes da autenticação porque o firewall atua na camada de rede. Senha incorreta seria um erro de autenticação, não recusa de conexão. Banco pausado (serverless) poderia causar atraso, não recusa imediata. TDE criptografa dados em repouso, não bloqueia conexões.",
+      "opcoes": [
+        { "texto": "O firewall do servidor não tem regra permitindo o endereço IP da estação.", "correta": true },
+        { "texto": "A senha do login SQL está incorreta.", "correta": false },
+        { "texto": "O banco está pausado no modo serverless.", "correta": false },
+        { "texto": "TDE está impedindo conexões externas.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-failover-group-23",
+      "topico": "Azure SQL Database",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Tailspin Toys precisa que, em caso de falha regional, o banco de dados Azure SQL Database faça failover automático para outra região sem que a aplicação precise trocar a string de conexão. Qual recurso atende?",
+      "explicacao": "Failover groups fornecem failover automático entre regiões com um endpoint de listener que redireciona o tráfego automaticamente — a string de conexão aponta para o listener e não muda no failover. Geo-replicação ativa cria réplicas de leitura mas o failover é manual e exige trocar a string de conexão. Backup de longa retenção guarda backups por anos mas exige restauração manual. Zone-redundant replica dentro da mesma região, não entre regiões.",
+      "opcoes": [
+        { "texto": "Auto-failover groups.", "correta": true },
+        { "texto": "Geo-replicação ativa.", "correta": false },
+        { "texto": "Backup de longa retenção (LTR).", "correta": false },
+        { "texto": "Configuração zone-redundant.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-sql-ordenacao-migracao-24",
+      "topico": "Família Azure SQL",
+      "tipo": "Ordenacao",
+      "enunciado": "A equipe de dados da Contoso vai migrar um banco SQL Server on-premises para o Azure. Selecione e ordene as etapas do processo de migração.",
+      "explicacao": "Primeiro avaliar a compatibilidade do banco com o serviço destino (Azure SQL Database, Managed Instance ou VM): ferramentas como Azure Migrate e Data Migration Assistant identificam incompatibilidades. Depois escolher o serviço destino com base nas incompatibilidades encontradas: se há recursos de instância, Managed Instance; se não, SQL Database. Em seguida migrar o esquema e os dados usando o Azure Database Migration Service ou ferramentas equivalentes. Por fim validar a migração comparando dados e testando a aplicação contra o novo destino. Escalar a computação vem depois da validação, não antes — escalar sem validar pode significar escalar algo que não funciona. Deletar o banco on-premises antes de validar perde a rede de segurança.",
+      "sequencia": [
+        "Avaliar a compatibilidade do banco com os serviços Azure SQL.",
+        "Escolher o serviço destino com base nas incompatibilidades encontradas.",
+        "Migrar o esquema e os dados para o destino escolhido.",
+        "Validar a migração comparando dados e testando a aplicação."
+      ],
+      "itensExtras": [
+        "Escalar a computação do destino antes de avaliar a compatibilidade.",
+        "Deletar o banco on-premises imediatamente após iniciar a migração."
+      ]
+    }
+  ]
+}

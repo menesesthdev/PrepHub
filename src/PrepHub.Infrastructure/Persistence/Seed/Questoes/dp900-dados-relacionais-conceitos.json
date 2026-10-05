@@ -1,0 +1,318 @@
+{
+  "exameCode": "DP-900",
+  "area": "dados-relacionais",
+  "questoes": [
+    {
+      "id": "dp900-rel-conc-pk-fk-01",
+      "topico": "Chaves primária e estrangeira",
+      "tipo": "EscolhaUnica",
+      "enunciado": "No banco de dados de pedidos da Contoso, a tabela Orders tem uma coluna CustomerId que referencia a coluna Id da tabela Customers. Essa referência garante que todo pedido aponte para um cliente existente. Qual conceito relacional descreve essa referência?",
+      "explicacao": "Uma chave estrangeira (foreign key) é uma coluna que referencia a chave primária de outra tabela, garantindo integridade referencial: todo valor na coluna da tabela filha deve existir na tabela pai. CustomerId em Orders apontando para Id em Customers é o exemplo canônico. Chave primária identifica unicamente cada linha na própria tabela. Índice melhora desempenho de consultas, não garante integridade. Constraint de check valida valores dentro da mesma linha, não referências entre tabelas.",
+      "opcoes": [
+        { "texto": "Chave estrangeira (foreign key).", "correta": true },
+        { "texto": "Chave primária (primary key).", "correta": false },
+        { "texto": "Índice.", "correta": false },
+        { "texto": "Constraint de check.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-normalizacao-02",
+      "topico": "Normalização",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de banco de dados da Fabrikam notou que o endereço do cliente está repetido em cada pedido. Quando o cliente muda de endereço, é preciso atualizar todas as linhas de pedido — e se alguma for esquecida, o banco fica inconsistente. Qual técnica elimina essa redundância?",
+      "explicacao": "Normalização é o processo de organizar tabelas para eliminar redundância e anomalias de atualização. No exemplo, normalizar significaria mover o endereço para a tabela Customers (uma única vez) e referenciar por chave estrangeira em Orders. Assim, atualizar o endereço é uma única operação. Desnormalização é o oposto: introduz redundância deliberadamente para acelerar consultas, aceitando o risco de inconsistência. Indexação melhora desempenho, não elimina redundância. Particionamento divide dados em segmentos, não elimina repetição.",
+      "opcoes": [
+        { "texto": "Normalização.", "correta": true },
+        { "texto": "Desnormalização.", "correta": false },
+        { "texto": "Indexação.", "correta": false },
+        { "texto": "Particionamento.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-select-03",
+      "topico": "Instruções SQL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Um analista da Northwind Traders precisa recuperar o nome e o preço de todos os produtos com preço superior a 50, ordenados do mais caro para o mais barato. Qual instrução SQL realiza essa operação?",
+      "explicacao": "SELECT Name, Price FROM Products WHERE Price > 50 ORDER BY Price DESC é a instrução correta: SELECT escolhe as colunas, FROM indica a tabela, WHERE filtra as linhas, ORDER BY ordena e DESC inverte para decrescente. Sem WHERE o filtro não é aplicado e todos os produtos viriam. Sem DESC a ordem seria crescente (do mais barato ao mais caro). INSERT é para adicionar dados, não consultar.",
+      "opcoes": [
+        { "texto": "SELECT Name, Price FROM Products WHERE Price > 50 ORDER BY Price DESC", "correta": true },
+        { "texto": "SELECT Name, Price FROM Products ORDER BY Price DESC", "correta": false },
+        { "texto": "SELECT Name, Price FROM Products WHERE Price > 50 ORDER BY Price", "correta": false },
+        { "texto": "INSERT INTO Products (Name, Price) VALUES ('Produto', 50)", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-join-04",
+      "topico": "Instruções SQL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Adventure Works precisa listar o nome de cada cliente junto com os pedidos que ele fez. A informação está em duas tabelas: Customers (Id, Name) e Orders (Id, CustomerId, Total). Qual operação SQL combina dados das duas tabelas?",
+      "explicacao": "JOIN (especificamente INNER JOIN) combina linhas de duas tabelas com base em uma condição de correspondência: Customers.Id = Orders.CustomerId. Retorna apenas clientes que têm pedidos e pedidos que têm cliente. UNION combina os resultados de dois SELECTs independentes (empilha linhas), não cruza tabelas. GROUP BY agrupa linhas para agregação, não combina tabelas. HAVING filtra grupos após agregação.",
+      "opcoes": [
+        { "texto": "JOIN.", "correta": true },
+        { "texto": "UNION.", "correta": false },
+        { "texto": "GROUP BY.", "correta": false },
+        { "texto": "HAVING.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-ddl-vs-dml-05",
+      "topico": "DDL e DML",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O DBA da Tailspin Toys precisa criar uma nova tabela no banco de dados para armazenar avaliações de produtos. Qual categoria de instruções SQL é usada para criar, alterar e excluir estruturas de banco de dados como tabelas?",
+      "explicacao": "DDL (Data Definition Language) é a categoria de instruções SQL que define e modifica estruturas: CREATE TABLE, ALTER TABLE, DROP TABLE. DML (Data Manipulation Language) manipula dados dentro de estruturas existentes: SELECT, INSERT, UPDATE, DELETE. DCL (Data Control Language) controla permissões: GRANT, REVOKE. TCL (Transaction Control Language) gerencia transações: COMMIT, ROLLBACK.",
+      "opcoes": [
+        { "texto": "DDL (Data Definition Language).", "correta": true },
+        { "texto": "DML (Data Manipulation Language).", "correta": false },
+        { "texto": "DCL (Data Control Language).", "correta": false },
+        { "texto": "TCL (Transaction Control Language).", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-view-06",
+      "topico": "Objetos de banco de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O DBA da Contoso quer que analistas consultem dados de vendas sem acessar as tabelas de base diretamente. Ele criou uma consulta nomeada que combina três tabelas e apresenta um resultado simplificado. Os analistas consultam essa consulta nomeada como se fosse uma tabela. Qual objeto de banco de dados é esse?",
+      "explicacao": "Uma view (visão) é uma consulta nomeada armazenada no banco de dados que pode ser consultada como se fosse uma tabela. Não armazena dados próprios — os dados vêm das tabelas de base a cada consulta. Permite simplificar consultas complexas e restringir acesso a colunas específicas. Uma stored procedure é um programa armazenado que pode receber parâmetros e executar lógica, não é consultada como tabela. Uma tabela temporária armazena dados temporários na sessão. Um índice melhora desempenho, não apresenta dados de forma diferente.",
+      "opcoes": [
+        { "texto": "View (visão).", "correta": true },
+        { "texto": "Stored procedure.", "correta": false },
+        { "texto": "Tabela temporária.", "correta": false },
+        { "texto": "Índice.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-stored-proc-07",
+      "topico": "Objetos de banco de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de desenvolvimento da Fabrikam precisa encapsular uma lógica de negócio complexa no banco de dados: validar dados, inserir em múltiplas tabelas e retornar um resultado. A lógica deve ser reutilizável, receber parâmetros e ser executada pelo nome. Qual objeto de banco de dados atende?",
+      "explicacao": "Uma stored procedure é um programa armazenado no banco de dados que pode receber parâmetros, executar lógica complexa (incluindo controle de fluxo e transações) e retornar resultados. É reutilizável e chamada pelo nome. Uma view é uma consulta nomeada de leitura, sem lógica de negócio. Uma função retorna um valor ou tabela mas tem restrições sobre efeitos colaterais (inserções, atualizações). Um trigger é executado automaticamente em resposta a eventos, não por chamada explícita.",
+      "opcoes": [
+        { "texto": "Stored procedure.", "correta": true },
+        { "texto": "View.", "correta": false },
+        { "texto": "Função.", "correta": false },
+        { "texto": "Trigger.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-index-08",
+      "topico": "Objetos de banco de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Consultas filtradas por CustomerId na tabela Orders da Northwind Traders estão lentas porque o banco precisa varrer todas as linhas. O DBA quer acelerar essas consultas sem alterar a estrutura da tabela nem a consulta em si. Qual objeto ele deve criar?",
+      "explicacao": "Um índice na coluna CustomerId permite que o banco localize rapidamente as linhas sem varrer a tabela inteira (table scan), semelhante ao índice remissivo de um livro. É a forma padrão de acelerar consultas por filtro sem alterar tabela nem consulta. Uma view não acelera a consulta subjacente. Particionar a tabela pode ajudar mas altera a estrutura física. Uma stored procedure encapsula lógica mas não acelera a busca em si.",
+      "opcoes": [
+        { "texto": "Índice na coluna CustomerId.", "correta": true },
+        { "texto": "View sobre a tabela Orders.", "correta": false },
+        { "texto": "Partição horizontal da tabela.", "correta": false },
+        { "texto": "Stored procedure com a consulta.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-1nf-09",
+      "topico": "Normalização",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A tabela de clientes da Adventure Works tem uma coluna PhoneNumbers que armazena múltiplos números de telefone separados por vírgula numa única célula (ex: '11-9999-0001, 11-9999-0002'). Qual forma normal essa tabela viola?",
+      "explicacao": "A primeira forma normal (1NF) exige que cada célula contenha um valor atômico (indivisível). Armazenar múltiplos telefones numa única célula viola 1NF. A correção é criar uma tabela separada CustomerPhones com uma linha para cada número. A segunda forma normal (2NF) trata de dependências parciais em chaves compostas. A terceira forma normal (3NF) trata de dependências transitivas. A forma normal de Boyce-Codd é um refinamento da 3NF.",
+      "opcoes": [
+        { "texto": "Primeira forma normal (1NF).", "correta": true },
+        { "texto": "Segunda forma normal (2NF).", "correta": false },
+        { "texto": "Terceira forma normal (3NF).", "correta": false },
+        { "texto": "Forma normal de Boyce-Codd (BCNF).", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-left-join-10",
+      "topico": "Instruções SQL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de marketing da Contoso precisa listar TODOS os clientes, incluindo os que nunca fizeram pedido. Para clientes sem pedido, as colunas de pedido devem aparecer como NULL. Qual tipo de JOIN atende?",
+      "explicacao": "LEFT JOIN (ou LEFT OUTER JOIN) retorna todas as linhas da tabela à esquerda (Customers), mesmo que não haja correspondência na tabela à direita (Orders). Para clientes sem pedido, as colunas de Orders vêm como NULL. INNER JOIN retornaria apenas clientes que têm pedidos — os sem pedido seriam excluídos. RIGHT JOIN retornaria todos os pedidos, incluindo os sem cliente (improvável se houver FK). CROSS JOIN faria o produto cartesiano, gerando todas as combinações possíveis.",
+      "opcoes": [
+        { "texto": "LEFT JOIN.", "correta": true },
+        { "texto": "INNER JOIN.", "correta": false },
+        { "texto": "RIGHT JOIN.", "correta": false },
+        { "texto": "CROSS JOIN.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-group-by-11",
+      "topico": "Instruções SQL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A analista da Fabrikam quer saber o total de vendas por categoria de produto. Ela precisa agrupar os registros por categoria e calcular a soma do campo Total. Qual cláusula SQL realiza o agrupamento?",
+      "explicacao": "GROUP BY agrupa linhas que têm o mesmo valor numa coluna e permite aplicar funções de agregação (SUM, COUNT, AVG, MAX, MIN) sobre cada grupo. Para total por categoria: SELECT Category, SUM(Total) FROM Sales GROUP BY Category. ORDER BY ordena o resultado, não agrupa. WHERE filtra linhas antes do agrupamento. HAVING filtra GRUPOS após o agrupamento — funciona junto com GROUP BY, não sozinha.",
+      "opcoes": [
+        { "texto": "GROUP BY.", "correta": true },
+        { "texto": "ORDER BY.", "correta": false },
+        { "texto": "WHERE.", "correta": false },
+        { "texto": "HAVING.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-insert-update-delete-12",
+      "topico": "Instruções SQL",
+      "tipo": "Associacao",
+      "enunciado": "Um desenvolvedor da Northwind Traders precisa realizar diferentes operações no banco de dados. Associe cada necessidade à instrução SQL correta.",
+      "explicacao": "Adicionar um novo cliente à tabela Customers é INSERT INTO: cria uma nova linha. Alterar o endereço de um cliente existente é UPDATE: modifica colunas de linhas existentes. Remover um pedido cancelado da tabela Orders é DELETE: exclui linhas. Consultar o total de vendas do mês é SELECT: lê dados. CREATE TABLE cria uma nova tabela (DDL), não manipula dados.",
+      "associacoes": [
+        { "alvo": "Adicionar um novo cliente à tabela Customers", "item": "INSERT" },
+        { "alvo": "Alterar o endereço de um cliente existente", "item": "UPDATE" },
+        { "alvo": "Remover um pedido cancelado da tabela Orders", "item": "DELETE" },
+        { "alvo": "Consultar o total de vendas do mês", "item": "SELECT" }
+      ],
+      "itensExtras": [
+        "CREATE TABLE"
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-relacao-1n-13",
+      "topico": "Relacionamentos",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Na modelagem de dados da Adventure Works, cada cliente pode ter vários pedidos, mas cada pedido pertence a exatamente um cliente. Qual tipo de relacionamento existe entre Customers e Orders?",
+      "explicacao": "Um-para-muitos (1:N) significa que uma linha da tabela pai (Customers) se relaciona com zero ou mais linhas da tabela filha (Orders), mas cada linha da filha se relaciona com exatamente uma da pai. É implementado com chave estrangeira em Orders apontando para Customers. Um-para-um significaria que cada cliente tem no máximo um pedido. Muitos-para-muitos exigiria uma tabela intermediária. Nenhum relacionamento significaria que as tabelas são independentes.",
+      "opcoes": [
+        { "texto": "Um-para-muitos (1:N).", "correta": true },
+        { "texto": "Um-para-um (1:1).", "correta": false },
+        { "texto": "Muitos-para-muitos (N:N).", "correta": false },
+        { "texto": "Nenhum relacionamento.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-relacao-nn-14",
+      "topico": "Relacionamentos",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Na loja da Tailspin Toys, cada produto pode pertencer a várias categorias e cada categoria pode conter vários produtos. Para modelar isso num banco relacional, qual abordagem é necessária?",
+      "explicacao": "Relacionamentos muitos-para-muitos (N:N) em bancos relacionais exigem uma tabela intermediária (tabela de junção ou associativa) que contém as chaves estrangeiras de ambas as tabelas. Por exemplo: ProductCategories com ProductId e CategoryId. Apenas uma chave estrangeira em Products ou Categories não permitiria múltiplas associações. Armazenar categorias como lista separada por vírgula numa coluna violaria 1NF. Uma view não cria relacionamentos, apenas simplifica consultas.",
+      "opcoes": [
+        { "texto": "Uma tabela intermediária com chaves estrangeiras de ambas as tabelas.", "correta": true },
+        { "texto": "Uma chave estrangeira simples numa das duas tabelas.", "correta": false },
+        { "texto": "Uma coluna com múltiplos valores separados por vírgula.", "correta": false },
+        { "texto": "Uma view que combina as duas tabelas.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-simnao-sql-case-15",
+      "topico": "Instruções SQL",
+      "tipo": "SimNao",
+      "enunciado": "Um analista da Contoso escreve consultas SQL. Avalie a afirmação: as palavras-chave SQL como SELECT, FROM e WHERE diferenciam maiúsculas de minúsculas — 'select' e 'SELECT' são tratados de forma diferente.",
+      "explicacao": "A afirmação é falsa. As palavras-chave SQL são case-insensitive na maioria dos bancos de dados (SQL Server, Azure SQL, MySQL, PostgreSQL): 'SELECT', 'Select' e 'select' são tratados da mesma forma. A distinção de maiúsculas/minúsculas pode existir para nomes de objetos (tabelas, colunas) dependendo da configuração de collation do banco, mas as palavras-chave da linguagem SQL em si não diferenciam.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-where-having-16",
+      "topico": "Instruções SQL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Fabrikam quer saber quais categorias de produto tiveram mais de 100 vendas no último mês. Após agrupar por categoria e contar as vendas, qual cláusula filtra os grupos que atendem ao critério?",
+      "explicacao": "HAVING filtra grupos APÓS a agregação: primeiro o GROUP BY agrupa por categoria, COUNT conta as vendas em cada grupo, e HAVING filtra os grupos com COUNT > 100. WHERE filtra linhas individuais ANTES do agrupamento — não pode referenciar funções de agregação. ORDER BY ordena o resultado. DISTINCT remove duplicatas mas não filtra por contagem.",
+      "opcoes": [
+        { "texto": "HAVING.", "correta": true },
+        { "texto": "WHERE.", "correta": false },
+        { "texto": "ORDER BY.", "correta": false },
+        { "texto": "DISTINCT.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-trigger-17",
+      "topico": "Objetos de banco de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O DBA da Northwind Traders precisa que o banco registre automaticamente em uma tabela de auditoria toda vez que um preço de produto é alterado — sem que a aplicação precise fazer nada. Qual objeto de banco de dados executa ações automaticamente em resposta a operações de dados?",
+      "explicacao": "Um trigger é um objeto que executa automaticamente um bloco de código em resposta a eventos de DML (INSERT, UPDATE, DELETE) numa tabela. No cenário, um trigger AFTER UPDATE em Products pode inserir na tabela de auditoria automaticamente. Uma stored procedure precisa ser chamada explicitamente. Uma view não executa ações, apenas apresenta dados. Uma constraint valida dados mas não executa lógica como inserir em outra tabela.",
+      "opcoes": [
+        { "texto": "Trigger.", "correta": true },
+        { "texto": "Stored procedure.", "correta": false },
+        { "texto": "View.", "correta": false },
+        { "texto": "Constraint.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-multipla-dml-18",
+      "topico": "DDL e DML",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "A equipe de dados da Adventure Works está classificando instruções SQL. Selecione duas instruções que pertencem à categoria DML (Data Manipulation Language).",
+      "explicacao": "INSERT e UPDATE são instruções DML: manipulam dados dentro de tabelas existentes (inserem e alteram linhas). CREATE TABLE é DDL (cria estruturas). GRANT é DCL (concede permissões). ALTER TABLE é DDL (modifica estrutura de tabela, não dados).",
+      "opcoes": [
+        { "texto": "INSERT.", "correta": true },
+        { "texto": "UPDATE.", "correta": true },
+        { "texto": "CREATE TABLE.", "correta": false },
+        { "texto": "GRANT.", "correta": false },
+        { "texto": "ALTER TABLE.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-pk-composta-19",
+      "topico": "Chaves primária e estrangeira",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A tabela OrderItems da Tailspin Toys registra os itens de cada pedido. Cada pedido pode ter vários itens e cada produto pode aparecer em vários pedidos. A combinação de OrderId e ProductId identifica unicamente cada linha. Qual tipo de chave descreve essa combinação?",
+      "explicacao": "Uma chave primária composta é formada por duas ou mais colunas cuja combinação identifica unicamente cada linha. OrderId sozinho não é único (um pedido tem vários itens) e ProductId sozinho não é único (um produto aparece em vários pedidos), mas a combinação é única. Uma chave estrangeira referencia outra tabela, não identifica a linha. Uma chave alternativa é uma coluna candidata que não foi escolhida como primária. Uma chave substituta (surrogate) é uma coluna artificial (como um identity) que não vem do negócio.",
+      "opcoes": [
+        { "texto": "Chave primária composta.", "correta": true },
+        { "texto": "Chave estrangeira composta.", "correta": false },
+        { "texto": "Chave alternativa.", "correta": false },
+        { "texto": "Chave substituta (surrogate key).", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-referential-integrity-20",
+      "topico": "Integridade referencial",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O banco de dados da Contoso impede que um pedido seja inserido com CustomerId = 999 se não existir nenhum cliente com Id = 999 na tabela Customers. Qual mecanismo impõe essa regra?",
+      "explicacao": "Integridade referencial, implementada por chave estrangeira, garante que todo valor na coluna de referência (CustomerId em Orders) corresponda a um valor existente na tabela referenciada (Id em Customers). É a regra fundamental que impede referências órfãs. Constraint de check valida valores numa condição sobre a própria linha, não referências entre tabelas. Trigger poderia implementar isso manualmente, mas não é o mecanismo nativo. Índice único garante unicidade, não integridade referencial.",
+      "opcoes": [
+        { "texto": "Integridade referencial (chave estrangeira).", "correta": true },
+        { "texto": "Constraint de check.", "correta": false },
+        { "texto": "Trigger.", "correta": false },
+        { "texto": "Índice único.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-aggregate-func-21",
+      "topico": "Instruções SQL",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A analista de vendas da Fabrikam precisa saber o valor médio dos pedidos no último trimestre. Qual função SQL calcula a média?",
+      "explicacao": "AVG() calcula a média aritmética dos valores numa coluna. SUM() calcula a soma total, não a média. COUNT() conta o número de linhas, não calcula média. MAX() retorna o maior valor.",
+      "opcoes": [
+        { "texto": "AVG().", "correta": true },
+        { "texto": "SUM().", "correta": false },
+        { "texto": "COUNT().", "correta": false },
+        { "texto": "MAX().", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-simnao-normalizacao-22",
+      "topico": "Normalização",
+      "tipo": "SimNao",
+      "enunciado": "O DBA da Northwind Traders está modelando o banco de dados. Avalie a afirmação: normalização sempre melhora o desempenho de consultas de leitura.",
+      "explicacao": "A afirmação é falsa. Normalização elimina redundância e melhora integridade e eficiência de escritas, mas pode PREJUDICAR consultas de leitura que precisam combinar muitas tabelas (JOINs extras). É por isso que data warehouses usam desnormalização deliberada: o esquema estrela repete dados nas dimensões para evitar JOINs e acelerar consultas analíticas. Normalização é uma decisão de design com trade-offs, não uma melhoria universal.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-tabela-conceito-23",
+      "topico": "Conceitos relacionais",
+      "tipo": "EscolhaUnica",
+      "enunciado": "No modelo relacional, dados são organizados em estruturas bidimensionais com linhas e colunas. Cada linha representa uma instância de entidade e cada coluna representa um atributo. Qual nome é dado a essa estrutura?",
+      "explicacao": "No modelo relacional, a estrutura fundamental é a tabela (ou relação): colunas definem os atributos e cada linha é uma tupla que representa uma instância de entidade. É a unidade básica de organização. Documento é a estrutura de bancos NoSQL de documentos. Grafo organiza dados em nós e arestas. Coleção é o equivalente a tabela em bancos de documentos como MongoDB.",
+      "opcoes": [
+        { "texto": "Tabela (relação).", "correta": true },
+        { "texto": "Documento.", "correta": false },
+        { "texto": "Grafo.", "correta": false },
+        { "texto": "Coleção.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-rel-conc-unique-constraint-24",
+      "topico": "Constraints",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A tabela Users do sistema da Adventure Works precisa garantir que dois usuários não tenham o mesmo endereço de e-mail, mas o e-mail não é a chave primária (o Id é). Qual constraint garante unicidade do e-mail?",
+      "explicacao": "UNIQUE constraint garante que todos os valores numa coluna (ou combinação de colunas) sejam distintos, sem que a coluna precise ser a chave primária. É o mecanismo certo para impor unicidade em colunas que não são PK. NOT NULL garante que o valor não seja nulo, mas não impede duplicatas. CHECK valida valores contra uma condição, mas não impede que dois registros tenham o mesmo valor. DEFAULT define um valor padrão quando nenhum é fornecido.",
+      "opcoes": [
+        { "texto": "UNIQUE constraint.", "correta": true },
+        { "texto": "NOT NULL constraint.", "correta": false },
+        { "texto": "CHECK constraint.", "correta": false },
+        { "texto": "DEFAULT constraint.", "correta": false }
+      ]
+    }
+  ]
+}
