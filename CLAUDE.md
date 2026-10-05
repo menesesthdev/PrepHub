@@ -369,7 +369,7 @@ Callback a cadastrar em cada provedor (ajuste host/porta): `/signin-google`, `/s
 ## Fora de escopo por agora
 
 - Deploy em nuvem (a imagem Docker existe e roda local; publicar num provedor é outro passo)
-- ~~**Conteúdo** de outros exames além do AZ-900.~~ **Feito.** Os quatro exames estão declarados e **publicados** (27/08/2026), com pesos conferidos no study guide oficial de cada um:
+- ~~**Conteúdo** de outros exames além do AZ-900.~~ **Feito.** Os exames estão declarados e **publicados**, com pesos conferidos no study guide oficial de cada um:
 
 | Exame | Domínios | Prova | Skills de | Questões escritas |
 |---|---|---|---|---|
@@ -377,6 +377,7 @@ Callback a cadastrar em cada provedor (ajuste host/porta): `/signin-google`, `/s
 | AZ-104 | 5 | 50 em 100 min | 17/04/2026 | 108 (5/5 domínios) |
 | AZ-305 | 4 | 50 em 120 min | 17/04/2026 | 88 (4/4 domínios) |
 | AZ-400 | 5 | 50 em 120 min | 27/07/2026 | 120 (5/5 domínios) |
+| **DP-900** | 4 | 40 em 45 min | 21/07/2026 | 300 — 87/71/55/87 (publicado 05/10/2026) |
 | **AIF-C01** (AWS) | 5 | 65 em 90 min | v1.1, 30/04/2026 | 450 — 90/108/126/63/63 (publicado 15/09/2026) |
 
 ⚠️ No AZ-400, o domínio `pipelines` vale **50–55% sozinho** — um banco equilibrado entre os cinco daria prova enviesada, e por isso ele tem 32 questões contra 22 dos demais.
