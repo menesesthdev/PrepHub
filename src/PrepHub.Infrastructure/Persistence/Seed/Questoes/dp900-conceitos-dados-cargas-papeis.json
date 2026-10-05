@@ -1,0 +1,391 @@
+{
+  "exameCode": "DP-900",
+  "area": "conceitos-de-dados",
+  "questoes": [
+    {
+      "id": "dp900-cd-cp-oltp-caracteristicas-01",
+      "topico": "Cargas transacionais (OLTP)",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O sistema de vendas da Contoso processa milhares de pedidos por hora. Cada operação insere ou atualiza poucos registros e precisa de resposta em milissegundos, com garantia de que nenhum pedido é perdido mesmo em caso de falha. Qual tipo de carga de trabalho esse sistema representa?",
+      "explicacao": "Operações frequentes que afetam poucos registros cada, com baixa latência e garantia de durabilidade, descrevem uma carga transacional (OLTP — Online Transaction Processing). Carga analítica (OLAP) processa grandes volumes de dados históricos com agregações. Processamento em lote executa grandes volumes de dados de uma vez, não em tempo real. Streaming processa dados contínuos em tempo real, mas sem o foco em transações ACID individuais.",
+      "opcoes": [
+        { "texto": "Carga de trabalho transacional (OLTP).", "correta": true },
+        { "texto": "Carga de trabalho analítica (OLAP).", "correta": false },
+        { "texto": "Processamento em lote (batch).", "correta": false },
+        { "texto": "Processamento de streaming.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-olap-caracteristicas-02",
+      "topico": "Cargas analíticas (OLAP)",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de business intelligence da Fabrikam executa consultas que agregam dados de vendas dos últimos cinco anos, cruzando regiões, categorias de produtos e períodos. Cada consulta lê milhões de registros mas não insere nem altera dados. Qual tipo de carga de trabalho isso representa?",
+      "explicacao": "Consultas que leem grandes volumes de dados históricos com agregações e cruzamentos, sem inserir nem alterar dados, descrevem uma carga analítica (OLAP — Online Analytical Processing). O objetivo é extrair insights, não processar transações. Carga transacional (OLTP) faz operações frequentes de leitura e escrita em poucos registros. ETL é um processo de movimentação de dados, não um tipo de carga de trabalho. Processamento de streaming trabalha com dados chegando em tempo real, não com análise de histórico estático.",
+      "opcoes": [
+        { "texto": "Carga de trabalho analítica (OLAP).", "correta": true },
+        { "texto": "Carga de trabalho transacional (OLTP).", "correta": false },
+        { "texto": "ETL (Extract, Transform, Load).", "correta": false },
+        { "texto": "Processamento de streaming.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-acid-significado-03",
+      "topico": "Propriedades ACID",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O banco de dados de pedidos da Northwind Traders garante que uma transferência de estoque entre dois armazéns atualiza os dois saldos ou nenhum deles: não é possível debitar o saldo de origem sem creditar o de destino. Qual propriedade ACID garante esse comportamento?",
+      "explicacao": "Atomicidade garante que uma transação é tudo ou nada: ou todas as operações dentro dela são concluídas com sucesso, ou nenhuma é aplicada. No cenário descrito, debitar e creditar são operações dentro da mesma transação — ou ambas acontecem ou ambas são revertidas. Consistência garante que o banco está num estado válido antes e depois da transação. Isolamento garante que transações concorrentes não interferem entre si. Durabilidade garante que dados confirmados sobrevivem a falhas.",
+      "opcoes": [
+        { "texto": "Atomicidade.", "correta": true },
+        { "texto": "Consistência.", "correta": false },
+        { "texto": "Isolamento.", "correta": false },
+        { "texto": "Durabilidade.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-acid-durabilidade-04",
+      "topico": "Propriedades ACID",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Após uma queda de energia, o banco de dados da Adventure Works reinicia e todas as transações que tinham sido confirmadas antes da queda estão intactas, sem perda de dados. Qual propriedade ACID garante esse comportamento?",
+      "explicacao": "Durabilidade garante que, uma vez que uma transação é confirmada (commit), os dados persistem mesmo em caso de falha de hardware, queda de energia ou crash do sistema. É implementada tipicamente por logs de transação gravados em disco antes da confirmação (write-ahead logging). Atomicidade garante tudo ou nada na execução. Consistência garante estados válidos. Isolamento garante independência entre transações concorrentes.",
+      "opcoes": [
+        { "texto": "Durabilidade.", "correta": true },
+        { "texto": "Atomicidade.", "correta": false },
+        { "texto": "Consistência.", "correta": false },
+        { "texto": "Isolamento.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-acid-isolamento-05",
+      "topico": "Propriedades ACID",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Dois caixas da Tailspin Toys processam pedidos simultaneamente no mesmo banco de dados. A equipe precisa garantir que uma transação em andamento num caixa não veja dados parciais de uma transação incompleta do outro caixa. Qual propriedade ACID endereça esse requisito?",
+      "explicacao": "Isolamento garante que transações concorrentes não interferem entre si: cada transação opera como se fosse a única em execução, sem ver dados intermediários de transações incompletas de outros processos. Atomicidade garante que cada transação é tudo ou nada. Consistência garante que o banco permanece em estado válido. Durabilidade garante que dados confirmados sobrevivem a falhas.",
+      "opcoes": [
+        { "texto": "Isolamento.", "correta": true },
+        { "texto": "Atomicidade.", "correta": false },
+        { "texto": "Consistência.", "correta": false },
+        { "texto": "Durabilidade.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-etl-conceito-06",
+      "topico": "ETL e ELT",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Contoso extrai dados do sistema de vendas, transforma-os (limpa, padroniza, calcula métricas) num servidor intermediário e então carrega os dados transformados no data warehouse. Qual padrão de processamento está sendo descrito?",
+      "explicacao": "ETL (Extract, Transform, Load) é o padrão em que os dados são extraídos da fonte, transformados num servidor intermediário e depois carregados no destino. A transformação acontece ANTES da carga no destino. ELT (Extract, Load, Transform) carrega os dados brutos primeiro e transforma no destino, aproveitando o poder de processamento do data warehouse. CDC (Change Data Capture) captura alterações incrementais, não é um padrão de transformação. OLAP é um tipo de carga de trabalho, não um padrão de movimentação de dados.",
+      "opcoes": [
+        { "texto": "ETL (Extract, Transform, Load).", "correta": true },
+        { "texto": "ELT (Extract, Load, Transform).", "correta": false },
+        { "texto": "CDC (Change Data Capture).", "correta": false },
+        { "texto": "OLAP.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-elt-cloud-07",
+      "topico": "ETL e ELT",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam migrou para a nuvem e agora carrega dados brutos diretamente no Azure Synapse Analytics, aproveitando o poder de processamento do serviço para realizar as transformações ali mesmo, em vez de usar um servidor intermediário. Esse padrão é:",
+      "explicacao": "ELT (Extract, Load, Transform) carrega dados brutos no destino primeiro e realiza as transformações usando o poder de processamento do destino. É o padrão preferido na nuvem porque data warehouses modernos como Azure Synapse têm capacidade de processamento massivo e é mais eficiente transformar ali do que em servidor intermediário. ETL transforma antes de carregar, num servidor separado. Replicação copia dados sem transformá-los. Streaming processa dados em tempo real, não é um padrão de carga em warehouse.",
+      "opcoes": [
+        { "texto": "ELT (Extract, Load, Transform).", "correta": true },
+        { "texto": "ETL (Extract, Transform, Load).", "correta": false },
+        { "texto": "Replicação de dados.", "correta": false },
+        { "texto": "Processamento de streaming.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-assoc-acid-08",
+      "topico": "Propriedades ACID",
+      "tipo": "Associacao",
+      "enunciado": "A equipe de banco de dados da Northwind Traders está revisando as propriedades ACID. Associe cada propriedade ao comportamento que ela garante.",
+      "explicacao": "Atomicidade garante que todas as operações de uma transação são executadas ou nenhuma é: tudo ou nada. Consistência garante que o banco transita de um estado válido para outro estado válido, nunca ficando num estado intermediário inválido. Isolamento garante que transações concorrentes não interferem: cada uma opera como se fosse a única. Durabilidade garante que dados confirmados sobrevivem a falhas de sistema. Escalabilidade descreve capacidade de crescimento, não é uma propriedade ACID.",
+      "associacoes": [
+        { "alvo": "Transação executa todas as operações ou nenhuma", "item": "Atomicidade" },
+        { "alvo": "Banco transita entre estados válidos sem estado intermediário inválido", "item": "Consistência" },
+        { "alvo": "Transações concorrentes não veem dados parciais uma da outra", "item": "Isolamento" },
+        { "alvo": "Dados confirmados sobrevivem a falha de energia ou crash", "item": "Durabilidade" }
+      ],
+      "itensExtras": [
+        "Escalabilidade"
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-oltp-vs-olap-09",
+      "topico": "OLTP vs OLAP",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "A equipe de dados da Adventure Works está diferenciando cargas OLTP e OLAP. Selecione duas características que são típicas de uma carga analítica (OLAP).",
+      "explicacao": "Consultas que leem grandes volumes de dados históricos com agregações são a essência do OLAP: o objetivo é analisar tendências, não processar transações. Esquemas otimizados para leitura, como estrela ou floco de neve, são projetados para consultas analíticas eficientes. Inserção e atualização frequentes de poucos registros é OLTP, não OLAP. Normalização rígida para evitar redundância é típica de OLTP. Latência de milissegundos para cada operação individual é requisito de OLTP.",
+      "opcoes": [
+        { "texto": "Consultas que leem grandes volumes de dados históricos com agregações.", "correta": true },
+        { "texto": "Esquemas otimizados para leitura, como estrela ou floco de neve.", "correta": true },
+        { "texto": "Inserção e atualização frequentes de poucos registros por operação.", "correta": false },
+        { "texto": "Normalização rígida para evitar qualquer redundância.", "correta": false },
+        { "texto": "Latência de milissegundos para cada operação individual.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-dba-responsabilidade-10",
+      "topico": "Administrador de banco de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Na equipe de dados da Contoso, um profissional é responsável por gerenciar a disponibilidade, o desempenho e a segurança dos bancos de dados, configurar backups, monitorar consultas lentas e aplicar patches. Qual papel esse profissional desempenha?",
+      "explicacao": "Administrador de banco de dados (DBA) é responsável pela operação, segurança, desempenho e disponibilidade dos bancos de dados. Inclui backups, monitoramento, ajuste de desempenho e aplicação de patches. Engenheiro de dados projeta e implementa pipelines de dados e arquiteturas de integração, não administra bancos no dia a dia. Analista de dados analisa dados e cria relatórios, não administra infraestrutura. Arquiteto de soluções projeta a arquitetura geral, não opera sistemas no dia a dia.",
+      "opcoes": [
+        { "texto": "Administrador de banco de dados.", "correta": true },
+        { "texto": "Engenheiro de dados.", "correta": false },
+        { "texto": "Analista de dados.", "correta": false },
+        { "texto": "Arquiteto de soluções.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-eng-dados-responsabilidade-11",
+      "topico": "Engenheiro de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Na Fabrikam, um profissional projeta e implementa pipelines que extraem dados de múltiplas fontes, transformam e carregam num data warehouse. Também configura a ingestão em tempo real e garante que os dados cheguem limpos e disponíveis para análise. Qual é o papel desse profissional?",
+      "explicacao": "O engenheiro de dados é responsável por projetar, construir e manter a infraestrutura de dados: pipelines de ETL/ELT, ingestão, limpeza e disponibilização de dados para consumo. O DBA administra bancos existentes, não projeta pipelines. O analista de dados consome dados prontos, não constrói a infraestrutura de movimentação. O cientista de dados cria modelos de machine learning, não pipelines de dados.",
+      "opcoes": [
+        { "texto": "Engenheiro de dados.", "correta": true },
+        { "texto": "Administrador de banco de dados.", "correta": false },
+        { "texto": "Analista de dados.", "correta": false },
+        { "texto": "Cientista de dados.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-analista-responsabilidade-12",
+      "topico": "Analista de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Na Adventure Works, um profissional cria relatórios e dashboards no Power BI para a diretoria, explorando dados do data warehouse para identificar tendências de vendas e produzir visualizações interativas. Qual é o papel desse profissional?",
+      "explicacao": "O analista de dados explora dados, cria visualizações e relatórios para apoiar decisões de negócio. Usa ferramentas como Power BI para transformar dados em insights visuais. O engenheiro de dados constrói a infraestrutura que alimenta o analista, não cria relatórios de negócio. O DBA cuida da operação dos bancos. O desenvolvedor de software escreve aplicações, não relatórios analíticos.",
+      "opcoes": [
+        { "texto": "Analista de dados.", "correta": true },
+        { "texto": "Engenheiro de dados.", "correta": false },
+        { "texto": "Administrador de banco de dados.", "correta": false },
+        { "texto": "Desenvolvedor de software.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-assoc-papeis-13",
+      "topico": "Papéis de dados",
+      "tipo": "Associacao",
+      "enunciado": "A Tailspin Toys está contratando profissionais de dados. Associe cada responsabilidade ao papel mais adequado.",
+      "explicacao": "Configurar backups automáticos e monitorar o desempenho de consultas é trabalho do DBA, que opera e mantém os bancos de dados. Projetar pipelines de ETL e configurar ingestão de dados de múltiplas fontes é trabalho do engenheiro de dados, que constrói a infraestrutura de movimentação. Criar dashboards no Power BI com métricas de vendas para a diretoria é trabalho do analista de dados, que transforma dados em visualizações de negócio. Treinar modelos de machine learning para previsão de demanda é trabalho do cientista de dados. Definir a arquitetura de microsserviços da aplicação é papel do arquiteto de soluções, não de um profissional de dados.",
+      "associacoes": [
+        { "alvo": "Configurar backups automáticos e monitorar desempenho de consultas", "item": "Administrador de banco de dados" },
+        { "alvo": "Projetar pipelines de ETL e configurar ingestão de múltiplas fontes", "item": "Engenheiro de dados" },
+        { "alvo": "Criar dashboards no Power BI com métricas de vendas para a diretoria", "item": "Analista de dados" },
+        { "alvo": "Treinar modelos de machine learning para previsão de demanda", "item": "Cientista de dados" }
+      ],
+      "itensExtras": [
+        "Arquiteto de soluções"
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-simnao-analista-pipeline-14",
+      "topico": "Papéis de dados",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de dados da Contoso está definindo responsabilidades. Avalie a afirmação: a principal responsabilidade do analista de dados é projetar e implementar pipelines de ingestão de dados.",
+      "explicacao": "A afirmação é falsa. Projetar e implementar pipelines de ingestão é responsabilidade do engenheiro de dados. O analista de dados trabalha com dados já disponíveis, criando relatórios, dashboards e visualizações que transformam dados em insights para apoiar decisões de negócio. A confusão acontece porque ambos trabalham com dados, mas o engenheiro constrói a infraestrutura e o analista consome o que a infraestrutura produz.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-crud-oltp-15",
+      "topico": "Cargas transacionais (OLTP)",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O sistema de reservas de hotel da Northwind Traders processa operações de criar reserva, ler disponibilidade, alterar datas e cancelar reserva. Cada operação toca poucos registros e exige resposta imediata. Esse padrão de operações CRUD é típico de qual tipo de sistema?",
+      "explicacao": "Operações CRUD (Create, Read, Update, Delete) que afetam poucos registros com resposta imediata descrevem um sistema OLTP (Online Transaction Processing). É o padrão de sistemas operacionais: cada interação do usuário gera uma transação pequena e rápida. Um sistema OLAP faz consultas de leitura massivas para análise, sem CRUD transacional. Um data lake armazena dados brutos para análise, não processa transações. Um sistema de streaming processa fluxos contínuos de eventos.",
+      "opcoes": [
+        { "texto": "Sistema OLTP.", "correta": true },
+        { "texto": "Sistema OLAP.", "correta": false },
+        { "texto": "Data lake.", "correta": false },
+        { "texto": "Sistema de streaming.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-normalizacao-oltp-16",
+      "topico": "Cargas transacionais (OLTP)",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de banco de dados da Contoso está projetando o esquema do sistema de pedidos. O DBA decidiu normalizar as tabelas para eliminar redundância, garantindo que o endereço do cliente exista em apenas um lugar e seja referenciado por chave estrangeira. Esse nível de normalização é mais comum em qual tipo de carga de trabalho?",
+      "explicacao": "Normalização rígida para eliminar redundância é característica de sistemas OLTP, onde a prioridade é consistência e eficiência nas escritas: se o endereço existir em dois lugares e o cliente mudá-lo, é preciso atualizar ambos (anomalia de atualização). Em cargas analíticas (OLAP), a desnormalização é deliberada — data warehouses usam esquemas estrela com redundância controlada para acelerar consultas de leitura. Data lakes armazenam dados brutos sem normalização. Sistemas de streaming não normalizam eventos.",
+      "opcoes": [
+        { "texto": "Carga transacional (OLTP).", "correta": true },
+        { "texto": "Carga analítica (OLAP).", "correta": false },
+        { "texto": "Data lake.", "correta": false },
+        { "texto": "Sistema de streaming.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-desnormalizacao-olap-17",
+      "topico": "Cargas analíticas (OLAP)",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O data warehouse da Fabrikam armazena dados de vendas numa tabela fato central ligada a tabelas dimensão (Produto, Tempo, Loja). A tabela dimensão de Produto repete o nome da categoria em cada linha de produto, em vez de ter uma tabela separada de categorias. Esse padrão de esquema é:",
+      "explicacao": "Esquema estrela é o padrão clássico de data warehouses: uma tabela fato central rodeada por tabelas dimensão desnormalizadas, onde dados como categoria ficam repetidos na dimensão Produto para evitar JOINs extras nas consultas analíticas. A redundância é deliberada, ao contrário de bancos OLTP. Esquema floco de neve normalizaria a dimensão (categoria numa tabela separada). Terceira forma normal é normalização OLTP. Esquema EAV é modelagem de atributos variáveis, não de análise.",
+      "opcoes": [
+        { "texto": "Esquema estrela.", "correta": true },
+        { "texto": "Esquema floco de neve.", "correta": false },
+        { "texto": "Terceira forma normal.", "correta": false },
+        { "texto": "Esquema EAV (Entity-Attribute-Value).", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-data-ingestion-18",
+      "topico": "Ingestão de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso precisa copiar dados de um banco SQL Server on-premises para o Azure Data Lake Storage toda noite, às 2h da manhã. A operação deve ser agendada e monitorada sem escrever código personalizado. Qual serviço do Azure é mais adequado?",
+      "explicacao": "Azure Data Factory é um serviço de integração de dados que permite criar, agendar e monitorar pipelines de cópia de dados entre fontes e destinos, sem escrever código. A atividade Copy move dados de SQL Server para Data Lake com conectores nativos. Azure Synapse Analytics é para análise, não para orquestrar cópia noturna. Azure Logic Apps pode copiar dados mas não é projetado para pipelines de dados em escala. AzCopy é uma ferramenta de linha de comando para cópia ad hoc, sem agendamento nem monitoramento integrados.",
+      "opcoes": [
+        { "texto": "Azure Data Factory.", "correta": true },
+        { "texto": "Azure Synapse Analytics.", "correta": false },
+        { "texto": "Azure Logic Apps.", "correta": false },
+        { "texto": "AzCopy.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-multipla-oltp-19",
+      "topico": "Cargas transacionais (OLTP)",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "A equipe de dados da Tailspin Toys está documentando as características de sistemas transacionais (OLTP). Selecione duas afirmações verdadeiras sobre cargas OLTP.",
+      "explicacao": "Sistemas OLTP garantem propriedades ACID nas transações, assegurando consistência e durabilidade de cada operação. As operações afetam poucos registros por vez (um pedido, uma reserva, uma atualização de estoque). Consultas que agregam milhões de registros históricos são típicas de OLAP, não OLTP. Esquemas desnormalizados são usados em data warehouses para acelerar leitura, não em OLTP. Acesso predominantemente de leitura descreve OLAP; OLTP tem volume significativo de escritas.",
+      "opcoes": [
+        { "texto": "As transações garantem propriedades ACID.", "correta": true },
+        { "texto": "Cada operação tipicamente afeta um pequeno número de registros.", "correta": true },
+        { "texto": "As consultas agregam milhões de registros históricos.", "correta": false },
+        { "texto": "Os esquemas são desnormalizados para acelerar a leitura.", "correta": false },
+        { "texto": "O acesso é predominantemente de leitura.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-data-processing-batch-20",
+      "topico": "Processamento em lote",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Fabrikam processa arquivos de vendas acumulados durante o dia inteiro: às 23h, um pipeline lê todos os arquivos do dia, limpa, transforma e carrega no data warehouse. Os dados não precisam estar disponíveis para análise durante o dia. Esse padrão é:",
+      "explicacao": "Processamento em lote (batch) acumula dados durante um período e os processa de uma vez em horário programado. É o padrão mais comum para cargas de data warehouse quando não há requisito de análise em tempo real. Processamento de streaming processsa dados assim que chegam, com latência de segundos. Processamento interativo é quando um analista executa consultas ad hoc. Micro-batch é um meio-termo entre batch e streaming, processando pequenos lotes com frequência (minutos), não uma vez por dia.",
+      "opcoes": [
+        { "texto": "Processamento em lote (batch).", "correta": true },
+        { "texto": "Processamento de streaming.", "correta": false },
+        { "texto": "Processamento interativo.", "correta": false },
+        { "texto": "Processamento micro-batch.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-dba-vs-eng-21",
+      "topico": "Papéis de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders está decidindo quem deve resolver um problema: consultas no banco de produção estão lentas e os índices precisam ser otimizados. Qual profissional é o mais indicado?",
+      "explicacao": "Otimização de consultas e índices em bancos de produção é responsabilidade do DBA (administrador de banco de dados), que garante desempenho, disponibilidade e integridade dos bancos no dia a dia. O engenheiro de dados construiria uma nova pipeline ou refatoraria a arquitetura de dados, não otimizaria índices de produção. O analista de dados usa os dados para relatórios, não administra o banco. O desenvolvedor escreveria a consulta na aplicação, mas a otimização de índices é tarefa do DBA.",
+      "opcoes": [
+        { "texto": "Administrador de banco de dados (DBA).", "correta": true },
+        { "texto": "Engenheiro de dados.", "correta": false },
+        { "texto": "Analista de dados.", "correta": false },
+        { "texto": "Desenvolvedor de software.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-simnao-oltp-readonly-22",
+      "topico": "OLTP vs OLAP",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de dados da Contoso está definindo políticas. Avalie a afirmação: sistemas OLTP são projetados principalmente para consultas de leitura intensiva sobre grandes volumes de dados históricos.",
+      "explicacao": "A afirmação é falsa. Sistemas OLTP são projetados para processar transações: operações frequentes de leitura E escrita que afetam poucos registros cada, com foco em latência baixa e consistência ACID. Consultas de leitura intensiva sobre grandes volumes de dados históricos descrevem sistemas OLAP (analíticos). A confusão é compreensível porque OLTP também faz leituras, mas o padrão é operações mistas (CRUD) em poucos registros, não análise de massa.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-data-wrangling-23",
+      "topico": "Preparação de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Antes de criar um relatório de vendas, o analista de dados da Adventure Works precisa limpar dados duplicados, corrigir valores inconsistentes e padronizar formatos de data nos dados brutos. Esse processo de preparação é conhecido como:",
+      "explicacao": "Data wrangling (ou data munging/data preparation) é o processo de limpar, padronizar e reestruturar dados brutos para torná-los adequados para análise. É uma atividade central do analista ou engenheiro de dados. Data mining é a extração de padrões e conhecimento de grandes volumes de dados, usando algoritmos. Data warehousing é o armazenamento de dados para análise, não a limpeza. Data governance é o conjunto de políticas e processos para gestão de dados, não uma atividade técnica de limpeza.",
+      "opcoes": [
+        { "texto": "Data wrangling (preparação de dados).", "correta": true },
+        { "texto": "Data mining.", "correta": false },
+        { "texto": "Data warehousing.", "correta": false },
+        { "texto": "Data governance.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-cdc-incremental-24",
+      "topico": "Ingestão de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Tailspin Toys precisa detectar e transferir apenas as linhas que foram inseridas ou alteradas no banco de origem desde a última carga, sem copiar todo o banco a cada vez. Qual técnica atende a esse requisito?",
+      "explicacao": "Change Data Capture (CDC) detecta alterações incrementais (inserções, atualizações, exclusões) no banco de origem e transfere apenas os dados que mudaram. Evita a carga completa a cada ciclo, economizando tempo e largura de banda. Carga completa (full load) copia todo o banco a cada vez, que é o que a equipe quer evitar. Snapshot cria uma cópia pontual completa. Replicação de log pode servir para DR mas é diferente de CDC, que foca na captura para integração.",
+      "opcoes": [
+        { "texto": "Change Data Capture (CDC).", "correta": true },
+        { "texto": "Carga completa (full load).", "correta": false },
+        { "texto": "Snapshot do banco de dados.", "correta": false },
+        { "texto": "Replicação transacional.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-data-governance-25",
+      "topico": "Governança de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A diretoria da Contoso quer garantir que dados sensíveis de clientes sejam classificados, catalogados e acessíveis apenas por quem tem permissão. A empresa precisa de um catálogo centralizado que documente a linhagem dos dados e aplique políticas de acesso. Qual conceito de gestão de dados abrange essas preocupações?",
+      "explicacao": "Governança de dados abrange políticas, processos e ferramentas para garantir qualidade, segurança, catalogação, classificação e rastreabilidade (linhagem) dos dados. Inclui controle de acesso, classificação de dados sensíveis e catálogo de dados. Modelagem de dados é o projeto de esquemas e estruturas. Integração de dados é a combinação de dados de múltiplas fontes. Backup e recuperação protegem contra perda de dados, mas não classificam nem catalogam.",
+      "opcoes": [
+        { "texto": "Governança de dados.", "correta": true },
+        { "texto": "Modelagem de dados.", "correta": false },
+        { "texto": "Integração de dados.", "correta": false },
+        { "texto": "Backup e recuperação de dados.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-transactional-integrity-26",
+      "topico": "Cargas transacionais (OLTP)",
+      "tipo": "EscolhaUnica",
+      "enunciado": "No sistema bancário da Fabrikam, uma transferência entre contas deve debitar a conta de origem E creditar a conta de destino. Se o sistema falhar entre as duas operações, o débito deve ser automaticamente revertido. Qual mecanismo garante esse comportamento?",
+      "explicacao": "Uma transação de banco de dados agrupa as duas operações (débito e crédito) numa unidade atômica: se qualquer parte falhar, o banco de dados reverte automaticamente tudo que foi feito na transação (rollback). É o mecanismo fundamental de integridade em sistemas OLTP. Índice melhora desempenho de consultas, não garante atomicidade. Trigger executa ações em resposta a eventos, mas não garante atomicidade de transações distribuídas. Lock controla concorrência, mas não é o mecanismo de rollback automático.",
+      "opcoes": [
+        { "texto": "Transação de banco de dados.", "correta": true },
+        { "texto": "Índice de banco de dados.", "correta": false },
+        { "texto": "Trigger de banco de dados.", "correta": false },
+        { "texto": "Lock de tabela.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-analista-powerbi-27",
+      "topico": "Analista de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Adventure Works precisa que alguém identifique tendências nas vendas trimestrais e comunique essas descobertas à diretoria por meio de gráficos e relatórios interativos. Qual ferramenta é a mais associada a esse papel?",
+      "explicacao": "Power BI é a ferramenta da Microsoft projetada para que analistas de dados criem relatórios e dashboards interativos a partir de dados. É o instrumento principal do analista para comunicar insights visualmente. Azure Data Factory é para pipelines de ingestão de dados, usado pelo engenheiro de dados. SQL Server Management Studio (SSMS) é para administração de banco de dados, usado pelo DBA. Azure Databricks é para processamento distribuído e ciência de dados, não para relatórios de negócio.",
+      "opcoes": [
+        { "texto": "Power BI.", "correta": true },
+        { "texto": "Azure Data Factory.", "correta": false },
+        { "texto": "SQL Server Management Studio.", "correta": false },
+        { "texto": "Azure Databricks.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-ordenacao-pipeline-28",
+      "topico": "Pipeline de dados",
+      "tipo": "Ordenacao",
+      "enunciado": "A equipe de dados da Northwind Traders está documentando o fluxo de dados desde a fonte até o consumo. Selecione e ordene as etapas na ordem correta.",
+      "explicacao": "Primeiro os dados são extraídos da fonte (sistema transacional, API, arquivo). Em seguida são limpos e transformados (padronização, cálculo de métricas, tratamento de nulos). Depois são carregados no destino analítico (data warehouse ou data lake). Por fim, analistas criam relatórios e dashboards a partir dos dados prontos. Arquivar no armazenamento frio viria depois do consumo, não antes — e não é uma etapa obrigatória do pipeline principal. Treinar modelo de ML vem depois dos dados estarem disponíveis e é opcional, não parte do pipeline ETL padrão.",
+      "sequencia": [
+        "Extrair dados da fonte transacional.",
+        "Limpar e transformar os dados (padronizar, calcular métricas).",
+        "Carregar os dados transformados no data warehouse.",
+        "Criar relatórios e dashboards a partir dos dados prontos."
+      ],
+      "itensExtras": [
+        "Arquivar os dados no armazenamento frio antes de transformá-los.",
+        "Treinar modelo de machine learning antes de limpar os dados."
+      ]
+    },
+    {
+      "id": "dp900-cd-cp-consistencia-acid-29",
+      "topico": "Propriedades ACID",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O banco de dados da Tailspin Toys tem uma restrição que impede que o saldo de uma conta fique negativo. Uma transação tenta debitar um valor maior que o saldo disponível. O banco de dados rejeita a transação inteira porque ela violaria a restrição. Qual propriedade ACID está sendo demonstrada?",
+      "explicacao": "Consistência garante que uma transação só é concluída se levar o banco de dados de um estado válido para outro estado válido. Se a transação violaria uma restrição (saldo não pode ser negativo), ela é rejeitada para manter a consistência. Atomicidade garantiria que a transação é tudo ou nada, mas não é ela que verifica a restrição de negócio. Isolamento protege contra interferência de outras transações concorrentes. Durabilidade garante que dados confirmados sobrevivem a falhas.",
+      "opcoes": [
+        { "texto": "Consistência.", "correta": true },
+        { "texto": "Atomicidade.", "correta": false },
+        { "texto": "Isolamento.", "correta": false },
+        { "texto": "Durabilidade.", "correta": false }
+      ]
+    }
+  ]
+}

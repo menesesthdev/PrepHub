@@ -1,0 +1,385 @@
+{
+  "exameCode": "DP-900",
+  "area": "conceitos-de-dados",
+  "questoes": [
+    {
+      "id": "dp900-cd-repr-estruturado-tabela-01",
+      "topico": "Dados estruturados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso armazena os pedidos de venda numa tabela SQL com colunas fixas: OrderId, CustomerId, OrderDate, TotalAmount. Toda linha segue o mesmo esquema e cada coluna tem tipo definido. Qual classificação melhor descreve esses dados?",
+      "explicacao": "Dados que seguem um esquema rígido com colunas, tipos e linhas uniformes são estruturados — é a definição clássica. Semiestruturados teriam esquema flexível, como JSON onde cada documento pode trazer campos diferentes. Não estruturados seriam arquivos sem esquema interno, como imagens ou vídeos. Dados tabulares sem esquema não existe como categoria reconhecida: tabela implica esquema.",
+      "opcoes": [
+        { "texto": "Dados estruturados.", "correta": true },
+        { "texto": "Dados semiestruturados.", "correta": false },
+        { "texto": "Dados não estruturados.", "correta": false },
+        { "texto": "Dados tabulares sem esquema.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-semi-json-02",
+      "topico": "Dados semiestruturados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders recebe catálogos de fornecedores em arquivos JSON. Cada fornecedor envia campos diferentes: uns incluem peso do produto, outros não; uns listam variações de cor, outros trazem um único SKU. Os arquivos não seguem um esquema rígido mas cada campo é identificado por uma chave. Qual classificação se aplica?",
+      "explicacao": "JSON com campos opcionais e estrutura variável entre documentos é o exemplo clássico de dado semiestruturado: não tem esquema rígido como uma tabela relacional, mas contém marcadores (chaves) que dão significado a cada valor. Dado estruturado exigiria um esquema uniforme e fixo para todos os registros. Dado não estruturado não teria marcadores internos — seria um blob de bytes sem significado intrínseco, como uma imagem. Dado relacional normalizado descreve um arranjo dentro do mundo estruturado, não uma categoria à parte.",
+      "opcoes": [
+        { "texto": "Dados semiestruturados.", "correta": true },
+        { "texto": "Dados estruturados.", "correta": false },
+        { "texto": "Dados não estruturados.", "correta": false },
+        { "texto": "Dados relacionais normalizados.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-nao-estrut-imagem-03",
+      "topico": "Dados não estruturados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O departamento de marketing da Fabrikam armazena milhares de fotos de produtos em alta resolução para campanhas publicitárias. Cada arquivo é uma imagem JPEG sem metadados de negócio embutidos. Esses arquivos são melhor classificados como que tipo de dado?",
+      "explicacao": "Imagens JPEG sem metadados de negócio são o exemplo canônico de dado não estruturado: não há esquema, colunas ou marcadores que identifiquem campos — o conteúdo é uma matriz de pixels que precisa de software específico para ser interpretado. Chamar de semiestruturado exigiria que houvesse marcadores ou tags descrevendo campos dentro do arquivo, como num JSON ou XML. Chamar de estruturado exigiria que cada imagem seguisse um esquema tabular fixo. Dado binário indexado não é uma classificação padrão de dados.",
+      "opcoes": [
+        { "texto": "Dados não estruturados.", "correta": true },
+        { "texto": "Dados semiestruturados.", "correta": false },
+        { "texto": "Dados estruturados.", "correta": false },
+        { "texto": "Dados binários indexados.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-xml-semi-04",
+      "topico": "Dados semiestruturados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works recebe notas fiscais eletrônicas em formato XML. Cada nota contém tags como <emitente>, <destinatario> e <itens>, mas fornecedores diferentes incluem tags adicionais opcionais. Qual tipo de dado isso representa?",
+      "explicacao": "XML com tags que identificam campos e estrutura hierárquica, mas sem esquema rígido obrigatório entre documentos, é semiestruturado. As tags funcionam como marcadores que dão significado ao conteúdo, permitindo leitura programática, mas cada documento pode trazer elementos diferentes. Dado estruturado exigiria que todas as notas seguissem exatamente o mesmo esquema sem variação. Dado não estruturado não teria marcadores — seria como um PDF escaneado. Dado de texto puro descreve o formato do arquivo, não a classificação dos dados.",
+      "opcoes": [
+        { "texto": "Dados semiestruturados.", "correta": true },
+        { "texto": "Dados estruturados.", "correta": false },
+        { "texto": "Dados não estruturados.", "correta": false },
+        { "texto": "Dados de texto puro.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-video-nao-estrut-05",
+      "topico": "Dados não estruturados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Tailspin Toys grava vídeos de treinamento para novos funcionários e os armazena num serviço de nuvem. Os arquivos MP4 não contêm legendas nem metadados de indexação. Para fins de classificação de dados, esses vídeos são considerados:",
+      "explicacao": "Vídeos MP4 sem metadados de indexação são dados não estruturados: não há esquema, colunas ou tags internas que descrevam o conteúdo de forma que um banco de dados possa interpretar diretamente. Classificá-los como semiestruturados exigiria que carregassem marcadores internos descrevendo campos. Dados estruturados têm esquema tabular fixo. Dados multimídia transacionais não é uma categoria reconhecida na classificação de dados.",
+      "opcoes": [
+        { "texto": "Dados não estruturados.", "correta": true },
+        { "texto": "Dados semiestruturados.", "correta": false },
+        { "texto": "Dados estruturados.", "correta": false },
+        { "texto": "Dados multimídia transacionais.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-escolha-armazenamento-06",
+      "topico": "Dados estruturados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de RH da Contoso precisa armazenar registros de funcionários com campos fixos: matrícula, nome, cargo, departamento e salário. Todos os registros seguem exatamente o mesmo formato e a equipe faz consultas frequentes com filtros por departamento e faixa salarial. Qual tipo de armazenamento é mais adequado?",
+      "explicacao": "Registros uniformes com esquema fixo e necessidade de consultas com filtros são o caso clássico de banco de dados relacional, que armazena dados estruturados em tabelas. Um armazenamento de documentos (como Cosmos DB) atende esquema flexível e é desproporcional quando todos os registros são idênticos em estrutura. Armazenamento de blobs serve para dados não estruturados como arquivos e imagens. Um data lake é para análise em larga escala, não para consultas transacionais de registros individuais.",
+      "opcoes": [
+        { "texto": "Banco de dados relacional.", "correta": true },
+        { "texto": "Armazenamento de documentos NoSQL.", "correta": false },
+        { "texto": "Armazenamento de blobs.", "correta": false },
+        { "texto": "Data lake.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-sensor-iot-semi-07",
+      "topico": "Dados semiestruturados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam instalou sensores IoT em sua fábrica. Cada sensor envia mensagens JSON com campos obrigatórios (sensorId, timestamp, temperature) e campos opcionais que variam conforme o modelo do sensor (humidity, vibration, pressure). A equipe quer armazenar esses dados mantendo a flexibilidade de esquema. Qual classificação descreve melhor os dados recebidos?",
+      "explicacao": "Mensagens JSON com campos obrigatórios e opcionais que variam entre dispositivos são semiestruturadas: têm organização interna (chaves e valores) mas sem esquema rígido uniforme. Dados estruturados exigiriam que todos os sensores enviassem exatamente os mesmos campos. Dados não estruturados não teriam chaves identificando os valores — seria um fluxo de bytes sem significado embutido. Dados em tempo real descreve a frequência de chegada, não a estrutura do dado em si.",
+      "opcoes": [
+        { "texto": "Dados semiestruturados.", "correta": true },
+        { "texto": "Dados estruturados.", "correta": false },
+        { "texto": "Dados não estruturados.", "correta": false },
+        { "texto": "Dados em tempo real.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-email-nao-estrut-08",
+      "topico": "Dados não estruturados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe jurídica da Northwind Traders precisa arquivar milhares de e-mails de correspondência comercial para fins de auditoria. O corpo de cada e-mail é texto livre, sem formato padronizado. Para fins de classificação de dados, esses e-mails são considerados:",
+      "explicacao": "O corpo de e-mails em texto livre, sem formato padronizado, é dado não estruturado: cada mensagem tem comprimento, conteúdo e organização diferentes, sem esquema que um banco de dados possa interpretar diretamente. Se os e-mails estivessem em formato MIME com cabeçalhos padronizados analisáveis, os cabeçalhos seriam semiestruturados, mas o corpo continua não estruturado — e o enunciado fala do corpo. Dados estruturados exigiriam tabela com colunas fixas. Dados de log transacional descreve outra coisa: registros padronizados de operações de sistema.",
+      "opcoes": [
+        { "texto": "Dados não estruturados.", "correta": true },
+        { "texto": "Dados semiestruturados.", "correta": false },
+        { "texto": "Dados estruturados.", "correta": false },
+        { "texto": "Dados de log transacional.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-planilha-estrut-09",
+      "topico": "Dados estruturados",
+      "tipo": "SimNao",
+      "enunciado": "A equipe financeira da Contoso mantém uma planilha de Excel com colunas fixas: Data, Descrição, Categoria, Valor e Centro de Custo. Toda linha segue o mesmo formato. Avalie a afirmação: esses dados são classificados como semiestruturados porque estão em um arquivo de planilha e não em um banco de dados relacional.",
+      "explicacao": "A afirmação é falsa. A classificação entre estruturado, semiestruturado e não estruturado depende da organização intrínseca dos dados, não do recipiente onde estão armazenados. Uma planilha com colunas fixas, tipos consistentes e todas as linhas seguindo o mesmo esquema contém dados estruturados — independentemente de estar num arquivo Excel ou num banco SQL. O que tornaria os dados semiestruturados seria variação de esquema entre linhas, e não o formato do arquivo.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-grafo-semi-10",
+      "topico": "Dados semiestruturados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works quer mapear a rede de relacionamentos entre clientes, produtos e lojas para recomendação. Cada nó (cliente, produto, loja) tem propriedades diferentes e as arestas descrevem relações como 'comprou', 'visitou' e 'recomendou'. Esse modelo de dados é melhor descrito como:",
+      "explicacao": "Um modelo de grafos com nós heterogêneos (cada tipo com propriedades diferentes) e arestas nomeadas é semiestruturado: tem organização e significado interno, mas o esquema varia entre nós. É exatamente o tipo de dado que bancos de grafos como Cosmos DB com API Gremlin armazenam. Dados estruturados exigiriam esquema uniforme. Dados não estruturados não teriam relações explícitas entre entidades. Dados hierárquicos puros descreveriam uma árvore com pai-filho, não uma rede de relações arbitrárias entre tipos diferentes.",
+      "opcoes": [
+        { "texto": "Dados semiestruturados em modelo de grafos.", "correta": true },
+        { "texto": "Dados estruturados em formato relacional.", "correta": false },
+        { "texto": "Dados não estruturados em rede.", "correta": false },
+        { "texto": "Dados hierárquicos puros.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-csv-estrut-11",
+      "topico": "Dados estruturados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Tailspin Toys exporta diariamente um arquivo CSV do sistema de vendas com colunas SaleId, Date, StoreCode, ProductSku, Quantity, UnitPrice. Todas as linhas seguem o mesmo formato. Esse arquivo contém:",
+      "explicacao": "Um CSV com colunas fixas e todas as linhas seguindo o mesmo formato contém dados estruturados: o esquema é determinado pelos cabeçalhos e é uniforme em todo o arquivo. O fato de ser um arquivo de texto e não um banco de dados não muda a classificação. Semiestruturado exigiria que linhas diferentes pudessem ter campos diferentes. Não estruturado seria um arquivo sem esquema interpretável. Dados relacionais descrevem um modelo de armazenamento, não uma classificação de dados — e embora o CSV possa ser importado num banco relacional, ele em si é apenas dados estruturados num formato de arquivo.",
+      "opcoes": [
+        { "texto": "Dados estruturados.", "correta": true },
+        { "texto": "Dados semiestruturados.", "correta": false },
+        { "texto": "Dados não estruturados.", "correta": false },
+        { "texto": "Dados relacionais.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-audio-nao-estrut-12",
+      "topico": "Dados não estruturados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O call center da Contoso grava todas as chamadas de atendimento em arquivos WAV. As gravações não passam por transcrição automática e são armazenadas como estão. Para a equipe de dados, esses arquivos representam:",
+      "explicacao": "Gravações de áudio em formato WAV sem transcrição são dados não estruturados: o conteúdo é uma forma de onda digital que precisa de software especializado para ser interpretado, sem campos, tags ou esquema que um banco de dados possa consumir diretamente. Semiestruturado exigiria marcadores internos descrevendo o conteúdo. Estruturado exigiria esquema tabular. Dados temporais de voz não é uma categoria padrão de classificação.",
+      "opcoes": [
+        { "texto": "Dados não estruturados.", "correta": true },
+        { "texto": "Dados semiestruturados.", "correta": false },
+        { "texto": "Dados estruturados.", "correta": false },
+        { "texto": "Dados temporais de voz.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-key-value-semi-13",
+      "topico": "Dados semiestruturados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam armazena configurações de aplicação num serviço de chave-valor. Cada entrada tem uma chave única (como 'MaxRetries', 'TimeoutSeconds', 'FeatureFlags:DarkMode') e um valor associado que pode ser string, número ou JSON aninhado. Esse armazenamento contém dados classificados como:",
+      "explicacao": "Um armazenamento chave-valor onde os valores podem variar em tipo e estrutura é semiestruturado: há organização (cada entrada tem chave e valor), mas não há esquema rígido que dite o formato de todos os valores. Dados estruturados exigiriam que todos os valores seguissem o mesmo tipo e formato. Dados não estruturados não teriam nem a organização chave-valor. Dados de configuração descreve o uso dos dados, não sua classificação quanto a estrutura.",
+      "opcoes": [
+        { "texto": "Dados semiestruturados.", "correta": true },
+        { "texto": "Dados estruturados.", "correta": false },
+        { "texto": "Dados não estruturados.", "correta": false },
+        { "texto": "Dados de configuração.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-multipla-classif-14",
+      "topico": "Classificação de dados",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "A equipe de dados da Northwind Traders precisa catalogar os diferentes ativos de dados da empresa. Selecione duas opções que são exemplos de dados não estruturados.",
+      "explicacao": "Documentos PDF escaneados sem OCR são imagens de páginas, sem texto pesquisável nem campos — dados não estruturados. Gravações de videoconferência em MP4 são fluxos de vídeo sem marcadores semânticos — também não estruturados. Um arquivo JSON de configuração tem chaves e valores que dão estrutura ao conteúdo, tornando-o semiestruturado. Uma tabela SQL de clientes com colunas fixas é o exemplo canônico de dados estruturados. Uma planilha CSV com cabeçalhos fixos e linhas uniformes também é estruturada.",
+      "opcoes": [
+        { "texto": "Documentos PDF escaneados sem OCR.", "correta": true },
+        { "texto": "Gravações de videoconferência em MP4.", "correta": true },
+        { "texto": "Arquivo JSON de configuração da aplicação.", "correta": false },
+        { "texto": "Tabela SQL de clientes com colunas fixas.", "correta": false },
+        { "texto": "Planilha CSV com cabeçalhos e linhas uniformes.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-yaml-semi-15",
+      "topico": "Dados semiestruturados",
+      "tipo": "SimNao",
+      "enunciado": "A Contoso usa arquivos YAML para definir pipelines de CI/CD. Cada arquivo segue uma estrutura hierárquica com chaves e valores, mas pipelines diferentes incluem seções opcionais variadas. Avalie a afirmação: arquivos YAML são dados estruturados porque possuem indentação que define hierarquia.",
+      "explicacao": "A afirmação é falsa. Ter hierarquia e indentação não basta para ser estruturado — o que define dado estruturado é um esquema rígido e uniforme. YAML, assim como JSON e XML, é semiestruturado: possui marcadores (chaves) que dão significado aos valores e organização hierárquica, mas o esquema varia entre documentos. A indentação no YAML é o mecanismo de representação da hierarquia, não evidência de esquema fixo.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-cosmosdb-flexivel-16",
+      "topico": "Dados semiestruturados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works está projetando o catálogo de produtos. Cada categoria tem atributos completamente diferentes: roupas têm tamanho e cor, bicicletas têm quadro e marcha, acessórios têm compatibilidade e material. A equipe precisa de consultas rápidas por qualquer atributo. Qual abordagem é mais adequada?",
+      "explicacao": "Produtos com atributos que variam por categoria são o caso clássico de dados semiestruturados, ideal para um banco de documentos que aceita esquema flexível. Tentar forçar isso num esquema relacional com colunas fixas criaria uma tabela cheia de NULLs (uma coluna para cada atributo possível) ou exigiria uma modelagem EAV (Entity-Attribute-Value), que é complexa e lenta para consultas. Armazenamento de blobs serve para arquivos, não para consultas por atributo. Um data warehouse é para análise, não para catálogo operacional com leitura por item.",
+      "opcoes": [
+        { "texto": "Banco de dados de documentos com esquema flexível.", "correta": true },
+        { "texto": "Tabela relacional com uma coluna para cada atributo possível.", "correta": false },
+        { "texto": "Armazenamento de blobs com metadados.", "correta": false },
+        { "texto": "Data warehouse com tabelas dimensionais.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-log-semi-17",
+      "topico": "Dados semiestruturados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "O sistema web da Tailspin Toys gera logs de requisições em formato JSON Lines: cada linha é um objeto JSON com campos como timestamp, path, statusCode e responseTime, mas requisições de erro incluem campos adicionais como stackTrace e errorCode. Esses logs são classificados como:",
+      "explicacao": "JSON Lines com campos base comuns e campos adicionais que variam conforme o tipo de evento é o caso clássico de dado semiestruturado: há organização interna (chaves JSON), mas o esquema varia entre registros. Dados estruturados exigiriam que toda linha tivesse exatamente os mesmos campos. Dados não estruturados não teriam campos identificáveis. Dados de telemetria bruta descreve o uso, não a classificação de estrutura.",
+      "opcoes": [
+        { "texto": "Dados semiestruturados.", "correta": true },
+        { "texto": "Dados estruturados.", "correta": false },
+        { "texto": "Dados não estruturados.", "correta": false },
+        { "texto": "Dados de telemetria bruta.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-assoc-tipos-dados-18",
+      "topico": "Classificação de dados",
+      "tipo": "Associacao",
+      "enunciado": "A equipe de arquitetura de dados da Contoso está classificando os ativos da empresa. Associe cada ativo de dados à sua classificação correta.",
+      "explicacao": "Tabela de pedidos num banco SQL tem esquema rígido com colunas e tipos fixos: dados estruturados. Catálogo de produtos em JSON com campos variáveis por categoria tem marcadores mas esquema flexível: dados semiestruturados. Fotos de produtos em JPEG são matrizes de pixels sem esquema interpretável por banco de dados: dados não estruturados. Mensagens XML de integração com tags e hierarquia mas campos opcionais por parceiro: dados semiestruturados. Vincular JSON a estruturado confunde a presença de organização com rigidez de esquema. Vincular XML a não estruturado ignora que tags são marcadores semânticos.",
+      "associacoes": [
+        { "alvo": "Tabela de pedidos num banco SQL com colunas OrderId, Date, Total", "item": "Dados estruturados" },
+        { "alvo": "Catálogo de produtos em JSON com campos variáveis por categoria", "item": "Dados semiestruturados" },
+        { "alvo": "Fotos de produtos em alta resolução armazenadas como JPEG", "item": "Dados não estruturados" },
+        { "alvo": "Mensagens XML de integração com tags e campos opcionais por parceiro", "item": "Dados semiestruturados" }
+      ],
+      "itensExtras": [
+        "Dados relacionais normalizados"
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-parquet-coluna-19",
+      "topico": "Dados estruturados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de engenharia de dados da Fabrikam precisa armazenar bilhões de registros de transações para análises que frequentemente agregam apenas duas ou três colunas de cada vez. Os dados têm esquema fixo. Qual formato de arquivo é mais eficiente para esse padrão de consulta?",
+      "explicacao": "Parquet é um formato colunar: armazena os valores de cada coluna juntos no disco, permitindo que uma consulta que agrega apenas duas colunas leia só os dados dessas colunas, ignorando as demais. Para análises que tocam poucas colunas de muitas linhas, a economia de I/O é enorme. CSV é orientado a linhas e obriga a ler todas as colunas de cada registro. JSON Lines também é orientado a linhas e ainda carrega as chaves repetidas em cada registro. Avro é eficiente para serialização e esquema evolutivo, mas é orientado a linhas — melhor para gravação sequencial que para consultas analíticas seletivas.",
+      "opcoes": [
+        { "texto": "Apache Parquet.", "correta": true },
+        { "texto": "CSV.", "correta": false },
+        { "texto": "JSON Lines.", "correta": false },
+        { "texto": "Apache Avro.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-avro-evolucao-20",
+      "topico": "Formatos de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de streaming da Contoso precisa de um formato binário compacto para transmitir eventos entre microsserviços. O formato deve incluir o esquema junto com os dados e suportar evolução de esquema sem quebrar consumidores existentes. Qual formato atende a esses requisitos?",
+      "explicacao": "Apache Avro é um formato binário orientado a linhas que embute o esquema no próprio arquivo e suporta evolução de esquema (adicionar ou remover campos sem quebrar leitores antigos) — é por isso que é a escolha padrão em streaming com Kafka e similares. Parquet é colunar e excelente para análise, mas não embute esquema da mesma forma e é otimizado para leitura, não para gravação sequencial de eventos. CSV não é binário, não inclui esquema e não suporta evolução. JSON é legível mas verboso, não é binário e não tem mecanismo nativo de evolução de esquema.",
+      "opcoes": [
+        { "texto": "Apache Avro.", "correta": true },
+        { "texto": "Apache Parquet.", "correta": false },
+        { "texto": "CSV.", "correta": false },
+        { "texto": "JSON.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-orc-hive-21",
+      "topico": "Formatos de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "Uma equipe de dados da Adventure Works usa Apache Hive para consultar grandes volumes de dados no Hadoop. O administrador recomendou trocar o formato de armazenamento dos arquivos no HDFS para um formato colunar otimizado para o ecossistema Hive, com compressão nativa e suporte a predicados de filtro no nível do stripe. Qual formato é mais indicado?",
+      "explicacao": "ORC (Optimized Row Columnar) foi desenvolvido especificamente para o Apache Hive e é o formato colunar de referência nesse ecossistema: oferece compressão nativa, índices embutidos e avaliação de predicados no nível do stripe, permitindo pular blocos inteiros de dados que não atendem ao filtro. Parquet é outro formato colunar excelente, mas é mais associado ao ecossistema Spark e não tem a mesma otimização nativa para Hive. CSV não é colunar e não oferece compressão nativa. Avro é orientado a linhas, otimizado para serialização, não para consultas analíticas.",
+      "opcoes": [
+        { "texto": "ORC (Optimized Row Columnar).", "correta": true },
+        { "texto": "Apache Parquet.", "correta": false },
+        { "texto": "CSV comprimido com gzip.", "correta": false },
+        { "texto": "Apache Avro.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-csv-troca-22",
+      "topico": "Formatos de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders precisa enviar dados tabulares para um parceiro que usa um sistema legado sem suporte a formatos modernos. O parceiro aceita apenas arquivos de texto simples com delimitador. Os dados têm esquema fixo com poucas colunas. Qual formato é mais adequado?",
+      "explicacao": "CSV (Comma-Separated Values) é o formato mais universal para troca de dados tabulares simples: é texto puro com delimitador, legível por qualquer sistema, inclusive legados. Para um sistema que não suporta formatos modernos, CSV é a única opção viável. Parquet é binário e exige bibliotecas específicas para leitura. JSON exige parser e, embora seja texto, tem estrutura que sistemas legados podem não interpretar. Avro é binário e exige desserialização com suporte a esquema — incompatível com sistemas legados.",
+      "opcoes": [
+        { "texto": "CSV.", "correta": true },
+        { "texto": "Apache Parquet.", "correta": false },
+        { "texto": "JSON.", "correta": false },
+        { "texto": "Apache Avro.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-colunar-vs-linha-23",
+      "topico": "Formatos de dados",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de dados da Fabrikam está avaliando formatos de arquivo. Avalie a afirmação: formatos colunares como Parquet são sempre mais eficientes que formatos orientados a linhas como CSV, independentemente do padrão de acesso aos dados.",
+      "explicacao": "A afirmação é falsa. Formatos colunares são mais eficientes quando o padrão de acesso lê poucas colunas de muitas linhas (consultas analíticas com agregação). Mas para gravação sequencial de registros completos, leitura de registros inteiros ou processamento linha a linha, formatos orientados a linhas podem ser mais eficientes: não precisam reorganizar os dados por coluna na gravação e não precisam recombinar colunas na leitura. A escolha depende do padrão de acesso, não existe formato universalmente superior.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-json-interop-24",
+      "topico": "Formatos de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A API REST da Tailspin Toys precisa retornar dados de produtos para aplicações web e mobile. O formato precisa ser legível por humanos, suportado nativamente por navegadores e fácil de consumir em JavaScript. Qual formato é mais indicado?",
+      "explicacao": "JSON é o formato padrão de APIs REST modernas: é texto legível, suportado nativamente em navegadores via JSON.parse(), e a notação é derivada de JavaScript. XML é legível mas verboso e exige parsing mais complexo. CSV perde a hierarquia — produtos com listas de variações não cabem numa estrutura plana sem contorções. Parquet é binário e não é consumível diretamente por navegadores.",
+      "opcoes": [
+        { "texto": "JSON.", "correta": true },
+        { "texto": "XML.", "correta": false },
+        { "texto": "CSV.", "correta": false },
+        { "texto": "Apache Parquet.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-ordenacao-formatos-25",
+      "topico": "Formatos de dados",
+      "tipo": "Ordenacao",
+      "enunciado": "A equipe de engenharia de dados da Contoso definiu um pipeline que processa dados de vendas. Selecione e ordene as etapas do fluxo, da ingestão ao consumo analítico.",
+      "explicacao": "Primeiro os dados chegam do sistema transacional em CSV, que é o formato mais simples e universal para exportação. Em seguida são convertidos para Avro para transmissão eficiente pelo pipeline de streaming, aproveitando o esquema embutido e a compactação binária. Depois são persistidos em Parquet no data lake para consultas analíticas eficientes, já que o formato colunar permite ler apenas as colunas necessárias. Por fim, o Power BI consulta os dados Parquet para gerar relatórios. Armazenar em ORC antes do Parquet seria redundante: ambos são colunares e o pipeline não usa Hive. Converter de volta para CSV no final perderia toda a otimização colunar.",
+      "sequencia": [
+        "Exportar dados do sistema transacional em formato CSV.",
+        "Converter para Avro e transmitir pelo pipeline de streaming.",
+        "Persistir no data lake em formato Parquet para análise.",
+        "Consultar os dados Parquet a partir do Power BI."
+      ],
+      "itensExtras": [
+        "Converter de Avro para ORC antes de gravar no data lake.",
+        "Converter os dados Parquet de volta para CSV antes de consultar."
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-blob-page-26",
+      "topico": "Classificação de dados",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works precisa armazenar discos de máquinas virtuais no Azure. Esses arquivos VHD são acessados com leituras e gravações aleatórias em posições arbitrárias do arquivo. Qual tipo de blob do Azure é projetado para esse padrão de acesso?",
+      "explicacao": "Page blobs são otimizados para operações de leitura e gravação aleatórias em qualquer posição do arquivo, que é exatamente o padrão de acesso de discos virtuais (VHD/VHDX). É por isso que os discos gerenciados do Azure usam page blobs internamente. Block blobs são otimizados para upload e download de objetos inteiros ou em blocos sequenciais — o padrão de arquivos e documentos. Append blobs são otimizados para adição sequencial ao final do arquivo, como logs. Archive blobs não existem como tipo: Archive é uma camada de acesso, não um tipo de blob.",
+      "opcoes": [
+        { "texto": "Page blob.", "correta": true },
+        { "texto": "Block blob.", "correta": false },
+        { "texto": "Append blob.", "correta": false },
+        { "texto": "Archive blob.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-data-store-grafo-27",
+      "topico": "Tipos de armazenamento",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de fraude da Fabrikam precisa analisar redes de transações para detectar padrões suspeitos: contas que transferem valores para contas intermediárias que, por sua vez, transferem para uma conta final. O mais importante é percorrer cadeias de relacionamentos entre entidades com eficiência. Qual tipo de armazenamento de dados é mais adequado?",
+      "explicacao": "Um banco de dados de grafos é projetado para armazenar e percorrer relacionamentos entre entidades com eficiência: cada nó representa uma entidade (conta) e cada aresta representa uma relação (transferência), e percorrer cadeias de relações é operação nativa do modelo. Em um banco relacional, seguir cadeias de relacionamentos exige JOINs recursivos custosos. Um armazenamento de documentos organiza por documento, não por relação entre entidades. Um armazenamento colunar é otimizado para agregação analítica, não para travessia de grafos.",
+      "opcoes": [
+        { "texto": "Banco de dados de grafos.", "correta": true },
+        { "texto": "Banco de dados relacional.", "correta": false },
+        { "texto": "Armazenamento de documentos.", "correta": false },
+        { "texto": "Armazenamento colunar.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-data-store-kv-28",
+      "topico": "Tipos de armazenamento",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders precisa de um cache de sessões de usuário para seu site de e-commerce. Cada sessão é identificada por um token único e contém um pequeno bloco de dados (carrinho, preferências). O acesso é sempre por token: buscar ou atualizar uma sessão inteira. Qual tipo de armazenamento é mais adequado?",
+      "explicacao": "Um armazenamento chave-valor é ideal para cache de sessões: cada entrada tem uma chave (o token) e um valor (os dados da sessão), e o acesso é sempre por chave, sem necessidade de consultas complexas. A operação fundamental é buscar ou gravar por chave, exatamente o que o modelo oferece com latência mínima. Um banco relacional é desnecessariamente complexo para acesso por chave única sem consultas. Um banco de documentos poderia servir, mas adiciona esquema flexível que não agrega valor quando o valor é opaco. Um data warehouse é para análise, não para cache operacional.",
+      "opcoes": [
+        { "texto": "Armazenamento chave-valor.", "correta": true },
+        { "texto": "Banco de dados relacional.", "correta": false },
+        { "texto": "Banco de dados de documentos.", "correta": false },
+        { "texto": "Data warehouse.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-repr-column-family-29",
+      "topico": "Tipos de armazenamento",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de telemetria da Contoso precisa armazenar bilhões de leituras de sensores IoT. Cada sensor gera dados a cada segundo, e as consultas típicas buscam leituras de um sensor específico num intervalo de tempo. Os dados são gravados continuamente e raramente atualizados depois. Qual modelo de armazenamento NoSQL é mais adequado?",
+      "explicacao": "Um armazenamento de família de colunas (column-family), como Apache Cassandra ou Azure Cosmos DB com API Cassandra, é otimizado para gravação intensiva e consultas por chave de partição (sensor) com filtro por intervalo (tempo). Dados de séries temporais com alta taxa de ingestão e consultas por chave + intervalo são o caso de uso canônico. Um banco relacional sofreria com o volume de gravações e a escala horizontal. Um banco de documentos organizaria por documento, sem otimização nativa para séries temporais. Um banco de grafos é para relacionamentos entre entidades, não para séries temporais.",
+      "opcoes": [
+        { "texto": "Armazenamento de família de colunas.", "correta": true },
+        { "texto": "Banco de dados relacional.", "correta": false },
+        { "texto": "Banco de dados de documentos.", "correta": false },
+        { "texto": "Banco de dados de grafos.", "correta": false }
+      ]
+    }
+  ]
+}

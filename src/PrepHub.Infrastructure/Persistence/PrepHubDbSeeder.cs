@@ -105,6 +105,24 @@ public static class PrepHubDbSeeder
             ],
             Publicado: true),
 
+        // Pesos conferidos no study guide oficial (skills measured de 21/07/2026): quatro domínios
+        // clássicos de fundamentos de dados. Estrutura de prova semelhante ao AZ-900 — 40 itens,
+        // 45 minutos — por ser da mesma série Fundamentals.
+        new DefinicaoDeExame(
+            Code: "DP-900",
+            Name: "Microsoft Azure Data Fundamentals",
+            TimeLimitMinutes: 45,
+            PassingScorePercent: 70,
+            TotalQuestions: 40,
+            Areas:
+            [
+                new AreaDeExame("conceitos-de-dados", "Descrever conceitos fundamentais de dados", 27.5m),
+                new AreaDeExame("dados-relacionais", "Identificar considerações sobre dados relacionais no Azure", 22.5m),
+                new AreaDeExame("dados-nao-relacionais", "Descrever considerações sobre dados não relacionais no Azure", 17.5m),
+                new AreaDeExame("analitica", "Descrever uma carga de trabalho analítica no Azure", 27.5m)
+            ],
+            Publicado: true),
+
         // Primeiro exame AWS, publicado em 15/09/2026 com 450 questões (90/108/126/63/63).
         // Exam guide oficial v1.1 (30/04/2026): 65 questões em 90 minutos — 50
         // pontuadas e 15 não pontuadas na prova real; aqui as 65 contam (decisão de 15/09/2026:

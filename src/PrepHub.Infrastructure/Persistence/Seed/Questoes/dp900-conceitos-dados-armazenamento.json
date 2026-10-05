@@ -1,0 +1,384 @@
+{
+  "exameCode": "DP-900",
+  "area": "conceitos-de-dados",
+  "questoes": [
+    {
+      "id": "dp900-cd-arm-datalake-cenario-01",
+      "topico": "Azure Data Lake",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam precisa de um repositório centralizado onde a equipe de dados possa armazenar dados brutos em qualquer formato — CSV, JSON, Parquet, imagens e vídeos — sem transformá-los antes da ingestão. O volume ultrapassa terabytes e a equipe quer aplicar processamento distribuído sobre esses dados posteriormente. Qual serviço do Azure é mais adequado?",
+      "explicacao": "Azure Data Lake Storage Gen2 é projetado exatamente para esse cenário: armazenamento de dados brutos em qualquer formato, em escala de petabytes, com namespace hierárquico que permite organização em pastas e suporte a frameworks de processamento distribuído como Spark. Azure SQL Database é um banco relacional que exige esquema e não aceita dados não estruturados nativamente. Azure Cosmos DB é um banco NoSQL de documentos, não um repositório de dados brutos em massa. Azure Table Storage é um armazenamento chave-valor simples, sem suporte a processamento distribuído nem namespace hierárquico.",
+      "opcoes": [
+        { "texto": "Azure Data Lake Storage Gen2.", "correta": true },
+        { "texto": "Azure SQL Database.", "correta": false },
+        { "texto": "Azure Cosmos DB.", "correta": false },
+        { "texto": "Azure Table Storage.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-warehouse-vs-lake-02",
+      "topico": "Data warehouse vs data lake",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso precisa armazenar dados de vendas já transformados e modelados em esquema estrela para que analistas de negócio executem consultas SQL complexas com alto desempenho. Os dados passam por ETL antes de serem carregados. Qual tipo de armazenamento é mais adequado?",
+      "explicacao": "Um data warehouse armazena dados já transformados e modelados em esquema otimizado para consultas analíticas (tipicamente esquema estrela com tabelas fato e dimensão). É projetado para consultas SQL complexas com alto desempenho sobre dados limpos e estruturados. Um data lake armazena dados brutos em qualquer formato, antes da transformação — não é otimizado para consultas SQL diretas de analistas. Um banco operacional (OLTP) é para transações, não para análise. Armazenamento de blobs é para arquivos, sem otimização para consultas SQL.",
+      "opcoes": [
+        { "texto": "Data warehouse.", "correta": true },
+        { "texto": "Data lake.", "correta": false },
+        { "texto": "Banco de dados operacional (OLTP).", "correta": false },
+        { "texto": "Armazenamento de blobs.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-lakehouse-conceito-03",
+      "topico": "Data lakehouse",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de arquitetura de dados da Adventure Works quer combinar a flexibilidade de um data lake (aceitar dados brutos em qualquer formato) com a capacidade de consultas SQL otimizadas de um data warehouse, sem manter dois sistemas separados. Qual conceito de arquitetura atende a esse objetivo?",
+      "explicacao": "O data lakehouse combina características de data lake e data warehouse num único sistema: aceita dados brutos como um lake, mas adiciona camada de metadados e otimizações que permitem consultas SQL performáticas como um warehouse. É o conceito implementado por tecnologias como Delta Lake e Microsoft Fabric OneLake. Um data lake sozinho não oferece otimização para consultas SQL. Um data warehouse sozinho não aceita dados brutos em qualquer formato. Data mesh é um conceito organizacional sobre propriedade de dados por domínio, não uma arquitetura de armazenamento.",
+      "opcoes": [
+        { "texto": "Data lakehouse.", "correta": true },
+        { "texto": "Data lake.", "correta": false },
+        { "texto": "Data warehouse.", "correta": false },
+        { "texto": "Data mesh.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-azure-sql-oltp-04",
+      "topico": "Azure SQL Database",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Tailspin Toys está migrando seu sistema de pedidos para a nuvem. O sistema processa milhares de transações por segundo, cada uma inserindo ou atualizando poucos registros, com requisito de consistência ACID. A equipe quer um serviço gerenciado sem administrar infraestrutura. Qual serviço do Azure é mais adequado?",
+      "explicacao": "Azure SQL Database é um banco relacional gerenciado (PaaS) que oferece transações ACID, alto throughput para operações OLTP e elimina a necessidade de gerenciar infraestrutura. Para um sistema de pedidos com transações frequentes de poucos registros, é a escolha natural. Azure Synapse Analytics é um serviço de análise, otimizado para consultas sobre grandes volumes, não para transações unitárias de alta frequência. Azure Cosmos DB oferece consistência configurável mas não ACID no sentido relacional tradicional em múltiplos documentos. Azure Blob Storage é armazenamento de objetos, sem capacidade transacional.",
+      "opcoes": [
+        { "texto": "Azure SQL Database.", "correta": true },
+        { "texto": "Azure Synapse Analytics.", "correta": false },
+        { "texto": "Azure Cosmos DB.", "correta": false },
+        { "texto": "Azure Blob Storage.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-cosmosdb-global-05",
+      "topico": "Azure Cosmos DB",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam opera uma aplicação de e-commerce global com usuários na América, Europa e Ásia. A equipe precisa de latência abaixo de 10 ms para leituras em todas as regiões e distribuição geográfica automática dos dados. Os dados do catálogo são semiestruturados. Qual serviço é mais indicado?",
+      "explicacao": "Azure Cosmos DB oferece distribuição global transparente com replicação multirregião e SLA de latência abaixo de 10 ms para leituras e gravações no percentil 99. É projetado para dados semiestruturados com acesso de baixa latência de qualquer lugar do mundo. Azure SQL Database pode ter réplicas de leitura em outras regiões, mas não é globalmente distribuído com a mesma transparência e SLA de latência. Azure Table Storage não oferece distribuição global automática nem SLA de latência comparável. Azure Cache for Redis é cache em memória, não um banco de dados persistente para catálogo.",
+      "opcoes": [
+        { "texto": "Azure Cosmos DB.", "correta": true },
+        { "texto": "Azure SQL Database com réplicas de leitura.", "correta": false },
+        { "texto": "Azure Table Storage.", "correta": false },
+        { "texto": "Azure Cache for Redis.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-blob-tiers-06",
+      "topico": "Camadas de acesso do Blob",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso tem arquivos de auditoria que precisam ser mantidos por sete anos por obrigação regulatória, mas são acessados no máximo uma vez por ano. O custo de armazenamento é a principal preocupação. Qual camada de acesso do Azure Blob Storage é mais adequada?",
+      "explicacao": "A camada Archive oferece o menor custo de armazenamento entre todas as camadas, ideal para dados que raramente são acessados (uma vez por ano ou menos). O trade-off é que o dado fica offline e precisa de reidratação (horas) para ser lido, o que é aceitável para arquivos de auditoria acessados excepcionalmente. A camada Hot tem o maior custo de armazenamento, adequada para dados acessados frequentemente. Cool é intermediária, adequada para dados acessados a cada 30 dias ou mais. Cold é similar à Cool com custo menor de armazenamento mas maior de acesso, para dados acessados a cada 90 dias — ainda mais cara que Archive para dados que ficam anos sem acesso.",
+      "opcoes": [
+        { "texto": "Archive.", "correta": true },
+        { "texto": "Hot.", "correta": false },
+        { "texto": "Cool.", "correta": false },
+        { "texto": "Cold.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-files-smb-07",
+      "topico": "Azure Files",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders tem aplicações legadas em servidores Windows que acessam compartilhamentos de rede via protocolo SMB. A equipe quer migrar esses compartilhamentos para a nuvem sem modificar as aplicações. Qual serviço do Azure permite isso?",
+      "explicacao": "Azure Files oferece compartilhamentos de arquivos totalmente gerenciados acessíveis via protocolo SMB (e NFS), o que permite que aplicações legadas se conectem exatamente como faziam com compartilhamentos de rede on-premises, sem alteração de código. Azure Blob Storage é acessível via HTTP/REST, não via SMB — as aplicações legadas precisariam ser reescritas. Azure Disk Storage fornece discos para VMs, não compartilhamentos de rede. Azure Data Lake Storage Gen2 é otimizado para análise em massa, não para substituir file servers SMB.",
+      "opcoes": [
+        { "texto": "Azure Files.", "correta": true },
+        { "texto": "Azure Blob Storage.", "correta": false },
+        { "texto": "Azure Disk Storage.", "correta": false },
+        { "texto": "Azure Data Lake Storage Gen2.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-table-storage-08",
+      "topico": "Azure Table Storage",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de desenvolvimento da Tailspin Toys precisa de um armazenamento NoSQL simples e barato para guardar preferências de usuário. Cada registro tem uma chave composta (userId + settingName) e um valor string. Não há necessidade de consultas complexas, índices secundários nem distribuição global. Qual serviço é mais adequado?",
+      "explicacao": "Azure Table Storage é um armazenamento chave-valor NoSQL simples, barato e sem servidor, ideal para dados com acesso por chave sem necessidade de consultas complexas. Para preferências de usuário acessadas por chave, é a opção mais econômica. Azure Cosmos DB for Table oferece a mesma API com recursos adicionais (distribuição global, SLAs de latência), mas custa mais e os recursos extras não são necessários aqui. Azure SQL Database é relacional e desproporcional para acesso por chave simples. Azure Redis Cache é em memória e mais caro — útil para cache de alta velocidade, não para armazenamento persistente barato.",
+      "opcoes": [
+        { "texto": "Azure Table Storage.", "correta": true },
+        { "texto": "Azure Cosmos DB for Table.", "correta": false },
+        { "texto": "Azure SQL Database.", "correta": false },
+        { "texto": "Azure Cache for Redis.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-multipla-azure-stores-09",
+      "topico": "Serviços de armazenamento do Azure",
+      "tipo": "EscolhaMultipla",
+      "enunciado": "A equipe de dados da Fabrikam está mapeando os serviços de armazenamento do Azure. Selecione dois serviços que são classificados como armazenamento NoSQL.",
+      "explicacao": "Azure Cosmos DB é o principal serviço NoSQL do Azure, oferecendo múltiplos modelos de dados (documentos, grafos, chave-valor, coluna). Azure Table Storage é um armazenamento NoSQL chave-valor simples, parte do Azure Storage. Azure SQL Database é relacional, não NoSQL. Azure Data Lake Storage Gen2 é armazenamento de objetos para análise, não um banco de dados NoSQL. Azure Synapse Analytics é um serviço de análise, não um armazenamento NoSQL.",
+      "opcoes": [
+        { "texto": "Azure Cosmos DB.", "correta": true },
+        { "texto": "Azure Table Storage.", "correta": true },
+        { "texto": "Azure SQL Database.", "correta": false },
+        { "texto": "Azure Data Lake Storage Gen2.", "correta": false },
+        { "texto": "Azure Synapse Analytics.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-redundancia-geo-10",
+      "topico": "Redundância de armazenamento",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso precisa que os dados armazenados no Azure sobrevivam à falha completa de um datacenter na região primária, com cópias mantidas automaticamente numa região a centenas de quilômetros de distância. Qual opção de redundância atende a esse requisito?",
+      "explicacao": "Armazenamento com redundância geográfica (GRS) mantém três cópias na região primária e três na região secundária, a centenas de quilômetros. Sobrevive à perda completa da região primária. Armazenamento com redundância local (LRS) mantém três cópias no mesmo datacenter — não sobrevive à perda do datacenter. Armazenamento com redundância de zona (ZRS) distribui entre zonas de disponibilidade na mesma região — não sobrevive à perda da região inteira. Sem redundância não é uma opção oferecida pelo Azure Storage — todo armazenamento tem ao menos LRS.",
+      "opcoes": [
+        { "texto": "Armazenamento com redundância geográfica (GRS).", "correta": true },
+        { "texto": "Armazenamento com redundância local (LRS).", "correta": false },
+        { "texto": "Armazenamento com redundância de zona (ZRS).", "correta": false },
+        { "texto": "Sem redundância, com backup manual.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-document-db-11",
+      "topico": "Banco de dados de documentos",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works precisa de um banco de dados para armazenar perfis de jogadores. Cada perfil tem campos comuns (gamertag, score) e campos que variam conforme o jogo (inventário, conquistas, builds). A equipe quer consultar por qualquer campo sem definir índices manualmente. Qual modelo de banco de dados é mais adequado?",
+      "explicacao": "Um banco de dados de documentos armazena cada perfil como um documento (tipicamente JSON) com esquema flexível, permitindo campos diferentes por documento. Azure Cosmos DB for NoSQL indexa automaticamente todas as propriedades, permitindo consultas por qualquer campo sem criação manual de índices. Um banco relacional exigiria esquema rígido ou modelagem EAV complexa. Um banco chave-valor só permite acesso por chave, sem consultas por campos internos. Um banco colunar é otimizado para análise, não para perfis operacionais com esquema variável.",
+      "opcoes": [
+        { "texto": "Banco de dados de documentos.", "correta": true },
+        { "texto": "Banco de dados relacional.", "correta": false },
+        { "texto": "Armazenamento chave-valor.", "correta": false },
+        { "texto": "Banco de dados colunar.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-simnao-lake-12",
+      "topico": "Data lake",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de dados da Northwind Traders está avaliando um data lake. Avalie a afirmação: um data lake armazena apenas dados não estruturados, como imagens e vídeos.",
+      "explicacao": "A afirmação é falsa. Um data lake armazena dados em qualquer formato: estruturados (CSV, Parquet), semiestruturados (JSON, XML) e não estruturados (imagens, vídeos, áudio). A ideia central é aceitar tudo na forma bruta (schema-on-read) e aplicar esquema apenas no momento da leitura. Restringir a dados não estruturados confunde data lake com armazenamento de blobs genérico e ignora que boa parte do valor analítico de um lake vem de dados estruturados e semiestruturados armazenados em formatos eficientes como Parquet.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-schema-read-write-13",
+      "topico": "Schema on read vs schema on write",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Tailspin Toys está discutindo duas abordagens de armazenamento. Na primeira, os dados são transformados e validados contra um esquema antes de serem armazenados. Na segunda, os dados são armazenados como estão e o esquema é aplicado no momento da leitura. Qual termo descreve a segunda abordagem?",
+      "explicacao": "Schema-on-read aplica o esquema no momento da leitura, não da gravação: os dados entram como estão e a interpretação acontece quando alguém os consulta. É o modelo de data lakes. Schema-on-write exige que os dados sejam transformados e validados contra um esquema antes de entrarem — é o modelo de data warehouses e bancos relacionais. ETL (Extract, Transform, Load) é um padrão de processamento, não um modelo de esquema. Normalização é uma técnica de modelagem relacional, não uma abordagem de quando aplicar esquema.",
+      "opcoes": [
+        { "texto": "Schema-on-read.", "correta": true },
+        { "texto": "Schema-on-write.", "correta": false },
+        { "texto": "ETL.", "correta": false },
+        { "texto": "Normalização.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-assoc-servicos-cenarios-14",
+      "topico": "Serviços de armazenamento do Azure",
+      "tipo": "Associacao",
+      "enunciado": "A equipe de arquitetura da Contoso precisa escolher o serviço de armazenamento do Azure correto para cada cenário. Associe cada cenário ao serviço mais adequado.",
+      "explicacao": "Armazenar documentos PDF e imagens escaneadas para consulta posterior é caso de Azure Blob Storage: dados não estruturados acessados por HTTP. Catálogo de produtos com campos variáveis e consulta global de baixa latência é Azure Cosmos DB: dados semiestruturados com distribuição global. Tabela de pedidos com transações ACID e consultas SQL complexas é Azure SQL Database: dados estruturados com requisitos transacionais. Compartilhamento de arquivos acessado via SMB por aplicações Windows é Azure Files. Azure Data Lake Storage Gen2 é para análise em massa, não para servir PDFs individualmente nem para substituir file servers.",
+      "associacoes": [
+        { "alvo": "Documentos PDF e imagens escaneadas para consulta por HTTP", "item": "Azure Blob Storage" },
+        { "alvo": "Catálogo de produtos com campos variáveis e consulta global de baixa latência", "item": "Azure Cosmos DB" },
+        { "alvo": "Tabela de pedidos com transações ACID e consultas SQL", "item": "Azure SQL Database" },
+        { "alvo": "Compartilhamento de arquivos acessado via SMB por aplicações Windows", "item": "Azure Files" }
+      ],
+      "itensExtras": [
+        "Azure Data Lake Storage Gen2"
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-lifecycle-mgmt-15",
+      "topico": "Gerenciamento de ciclo de vida",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam armazena logs de aplicação no Azure Blob Storage. Logs com mais de 30 dias são raramente acessados, e logs com mais de 365 dias precisam ser arquivados pelo menor custo possível. A equipe quer automatizar essa movimentação. Qual recurso do Azure atende?",
+      "explicacao": "O gerenciamento de ciclo de vida do Azure Blob Storage permite definir regras que movem blobs automaticamente entre camadas de acesso com base na idade: por exemplo, mover para Cool após 30 dias e para Archive após 365 dias. É exatamente o cenário descrito. Azure Policy aplica regras de governança sobre recursos, não sobre camadas de acesso de blobs individuais. Azure Automation pode executar scripts, mas seria uma solução manual para algo que o recurso nativo resolve. Exclusão temporária protege contra exclusão acidental, não move dados entre camadas.",
+      "opcoes": [
+        { "texto": "Regras de gerenciamento de ciclo de vida do Blob Storage.", "correta": true },
+        { "texto": "Azure Policy.", "correta": false },
+        { "texto": "Azure Automation com script agendado.", "correta": false },
+        { "texto": "Exclusão temporária (soft delete).", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-append-blob-log-16",
+      "topico": "Tipos de blob",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de operações da Contoso precisa gravar logs de auditoria no Azure Blob Storage. Os logs são escritos sequencialmente, adicionando novas entradas ao final do arquivo. Os dados nunca são modificados depois de gravados. Qual tipo de blob é otimizado para esse padrão?",
+      "explicacao": "Append blobs são otimizados para operações de adição ao final do arquivo, sem suporte a modificação de dados já gravados — é exatamente o padrão de escrita de logs. Block blobs suportam upload de blocos inteiros e reescrita, mas não são otimizados para adição sequencial contínua. Page blobs são para acesso aleatório (discos virtuais). Archive não é um tipo de blob e sim uma camada de acesso.",
+      "opcoes": [
+        { "texto": "Append blob.", "correta": true },
+        { "texto": "Block blob.", "correta": false },
+        { "texto": "Page blob.", "correta": false },
+        { "texto": "Archive blob.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-storage-account-17",
+      "topico": "Conta de armazenamento",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders está criando sua primeira conta de armazenamento no Azure. O administrador precisa escolher o tipo de conta que suporte blobs, filas, tabelas e compartilhamentos de arquivos no mesmo recurso. Qual tipo de conta atende?",
+      "explicacao": "Uma conta de armazenamento de propósito geral v2 (General-purpose v2) suporta todos os serviços do Azure Storage: blobs, filas, tabelas e compartilhamentos de arquivos, numa única conta. É o tipo recomendado pela Microsoft para a maioria dos cenários. Uma conta de Blob Storage só suporta blobs. Uma conta de armazenamento Premium com page blobs é para cenários de alto desempenho com discos. Azure Data Lake Storage Gen2 é uma capacidade sobre GPv2, não um tipo separado de conta — e ao habilitá-la o namespace hierárquico pode limitar o uso de outros serviços.",
+      "opcoes": [
+        { "texto": "General-purpose v2 (GPv2).", "correta": true },
+        { "texto": "Blob Storage.", "correta": false },
+        { "texto": "Premium Page Blobs.", "correta": false },
+        { "texto": "Data Lake Storage Gen2 dedicado.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-hierarq-namespace-18",
+      "topico": "Azure Data Lake Storage Gen2",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Adventure Works ativou o namespace hierárquico numa conta de armazenamento do Azure. Qual é o principal benefício dessa funcionalidade?",
+      "explicacao": "O namespace hierárquico transforma o armazenamento de blobs em um sistema de arquivos com diretórios reais. O principal benefício é que operações sobre diretórios (renomear, mover, excluir uma pasta inteira) são atômicas e executadas em tempo constante, em vez de precisarem percorrer e renomear cada blob individualmente. Para workloads de análise com milhões de arquivos organizados em pastas, a diferença de desempenho é enorme. Criptografia em repouso já existe sem namespace hierárquico. Versionamento de blobs é outra funcionalidade, independente. Replicação geográfica é configuração da conta, não do namespace.",
+      "opcoes": [
+        { "texto": "Operações atômicas sobre diretórios com desempenho em tempo constante.", "correta": true },
+        { "texto": "Criptografia automática de dados em repouso.", "correta": false },
+        { "texto": "Versionamento automático de cada blob.", "correta": false },
+        { "texto": "Replicação geográfica de dados.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-replicacao-opcoes-19",
+      "topico": "Redundância de armazenamento",
+      "tipo": "Associacao",
+      "enunciado": "A equipe de infraestrutura da Tailspin Toys está avaliando as opções de redundância do Azure Storage. Associe cada opção ao nível de proteção que ela oferece.",
+      "explicacao": "LRS mantém três cópias no mesmo datacenter: protege contra falha de disco ou rack, mas não contra perda do datacenter. ZRS distribui três cópias entre três zonas de disponibilidade na mesma região: protege contra a falha de uma zona inteira. GRS mantém cópias em duas regiões separadas: protege contra perda de toda a região primária. RA-GRS é igual ao GRS com acesso de leitura ao secundário: protege contra perda regional e ainda permite leitura do secundário em operação normal. Uma réplica em duas zonas da mesma região é o que o ZRS faz, não o GRS.",
+      "associacoes": [
+        { "alvo": "Protege contra falha de hardware dentro de um único datacenter", "item": "LRS (redundância local)" },
+        { "alvo": "Protege contra perda de uma zona de disponibilidade na região", "item": "ZRS (redundância de zona)" },
+        { "alvo": "Protege contra perda de toda a região primária", "item": "GRS (redundância geográfica)" },
+        { "alvo": "Protege contra perda regional e permite leitura do secundário", "item": "RA-GRS (geográfica com leitura)" }
+      ],
+      "itensExtras": [
+        "Réplica em duas zonas da mesma região"
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-hot-cool-cenario-20",
+      "topico": "Camadas de acesso do Blob",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Fabrikam armazena relatórios mensais no Azure Blob Storage. Nos primeiros 30 dias após a geração, os relatórios são acessados diariamente pela equipe. Depois disso, o acesso cai para uma ou duas vezes por mês. Qual estratégia de camada de acesso minimiza o custo total?",
+      "explicacao": "Começar na camada Hot (custo de acesso baixo, armazenamento mais caro) durante os 30 dias de acesso frequente e mover para Cool (armazenamento mais barato, acesso mais caro) depois é a estratégia mais econômica. Hot o tempo todo paga armazenamento premium por dados que logo serão pouco acessados. Cool desde o início pagaria custo de acesso elevado nos primeiros 30 dias de uso intenso. Archive exige horas de reidratação, inviável para acesso mensal que precisa ser imediato.",
+      "opcoes": [
+        { "texto": "Hot nos primeiros 30 dias, depois mover para Cool.", "correta": true },
+        { "texto": "Manter em Hot permanentemente.", "correta": false },
+        { "texto": "Começar em Cool desde o primeiro dia.", "correta": false },
+        { "texto": "Mover diretamente para Archive após a geração.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-block-blob-upload-21",
+      "topico": "Tipos de blob",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso precisa fazer upload de arquivos de vídeo de até 200 GB para o Azure Blob Storage. O upload pode ser interrompido por falhas de rede e a equipe quer poder retomar de onde parou. Qual tipo de blob suporta esse padrão?",
+      "explicacao": "Block blobs suportam upload em blocos independentes: cada bloco é enviado separadamente e depois confirmado numa lista. Se a conexão cair, basta reenviar o bloco que falhou, sem recomeçar do zero. É o tipo padrão para upload de arquivos e objetos. Page blobs são para acesso aleatório (discos). Append blobs só permitem adição ao final, não upload em blocos independentes. File share não é um tipo de blob e sim outro serviço do Azure Storage.",
+      "opcoes": [
+        { "texto": "Block blob.", "correta": true },
+        { "texto": "Page blob.", "correta": false },
+        { "texto": "Append blob.", "correta": false },
+        { "texto": "Azure File Share.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-azure-disk-vm-22",
+      "topico": "Azure Disk Storage",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Adventure Works precisa de armazenamento persistente de alto desempenho para o sistema operacional e os dados de uma máquina virtual no Azure. O disco precisa sobreviver ao reinício da VM. Qual serviço atende?",
+      "explicacao": "Azure Managed Disks (Disk Storage) fornece armazenamento em bloco persistente para VMs do Azure: sobrevive ao reinício, oferece opções de desempenho (Standard HDD, Standard SSD, Premium SSD, Ultra Disk) e é gerenciado pelo Azure (replicação, snapshots). Blob Storage é armazenamento de objetos, não de blocos para VM. Azure Files é compartilhamento de rede, não disco de VM. Disco temporário existe na VM mas NÃO persiste ao reinício — dados são perdidos, exatamente o que o enunciado quer evitar.",
+      "opcoes": [
+        { "texto": "Azure Managed Disks.", "correta": true },
+        { "texto": "Azure Blob Storage.", "correta": false },
+        { "texto": "Azure Files.", "correta": false },
+        { "texto": "Disco temporário da VM.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-simnao-cosmosdb-sql-23",
+      "topico": "Azure Cosmos DB",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de dados da Fabrikam está avaliando o Azure Cosmos DB. Avalie a afirmação: o Azure Cosmos DB é um banco de dados relacional porque permite consultas usando sintaxe semelhante a SQL.",
+      "explicacao": "A afirmação é falsa. O Azure Cosmos DB for NoSQL (anteriormente Core/SQL API) usa uma sintaxe de consulta inspirada em SQL, mas é um banco de dados NoSQL de documentos. Os dados são armazenados como documentos JSON, sem esquema relacional, sem normalização e sem JOINs entre tabelas no sentido relacional. A capacidade de usar sintaxe semelhante a SQL é uma conveniência de consulta que reduz a curva de aprendizado, não uma evidência de modelo relacional. O modelo de dados continua sendo de documentos, não de tabelas com linhas e colunas fixas.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-file-sync-24",
+      "topico": "Azure Files",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Northwind Traders tem escritórios em três cidades e cada um acessa o mesmo conjunto de arquivos no servidor de arquivos local. A equipe quer centralizar no Azure mas manter uma cópia local em cada escritório para baixa latência. Qual recurso atende?",
+      "explicacao": "Azure File Sync permite sincronizar compartilhamentos do Azure Files com servidores Windows on-premises em vários locais. Cada escritório mantém um cache local dos arquivos mais usados, com sincronização automática para o Azure e entre locais. A equipe tem baixa latência local e um repositório central na nuvem. VPN conecta redes mas não sincroniza arquivos automaticamente. Azure CDN é para conteúdo web estático, não para file servers corporativos. Replicação geográfica do Storage Account replica a conta inteira para DR, não para distribuir caches locais.",
+      "opcoes": [
+        { "texto": "Azure File Sync.", "correta": true },
+        { "texto": "VPN site-to-site com Azure Files.", "correta": false },
+        { "texto": "Azure CDN.", "correta": false },
+        { "texto": "Replicação geográfica da conta de armazenamento.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-immutable-compliance-25",
+      "topico": "Armazenamento imutável",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de compliance da Contoso precisa que registros financeiros armazenados no Azure Blob Storage não possam ser modificados nem excluídos por nenhum usuário — incluindo administradores — durante o período de retenção de sete anos. Qual recurso atende a esse requisito regulatório?",
+      "explicacao": "Políticas de imutabilidade do Azure Blob Storage (WORM — Write Once, Read Many) impedem que os dados sejam modificados ou excluídos durante o período de retenção configurado. Uma vez que a política é bloqueada, nem administradores podem remover os dados antes do prazo. É o recurso projetado para atender regulamentações como SEC 17a-4. Exclusão temporária (soft delete) protege contra exclusão acidental mas permite exclusão definitiva. Controle de acesso (RBAC) pode limitar quem exclui, mas um administrador sempre pode alterar as permissões. Versionamento mantém histórico mas não impede exclusão do blob em si.",
+      "opcoes": [
+        { "texto": "Políticas de imutabilidade (WORM).", "correta": true },
+        { "texto": "Exclusão temporária (soft delete).", "correta": false },
+        { "texto": "Controle de acesso baseado em função (RBAC).", "correta": false },
+        { "texto": "Versionamento de blobs.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-storage-encryption-26",
+      "topico": "Criptografia de armazenamento",
+      "tipo": "SimNao",
+      "enunciado": "A equipe de segurança da Fabrikam perguntou se os dados no Azure Storage são criptografados em repouso. Avalie a afirmação: a criptografia em repouso no Azure Storage precisa ser habilitada manualmente pelo administrador em cada conta.",
+      "explicacao": "A afirmação é falsa. O Azure Storage criptografa automaticamente todos os dados em repouso usando AES-256, sem necessidade de habilitação manual. A criptografia é aplicada a todos os dados em todas as contas de armazenamento, incluindo blobs, filas, tabelas e arquivos. O administrador pode optar por usar chaves gerenciadas pelo cliente em vez das chaves gerenciadas pela Microsoft, mas a criptografia em si é sempre ativa por padrão.",
+      "opcoes": [
+        { "texto": "Não", "correta": true },
+        { "texto": "Sim", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-access-key-sas-27",
+      "topico": "Controle de acesso ao armazenamento",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Tailspin Toys precisa dar a um parceiro externo acesso temporário de leitura a um contêiner específico no Azure Blob Storage, sem compartilhar as chaves de acesso da conta e sem criar uma conta de usuário para o parceiro. Qual mecanismo é mais adequado?",
+      "explicacao": "Uma Assinatura de Acesso Compartilhado (SAS) permite conceder acesso temporário e restrito a recursos específicos do Azure Storage, com permissões granulares (só leitura, por exemplo) e prazo de validade, sem expor as chaves da conta. É o mecanismo projetado para acesso de terceiros. Compartilhar a chave de acesso daria acesso total à conta inteira, não apenas ao contêiner, e sem prazo. RBAC do Microsoft Entra exige criar uma identidade para o parceiro. Tornar o contêiner público daria acesso a qualquer pessoa, sem controle.",
+      "opcoes": [
+        { "texto": "Assinatura de Acesso Compartilhado (SAS).", "correta": true },
+        { "texto": "Compartilhar a chave de acesso primária da conta.", "correta": false },
+        { "texto": "Atribuir função RBAC ao parceiro via Microsoft Entra.", "correta": false },
+        { "texto": "Definir o nível de acesso do contêiner como público.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-containers-structure-28",
+      "topico": "Organização do Blob Storage",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A equipe de dados da Adventure Works está organizando o Azure Blob Storage. Qual é a hierarquia correta de organização, do mais externo ao mais interno?",
+      "explicacao": "A hierarquia do Azure Blob Storage é: conta de armazenamento (o recurso de nível mais alto), contêiner (equivalente a uma pasta de primeiro nível dentro da conta) e blob (o objeto individual armazenado dentro do contêiner). Cada conta pode ter múltiplos contêineres, e cada contêiner pode ter múltiplos blobs. Não existe o conceito de banco de dados nem de tabela na hierarquia do Blob Storage — esses são conceitos de bancos de dados, não de armazenamento de objetos.",
+      "opcoes": [
+        { "texto": "Conta de armazenamento → contêiner → blob.", "correta": true },
+        { "texto": "Conta de armazenamento → blob → contêiner.", "correta": false },
+        { "texto": "Contêiner → conta de armazenamento → blob.", "correta": false },
+        { "texto": "Conta de armazenamento → banco de dados → tabela → blob.", "correta": false }
+      ]
+    },
+    {
+      "id": "dp900-cd-arm-nfs-linux-29",
+      "topico": "Azure Files",
+      "tipo": "EscolhaUnica",
+      "enunciado": "A Contoso tem servidores Linux que precisam montar compartilhamentos de rede da nuvem usando protocolo NFS. A equipe quer um serviço gerenciado sem administrar servidores de arquivo. Qual serviço atende?",
+      "explicacao": "Azure Files suporta o protocolo NFS (v4.1) além do SMB, permitindo que servidores Linux montem compartilhamentos nativamente sem agentes nem adaptações. É a opção gerenciada para compartilhamentos NFS. Azure Blob Storage com NFS 3.0 é uma opção mais recente mas exige namespace hierárquico (Data Lake Storage Gen2) e é voltada para workloads de análise, não para substituir file servers. Azure NetApp Files é um serviço NetApp completo, mais poderoso e mais caro, para workloads que exigem desempenho extremo. Montar um disco de VM e compartilhar via NFS funciona mas exige administrar a VM e o serviço NFS manualmente.",
+      "opcoes": [
+        { "texto": "Azure Files com protocolo NFS.", "correta": true },
+        { "texto": "Azure Blob Storage com NFS 3.0.", "correta": false },
+        { "texto": "Azure NetApp Files.", "correta": false },
+        { "texto": "VM Linux com servidor NFS manual.", "correta": false }
+      ]
+    }
+  ]
+}
